@@ -1,0 +1,26 @@
+         CLIPS (Quicksilver Beta 3/26/08)
+CLIPS> (assert(sintoma dor_de_cabeca))
+<Fact-1>
+CLIPS> (assert(atendimento emergencia))
+<Fact-2>
+CLIPS> (defrule dor
+         (sintoma dor_de_cabeca) => (printout t "laranja 10 minutos" crlf)))
+CLIPS> (rules)
+dor
+For a total of 1 defrule.
+CLIPS> (run)
+laranja 10 minutos
+CLIPS> (sintoma dor_de_cabeca)
+
+[EXPRNPSR3] Missing function declaration for sintoma.
+CLIPS> (dor)
+
+[EXPRNPSR3] Missing function declaration for dor.
+CLIPS> dor
+dor
+CLIPS> (assert(sintoma dor_de_cabeca))
+FALSE
+CLIPS> (dor_de_cabeca)
+
+[EXPRNPSR3] Missing function declaration for dor_de_cabeca.
+CLIPS> 
