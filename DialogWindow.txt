@@ -1,3 +1,4 @@
+#yeeeeeeeeeeeeesssssssss
 #it works milagre hsauhsauhua
          CLIPS (Quicksilver Beta 3/26/08)
 CLIPS> (assert(sintoma dor_de_cabeca))
