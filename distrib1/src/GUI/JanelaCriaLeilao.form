@@ -53,7 +53,7 @@
   <SubComponents>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Criando servi&#xe7;o de Leil&#xe3;o - Aguarde a disponibilidade de no m&#xed;nimo 4 usu&#xe1;rios"/>
+        <Property name="text" type="java.lang.String" value="Para criar um leil&#xe3;o aguarde a disponibilidade de no m&#xed;nimo 4 usu&#xe1;rios"/>
       </Properties>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">

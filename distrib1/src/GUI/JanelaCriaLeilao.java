@@ -13,10 +13,12 @@ public class JanelaCriaLeilao extends javax.swing.JFrame {
 
     /**
      * Creates new form JanelaCriaLeilao
+     * @param minhaIDpublica
      */
     public JanelaCriaLeilao(String minhaIDpublica) {
         JanelaConsole.escreveNaJanela("Entrando com ID Pública: " + minhaIDpublica);
         initComponents();
+        jButton1.setVisible(false);
     }
 
     /**
@@ -37,7 +39,7 @@ public class JanelaCriaLeilao extends javax.swing.JFrame {
         setTitle("Aguardando usuários...");
         setResizable(false);
 
-        jLabel1.setText("Criando serviço de Leilão - Aguarde a disponibilidade de no mínimo 4 usuários");
+        jLabel1.setText("Para criar um leilão aguarde a disponibilidade de no mínimo 4 usuários");
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
