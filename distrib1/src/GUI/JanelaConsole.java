@@ -1,4 +1,4 @@
-package distrib1;
+package GUI;
 
 import javax.swing.table.DefaultTableModel;
 
