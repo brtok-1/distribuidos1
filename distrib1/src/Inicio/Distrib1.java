@@ -7,7 +7,9 @@ package Inicio;
  */
 
 
+import Comunicação.DefinirComunicacao;
 import GUI.JanelaMinhaIDPublica;
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.UIManager;
