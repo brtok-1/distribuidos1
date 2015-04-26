@@ -5,6 +5,8 @@
  */
 package GUI;
 
+import Inicio.Distrib1;
+
 /**
  *
  * @author Bruno
@@ -13,12 +15,11 @@ public class JanelaCriaLeilao extends javax.swing.JFrame {
 
     /**
      * Creates new form JanelaCriaLeilao
-     * @param minhaIDpublica
      */
-    public JanelaCriaLeilao(String minhaIDpublica) {
-        JanelaConsole.escreveNaJanela("Entrando com ID Pública: " + minhaIDpublica);
+    public JanelaCriaLeilao() {
+        JanelaConsole.escreveNaJanela("Entrando com ID Pública: " + Distrib1.IDpublica);
         initComponents();
-        jButton1.setVisible(false);
+        //jButton1.setVisible(false);
     }
 
     /**
@@ -105,7 +106,10 @@ public class JanelaCriaLeilao extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
+        dispose();
+        JanelaIniciandoNovoLeilao jinl = new JanelaIniciandoNovoLeilao();
+        jinl.setVisible(true);
+        jinl.repaint();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

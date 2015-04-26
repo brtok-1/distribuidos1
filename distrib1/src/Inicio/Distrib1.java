@@ -19,6 +19,9 @@ import javax.swing.UnsupportedLookAndFeelException;
  */
 public class Distrib1 {
 
+    public static String IDpublica;
+    public static String souOq = "servidor";
+    
     /**
      * @param args the command line arguments
      */

@@ -5,6 +5,8 @@
  */
 package Inicio;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Bruno
@@ -14,14 +16,16 @@ public class Livro {
     String nome;
     String descricao;
     double precoInicial;
-    int tempoTotalLeilao;
+    long tempoTotalLeilao;
+    long tempoNoInicio;
+    ArrayList<Lance> lances = new ArrayList<>();
 
-    public Livro(String codigo, String nome, String descricao, double precoInicial, int tempoTotalLeilao) {
+    public Livro(String codigo, String nome, String descricao, long tempoTotalLeilao, long tempoInicial) {
         this.codigo = codigo;
         this.nome = nome;
         this.descricao = descricao;
-        this.precoInicial = precoInicial;
         this.tempoTotalLeilao = tempoTotalLeilao;
+        this.tempoNoInicio = tempoInicial;
     }
 
     public String getCodigo() {
@@ -48,22 +52,30 @@ public class Livro {
         this.descricao = descricao;
     }
 
-    public double getPrecoInicialDouble() {
+    public double getPrecoInicial() {
         return precoInicial;
     }
 
-    public void setPrecoInicialDouble(double precoInicial) {
+    public void setPrecoInicial(double precoInicial) {
         this.precoInicial = precoInicial;
     }
 
-    public int getTempoTotalLeilao() {
+    public long getTempoTotalLeilao() {
         return tempoTotalLeilao;
     }
 
-    public void setTempoTotalLeilao(int tempoTotalLeilao) {
+    public void setTempoTotalLeilao(long tempoTotalLeilao) {
         this.tempoTotalLeilao = tempoTotalLeilao;
     }
-    
+
+    public long getTempoNoInicio() {
+        return tempoNoInicio;
+    }
+
+    public void setTempoNoInicio(long tempoNoInicio) {
+        this.tempoNoInicio = tempoNoInicio;
+    }
+
     public String getPrecoInicialString() {
         String preco = String.valueOf(precoInicial);
         preco = preco.replaceAll("\\.", ",");
@@ -74,6 +86,14 @@ public class Livro {
         preco = preco.replaceAll(",", "\\.");
         double precoIn = Double.parseDouble(preco);
         precoInicial = precoIn;
+    }
+
+    public ArrayList<Lance> getLances() {
+        return lances;
+    }
+
+    public void setLances(ArrayList<Lance> lances) {
+        this.lances = lances;
     }
     
 }

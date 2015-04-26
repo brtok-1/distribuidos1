@@ -5,6 +5,7 @@
  */
 package GUI;
 
+import Inicio.Distrib1;
 import javax.swing.JOptionPane;
 
 /**
@@ -82,8 +83,9 @@ public class JanelaMinhaIDPublica extends javax.swing.JFrame {
             JanelaConsole console = new JanelaConsole();
             console.setVisible(true);
             console.repaint();
+            Distrib1.IDpublica = idPublica;
             dispose();
-            JanelaCriaLeilao jcl = new JanelaCriaLeilao(idPublica);
+            JanelaCriaLeilao jcl = new JanelaCriaLeilao();
             jcl.setVisible(true);
             jcl.repaint();
         }

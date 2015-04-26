@@ -5,22 +5,33 @@
  */
 package GUI;
 
-import Inicio.Distrib1;
+import Inicio.Livro;
 
 /**
  *
  * @author Bruno
  */
-public class JanelaLeilaoIniciado extends javax.swing.JFrame {
+public class JanelaLeilaoEncerrado extends javax.swing.JFrame {
 
     /**
      * Creates new form JanelaLeilaoAcontecendo
+     * @param leilao
      */
-    public JanelaLeilaoIniciado() {
+    public JanelaLeilaoEncerrado(Livro leilao) {
         initComponents();
-        if (Distrib1.souOq.equalsIgnoreCase("servidor")) {
-            botaoDarLance.setVisible(false);
-            botaoNaoParticipar.setText("OK");
+        labelCodigo.setText(leilao.getCodigo());
+        labelDescricao.setText(leilao.getDescricao());
+        labelNome.setText(leilao.getNome());
+        labelPrecoInicial.setText(leilao.getPrecoInicialString());
+        int tamanho = leilao.getLances().size();
+        if (tamanho == 0) {
+            labelValorVenda.setVisible(false);
+            jLabel5.setVisible(false);
+            jLabel7.setVisible(false);
+            labelVendidoPara.setText("Não houveram lances.");
+        } else {
+            labelValorVenda.setText(leilao.getLances().get(tamanho-1).getValorOferecidoString());
+            labelVendidoPara.setText(leilao.getLances().get(tamanho-1).getQuemOfereceu());
         }
     }
 
@@ -41,13 +52,14 @@ public class JanelaLeilaoIniciado extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         labelDescricao = new javax.swing.JLabel();
         labelPrecoInicial = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        labelVendidoPara = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        labelTempoRestante = new javax.swing.JLabel();
-        botaoDarLance = new javax.swing.JButton();
-        botaoNaoParticipar = new javax.swing.JButton();
+        labelValorVenda = new javax.swing.JLabel();
+        jButton3 = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel1.setText("Código:");
@@ -69,23 +81,26 @@ public class JanelaLeilaoIniciado extends javax.swing.JFrame {
 
         labelPrecoInicial.setText("labelPrecoInicial");
 
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel5.setText("Vendido para:");
+
+        labelVendidoPara.setText("labelVendidoPara");
+
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel7.setText("Tempo de Leilão:");
+        jLabel7.setText("Valor de venda:");
 
-        labelTempoRestante.setText("labelTempoRestante");
+        labelValorVenda.setText("labelValorVenda");
 
-        botaoDarLance.setText("Dar um Lance");
-
-        botaoNaoParticipar.setText("Não participar");
-        botaoNaoParticipar.addActionListener(new java.awt.event.ActionListener() {
+        jButton3.setText("Fechar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botaoNaoParticiparActionPerformed(evt);
+                jButton3ActionPerformed(evt);
             }
         });
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel9.setText("<html><center>Um novo leilão foi iniciado</center>");
+        jLabel9.setText("<html><center>Leilão Encerrado</center>");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -94,26 +109,26 @@ public class JanelaLeilaoIniciado extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 268, Short.MAX_VALUE)
+                    .addComponent(jLabel9)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(labelPrecoInicial)
-                            .addComponent(labelCodigo)
-                            .addComponent(labelNome)
-                            .addComponent(labelDescricao)
-                            .addComponent(labelTempoRestante))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(botaoDarLance, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(botaoNaoParticipar)))
+                            .addComponent(labelCodigo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(labelNome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(labelDescricao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(labelPrecoInicial, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(labelVendidoPara, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(labelValorVenda, javax.swing.GroupLayout.DEFAULT_SIZE, 287, Short.MAX_VALUE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton3)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -137,40 +152,44 @@ public class JanelaLeilaoIniciado extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(labelPrecoInicial))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(labelVendidoPara))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labelTempoRestante))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(botaoNaoParticipar)
-                    .addComponent(botaoDarLance))
+                    .addComponent(labelValorVenda))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton3)
                 .addContainerGap())
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void botaoNaoParticiparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoNaoParticiparActionPerformed
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         dispose();
         JanelaCriaLeilao jcl = new JanelaCriaLeilao();
         jcl.setVisible(true);
         jcl.repaint();
-    }//GEN-LAST:event_botaoNaoParticiparActionPerformed
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton botaoDarLance;
-    private javax.swing.JButton botaoNaoParticipar;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel labelCodigo;
     private javax.swing.JLabel labelDescricao;
     private javax.swing.JLabel labelNome;
     private javax.swing.JLabel labelPrecoInicial;
-    private javax.swing.JLabel labelTempoRestante;
+    private javax.swing.JLabel labelValorVenda;
+    private javax.swing.JLabel labelVendidoPara;
     // End of variables declaration//GEN-END:variables
 }
