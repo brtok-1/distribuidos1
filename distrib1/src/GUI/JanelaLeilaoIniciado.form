@@ -41,7 +41,7 @@
                           <Component id="labelCodigo" min="-2" max="-2" attributes="0"/>
                           <Component id="labelNome" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="labelDescricao" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
+                          <Component id="labelTempoRestante" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
@@ -83,7 +83,7 @@
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel7" alignment="3" min="-2" pref="14" max="-2" attributes="0"/>
-                  <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="labelTempoRestante" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="30" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -146,7 +146,7 @@
         <Property name="text" type="java.lang.String" value="Tempo de Leil&#xe3;o:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel8">
+    <Component class="javax.swing.JLabel" name="labelTempoRestante">
       <Properties>
         <Property name="text" type="java.lang.String" value="labelTempoRestante"/>
       </Properties>

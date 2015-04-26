@@ -36,7 +36,7 @@ public class JanelaLeilaoIniciado extends javax.swing.JFrame {
         labelDescricao = new javax.swing.JLabel();
         labelPrecoInicial = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
+        labelTempoRestante = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
@@ -66,7 +66,7 @@ public class JanelaLeilaoIniciado extends javax.swing.JFrame {
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel7.setText("Tempo de Leilão:");
 
-        jLabel8.setText("labelTempoRestante");
+        labelTempoRestante.setText("labelTempoRestante");
 
         jButton1.setText("Dar um Lance");
 
@@ -97,7 +97,7 @@ public class JanelaLeilaoIniciado extends javax.swing.JFrame {
                             .addComponent(labelCodigo)
                             .addComponent(labelNome)
                             .addComponent(labelDescricao)
-                            .addComponent(jLabel8))
+                            .addComponent(labelTempoRestante))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -129,7 +129,7 @@ public class JanelaLeilaoIniciado extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8))
+                    .addComponent(labelTempoRestante))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
@@ -148,11 +148,11 @@ public class JanelaLeilaoIniciado extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel labelCodigo;
     private javax.swing.JLabel labelDescricao;
     private javax.swing.JLabel labelNome;
     private javax.swing.JLabel labelPrecoInicial;
+    private javax.swing.JLabel labelTempoRestante;
     // End of variables declaration//GEN-END:variables
 }
