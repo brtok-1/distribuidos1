@@ -5,7 +5,7 @@
  */
 package GUI;
 
-import Controle.ControleTempoDoLeilao;
+import Controle.ControleLeilao;
 import Inicio.Livro;
 
 /**
@@ -157,7 +157,7 @@ public class JanelaIniciandoNovoLeilao extends javax.swing.JFrame {
         long tempo = Long.parseLong(tempoString) * 60000;
         Livro leilao = new Livro(codigo, nome, descricao, tempo, System.currentTimeMillis());
         leilao.setPrecoInicialString(preco);
-        ControleTempoDoLeilao ctl = new ControleTempoDoLeilao(leilao);
+        ControleLeilao ctl = new ControleLeilao(leilao);
         ctl.start();
         dispose();
     }//GEN-LAST:event_botaoIniciarActionPerformed

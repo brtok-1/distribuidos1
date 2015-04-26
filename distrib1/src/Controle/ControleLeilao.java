@@ -14,13 +14,13 @@ import java.util.logging.Logger;
  *
  * @author Bruno
  */
-public class ControleTempoDoLeilao extends Thread {
+public class ControleLeilao extends Thread {
 
     static Livro leilao;
     long tempoTotal;
     long horarioAgora;
 
-    public ControleTempoDoLeilao(Livro l) {
+    public ControleLeilao(Livro l) {
         leilao = l;
     }
 
@@ -40,7 +40,7 @@ public class ControleTempoDoLeilao extends Thread {
                     jle.repaint();
                 }
             } catch (InterruptedException ex) {
-                Logger.getLogger(ControleTempoDoLeilao.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ControleLeilao.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
