@@ -5,6 +5,7 @@
  */
 package GUI;
 
+import Comunicação.ControladoraThreads;
 import Inicio.Distrib1;
 import javax.swing.JOptionPane;
 
@@ -85,6 +86,8 @@ public class JanelaMinhaIDPublica extends javax.swing.JFrame {
             console.repaint();
             Distrib1.IDpublica = idPublica;
             dispose();
+            ControladoraThreads threads = new ControladoraThreads();
+            threads.start();
             JanelaCriaLeilao jcl = new JanelaCriaLeilao();
             jcl.setVisible(true);
             jcl.repaint();

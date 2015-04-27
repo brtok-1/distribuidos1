@@ -19,8 +19,8 @@ import java.io.ObjectOutputStream;
  */
 public class DefinirComunicacao {
 
-    final String INET_ADDR = "224.0.0.10";
-    static int PORT = 8888;
+    public static final String INET_ADDR = "224.0.0.10";
+    public static int PORT;
 
     public DefinirComunicacao() throws IOException, ClassNotFoundException {
         File arquivo = new File("pt");
@@ -32,11 +32,12 @@ public class DefinirComunicacao {
             System.out.println(PORT);
             Distrib1.souOq = "cliente";
         } else {
+            PORT = 8888;
             Distrib1.souOq = "servidor";
         }
         arquivo.delete();
         ObjectOutputStream escritor = new ObjectOutputStream(new FileOutputStream("pt"));
         escritor.writeObject(PORT);
         escritor.close();
-    }    
+    }
 }

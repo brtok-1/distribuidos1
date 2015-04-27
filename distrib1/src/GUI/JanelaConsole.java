@@ -31,7 +31,7 @@ public class JanelaConsole extends javax.swing.JFrame {
         jTable1.setModel(dtm);
         dtm.addRow(mensagem);
         if (dtm.getRowCount() > 8) {
-            dtm.removeRow(1);
+            dtm.removeRow(0);
         }
     }
 

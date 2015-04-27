@@ -7,6 +7,7 @@ package Inicio;
  */
 
 
+import Comunicação.ControladoraThreads;
 import Comunicação.DefinirComunicacao;
 import GUI.JanelaMinhaIDPublica;
 import java.io.IOException;
