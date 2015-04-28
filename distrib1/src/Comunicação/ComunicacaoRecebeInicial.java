@@ -34,9 +34,10 @@ public class ComunicacaoRecebeInicial extends Thread {
                     byte[] buf = new byte[256];
                     DatagramPacket msgPacket = new DatagramPacket(buf, buf.length);
                     clientSocket.receive(msgPacket);
-                    String msg = new String(buf, 0, buf.length);
-                    JanelaConsole.escreveNaJanela("Recebeu: " + msg);
+                    String msg = new String(buf);
+                    JanelaConsole.escreveNaJanela("Recebeu: " + msg.trim());
                 }
+                clientSocket.leaveGroup(addres);
             } catch (IOException ex) {
                 Logger.getLogger(ComunicacaoRecebeInicial.class.getName()).log(Level.SEVERE, null, ex);
             }

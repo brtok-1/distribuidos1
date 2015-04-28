@@ -29,24 +29,15 @@ public class ComunicacaoEnvioInicial extends Thread {
             DefinirComunicacao comunica = new DefinirComunicacao();
             boolean naotem4 = true;
             while (naotem4) {
-                InetAddress addr = InetAddress.getByName(comunica.INET_ADDR);
-                try (DatagramSocket serverSocket = new DatagramSocket()) {
-                    for (int i = 0; i < 100; i++) {
-                        String msg = Distrib1.IDpublica;
-                        DatagramPacket msgPacket = new DatagramPacket(msg.getBytes(), msg.getBytes().length, addr, comunica.PORT);
-                        serverSocket.send(msgPacket);
-                        JanelaConsole.escreveNaJanela("Mandou: " + msg);
-                        try {
-                            sleep(2500);
-                        } catch (InterruptedException ex) {
-                            Logger.getLogger(ComunicacaoEnvioInicial.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                    }
-                } catch (IOException ex) {
-                    Logger.getLogger(ComunicacaoEnvioInicial.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                InetAddress addr = InetAddress.getByName(DefinirComunicacao.INET_ADDR);
+                DatagramSocket serverSocket = new DatagramSocket();
+                String msg = Distrib1.IDpublica + "#" + DefinirComunicacao.idRede;
+                DatagramPacket msgPacket = new DatagramPacket(msg.getBytes(), msg.getBytes().length, addr, DefinirComunicacao.PORT);
+                serverSocket.send(msgPacket);
+                JanelaConsole.escreveNaJanela("Mandou: " + msg);
+                sleep(5000);
             }
-        } catch (IOException | ClassNotFoundException ex) {
+        } catch (IOException | ClassNotFoundException | InterruptedException ex) {
             Logger.getLogger(ComunicacaoEnvioInicial.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
