@@ -6,6 +6,9 @@
 package Comunicação;
 
 import GUI.JanelaConsole;
+import GUI.JanelaCriaLeilao;
+import Inicio.Conexao;
+import static Inicio.Distrib1.conexoes;
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.InetAddress;
@@ -35,7 +38,23 @@ public class ComunicacaoRecebeInicial extends Thread {
                     DatagramPacket msgPacket = new DatagramPacket(buf, buf.length);
                     clientSocket.receive(msgPacket);
                     String msg = new String(buf);
-                    JanelaConsole.escreveNaJanela("Recebeu: " + msg.trim());
+                    msg = msg.trim();
+                    JanelaConsole.escreveNaJanela("Recebeu: " + msg);
+                    String [] msgs = msg.split("#");
+                    Conexao c = new Conexao(msgs[0], Integer.parseInt(msgs[1]));
+                    boolean naoAchou = true;
+                    for (int i = 0; i < conexoes.size(); i++) {
+                        if (conexoes.get(i).getIdPublica().equalsIgnoreCase(c.getIdPublica()) && conexoes.get(i).getIdRede() == c.getIdRede()) {
+                            naoAchou = false;
+                        }
+                    }
+                    if (naoAchou) {
+                        conexoes.add(c);
+                        JanelaCriaLeilao.atualizar();
+                    }
+                    if (conexoes.size() >= 4) {
+                        naotem4 = false;
+                    }
                 }
                 clientSocket.leaveGroup(addres);
             } catch (IOException ex) {

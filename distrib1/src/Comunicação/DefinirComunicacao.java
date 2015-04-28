@@ -19,8 +19,8 @@ public class DefinirComunicacao {
     public static int idRede;
 
     public DefinirComunicacao() throws IOException, ClassNotFoundException {
-        idRede = (int) (Math.random() * 255);
-        INET_ADDR = "224.0.0." + idRede;
+        idRede = (int) (Math.random() * 100);
+        INET_ADDR = "255.0.0." + idRede;
         JanelaConsole.escreveNaJanela("Participando da comunicação");
         JanelaConsole.escreveNaJanela("com endereço: " + INET_ADDR);
     }
