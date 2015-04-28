@@ -27,7 +27,7 @@ public class JanelaCriaLeilao extends javax.swing.JFrame {
         Object [][] tabela = new Object[conexoes.size()][2];
         for (int i = 0; i < conexoes.size(); i++) {
             tabela[i][0] = conexoes.get(i).getIdPublica();
-            tabela[i][0] = conexoes.get(i).getIdRede();
+            tabela[i][1] = conexoes.get(i).getIdRede();
         }
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
                 tabela,
