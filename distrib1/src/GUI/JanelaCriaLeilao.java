@@ -6,6 +6,7 @@
 package GUI;
 
 import Inicio.Distrib1;
+import static Inicio.Distrib1.conexoes;
 
 /**
  *
@@ -20,6 +21,42 @@ public class JanelaCriaLeilao extends javax.swing.JFrame {
         JanelaConsole.escreveNaJanela("Entrando com ID Pública: " + Distrib1.IDpublica);
         initComponents();
         //jButton1.setVisible(false);
+    }
+
+    public static void atualizar() {
+        Object [][] tabela = new Object[conexoes.size()][2];
+        for (int i = 0; i < conexoes.size(); i++) {
+            tabela[i][0] = conexoes.get(i).getIdPublica();
+            tabela[i][0] = conexoes.get(i).getIdRede();
+        }
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+                tabela,
+                new String[]{
+                    "Usuário", "ID Rede"
+                }
+        ) {
+            Class[] types = new Class[]{
+                java.lang.String.class, java.lang.Integer.class
+            };
+            boolean[] canEdit = new boolean[]{
+                false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types[columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit[columnIndex];
+            }
+        });
+
+        jScrollPane1.setViewportView(jTable1);
+
+        if (jTable1.getColumnModel().getColumnCount() > 0) {
+            jTable1.getColumnModel().getColumn(0).setResizable(false);
+            jTable1.getColumnModel().getColumn(1).setResizable(false);
+        }
     }
 
     /**
@@ -47,14 +84,14 @@ public class JanelaCriaLeilao extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Usuário"
+                "Usuário", "ID Rede"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class
+                java.lang.String.class, java.lang.Integer.class
             };
             boolean[] canEdit = new boolean [] {
-                false
+                false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -68,6 +105,7 @@ public class JanelaCriaLeilao extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTable1);
         if (jTable1.getColumnModel().getColumnCount() > 0) {
             jTable1.getColumnModel().getColumn(0).setResizable(false);
+            jTable1.getColumnModel().getColumn(1).setResizable(false);
         }
 
         jButton1.setText("Cria um Leilão");
@@ -115,7 +153,7 @@ public class JanelaCriaLeilao extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private static javax.swing.JScrollPane jScrollPane1;
+    private static javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }

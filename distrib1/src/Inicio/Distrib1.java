@@ -7,10 +7,8 @@ package Inicio;
  */
 
 
-import Comunicação.ControladoraThreads;
-import Comunicação.DefinirComunicacao;
 import GUI.JanelaMinhaIDPublica;
-import java.io.IOException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.UIManager;
@@ -24,6 +22,7 @@ public class Distrib1 {
 
     public static String IDpublica;
     public static String souOq = "servidor";
+    public static ArrayList<Conexao> conexoes = new ArrayList<>();
     
     /**
      * @param args the command line arguments
