@@ -11,6 +11,9 @@ import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -34,7 +37,10 @@ public class ComunicacaoEnvioInicial extends Thread {
                 String msg = Distrib1.IDpublica + "#" + DefinirComunicacao.idRede;
                 DatagramPacket msgPacket = new DatagramPacket(msg.getBytes(), msg.getBytes().length, addr, DefinirComunicacao.PORT);
                 serverSocket.send(msgPacket);
-                JanelaConsole.escreveNaJanela("Mandou: " + msg);
+                Date now = new Date();
+                DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+                String dh = formatter.format(now);
+                JanelaConsole.escreveNaJanela(dh + " Mandou: " + msg);
                 sleep(5000);
             }
         } catch (IOException | ClassNotFoundException | InterruptedException ex) {
