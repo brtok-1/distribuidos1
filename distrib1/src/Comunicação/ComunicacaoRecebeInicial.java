@@ -11,6 +11,9 @@ import java.net.DatagramPacket;
 import java.net.InetAddress;
 import java.net.MulticastSocket;
 import java.net.UnknownHostException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -35,7 +38,10 @@ public class ComunicacaoRecebeInicial extends Thread {
                     DatagramPacket msgPacket = new DatagramPacket(buf, buf.length);
                     clientSocket.receive(msgPacket);
                     String msg = new String(buf);
-                    JanelaConsole.escreveNaJanela("Recebeu: " + msg.trim());
+                    Date now = new Date();
+                    DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+                    String dh = formatter.format(now);
+                    JanelaConsole.escreveNaJanela(dh + " Recebeu: " + msg.trim());
                 }
                 clientSocket.leaveGroup(addres);
             } catch (IOException ex) {
