@@ -28,6 +28,7 @@ public class ComunicacaoRecebeInicial extends Thread {
      */
     @Override
     public void run() {
+        System.out.println("Jesus");
         try {
             boolean naotem4 = true;
             InetAddress addres = InetAddress.getByName(DefinirComunicacao.INET_ADDR);

@@ -30,7 +30,6 @@ public class ComunicacaoEnvioInicial extends Thread {
     @Override
     public void run() {
         try {
-            DefinirComunicacao comunica = new DefinirComunicacao();
             while (naotem4) {
                 InetAddress addr = InetAddress.getByName(DefinirComunicacao.INET_ADDR);
                 DatagramSocket serverSocket = new DatagramSocket();
@@ -43,7 +42,7 @@ public class ComunicacaoEnvioInicial extends Thread {
                 JanelaConsole.escreveNaJanela(dh + " Mandou: " + msg);
                 sleep(5000);
             }
-        } catch (IOException | ClassNotFoundException | InterruptedException ex) {
+        } catch (IOException | InterruptedException ex) {
             Logger.getLogger(ComunicacaoEnvioInicial.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
