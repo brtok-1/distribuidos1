@@ -23,6 +23,7 @@ import java.util.logging.Logger;
  */
 public class ComunicacaoEnvioInicial extends Thread {
 
+    static boolean naotem4 = true;
     /**
      *
      */
@@ -30,7 +31,6 @@ public class ComunicacaoEnvioInicial extends Thread {
     public void run() {
         try {
             DefinirComunicacao comunica = new DefinirComunicacao();
-            boolean naotem4 = true;
             while (naotem4) {
                 InetAddress addr = InetAddress.getByName(DefinirComunicacao.INET_ADDR);
                 DatagramSocket serverSocket = new DatagramSocket();
@@ -47,4 +47,6 @@ public class ComunicacaoEnvioInicial extends Thread {
             Logger.getLogger(ComunicacaoEnvioInicial.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    
 }

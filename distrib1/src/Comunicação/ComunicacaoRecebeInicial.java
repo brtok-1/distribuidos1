@@ -54,6 +54,7 @@ public class ComunicacaoRecebeInicial extends Thread {
                     }
                     if (conexoes.size() >= 4) {
                         naotem4 = false;
+                        ComunicacaoEnvioInicial.naotem4 = false;
                     }
                 }
                 clientSocket.leaveGroup(addres);
