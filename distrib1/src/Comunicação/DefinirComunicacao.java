@@ -23,5 +23,6 @@ public class DefinirComunicacao {
         INET_ADDR = "228.5.6.7";
         JanelaConsole.escreveNaJanela("Participando da comunicação");
         JanelaConsole.escreveNaJanela("com endereço: " + INET_ADDR);
+        System.out.println(".");
     }
 }
