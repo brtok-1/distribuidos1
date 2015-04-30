@@ -31,10 +31,10 @@ public class ComunicacaoEnvioInicial extends Thread {
     public void run() {
         try {
             while (naotem4) {
-                InetAddress addr = InetAddress.getByName(DefinirComunicacao.INET_ADDR);
+                InetAddress addr = InetAddress.getByName(Distrib1.INET_ADDR);
                 DatagramSocket serverSocket = new DatagramSocket();
-                String msg = Distrib1.IDpublica + "#" + DefinirComunicacao.idRede;
-                DatagramPacket msgPacket = new DatagramPacket(msg.getBytes(), msg.getBytes().length, addr, DefinirComunicacao.PORT);
+                String msg = Distrib1.idPublica + "#" + Distrib1.idRede;
+                DatagramPacket msgPacket = new DatagramPacket(msg.getBytes(), msg.getBytes().length, addr, Distrib1.PORT);
                 serverSocket.send(msgPacket);
                 Date now = new Date();
                 DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");

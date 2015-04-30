@@ -7,6 +7,8 @@ package GUI;
 
 import Controle.ControleLeilao;
 import Inicio.Livro;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -164,9 +166,14 @@ public class JanelaIniciandoNovoLeilao extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         dispose();
-        JanelaCriaLeilao jcl = new JanelaCriaLeilao();
-        jcl.setVisible(true);
-        jcl.repaint();
+        JanelaCriaLeilao jcl;
+        try {
+            jcl = new JanelaCriaLeilao();
+            jcl.setVisible(true);
+            jcl.repaint();
+        } catch (InterruptedException ex) {
+            Logger.getLogger(JanelaIniciandoNovoLeilao.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

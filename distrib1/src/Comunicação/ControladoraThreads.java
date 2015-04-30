@@ -5,7 +5,7 @@
  */
 package Comunicação;
 
-import java.io.IOException;
+import GUI.JanelaConsole;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -20,14 +20,19 @@ public class ControladoraThreads extends Thread {
      */
     @Override
     public void run() {
-        try {
-            DefinirComunicacao comunica = new DefinirComunicacao();
-        } catch (IOException | ClassNotFoundException ex) {
-            Logger.getLogger(ControladoraThreads.class.getName()).log(Level.SEVERE, null, ex);
-        }
         ComunicacaoEnvioInicial envio = new ComunicacaoEnvioInicial();
         envio.start();
+        try {
+            JanelaConsole.escreveNaJanela("Thread Multicast inicial de envio iniciada.");
+        } catch (InterruptedException ex) {
+            Logger.getLogger(ControladoraThreads.class.getName()).log(Level.SEVERE, null, ex);
+        }
         ComunicacaoRecebeInicial recebe = new ComunicacaoRecebeInicial();
         recebe.start();
+        try {
+            JanelaConsole.escreveNaJanela("Thread Multicast inicial de recepção iniciada.");
+        } catch (InterruptedException ex) {
+            Logger.getLogger(ControladoraThreads.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

@@ -7,6 +7,8 @@ package GUI;
 
 import Comunicação.ControladoraThreads;
 import Inicio.Distrib1;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -77,20 +79,25 @@ public class JanelaMinhaIDPublica extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String idPublica = jTextField1.getText();
-        if (idPublica.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "É necessário um ID pública qualquer.");
-        } else {
-            JanelaConsole console = new JanelaConsole();
-            console.setVisible(true);
-            console.repaint();
-            Distrib1.IDpublica = idPublica;
-            dispose();
-            ControladoraThreads threads = new ControladoraThreads();
-            threads.start();
-            JanelaCriaLeilao jcl = new JanelaCriaLeilao();
-            jcl.setVisible(true);
-            jcl.repaint();
+        try {
+            String idPublica = jTextField1.getText();
+            if (idPublica.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "É necessário um ID pública qualquer.");
+            } else {
+                JanelaConsole console = new JanelaConsole();
+                console.setVisible(true);
+                console.repaint();
+                Distrib1.idPublica = idPublica;
+                dispose();
+                ControladoraThreads threads = new ControladoraThreads();
+                threads.start();
+                JanelaConsole.escreveNaJanela("Controladora de Threads iniciada.");
+                JanelaCriaLeilao jcl = new JanelaCriaLeilao();
+                jcl.setVisible(true);
+                jcl.repaint();
+            }
+        } catch (InterruptedException ex) {
+            Logger.getLogger(JanelaMinhaIDPublica.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

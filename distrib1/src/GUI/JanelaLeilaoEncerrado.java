@@ -6,6 +6,8 @@
 package GUI;
 
 import Inicio.Livro;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -15,6 +17,7 @@ public class JanelaLeilaoEncerrado extends javax.swing.JFrame {
 
     /**
      * Creates new form JanelaLeilaoAcontecendo
+     *
      * @param leilao
      */
     public JanelaLeilaoEncerrado(Livro leilao) {
@@ -30,8 +33,8 @@ public class JanelaLeilaoEncerrado extends javax.swing.JFrame {
             jLabel7.setVisible(false);
             labelVendidoPara.setText("Não houveram lances.");
         } else {
-            labelValorVenda.setText(leilao.getLances().get(tamanho-1).getValorOferecidoString());
-            labelVendidoPara.setText(leilao.getLances().get(tamanho-1).getQuemOfereceu());
+            labelValorVenda.setText(leilao.getLances().get(tamanho - 1).getValorOferecidoString());
+            labelVendidoPara.setText(leilao.getLances().get(tamanho - 1).getQuemOfereceu());
         }
     }
 
@@ -170,10 +173,15 @@ public class JanelaLeilaoEncerrado extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        dispose();
-        JanelaCriaLeilao jcl = new JanelaCriaLeilao();
-        jcl.setVisible(true);
-        jcl.repaint();
+        JanelaCriaLeilao jcl;
+        try {
+            jcl = new JanelaCriaLeilao();
+            jcl.setVisible(true);
+            jcl.repaint();
+            dispose();
+        } catch (InterruptedException ex) {
+            Logger.getLogger(JanelaLeilaoEncerrado.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

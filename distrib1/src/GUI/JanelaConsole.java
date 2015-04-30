@@ -24,15 +24,16 @@ public class JanelaConsole extends javax.swing.JFrame {
         initComponents();
     }
 
-    public static void escreveNaJanela(String s) {
+    public static void escreveNaJanela(String s) throws InterruptedException {
         Object mensagem[] = new Object[1];
         mensagem[0] = s;
         DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
         jTable1.setModel(dtm);
         dtm.addRow(mensagem);
-        if (dtm.getRowCount() > 8) {
+        if (dtm.getRowCount() > 10) {
             dtm.removeRow(0);
         }
+        Thread.sleep(1000);
     }
 
     /** This method is called from within the constructor to
@@ -86,11 +87,11 @@ public class JanelaConsole extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 335, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
         );
 
         pack();

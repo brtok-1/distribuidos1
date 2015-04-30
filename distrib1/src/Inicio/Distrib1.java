@@ -20,21 +20,23 @@ import javax.swing.UnsupportedLookAndFeelException;
  */
 public class Distrib1 {
 
-    public static String IDpublica;
+    public static String idPublica;
+    public static int idRede;
     public static String souOq = "servidor";
+    public static String INET_ADDR = "228.5.6.7";
+    public static int PORT = 8885;
     public static ArrayList<Conexao> conexoes = new ArrayList<>();
     
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        
+        Distrib1.idRede = (int) (Math.random() * 100);
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
             Logger.getLogger(Distrib1.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
         JanelaMinhaIDPublica jid = new JanelaMinhaIDPublica();
         jid.setVisible(true);
         jid.repaint();

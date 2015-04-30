@@ -6,6 +6,8 @@
 package GUI;
 
 import Inicio.Distrib1;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -152,10 +154,15 @@ public class JanelaLeilaoIniciado extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botaoNaoParticiparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoNaoParticiparActionPerformed
-        dispose();
-        JanelaCriaLeilao jcl = new JanelaCriaLeilao();
-        jcl.setVisible(true);
-        jcl.repaint();
+        JanelaCriaLeilao jcl;
+        try {
+            jcl = new JanelaCriaLeilao();
+            dispose();
+            jcl.setVisible(true);
+            jcl.repaint();
+        } catch (InterruptedException ex) {
+            Logger.getLogger(JanelaLeilaoIniciado.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_botaoNaoParticiparActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

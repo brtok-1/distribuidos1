@@ -17,8 +17,8 @@ public class JanelaCriaLeilao extends javax.swing.JFrame {
     /**
      * Creates new form JanelaCriaLeilao
      */
-    public JanelaCriaLeilao() {
-        JanelaConsole.escreveNaJanela("Entrando com ID Pública: " + Distrib1.IDpublica);
+    public JanelaCriaLeilao() throws InterruptedException {
+        JanelaConsole.escreveNaJanela("Entrando com ID Pública: " + Distrib1.idPublica);
         initComponents();
         //jButton1.setVisible(false);
     }
