@@ -15,6 +15,9 @@ import java.net.DatagramPacket;
 import java.net.InetAddress;
 import java.net.MulticastSocket;
 import java.net.UnknownHostException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -62,9 +65,12 @@ public class ComunicacaoRecebeInicial extends Thread {
                             byte[] outrobuf = new byte[256];
                             DatagramPacket msgPacket2 = new DatagramPacket(outrobuf, outrobuf.length);
                             clientSocket.receive(msgPacket2);
+                            Date now = new Date();
+                            DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+                            String dh = formatter.format(now);
                             String msg2 = new String(outrobuf);
                             msg2 = msg2.trim();
-                            JanelaConsole.escreveNaJanela("Recebeu: " + msg2);
+                            JanelaConsole.escreveNaJanela(dh + " Recebeu: " + msg2);
                             String[] msgs2 = msg2.split("#");
                             Conexao c2 = new Conexao(msgs2[0], Integer.parseInt(msgs2[1]));
                             boolean naoAchou2 = true;
