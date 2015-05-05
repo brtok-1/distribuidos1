@@ -6,7 +6,8 @@
 package GUI;
 
 import Comunicação.ControladoraThreads;
-import Inicio.Distrib1;
+import Modelo.Usuario;
+//import Inicio.Distrib1;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -17,6 +18,7 @@ import javax.swing.JOptionPane;
  */
 public class JanelaMinhaIDPublica extends javax.swing.JFrame {
 
+    private Usuario usuario;
     /**
      * Creates new form JanelaMinhaIDPublica
      */
@@ -87,20 +89,29 @@ public class JanelaMinhaIDPublica extends javax.swing.JFrame {
                 JanelaConsole console = new JanelaConsole();
                 console.setVisible(true);
                 console.repaint();
-                Distrib1.idPublica = idPublica;
+                //Distrib1.idPublica = idPublica;
+                usuario.setIdPublica(idPublica);
                 dispose();
                 ControladoraThreads threads = new ControladoraThreads();
                 threads.start();
-                JanelaConsole.escreveNaJanela("Controladora de Threads iniciada.");
-                JanelaCriaLeilao jcl = new JanelaCriaLeilao();
-                jcl.setVisible(true);
-                jcl.repaint();
+                threads.Controladora();
+                
             }
-        } catch (InterruptedException ex) {
+        } catch (Exception ex) {
             Logger.getLogger(JanelaMinhaIDPublica.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;

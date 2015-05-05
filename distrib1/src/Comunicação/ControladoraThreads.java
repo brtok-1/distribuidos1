@@ -6,6 +6,7 @@
 package Comunicação;
 
 import GUI.JanelaConsole;
+import GUI.JanelaCriaLeilao;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -34,5 +35,18 @@ public class ControladoraThreads extends Thread {
         } catch (InterruptedException ex) {
             Logger.getLogger(ControladoraThreads.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    public void Controladora()
+    {
+        try {
+            JanelaConsole.escreveNaJanela("Controladora de Threads iniciada.");
+            JanelaCriaLeilao jcl = new JanelaCriaLeilao();
+            jcl.setVisible(true);
+            jcl.repaint();
+        } catch (InterruptedException ex) {
+            Logger.getLogger(ControladoraThreads.class.getName()).log(Level.SEVERE, null, ex);
+        }
+                
     }
 }

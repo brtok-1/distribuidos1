@@ -5,14 +5,18 @@
  */
 package GUI;
 
+import Modelo.Conexao;
 import Inicio.Distrib1;
-import static Inicio.Distrib1.conexoes;
+//import static Inicio.Distrib1.conexoes;
+import java.util.ArrayList;
 
 /**
  *
  * @author Bruno
  */
 public class JanelaCriaLeilao extends javax.swing.JFrame {
+    
+    //public static ArrayList<Conexao> conexoes = new ArrayList<>();
 
     /**
      * Creates new form JanelaCriaLeilao
@@ -23,7 +27,7 @@ public class JanelaCriaLeilao extends javax.swing.JFrame {
         //jButton1.setVisible(false);
     }
 
-    public static void atualizar() {
+    public static void atualizar(ArrayList<Conexao> conexoes) {
         Object [][] tabela = new Object[conexoes.size()][2];
         for (int i = 0; i < conexoes.size(); i++) {
             tabela[i][0] = conexoes.get(i).getIdPublica();
@@ -150,6 +154,14 @@ public class JanelaCriaLeilao extends javax.swing.JFrame {
         jinl.repaint();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+//    public static ArrayList<Conexao> getConexoes() {
+//        return conexoes;
+//    }
+//
+//    public static void setConexoes(ArrayList<Conexao> conexoes) {
+//        JanelaCriaLeilao.conexoes = conexoes;
+//    }    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;

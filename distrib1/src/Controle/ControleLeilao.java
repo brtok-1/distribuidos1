@@ -6,7 +6,7 @@
 package Controle;
 
 import GUI.JanelaLeilaoEncerrado;
-import Inicio.Livro;
+import Modelo.Livro;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 

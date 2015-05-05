@@ -6,7 +6,7 @@
 package Comunicação;
 
 import GUI.JanelaConsole;
-import Inicio.Distrib1;
+//import Inicio.Distrib1;
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;

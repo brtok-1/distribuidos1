@@ -7,9 +7,9 @@ package Comunicação;
 
 import GUI.JanelaConsole;
 import GUI.JanelaCriaLeilao;
-import Inicio.Conexao;
+import Modelo.Conexao;
 import Inicio.Distrib1;
-import static Inicio.Distrib1.conexoes;
+//import static Inicio.Distrib1.conexoes;
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.InetAddress;
@@ -17,6 +17,7 @@ import java.net.MulticastSocket;
 import java.net.UnknownHostException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -27,6 +28,7 @@ import java.util.logging.Logger;
  */
 public class ComunicacaoRecebeInicial extends Thread {
 
+    public static ArrayList<Conexao> conexoes = new ArrayList<>();
     /**
      *
      */
@@ -54,7 +56,7 @@ public class ComunicacaoRecebeInicial extends Thread {
                     }
                     if (naoAchou) {
                         conexoes.add(c);
-                        JanelaCriaLeilao.atualizar();
+                        JanelaCriaLeilao.atualizar(conexoes);
                         if (Distrib1.souOq.equalsIgnoreCase("servidor") && ((!(c.getIdPublica().equals(Distrib1.idPublica))) && (c.getIdRede() > Distrib1.idRede))) {
                             Distrib1.souOq = "cliente";
                         }
@@ -81,7 +83,7 @@ public class ComunicacaoRecebeInicial extends Thread {
                             }
                             if (naoAchou2) {
                                 conexoes.add(c2);
-                                JanelaCriaLeilao.atualizar();
+                                JanelaCriaLeilao.atualizar(conexoes);
                             }
                             sleep(1000);
                         }
