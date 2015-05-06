@@ -42,7 +42,7 @@ public class ComunicacaoEnvioInicial extends Thread {
             while (naotem4) {
                 InetAddress addr = InetAddress.getByName(conexao.getINET_ADDR());
                 DatagramSocket serverSocket = new DatagramSocket();
-                String msg = usuario.getIdPublica() + "#" + usuario.getIdRede() + "#" + usuario.getPapel();
+                String msg = usuario.getIdPublica() + "#" + usuario.getIdRede() + "#" + usuario.getPapel() + "#" + usuario.getChavePublica();
                 DatagramPacket msgPacket = new DatagramPacket(msg.getBytes(), msg.getBytes().length, addr, conexao.getPORT());
                 serverSocket.send(msgPacket);
                 Date now = new Date();
