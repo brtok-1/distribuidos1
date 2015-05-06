@@ -5,7 +5,7 @@
  */
 package GUI;
 
-import Inicio.Distrib1;
+import Modelo.Usuario;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -20,7 +20,10 @@ public class JanelaLeilaoIniciado extends javax.swing.JFrame {
      */
     public JanelaLeilaoIniciado() {
         initComponents();
-        if (Distrib1.souOq.equalsIgnoreCase("servidor")) {
+        
+        Usuario usuario = Usuario.getInstancia();
+        
+        if (usuario.getIdPublica().equalsIgnoreCase("servidor")) {
             botaoDarLance.setVisible(false);
             botaoNaoParticipar.setText("OK");
         }

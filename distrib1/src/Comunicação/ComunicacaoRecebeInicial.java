@@ -29,7 +29,7 @@ import java.util.logging.Logger;
  */
 public class ComunicacaoRecebeInicial extends Thread {
 
-    public static ArrayList<Conexao> conexoes = new ArrayList<>();
+    //public static ArrayList<Conexao> conexoes = new ArrayList<>();
     private ArrayList<Usuario> usuarios = new ArrayList<>();
     /**
      *
@@ -37,9 +37,12 @@ public class ComunicacaoRecebeInicial extends Thread {
     @Override
     public void run() {
         try {
+            //Obtem a conexão
+            Conexao conexao = Conexao.getInstancia();
+            
             boolean naotem4 = true;
-            InetAddress addres = InetAddress.getByName(Distrib1.INET_ADDR);
-            try (MulticastSocket clientSocket = new MulticastSocket(Distrib1.PORT)) {
+            InetAddress addres = InetAddress.getByName(conexao.getINET_ADDR());
+            try (MulticastSocket clientSocket = new MulticastSocket(conexao.getPORT())) {
                 clientSocket.joinGroup(addres);
                 while (naotem4) {
                     byte[] buf = new byte[256];
@@ -49,22 +52,35 @@ public class ComunicacaoRecebeInicial extends Thread {
                     msg = msg.trim();
                     JanelaConsole.escreveNaJanela("Recebeu: " + msg);
                     String[] msgs = msg.split("#");
-                    Conexao c = new Conexao(msgs[0], Integer.parseInt(msgs[1]));
-                    Usuario u = new Usuario(Integer.parseInt(msgs[0]), msgs[1], null, null);
+//                    Conexao c = new Conexao(msgs[0], Integer.parseInt(msgs[1]));
+                    
+                    //Obtem o usuário local
+                    Usuario usuarioLocal = Usuario.getInstancia();
+                    
+                    Usuario usuario = new Usuario(Integer.parseInt(msgs[1]), msgs[0], null, null, msgs[2]);
                     boolean naoAchou = true;
-                    for (int i = 0; i < conexoes.size(); i++) {
-                        if (conexoes.get(i).getIdPublica().equalsIgnoreCase(c.getIdPublica()) && conexoes.get(i).getIdRede() == c.getIdRede()) {
+                    for (Usuario us : usuarios)
+                    {
+                        if (us.getIdPublica().equalsIgnoreCase(usuario.getIdPublica()) && us.getIdRede() == usuario.getIdRede()) {
                             naoAchou = false;
                         }
                     }
+//                    for (int i = 0; i < conexoes.size(); i++) {
+//                        if (conexoes.get(i).getIdPublica().equalsIgnoreCase(c.getIdPublica()) && conexoes.get(i).getIdRede() == c.getIdRede()) {
+//                            naoAchou = false;
+//                        }
+//                    }
                     if (naoAchou) {
-                        conexoes.add(c);
-                        JanelaCriaLeilao.atualizar(conexoes);
-                        if (Distrib1.souOq.equalsIgnoreCase("servidor") && ((!(c.getIdPublica().equals(Distrib1.idPublica))) && (c.getIdRede() > Distrib1.idRede))) {
-                            Distrib1.souOq = "cliente";
+                        //conexoes.add(c);
+                        usuarios.add(usuario);
+                        //JanelaCriaLeilao.atualizar(conexoes);
+                        JanelaCriaLeilao.atualizar(usuarios);
+                        if (usuarioLocal.getPapel().equalsIgnoreCase("servidor") && ((!(usuario.getIdPublica().equals(usuarioLocal.getIdPublica()))) && (usuario.getIdRede() > usuarioLocal.getIdRede()))) {
+                            //Distrib1.souOq = "cliente";
+                            usuarioLocal.setPapel("cliente");
                         }
                     }
-                    if (conexoes.size() >= 4) {
+                    if (usuarios.size() >= 4) {
                         JanelaConsole.escreveNaJanela("Aguarde mais 10 segundos pois podem haver novas conexões.");
                         for (int i = 0; i < 10; i++) {
                             byte[] outrobuf = new byte[256];
@@ -77,22 +93,26 @@ public class ComunicacaoRecebeInicial extends Thread {
                             msg2 = msg2.trim();
                             JanelaConsole.escreveNaJanela(dh + " Recebeu: " + msg2);
                             String[] msgs2 = msg2.split("#");
-                            Conexao c2 = new Conexao(msgs2[0], Integer.parseInt(msgs2[1]));
+                            Usuario novoUsuario = new Usuario(Integer.parseInt(msgs2[1]), msgs2[0], null, null, msgs2[2]);
+                            //Conexao c2 = new Conexao(msgs2[0], Integer.parseInt(msgs2[1]));
                             boolean naoAchou2 = true;
-                            for (int j = 0; j < conexoes.size(); j++) {
-                                if (conexoes.get(j).getIdPublica().equalsIgnoreCase(c2.getIdPublica()) && conexoes.get(j).getIdRede() == c2.getIdRede()) {
+                            
+                            for (Usuario us : usuarios)
+                            {
+                                if (us.getIdPublica().equalsIgnoreCase(novoUsuario.getIdPublica()) && us.getIdRede() == novoUsuario.getIdRede()) {
                                     naoAchou2 = false;
                                 }
                             }
+                            
                             if (naoAchou2) {
-                                conexoes.add(c2);
-                                JanelaCriaLeilao.atualizar(conexoes);
+                                usuarios.add(novoUsuario);
+                                JanelaCriaLeilao.atualizar(usuarios);
                             }
                             sleep(1000);
                         }
                         naotem4 = false;
                         ComunicacaoEnvioInicial.naotem4 = false;
-                        if (Distrib1.souOq.equalsIgnoreCase("servidor")) {
+                        if (usuarioLocal.getPapel().equalsIgnoreCase("servidor")) {
                             JanelaConsole.escreveNaJanela("Característica já definida: SERVIDOR");
                         } else {
                             JanelaConsole.escreveNaJanela("Característica já definida: CLIENTE");

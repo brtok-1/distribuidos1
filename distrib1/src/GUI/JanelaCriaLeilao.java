@@ -5,8 +5,10 @@
  */
 package GUI;
 
-import Modelo.Conexao;
-import Inicio.Distrib1;
+//import Modelo.Conexao;
+//import static Comunicação.ComunicacaoRecebeInicial.conexoes;
+//import Inicio.Distrib1;
+import Modelo.Usuario;
 //import static Inicio.Distrib1.conexoes;
 import java.util.ArrayList;
 
@@ -15,23 +17,32 @@ import java.util.ArrayList;
  * @author Bruno
  */
 public class JanelaCriaLeilao extends javax.swing.JFrame {
+
+//    public static void atualizar(ArrayList<Usuario> usuarios) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
     
+    //private Usuario usuario;
     //public static ArrayList<Conexao> conexoes = new ArrayList<>();
 
     /**
      * Creates new form JanelaCriaLeilao
+     * @param usuario
      */
     public JanelaCriaLeilao() throws InterruptedException {
-        JanelaConsole.escreveNaJanela("Entrando com ID Pública: " + Distrib1.idPublica);
+        
+        Usuario usuario = Usuario.getInstancia();
+        
+        JanelaConsole.escreveNaJanela("Entrando com ID Pública: " + usuario.getIdPublica());
         initComponents();
         //jButton1.setVisible(false);
     }
 
-    public static void atualizar(ArrayList<Conexao> conexoes) {
-        Object [][] tabela = new Object[conexoes.size()][2];
-        for (int i = 0; i < conexoes.size(); i++) {
-            tabela[i][0] = conexoes.get(i).getIdPublica();
-            tabela[i][1] = conexoes.get(i).getIdRede();
+    public static void atualizar(ArrayList<Usuario> usuarios) {
+        Object [][] tabela = new Object[usuarios.size()][2];
+        for (int i = 0; i < usuarios.size(); i++) {
+            tabela[i][0] = usuarios.get(i).getIdPublica();
+            tabela[i][1] = usuarios.get(i).getIdRede();
         }
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
                 tabela,

@@ -11,33 +11,38 @@ package Modelo;
  */
 public class Conexao {
     
-    String idPublica;
-    int idRede;
+    private String INET_ADDR;
+    private int PORT;
     
-    public static String souOq = "servidor";
-    public static String INET_ADDR = "228.5.6.7";
-    public static int PORT = 8885;
-
-    public Conexao(String idPublica, int idRede) {
-        this.idPublica = idPublica;
-        this.idRede = idRede;
+    private static Conexao instancia;    
+ 
+    public String getINET_ADDR() {
+        return INET_ADDR;
     }
 
-    public String getIdPublica() {
-        return idPublica;
+    public void setINET_ADDR(String INET_ADDR) {
+        this.INET_ADDR = INET_ADDR;
     }
 
-    public void setIdPublica(String idPublica) {
-        this.idPublica = idPublica;
+    public int getPORT() {
+        return PORT;
     }
 
-    public int getIdRede() {
-        return idRede;
+    public void setPORT(int PORT) {
+        this.PORT = PORT;
     }
 
-    public void setIdRede(int idRede) {
-        this.idRede = idRede;
+    public static Conexao getInstancia() {
+        if (instancia == null)
+        {
+            instancia = new Conexao();
+        }
+        return instancia;
     }
-    
+
+    public static void setInstancia(Conexao instancia) {
+        Conexao.instancia = instancia;
+    }
+
     
 }

@@ -7,6 +7,7 @@ package Comunicação;
 
 import GUI.JanelaConsole;
 import Modelo.Conexao;
+import Modelo.Usuario;
 //import Inicio.Distrib1;
 import java.io.IOException;
 import java.net.DatagramPacket;
@@ -24,7 +25,6 @@ import java.util.logging.Logger;
  */
 public class ComunicacaoEnvioInicial extends Thread {
 
-    private Conexao conexao;
     
     static boolean naotem4 = true;
     /**
@@ -33,11 +33,17 @@ public class ComunicacaoEnvioInicial extends Thread {
     @Override
     public void run() {
         try {
+            //Obtem a conexao
+            Conexao conexao = Conexao.getInstancia();
+            
+            //Obtem o usuário
+            Usuario usuario = Usuario.getInstancia();
+            
             while (naotem4) {
-                InetAddress addr = InetAddress.getByName(Distrib1.INET_ADDR);
+                InetAddress addr = InetAddress.getByName(conexao.getINET_ADDR());
                 DatagramSocket serverSocket = new DatagramSocket();
-                String msg = Distrib1.idPublica + "#" + Distrib1.idRede;
-                DatagramPacket msgPacket = new DatagramPacket(msg.getBytes(), msg.getBytes().length, addr, Distrib1.PORT);
+                String msg = usuario.getIdPublica() + "#" + usuario.getIdRede() + "#" + usuario.getPapel();
+                DatagramPacket msgPacket = new DatagramPacket(msg.getBytes(), msg.getBytes().length, addr, conexao.getPORT());
                 serverSocket.send(msgPacket);
                 Date now = new Date();
                 DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
@@ -48,16 +54,7 @@ public class ComunicacaoEnvioInicial extends Thread {
         } catch (IOException | InterruptedException ex) {
             Logger.getLogger(ComunicacaoEnvioInicial.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
-
-    public Conexao getConexao() {
-        return conexao;
-    }
-
-    public void setConexao(Conexao conexao) {
-        this.conexao = conexao;
-    }
-    
+    } 
     
     
     

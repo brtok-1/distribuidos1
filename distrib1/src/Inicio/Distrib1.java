@@ -8,6 +8,7 @@ package Inicio;
 
 
 import GUI.JanelaMinhaIDPublica;
+import Modelo.Conexao;
 import Modelo.Usuario;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,9 +23,9 @@ public class Distrib1 {
 
     //public static String idPublica;
     //public static int idRede;
-    public static String souOq = "servidor";
-    public static String INET_ADDR = "228.5.6.7";
-    public static int PORT = 8885;
+    //public static String souOq = "servidor";
+    //public static String INET_ADDR = "228.5.6.7";
+    //public static int PORT = 8885;
     //public static ArrayList<Conexao> conexoes = new ArrayList<>();
     
     /**
@@ -32,10 +33,19 @@ public class Distrib1 {
      */
     public static void main(String[] args) {
         
-        Usuario usuario = new Usuario();
-        usuario.setIdRede((int) (Math.random() * 100));
+        //Cria e instancia o usuário
+        Usuario usuario = Usuario.getInstancia();
         
+        usuario.setIdRede((int) (Math.random() * 100));
+        usuario.setPapel("servidor");
+        
+        Usuario.setInstancia(usuario);
         //Distrib1.idRede = (int) (Math.random() * 100);
+        
+        //Cria e instancia a conexão
+        Conexao conexao = Conexao.getInstancia();
+        conexao.setINET_ADDR("228.5.6.7");
+        conexao.setPORT(8885);
         
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -43,7 +53,7 @@ public class Distrib1 {
             Logger.getLogger(Distrib1.class.getName()).log(Level.SEVERE, null, ex);
         }
         JanelaMinhaIDPublica jid = new JanelaMinhaIDPublica();
-        jid.setUsuario(usuario);
+        //jid.setUsuario(usuario);
         jid.setVisible(true);
         jid.repaint();
     }

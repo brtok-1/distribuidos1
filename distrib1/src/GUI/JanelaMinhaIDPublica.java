@@ -18,7 +18,7 @@ import javax.swing.JOptionPane;
  */
 public class JanelaMinhaIDPublica extends javax.swing.JFrame {
 
-    private Usuario usuario;
+    //private Usuario usuario;
     /**
      * Creates new form JanelaMinhaIDPublica
      */
@@ -90,7 +90,13 @@ public class JanelaMinhaIDPublica extends javax.swing.JFrame {
                 console.setVisible(true);
                 console.repaint();
                 //Distrib1.idPublica = idPublica;
+                
+                Usuario usuario = Usuario.getInstancia();
+                
                 usuario.setIdPublica(idPublica);
+                
+                Usuario.setInstancia(usuario);
+                
                 dispose();
                 ControladoraThreads threads = new ControladoraThreads();
                 threads.start();
@@ -102,13 +108,6 @@ public class JanelaMinhaIDPublica extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
 
     
     
