@@ -9,6 +9,7 @@ import GUI.JanelaConsole;
 import GUI.JanelaCriaLeilao;
 import Modelo.Conexao;
 import Inicio.Distrib1;
+import Modelo.Usuario;
 //import static Inicio.Distrib1.conexoes;
 import java.io.IOException;
 import java.net.DatagramPacket;
@@ -29,6 +30,7 @@ import java.util.logging.Logger;
 public class ComunicacaoRecebeInicial extends Thread {
 
     public static ArrayList<Conexao> conexoes = new ArrayList<>();
+    private ArrayList<Usuario> usuarios = new ArrayList<>();
     /**
      *
      */
@@ -48,6 +50,7 @@ public class ComunicacaoRecebeInicial extends Thread {
                     JanelaConsole.escreveNaJanela("Recebeu: " + msg);
                     String[] msgs = msg.split("#");
                     Conexao c = new Conexao(msgs[0], Integer.parseInt(msgs[1]));
+                    Usuario u = new Usuario(Integer.parseInt(msgs[0]), msgs[1], null, null);
                     boolean naoAchou = true;
                     for (int i = 0; i < conexoes.size(); i++) {
                         if (conexoes.get(i).getIdPublica().equalsIgnoreCase(c.getIdPublica()) && conexoes.get(i).getIdRede() == c.getIdRede()) {

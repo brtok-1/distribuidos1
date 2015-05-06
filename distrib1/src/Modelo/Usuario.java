@@ -13,6 +13,15 @@ public class Usuario {
     
     private int idRede;
     private String idPublica;
+    private String chavePublica;
+    private String chavePrivada;
+
+    public Usuario(int idRede, String idPublica, String chavePublica, String chavePrivada) {
+        this.idRede = idRede;
+        this.idPublica = idPublica;
+        this.chavePublica = chavePublica;
+        this.chavePrivada = chavePrivada;
+    }   
 
     public int getIdRede() {
         return idRede;
@@ -28,6 +37,22 @@ public class Usuario {
 
     public void setIdPublica(String idPublica) {
         this.idPublica = idPublica;
+    }
+
+    public String getChavePublica() {
+        return chavePublica;
+    }
+
+    public void setChavePublica(String chavePublica) {
+        this.chavePublica = chavePublica;
+    }
+
+    public String getChavePrivada() {
+        return chavePrivada;
+    }
+
+    public void setChavePrivada(String chavePrivada) {
+        this.chavePrivada = chavePrivada;
     }
     
     

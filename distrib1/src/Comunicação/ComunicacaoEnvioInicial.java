@@ -6,6 +6,7 @@
 package Comunicação;
 
 import GUI.JanelaConsole;
+import Modelo.Conexao;
 //import Inicio.Distrib1;
 import java.io.IOException;
 import java.net.DatagramPacket;
@@ -23,6 +24,8 @@ import java.util.logging.Logger;
  */
 public class ComunicacaoEnvioInicial extends Thread {
 
+    private Conexao conexao;
+    
     static boolean naotem4 = true;
     /**
      *
@@ -46,6 +49,16 @@ public class ComunicacaoEnvioInicial extends Thread {
             Logger.getLogger(ComunicacaoEnvioInicial.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    public Conexao getConexao() {
+        return conexao;
+    }
+
+    public void setConexao(Conexao conexao) {
+        this.conexao = conexao;
+    }
+    
+    
     
     
 }
