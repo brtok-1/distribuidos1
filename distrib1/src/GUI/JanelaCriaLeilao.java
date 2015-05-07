@@ -141,6 +141,9 @@ public class JanelaCriaLeilao extends javax.swing.JFrame {
 
         jLabel2.setText("Participantes:");
 
+        txtNumeroParticipantes.setEditable(false);
+        txtNumeroParticipantes.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(

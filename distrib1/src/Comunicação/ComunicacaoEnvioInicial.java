@@ -44,7 +44,7 @@ public class ComunicacaoEnvioInicial extends Thread {
             //Obtem o usuário
             Usuario usuario = Usuario.getInstancia();
             
-            while (conexao.getQuantidadeUsuarios() < 4) {
+            while (conexao.getStatusLeilao().equalsIgnoreCase("aguardando")) {
                 InetAddress addr = InetAddress.getByName(conexao.getINET_ADDR());
                 DatagramSocket serverSocket = new DatagramSocket();
                 String msg = usuario.getIdPublica() + "#" + usuario.getIdRede() + "#" + usuario.getPapel() + "#" + usuario.getChavePublica();

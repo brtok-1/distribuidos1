@@ -41,7 +41,7 @@ public class ComunicacaoRecebeInicial extends Thread {
             InetAddress addres = InetAddress.getByName(conexao.getINET_ADDR());
             try (MulticastSocket clientSocket = new MulticastSocket(conexao.getPORT())) {
                 clientSocket.joinGroup(addres);
-                while (conexao.getQuantidadeUsuarios() < 4) {
+                while (conexao.getStatusLeilao().equalsIgnoreCase("aguardando")) {
                     byte[] buf = new byte[256];
                     DatagramPacket msgPacket = new DatagramPacket(buf, buf.length);
                     clientSocket.receive(msgPacket);
@@ -49,6 +49,7 @@ public class ComunicacaoRecebeInicial extends Thread {
                     msg = msg.trim();
                     JanelaConsole.escreveNaJanela("Recebeu: " + msg);
                     String[] msgs = msg.split("#");
+                    
                     //Obtem o usuário local
                     Usuario usuarioLocal = Usuario.getInstancia();
                     Usuario usuario = new Usuario(Integer.parseInt(msgs[1]), msgs[0], null, null, msgs[2]);
@@ -94,13 +95,16 @@ public class ComunicacaoRecebeInicial extends Thread {
                             }
                             sleep(1000);
                         }
+                        conexao.setStatusLeilao("andamento");
                         if (usuarioLocal.getPapel().equalsIgnoreCase("servidor")) {
                             JanelaConsole.escreveNaJanela("Característica já definida: SERVIDOR");
                         } else {
                             JanelaConsole.escreveNaJanela("Característica já definida: CLIENTE");
                         }
+                        JanelaConsole.escreveNaJanela("Leilão iniciado");
                     }
                 }
+                
                 clientSocket.leaveGroup(addres);
                 JanelaCriaLeilao.mostraBotao(true);
             } catch (IOException ex) {
