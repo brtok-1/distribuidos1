@@ -11,8 +11,10 @@ package Modelo;
  */
 public class Conexao {
     
+    private String statusLeilao;
     private String INET_ADDR;
     private int PORT;
+    private int quantidadeUsuarios;
     
     private static Conexao instancia;    
  
@@ -44,5 +46,20 @@ public class Conexao {
         Conexao.instancia = instancia;
     }
 
+    public String getStatusLeilao() {
+        return statusLeilao;
+    }
+
+    public void setStatusLeilao(String statusLeilao) {
+        this.statusLeilao = statusLeilao;
+    }
+
+    public int getQuantidadeUsuarios() {
+        return quantidadeUsuarios;
+    }
+
+    public void setQuantidadeUsuarios(int quantidadeUsuarios) {
+        this.quantidadeUsuarios = quantidadeUsuarios;
+    }   
     
 }

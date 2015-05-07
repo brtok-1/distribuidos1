@@ -8,7 +8,6 @@ package Comunicação;
 import GUI.JanelaConsole;
 import Modelo.Conexao;
 import Modelo.Usuario;
-//import Inicio.Distrib1;
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
@@ -26,12 +25,18 @@ import java.util.logging.Logger;
 public class ComunicacaoEnvioInicial extends Thread {
 
     
-    static boolean naotem4 = true;
+    //static boolean naotem4 = true;
     /**
      *
      */
     @Override
     public void run() {
+        EnvioInicial();
+    }
+    
+    //Envio de informações enquanto se aguardam os usuários    
+    public void EnvioInicial()
+    {
         try {
             //Obtem a conexao
             Conexao conexao = Conexao.getInstancia();
@@ -39,7 +44,7 @@ public class ComunicacaoEnvioInicial extends Thread {
             //Obtem o usuário
             Usuario usuario = Usuario.getInstancia();
             
-            while (naotem4) {
+            while (conexao.getQuantidadeUsuarios() < 4) {
                 InetAddress addr = InetAddress.getByName(conexao.getINET_ADDR());
                 DatagramSocket serverSocket = new DatagramSocket();
                 String msg = usuario.getIdPublica() + "#" + usuario.getIdRede() + "#" + usuario.getPapel() + "#" + usuario.getChavePublica();
@@ -54,7 +59,7 @@ public class ComunicacaoEnvioInicial extends Thread {
         } catch (IOException | InterruptedException ex) {
             Logger.getLogger(ComunicacaoEnvioInicial.class.getName()).log(Level.SEVERE, null, ex);
         }
-    } 
+    }
     
     
     

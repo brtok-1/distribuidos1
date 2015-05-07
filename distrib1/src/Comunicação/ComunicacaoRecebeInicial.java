@@ -9,7 +9,6 @@ import GUI.JanelaConsole;
 import GUI.JanelaCriaLeilao;
 import Modelo.Conexao;
 import Modelo.Usuario;
-//import static Inicio.Distrib1.conexoes;
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.InetAddress;
@@ -39,11 +38,10 @@ public class ComunicacaoRecebeInicial extends Thread {
             //Obtem a conexão
             Conexao conexao = Conexao.getInstancia();
             
-            boolean naotem4 = true;
             InetAddress addres = InetAddress.getByName(conexao.getINET_ADDR());
             try (MulticastSocket clientSocket = new MulticastSocket(conexao.getPORT())) {
                 clientSocket.joinGroup(addres);
-                while (naotem4) {
+                while (conexao.getQuantidadeUsuarios() < 4) {
                     byte[] buf = new byte[256];
                     DatagramPacket msgPacket = new DatagramPacket(buf, buf.length);
                     clientSocket.receive(msgPacket);
@@ -61,12 +59,10 @@ public class ComunicacaoRecebeInicial extends Thread {
                         }
                     }
                     if (naoAchou) {
-                        //conexoes.add(c);
                         usuarios.add(usuario);
-                        //JanelaCriaLeilao.atualizar(conexoes);
+                        conexao.setQuantidadeUsuarios(conexao.getQuantidadeUsuarios() + 1);
                         JanelaCriaLeilao.atualizar(usuarios);
                         if (usuarioLocal.getPapel().equalsIgnoreCase("servidor") && ((!(usuario.getIdPublica().equals(usuarioLocal.getIdPublica()))) && (usuario.getIdRede() > usuarioLocal.getIdRede()))) {
-                            //Distrib1.souOq = "cliente";
                             usuarioLocal.setPapel("cliente");
                         }
                     }
@@ -93,12 +89,11 @@ public class ComunicacaoRecebeInicial extends Thread {
                             
                             if (naoAchou2) {
                                 usuarios.add(novoUsuario);
+                                conexao.setQuantidadeUsuarios(conexao.getQuantidadeUsuarios() + 1);
                                 JanelaCriaLeilao.atualizar(usuarios);
                             }
                             sleep(1000);
                         }
-                        naotem4 = false;
-                        ComunicacaoEnvioInicial.naotem4 = false;
                         if (usuarioLocal.getPapel().equalsIgnoreCase("servidor")) {
                             JanelaConsole.escreveNaJanela("Característica já definida: SERVIDOR");
                         } else {
