@@ -1,5 +1,6 @@
 package GUI;
 
+import Modelo.Usuario;
 import javax.swing.table.DefaultTableModel;
 
 /*
@@ -22,6 +23,8 @@ public class JanelaConsole extends javax.swing.JFrame {
     /** Creates new form JanelaConsole */
     public JanelaConsole() {
         initComponents();
+        Usuario usuario = Usuario.getInstancia();
+        setTitle(usuario.getIdPublica() + " - Console");
     }
 
     public static void escreveNaJanela(String s) throws InterruptedException {

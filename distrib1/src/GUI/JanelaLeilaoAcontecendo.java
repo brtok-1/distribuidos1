@@ -5,6 +5,8 @@
  */
 package GUI;
 
+import Modelo.Usuario;
+
 /**
  *
  * @author Bruno
@@ -16,6 +18,8 @@ public class JanelaLeilaoAcontecendo extends javax.swing.JFrame {
      */
     public JanelaLeilaoAcontecendo() {
         initComponents();
+        Usuario usuario = Usuario.getInstancia();
+        setTitle(usuario.getIdPublica() + " - O livro recebeu um lance!");
     }
 
     /**

@@ -86,18 +86,13 @@ public class JanelaMinhaIDPublica extends javax.swing.JFrame {
             if (idPublica.isEmpty()) {
                 JOptionPane.showMessageDialog(null, "É necessário um ID pública qualquer.");
             } else {
+                Usuario usuario = Usuario.getInstancia();
+                usuario.setIdPublica(idPublica);
+                Usuario.setInstancia(usuario);
+                dispose();
                 JanelaConsole console = new JanelaConsole();
                 console.setVisible(true);
                 console.repaint();
-                //Distrib1.idPublica = idPublica;
-                
-                Usuario usuario = Usuario.getInstancia();
-                
-                usuario.setIdPublica(idPublica);
-                
-                Usuario.setInstancia(usuario);
-                
-                dispose();
                 ControladoraThreads threads = new ControladoraThreads();
                 threads.start();
                 threads.Controladora();

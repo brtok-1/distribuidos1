@@ -6,6 +6,7 @@
 package GUI;
 
 import Modelo.Livro;
+import Modelo.Usuario;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -22,6 +23,8 @@ public class JanelaLeilaoEncerrado extends javax.swing.JFrame {
      */
     public JanelaLeilaoEncerrado(Livro leilao) {
         initComponents();
+        Usuario usuario = Usuario.getInstancia();
+        setTitle(usuario.getIdPublica() + " - Leilão encerrado");
         labelCodigo.setText(leilao.getCodigo());
         labelDescricao.setText(leilao.getDescricao());
         labelNome.setText(leilao.getNome());

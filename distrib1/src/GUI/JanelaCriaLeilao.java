@@ -27,15 +27,13 @@ public class JanelaCriaLeilao extends javax.swing.JFrame {
 
     /**
      * Creates new form JanelaCriaLeilao
-     * @param usuario
+     * @throws java.lang.InterruptedException
      */
     public JanelaCriaLeilao() throws InterruptedException {
-        
         Usuario usuario = Usuario.getInstancia();
-        
-        JanelaConsole.escreveNaJanela("Entrando com ID Pública: " + usuario.getIdPublica());
         initComponents();
-        //jButton1.setVisible(false);
+        setTitle(usuario.getIdPublica() + " - Aguardando usuários...");
+        jButton1.setVisible(false);
     }
 
     public static void atualizar(ArrayList<Usuario> usuarios) {
@@ -72,6 +70,10 @@ public class JanelaCriaLeilao extends javax.swing.JFrame {
             jTable1.getColumnModel().getColumn(0).setResizable(false);
             jTable1.getColumnModel().getColumn(1).setResizable(false);
         }
+    }
+    
+    public static void mostraBotao(boolean mostra) {
+        jButton1.setVisible(mostra);
     }
 
     /**
@@ -174,7 +176,7 @@ public class JanelaCriaLeilao extends javax.swing.JFrame {
 //    }    
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private static javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private static javax.swing.JScrollPane jScrollPane1;
     private static javax.swing.JTable jTable1;

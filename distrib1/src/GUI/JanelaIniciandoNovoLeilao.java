@@ -7,6 +7,7 @@ package GUI;
 
 import Controle.ControleLeilao;
 import Modelo.Livro;
+import Modelo.Usuario;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -21,6 +22,8 @@ public class JanelaIniciandoNovoLeilao extends javax.swing.JFrame {
      */
     public JanelaIniciandoNovoLeilao() {
         initComponents();
+        Usuario usuario = Usuario.getInstancia();
+        setTitle(usuario.getIdPublica() + " - Novo livro para leilão");
     }
 
     /**

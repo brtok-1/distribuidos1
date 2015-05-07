@@ -8,7 +8,6 @@ package Comunicação;
 import GUI.JanelaConsole;
 import GUI.JanelaCriaLeilao;
 import Modelo.Conexao;
-import Inicio.Distrib1;
 import Modelo.Usuario;
 //import static Inicio.Distrib1.conexoes;
 import java.io.IOException;
@@ -52,24 +51,15 @@ public class ComunicacaoRecebeInicial extends Thread {
                     msg = msg.trim();
                     JanelaConsole.escreveNaJanela("Recebeu: " + msg);
                     String[] msgs = msg.split("#");
-//                    Conexao c = new Conexao(msgs[0], Integer.parseInt(msgs[1]));
-                    
                     //Obtem o usuário local
                     Usuario usuarioLocal = Usuario.getInstancia();
-                    
                     Usuario usuario = new Usuario(Integer.parseInt(msgs[1]), msgs[0], null, null, msgs[2]);
                     boolean naoAchou = true;
-                    for (Usuario us : usuarios)
-                    {
+                    for (Usuario us : usuarios) {
                         if (us.getIdPublica().equalsIgnoreCase(usuario.getIdPublica()) && us.getIdRede() == usuario.getIdRede()) {
                             naoAchou = false;
                         }
                     }
-//                    for (int i = 0; i < conexoes.size(); i++) {
-//                        if (conexoes.get(i).getIdPublica().equalsIgnoreCase(c.getIdPublica()) && conexoes.get(i).getIdRede() == c.getIdRede()) {
-//                            naoAchou = false;
-//                        }
-//                    }
                     if (naoAchou) {
                         //conexoes.add(c);
                         usuarios.add(usuario);
@@ -94,11 +84,8 @@ public class ComunicacaoRecebeInicial extends Thread {
                             JanelaConsole.escreveNaJanela(dh + " Recebeu: " + msg2);
                             String[] msgs2 = msg2.split("#");
                             Usuario novoUsuario = new Usuario(Integer.parseInt(msgs2[1]), msgs2[0], null, null, msgs2[2]);
-                            //Conexao c2 = new Conexao(msgs2[0], Integer.parseInt(msgs2[1]));
                             boolean naoAchou2 = true;
-                            
-                            for (Usuario us : usuarios)
-                            {
+                            for (Usuario us : usuarios) {
                                 if (us.getIdPublica().equalsIgnoreCase(novoUsuario.getIdPublica()) && us.getIdRede() == novoUsuario.getIdRede()) {
                                     naoAchou2 = false;
                                 }
@@ -120,6 +107,7 @@ public class ComunicacaoRecebeInicial extends Thread {
                     }
                 }
                 clientSocket.leaveGroup(addres);
+                JanelaCriaLeilao.mostraBotao(true);
             } catch (IOException ex) {
                 Logger.getLogger(ComunicacaoRecebeInicial.class.getName()).log(Level.SEVERE, null, ex);
             } catch (InterruptedException ex) {

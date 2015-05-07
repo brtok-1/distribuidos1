@@ -20,9 +20,8 @@ public class JanelaLeilaoIniciado extends javax.swing.JFrame {
      */
     public JanelaLeilaoIniciado() {
         initComponents();
-        
         Usuario usuario = Usuario.getInstancia();
-        
+        setTitle(usuario.getIdPublica() + " - Leilão iniciado");
         if (usuario.getIdPublica().equalsIgnoreCase("servidor")) {
             botaoDarLance.setVisible(false);
             botaoNaoParticipar.setText("OK");
