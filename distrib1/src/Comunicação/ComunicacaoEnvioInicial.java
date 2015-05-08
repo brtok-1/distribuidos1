@@ -24,6 +24,8 @@ import java.util.logging.Logger;
  */
 public class ComunicacaoEnvioInicial extends Thread {
 
+    private Usuario usuario;
+    private Conexao conexao;
     
     //static boolean naotem4 = true;
     /**
@@ -31,19 +33,27 @@ public class ComunicacaoEnvioInicial extends Thread {
      */
     @Override
     public void run() {
-        EnvioInicial();
+        
+        //Obtem a conexao
+        conexao = Conexao.getInstancia();
+        
+        //Obtem o usuário
+        usuario = Usuario.getInstancia();        
+        
+        if(conexao.getStatusLeilao().equals("aguardando"))
+        {
+            EnvioInicial();
+        }
+        if(conexao.getStatusLeilao().equals("andamento"))
+        {
+            ParticiparLeilao();
+        }    
     }
     
     //Envio de informações enquanto se aguardam os usuários    
     public void EnvioInicial()
     {
-        try {
-            //Obtem a conexao
-            Conexao conexao = Conexao.getInstancia();
-            
-            //Obtem o usuário
-            Usuario usuario = Usuario.getInstancia();
-            
+        try {           
             while (conexao.getStatusLeilao().equalsIgnoreCase("aguardando")) {
                 InetAddress addr = InetAddress.getByName(conexao.getINET_ADDR());
                 DatagramSocket serverSocket = new DatagramSocket();
@@ -58,6 +68,14 @@ public class ComunicacaoEnvioInicial extends Thread {
             }
         } catch (IOException | InterruptedException ex) {
             Logger.getLogger(ComunicacaoEnvioInicial.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void ParticiparLeilao()
+    {        
+        if(usuario.getPapel().equalsIgnoreCase("servidor"))
+        {
+            
         }
     }
     

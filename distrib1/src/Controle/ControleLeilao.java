@@ -6,7 +6,9 @@
 package Controle;
 
 import GUI.JanelaLeilaoEncerrado;
+import Modelo.Conexao;
 import Modelo.Livro;
+import Modelo.Usuario;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -16,12 +18,15 @@ import java.util.logging.Logger;
  */
 public class ControleLeilao extends Thread {
 
-    static Livro leilao;
+    private Usuario usuario;
+    private Conexao conexao;    
+    private Livro livro;
+
     long tempoTotal;
     long horarioAgora;
 
     public ControleLeilao(Livro l) {
-        leilao = l;
+        livro = l;
     }
 
     @Override
@@ -30,14 +35,14 @@ public class ControleLeilao extends Thread {
         while (naoAcabou) {
             try {
                 sleep(1000);
-                tempoTotal = leilao.getTempoNoInicio() + leilao.getTempoTotalLeilao();
+                //tempoTotal = leilao.getTempoNoInicio() + leilao.getTempoTotalLeilao();
                 horarioAgora = System.currentTimeMillis();
                 if (horarioAgora >= tempoTotal) {
                     //ENCERRAR O LEILÃO
                     naoAcabou = false;
-                    JanelaLeilaoEncerrado jle = new JanelaLeilaoEncerrado(leilao);
-                    jle.setVisible(true);
-                    jle.repaint();
+                    //JanelaLeilaoEncerrado jle = new JanelaLeilaoEncerrado(leilao);
+                    //jle.setVisible(true);
+                    //jle.repaint();
                 }
             } catch (InterruptedException ex) {
                 Logger.getLogger(ControleLeilao.class.getName()).log(Level.SEVERE, null, ex);
@@ -48,5 +53,22 @@ public class ControleLeilao extends Thread {
     public void tempoRestanteLeilaoEmMinutos() {
 
     }
-
+    
+    public void criaLeilao()
+    {
+        usuario = Usuario.getInstancia();
+        
+        if(usuario.getPapel().equalsIgnoreCase("servidor"))
+        {
+            
+        } else
+        {
+            
+        }     
+    }
+    
+    public void salvaLivro()
+    {
+        
+    }
 }

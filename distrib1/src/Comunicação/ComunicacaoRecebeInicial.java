@@ -105,7 +105,7 @@ public class ComunicacaoRecebeInicial extends Thread {
                     }
                 }
                 
-                clientSocket.leaveGroup(addres);
+                //clientSocket.leaveGroup(addres);
                 JanelaCriaLeilao.mostraBotao(true);
             } catch (IOException ex) {
                 Logger.getLogger(ComunicacaoRecebeInicial.class.getName()).log(Level.SEVERE, null, ex);
