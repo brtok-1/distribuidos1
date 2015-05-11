@@ -172,19 +172,11 @@ public class JanelaCriaLeilao extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        //dispose();
         JanelaIniciandoNovoLeilao jinl = new JanelaIniciandoNovoLeilao();
         jinl.setVisible(true);
         jinl.repaint();
     }//GEN-LAST:event_jButton1ActionPerformed
-
-//    public static ArrayList<Conexao> getConexoes() {
-//        return conexoes;
-//    }
-//
-//    public static void setConexoes(ArrayList<Conexao> conexoes) {
-//        JanelaCriaLeilao.conexoes = conexoes;
-//    }    
+    
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private static javax.swing.JButton jButton1;
