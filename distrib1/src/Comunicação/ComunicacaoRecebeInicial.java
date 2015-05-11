@@ -27,92 +27,81 @@ public class ComunicacaoRecebeInicial extends Thread {
     private Conexao conexao;
     private Usuario usuarioLocal;
     private String[] mensagemQuebrada;
+    private int participantesTempoAdicional;
 
     InetAddress address;
     MulticastSocket clientSocket;
 
     @Override
     public void run() {
-
         try {
+            participantesTempoAdicional = 0;
             //Obtem a conexão
             conexao = Conexao.getInstancia();
             //Obtem o usuário local
             usuarioLocal = Usuario.getInstancia();
-
             ConfiguraConexao();
-
             while (true) {
-
-                if (conexao.getStatusLeilao().equalsIgnoreCase("aguardando")) {
-                    RecebeParticipantes();
-                }
-                if (conexao.getStatusLeilao().equalsIgnoreCase("andamento")) {
-                    if (usuarioLocal.getPapel().equalsIgnoreCase("servidor")) {
-                    } else {
-                        MantemParticipantes();
-                        EscutaLeilao();
-                    }
-                }
+                RecebeMensagem();
+                DirecionaMensagem();
             }
         } catch (Exception e) {
             System.out.println("Erro: " + e.getMessage());
         }
-
     }
 
     public void RecebeParticipantes() throws Exception {
-        while (conexao.getStatusLeilao().equalsIgnoreCase("aguardando")) {
-            RecebeMensagem();
-            Usuario usuario = new Usuario(Integer.parseInt(mensagemQuebrada[2]), mensagemQuebrada[1], null, null, mensagemQuebrada[3]);
-            boolean naoAchou = true;
-            for (Usuario us : usuarios) {
-                if (us.getIdPublica().equalsIgnoreCase(usuario.getIdPublica()) && us.getIdRede() == usuario.getIdRede()) {
-                    naoAchou = false;
-                }
-            }
-            if (naoAchou) {
-                usuarios.add(usuario);
-                conexao.setQuantidadeUsuarios(conexao.getQuantidadeUsuarios() + 1);
-                JanelaCriaLeilao.atualizar(usuarios);
-                if (usuarioLocal.getPapel().equalsIgnoreCase("servidor") && ((!(usuario.getIdPublica().equals(usuarioLocal.getIdPublica()))) && (usuario.getIdRede() > usuarioLocal.getIdRede()))) {
-                    usuarioLocal.setPapel("cliente");
-                }
-            }
-            if (usuarios.size() >= 4) {
-                JanelaConsole.escreveNaJanela("Aguarde mais 10 segundos pois podem haver novas conexões.");
-
-                for (int i = 0; i < 10; i++) {
-                    RecebeMensagem();
-                    Usuario novoUsuario = new Usuario(Integer.parseInt(mensagemQuebrada[2]), mensagemQuebrada[1], null, null, mensagemQuebrada[3]);
-                    boolean naoAchou2 = true;
-                    for (Usuario us : usuarios) {
-                        if (us.getIdPublica().equalsIgnoreCase(novoUsuario.getIdPublica()) && us.getIdRede() == novoUsuario.getIdRede()) {
-                            naoAchou2 = false;
-                        }
-                    }
-
-                    if (naoAchou2) {
-                        usuarios.add(novoUsuario);
-                        conexao.setQuantidadeUsuarios(conexao.getQuantidadeUsuarios() + 1);
-                        JanelaCriaLeilao.atualizar(usuarios);
-                    }
-                    sleep(1000);
-                }
-
-                conexao.setStatusLeilao("andamento");
-                if (usuarioLocal.getPapel().equalsIgnoreCase("servidor")) {
-                    JanelaConsole.escreveNaJanela("Característica já definida: SERVIDOR");
-                } else {
-                    JanelaConsole.escreveNaJanela("Característica já definida: CLIENTE");
-                }
-                JanelaConsole.escreveNaJanela("Aguardando inicio de Leilão.");
+        Usuario usuario = new Usuario(Integer.parseInt(mensagemQuebrada[2]), mensagemQuebrada[1], null, null, mensagemQuebrada[3]);
+        boolean naoAchou = true;
+        for (Usuario us : usuarios) {
+            if (us.getChavePublica().equalsIgnoreCase(usuario.getChavePublica())) {
+                naoAchou = false;
             }
         }
+        if (naoAchou) {
+            usuarios.add(usuario);
+            conexao.setQuantidadeUsuarios(conexao.getQuantidadeUsuarios() + 1);
+            JanelaCriaLeilao.atualizar(usuarios);
+            if (usuarioLocal.getPapel().equalsIgnoreCase("servidor") && ((!(usuario.getIdPublica().equals(usuarioLocal.getIdPublica()))) && (usuario.getIdRede() > usuarioLocal.getIdRede()))) {
+                usuarioLocal.setPapel("cliente");
+            }
+        }
+        if (usuarios.size() >= 4) {
+            JanelaConsole.escreveNaJanela("Aguarde mais alguns segundos");
+            JanelaConsole.escreveNaJanela("enquanto identificamos se pode haver mais conexões.");
+            conexao.setStatusLeilao("tempoAdicional");
+        }
+    }
 
-        //clientSocket.leaveGroup(addres);
-        JanelaCriaLeilao.mostraBotao(true);
-
+    public void RecebeParticipantesTempoAdicional() throws Exception {
+        Usuario usuario = new Usuario(Integer.parseInt(mensagemQuebrada[2]), mensagemQuebrada[1], null, null, mensagemQuebrada[3]);
+        boolean naoAchou = true;
+        for (Usuario us : usuarios) {
+            if (us.getChavePublica().equalsIgnoreCase(usuario.getChavePublica())) {
+                naoAchou = false;
+            }
+        }
+        if (naoAchou) {
+            usuarios.add(usuario);
+            conexao.setQuantidadeUsuarios(conexao.getQuantidadeUsuarios() + 1);
+            JanelaCriaLeilao.atualizar(usuarios);
+            if (usuarioLocal.getPapel().equalsIgnoreCase("servidor") && ((!(usuario.getIdPublica().equals(usuarioLocal.getIdPublica()))) && (usuario.getIdRede() > usuarioLocal.getIdRede()))) {
+                usuarioLocal.setPapel("cliente");
+            }
+        }
+        participantesTempoAdicional++;
+        sleep(1000);
+        if (participantesTempoAdicional > 9) {
+            conexao.setStatusLeilao("andamento");
+            participantesTempoAdicional = 0;
+            if (usuarioLocal.getPapel().equalsIgnoreCase("servidor")) {
+                JanelaConsole.escreveNaJanela("Característica já definida: SERVIDOR");
+            } else {
+                JanelaConsole.escreveNaJanela("Característica já definida: CLIENTE");
+            }
+            JanelaConsole.escreveNaJanela("Aguardando inicio de Leilão.");
+            JanelaCriaLeilao.mostraBotao(true);
+        }
     }
 
     //Configura a conexao
@@ -139,6 +128,23 @@ public class ComunicacaoRecebeInicial extends Thread {
         String dh = formatter.format(now);
         JanelaConsole.escreveNaJanela(dh + " Recebeu: " + mensagem);
         mensagemQuebrada = mensagem.split("#");
+    }
+
+    //direcionar mensagem para um método ou thread
+    public void DirecionaMensagem() throws Exception {
+        int tipoMensagem = Integer.parseInt(mensagemQuebrada[0]);
+        switch (tipoMensagem) {
+            case 77:
+                if (conexao.getStatusLeilao().equalsIgnoreCase("aguardando")) {
+                    RecebeParticipantes();
+                }
+                if (conexao.getStatusLeilao().equalsIgnoreCase("tempoAdicional")) {
+                    RecebeParticipantesTempoAdicional();
+                }
+                break;
+            default:
+                JanelaConsole.escreveNaJanela("A última mensagem recebida é desconhecida.");
+        }
     }
 
     //Salva os participantes do leilão
