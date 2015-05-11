@@ -5,6 +5,8 @@
  */
 package Modelo;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Bruno
@@ -15,6 +17,8 @@ public class Conexao {
     private String INET_ADDR;
     private int PORT;
     private int quantidadeUsuarios;
+    
+    private ArrayList<Livro> balcao;
     
     private static Conexao instancia;    
  
@@ -61,5 +65,13 @@ public class Conexao {
     public void setQuantidadeUsuarios(int quantidadeUsuarios) {
         this.quantidadeUsuarios = quantidadeUsuarios;
     }   
+
+    public ArrayList<Livro> getBalcao() {
+        return balcao;
+    }
+
+    public void setBalcao(ArrayList<Livro> balcao) {
+        this.balcao = balcao;
+    }  
     
 }

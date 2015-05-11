@@ -5,10 +5,10 @@
  */
 package Controle;
 
-import GUI.JanelaLeilaoEncerrado;
 import Modelo.Conexao;
 import Modelo.Livro;
 import Modelo.Usuario;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -27,6 +27,18 @@ public class ControleLeilao extends Thread {
 
     public ControleLeilao(Livro l) {
         livro = l;
+        
+        conexao = Conexao.getInstancia();
+        
+        AdicionarLivro();
+    }
+    
+    //Adiciona o livro no balcão
+    public void AdicionarLivro()
+    {
+        ArrayList<Livro> balcao = conexao.getBalcao();
+        balcao.add(livro);
+        conexao.setBalcao(balcao);
     }
 
     @Override

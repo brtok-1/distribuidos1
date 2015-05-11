@@ -84,11 +84,23 @@ public class ComunicacaoEnvioInicial extends Thread {
     //Envia um "olá" a cada 10 segundos para avisar que continua participando do leilão
     public void ParticiparLeilaoServidor() throws Exception {
         while (conexao.getStatusLeilao().equalsIgnoreCase("andamento")) {
+            
+            if(!conexao.getBalcao().isEmpty())
+            {
+                EnviaLivro();
+                conexao.setBalcao(null);
+            }
+            
             mensagem = "ola";
             EnviaMensagem();
             sleep(10000);
         }
-
+    }
+    
+    //Envia o livro para leilão
+    public void EnviaLivro()
+    {
+        
     }
 
 }
