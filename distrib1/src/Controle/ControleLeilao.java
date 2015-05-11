@@ -25,19 +25,18 @@ public class ControleLeilao extends Thread {
     long tempoTotal;
     long horarioAgora;
 
-    public ControleLeilao(Livro l) {
-        livro = l;
+    public ControleLeilao() {
         
+        livro = new Livro();
         conexao = Conexao.getInstancia();
         
-        AdicionarLivro();
+        
     }
     
     //Adiciona o livro no balcão
-    public void AdicionarLivro()
+    public void AdicionarLivro(Livro livro)
     {
         ArrayList<Livro> balcao = new ArrayList<>();
-        balcao = conexao.getBalcao();
         balcao.add(livro);
         conexao.setBalcao(balcao);
     }

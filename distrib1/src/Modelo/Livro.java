@@ -28,6 +28,11 @@ public class Livro {
         this.tempoTotalLeilao = tempoTotalLeilao;
         this.tempoNoInicio = tempoInicial;
     }
+    
+    public Livro()
+    {
+        
+    }
 
     public String getCodigo() {
         return codigo;

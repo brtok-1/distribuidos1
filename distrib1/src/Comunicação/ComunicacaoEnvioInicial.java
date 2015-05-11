@@ -42,6 +42,7 @@ public class ComunicacaoEnvioInicial extends Thread {
                     EnvioInicial();
                 }
                 if (conexao.getStatusLeilao().equals("andamento")) {
+                    System.out.println("Participando do leilão");
                     ParticiparLeilao();
                 }
             }
@@ -53,7 +54,7 @@ public class ComunicacaoEnvioInicial extends Thread {
     //Envio de informações enquanto se aguardam os usuários    
     public void EnvioInicial() throws Exception {
         while (conexao.getStatusLeilao().equalsIgnoreCase("aguardando")) {
-            mensagem = "#" + usuario.getIdPublica() + "#" + usuario.getIdRede() + "#" + usuario.getPapel() + "#" + usuario.getChavePublica();
+            mensagem = "77#" + usuario.getIdPublica() + "#" + usuario.getIdRede() + "#" + usuario.getPapel() + "#" + usuario.getChavePublica();
             EnviaMensagem();
             sleep(5000);
         }
@@ -76,20 +77,21 @@ public class ComunicacaoEnvioInicial extends Thread {
     }
 
     public void ParticiparLeilao() throws Exception {
+        System.out.println(conexao.getStatusLeilao().equalsIgnoreCase("andamento"));
         while (conexao.getStatusLeilao().equalsIgnoreCase("andamento")) {
+            System.out.println("Balcão: " + conexao.getBalcao().size());
 
             if (!conexao.getBalcao().isEmpty()) {
                 EnviaLivro();
                 conexao.setBalcao(null);
             }
 
-            //Envia um "olá" a cada 10 segundos para avisar que continua participando do leilão
+            //Caso seja servidor, envia um "olá" a cada 10 segundos para avisar que continua participando do leilão
             if (usuario.getPapel().equals("servidor")) {
                 mensagem = "ola";
                 EnviaMensagem();
                 sleep(10000);
             }
-
         }
     }
     
@@ -97,6 +99,7 @@ public class ComunicacaoEnvioInicial extends Thread {
     public void EnviaLivro() throws Exception {
         
         mensagem = "Novo livro de " + usuario.getIdPublica();
+        System.out.println("Novo livro de  " + usuario.getIdPublica());
         EnviaMensagem();
 
     }

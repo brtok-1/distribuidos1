@@ -162,7 +162,8 @@ public class JanelaIniciandoNovoLeilao extends javax.swing.JFrame {
         long tempo = Long.parseLong(tempoString) * 60000;
         Livro livro = new Livro(codigo, nome, descricao, tempo, System.currentTimeMillis());
         livro.setPrecoInicialString(preco);
-        ControleLeilao ctl = new ControleLeilao(livro);
+        ControleLeilao ctl = new ControleLeilao();
+        ctl.AdicionarLivro(livro);
         //ctl.start();
         dispose();
     }//GEN-LAST:event_botaoIniciarActionPerformed
