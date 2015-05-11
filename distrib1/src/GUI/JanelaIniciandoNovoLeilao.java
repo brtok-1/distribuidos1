@@ -54,7 +54,7 @@ public class JanelaIniciandoNovoLeilao extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel1.setText("Código:");
 
-        botaoIniciar.setText("Iniciar >>");
+        botaoIniciar.setText("Cadastrar >>");
         botaoIniciar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botaoIniciarActionPerformed(evt);

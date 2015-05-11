@@ -8,15 +8,12 @@ package Comunicação;
 import GUI.JanelaConsole;
 import Modelo.Conexao;
 import Modelo.Usuario;
-import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -26,59 +23,72 @@ public class ComunicacaoEnvioInicial extends Thread {
 
     private Usuario usuario;
     private Conexao conexao;
-    
-    //static boolean naotem4 = true;
-    /**
-     *
-     */
+    private String mensagem;
+
+    InetAddress address;
+    DatagramSocket serverSocket;
+
     @Override
     public void run() {
-        
-        //Obtem a conexao
-        conexao = Conexao.getInstancia();
-        
-        //Obtem o usuário
-        usuario = Usuario.getInstancia();        
-        
-        if(conexao.getStatusLeilao().equals("aguardando"))
-        {
-            EnvioInicial();
-        }
-        if(conexao.getStatusLeilao().equals("andamento"))
-        {
-            ParticiparLeilao();
-        }    
-    }
-    
-    //Envio de informações enquanto se aguardam os usuários    
-    public void EnvioInicial()
-    {
-        try {           
-            while (conexao.getStatusLeilao().equalsIgnoreCase("aguardando")) {
-                InetAddress addr = InetAddress.getByName(conexao.getINET_ADDR());
-                DatagramSocket serverSocket = new DatagramSocket();
-                String msg = usuario.getIdPublica() + "#" + usuario.getIdRede() + "#" + usuario.getPapel() + "#" + usuario.getChavePublica();
-                DatagramPacket msgPacket = new DatagramPacket(msg.getBytes(), msg.getBytes().length, addr, conexao.getPORT());
-                serverSocket.send(msgPacket);
-                Date now = new Date();
-                DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-                String dh = formatter.format(now);
-                JanelaConsole.escreveNaJanela(dh + " Mandou: " + msg);
-                sleep(5000);
+
+        try {
+            //Obtem a conexao
+            conexao = Conexao.getInstancia();
+
+            //Obtem o usuário
+            usuario = Usuario.getInstancia();
+
+            ConfiguraConexao();
+
+            while (true) {
+                if (conexao.getStatusLeilao().equals("aguardando")) {
+                    EnvioInicial();
+                }
+                if (conexao.getStatusLeilao().equals("andamento")) {
+                    if (usuario.getPapel().equalsIgnoreCase("servidor")) {
+                        ParticiparLeilaoServidor();
+                    }
+                }
             }
-        } catch (IOException | InterruptedException ex) {
-            Logger.getLogger(ComunicacaoEnvioInicial.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
     }
-    
-    public void ParticiparLeilao()
-    {        
-        if(usuario.getPapel().equalsIgnoreCase("servidor"))
-        {
-            
+
+    //Envio de informações enquanto se aguardam os usuários    
+    public void EnvioInicial() throws Exception {
+        while (conexao.getStatusLeilao().equalsIgnoreCase("aguardando")) {
+
+            mensagem = usuario.getIdPublica() + "#" + usuario.getIdRede() + "#" + usuario.getPapel() + "#" + usuario.getChavePublica();
+            EnviaMensagem();
+            sleep(5000);
         }
     }
-    
-    
-    
+
+    //Envia mensagem
+    public void EnviaMensagem() throws Exception {
+        DatagramPacket msgPacket = new DatagramPacket(mensagem.getBytes(), mensagem.getBytes().length, address, conexao.getPORT());
+        serverSocket.send(msgPacket);
+        Date now = new Date();
+        DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        String dh = formatter.format(now);
+        JanelaConsole.escreveNaJanela(dh + " Mandou: " + mensagem);
+    }
+
+    //Configura a conexao
+    public void ConfiguraConexao() throws Exception {
+        address = InetAddress.getByName(conexao.getINET_ADDR());
+        serverSocket = new DatagramSocket();
+    }
+
+    //Envia um "olá" a cada 10 segundos para avisar que continua participando do leilão
+    public void ParticiparLeilaoServidor() throws Exception {
+        while (conexao.getStatusLeilao().equalsIgnoreCase("andamento")) {
+            mensagem = "ola";
+            EnviaMensagem();
+            sleep(10000);
+        }
+
+    }
+
 }

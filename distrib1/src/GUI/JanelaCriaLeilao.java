@@ -5,12 +5,9 @@
  */
 package GUI;
 
-//import Modelo.Conexao;
-//import static Comunicação.ComunicacaoRecebeInicial.conexoes;
-//import Inicio.Distrib1;
 import Modelo.Conexao;
 import Modelo.Usuario;
-//import static Inicio.Distrib1.conexoes;
+
 import java.util.ArrayList;
 
 /**
@@ -18,13 +15,6 @@ import java.util.ArrayList;
  * @author Bruno
  */
 public class JanelaCriaLeilao extends javax.swing.JFrame {
-
-//    public static void atualizar(ArrayList<Usuario> usuarios) {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//    }
-    
-    //private Usuario usuario;
-    //public static ArrayList<Conexao> conexoes = new ArrayList<>();
 
     /**
      * Creates new form JanelaCriaLeilao
@@ -182,7 +172,7 @@ public class JanelaCriaLeilao extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        dispose();
+        //dispose();
         JanelaIniciandoNovoLeilao jinl = new JanelaIniciandoNovoLeilao();
         jinl.setVisible(true);
         jinl.repaint();
