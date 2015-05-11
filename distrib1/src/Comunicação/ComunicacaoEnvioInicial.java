@@ -42,9 +42,7 @@ public class ComunicacaoEnvioInicial extends Thread {
                     EnvioInicial();
                 }
                 if (conexao.getStatusLeilao().equals("andamento")) {
-                    if (usuario.getPapel().equalsIgnoreCase("servidor")) {
-                        ParticiparLeilaoServidor();
-                    }
+                    ParticiparLeilao();
                 }
             }
         } catch (Exception e) {
@@ -77,26 +75,32 @@ public class ComunicacaoEnvioInicial extends Thread {
         serverSocket = new DatagramSocket();
     }
 
-    //Envia um "olá" a cada 10 segundos para avisar que continua participando do leilão
-    public void ParticiparLeilaoServidor() throws Exception {
+    public void ParticiparLeilao() throws Exception {
         while (conexao.getStatusLeilao().equalsIgnoreCase("andamento")) {
-            
-            if(!conexao.getBalcao().isEmpty())
-            {
+
+            if (!conexao.getBalcao().isEmpty()) {
                 EnviaLivro();
                 conexao.setBalcao(null);
             }
-            
-            mensagem = "ola";
-            EnviaMensagem();
-            sleep(10000);
+
+            //Envia um "olá" a cada 10 segundos para avisar que continua participando do leilão
+            if (usuario.getPapel().equals("servidor")) {
+                mensagem = "ola";
+                EnviaMensagem();
+                sleep(10000);
+            }
+
         }
     }
     
     //Envia o livro para leilão
-    public void EnviaLivro()
-    {
+    public void EnviaLivro() throws Exception {
         
+        mensagem = "Novo livro de " + usuario.getIdPublica();
+        EnviaMensagem();
+
     }
+
+    
 
 }

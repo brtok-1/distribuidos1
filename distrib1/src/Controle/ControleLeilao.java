@@ -36,7 +36,8 @@ public class ControleLeilao extends Thread {
     //Adiciona o livro no balcão
     public void AdicionarLivro()
     {
-        ArrayList<Livro> balcao = conexao.getBalcao();
+        ArrayList<Livro> balcao = new ArrayList<>();
+        balcao = conexao.getBalcao();
         balcao.add(livro);
         conexao.setBalcao(balcao);
     }
