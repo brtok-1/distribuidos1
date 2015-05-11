@@ -17,7 +17,7 @@ public class Conexao {
     private String INET_ADDR;
     private int PORT;
     private int quantidadeUsuarios;
-    
+    private boolean terminar;
     private ArrayList<Livro> balcao;
     
     private static Conexao instancia;    

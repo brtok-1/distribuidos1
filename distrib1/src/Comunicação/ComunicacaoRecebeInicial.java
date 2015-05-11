@@ -26,7 +26,7 @@ public class ComunicacaoRecebeInicial extends Thread {
     private ArrayList<Usuario> usuarios = new ArrayList<>();
     private Conexao conexao;
     private Usuario usuarioLocal;
-    private String mensagem;
+    private String[] mensagemQuebrada;
 
     InetAddress address;
     MulticastSocket clientSocket;
@@ -62,13 +62,9 @@ public class ComunicacaoRecebeInicial extends Thread {
     }
 
     public void RecebeParticipantes() throws Exception {
-
         while (conexao.getStatusLeilao().equalsIgnoreCase("aguardando")) {
-
             RecebeMensagem();
-            String[] dadosRecebidos = mensagem.split("#");
-
-            Usuario usuario = new Usuario(Integer.parseInt(dadosRecebidos[1]), dadosRecebidos[0], null, null, dadosRecebidos[2]);
+            Usuario usuario = new Usuario(Integer.parseInt(mensagemQuebrada[2]), mensagemQuebrada[1], null, null, mensagemQuebrada[3]);
             boolean naoAchou = true;
             for (Usuario us : usuarios) {
                 if (us.getIdPublica().equalsIgnoreCase(usuario.getIdPublica()) && us.getIdRede() == usuario.getIdRede()) {
@@ -88,8 +84,7 @@ public class ComunicacaoRecebeInicial extends Thread {
 
                 for (int i = 0; i < 10; i++) {
                     RecebeMensagem();
-                    String[] dadosRecebidos2 = mensagem.split("#");
-                    Usuario novoUsuario = new Usuario(Integer.parseInt(dadosRecebidos2[1]), dadosRecebidos2[0], null, null, dadosRecebidos2[2]);
+                    Usuario novoUsuario = new Usuario(Integer.parseInt(mensagemQuebrada[2]), mensagemQuebrada[1], null, null, mensagemQuebrada[3]);
                     boolean naoAchou2 = true;
                     for (Usuario us : usuarios) {
                         if (us.getIdPublica().equalsIgnoreCase(novoUsuario.getIdPublica()) && us.getIdRede() == novoUsuario.getIdRede()) {
@@ -111,7 +106,7 @@ public class ComunicacaoRecebeInicial extends Thread {
                 } else {
                     JanelaConsole.escreveNaJanela("Característica já definida: CLIENTE");
                 }
-                JanelaConsole.escreveNaJanela("Leilão iniciado");
+                JanelaConsole.escreveNaJanela("Aguardando inicio de Leilão.");
             }
         }
 
@@ -133,17 +128,17 @@ public class ComunicacaoRecebeInicial extends Thread {
 
     //Recebe mensagem através do multicast
     public void RecebeMensagem() throws Exception {
-
         byte[] buf = new byte[256];
         DatagramPacket msgPacket = new DatagramPacket(buf, buf.length);
         clientSocket.receive(msgPacket);
+        String mensagem;
         mensagem = new String(buf);
         mensagem = mensagem.trim();
         Date now = new Date();
         DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         String dh = formatter.format(now);
         JanelaConsole.escreveNaJanela(dh + " Recebeu: " + mensagem);
-
+        mensagemQuebrada = mensagem.split("#");
     }
 
     //Salva os participantes do leilão
@@ -154,7 +149,6 @@ public class ComunicacaoRecebeInicial extends Thread {
     //Escuta os participantes do leilão
     public void EscutaLeilao() throws Exception {
         RecebeMensagem();
-        String[] dadosRecebidos = mensagem.split("#");
     }
 
 }

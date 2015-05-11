@@ -34,12 +34,9 @@ public class ComunicacaoEnvioInicial extends Thread {
         try {
             //Obtem a conexao
             conexao = Conexao.getInstancia();
-
             //Obtem o usuário
             usuario = Usuario.getInstancia();
-
             ConfiguraConexao();
-
             while (true) {
                 if (conexao.getStatusLeilao().equals("aguardando")) {
                     EnvioInicial();
@@ -58,8 +55,7 @@ public class ComunicacaoEnvioInicial extends Thread {
     //Envio de informações enquanto se aguardam os usuários    
     public void EnvioInicial() throws Exception {
         while (conexao.getStatusLeilao().equalsIgnoreCase("aguardando")) {
-
-            mensagem = usuario.getIdPublica() + "#" + usuario.getIdRede() + "#" + usuario.getPapel() + "#" + usuario.getChavePublica();
+            mensagem = "#" + usuario.getIdPublica() + "#" + usuario.getIdRede() + "#" + usuario.getPapel() + "#" + usuario.getChavePublica();
             EnviaMensagem();
             sleep(5000);
         }
