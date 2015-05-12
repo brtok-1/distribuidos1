@@ -38,7 +38,7 @@ public class ControleHelloServidor extends Thread {
             Logger.getLogger(ControleHelloServidor.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        while (!(conexao.getStatusLeilao().equalsIgnoreCase("andamento"))) {
+        while (true) {
             try {
                 String mensagem = "1#ola";
                 Date now = new Date();

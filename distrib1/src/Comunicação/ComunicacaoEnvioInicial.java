@@ -32,33 +32,35 @@ public class ComunicacaoEnvioInicial extends Thread {
 
     @Override
     public void run() {
-        //Obtem a conexao
-        conexao = Conexao.getInstancia();
-        //Obtem o usuário
-        usuario = Usuario.getInstancia();
-        try {
-            ConfiguraConexao();
-            while (true) {
-                if (conexao.getStatusLeilao().equalsIgnoreCase("aguardando") || conexao.getStatusLeilao().equalsIgnoreCase("tempoAdicional")) {
+        synchronized (this) {
+            //Obtem a conexao
+            conexao = Conexao.getInstancia();
+            //Obtem o usuário
+            usuario = Usuario.getInstancia();
+            try {
+                ConfiguraConexao();
+                while (conexao.getStatusLeilao().equalsIgnoreCase("aguardando") || conexao.getStatusLeilao().equalsIgnoreCase("tempoAdicional")) {
                     EnvioInicial();
                 }
-                if (conexao.getStatusLeilao().equals("andamento")) {
-                    System.out.println("Participando do leilão");
-                    ParticiparLeilao();
+                while (!(conexao.getStatusLeilao().equalsIgnoreCase("quedaServidor"))) {
+                    if (conexao.getStatusLeilao().equals("andamento")) {
+                        ParticiparLeilao();
+                    }
                 }
+                JanelaConsole.escreveNaJanela("O servidor caiu. A detecção de usuários e eleição");
+                JanelaConsole.escreveNaJanela("de um novo servidor, começará em instantes.");
+                notify();
+            } catch (Exception ex) {
+                Logger.getLogger(ComunicacaoEnvioInicial.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } catch (Exception ex) {
-            Logger.getLogger(ComunicacaoEnvioInicial.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     //Envio de informações enquanto se aguardam os usuários    
     public void EnvioInicial() throws Exception {
-        while (conexao.getStatusLeilao().equalsIgnoreCase("aguardando") || conexao.getStatusLeilao().equalsIgnoreCase("tempoAdicional")) {
-            mensagem = "77#" + usuario.getIdPublica() + "#" + usuario.getIdRede() + "#" + usuario.getPapel() + "#" + usuario.getChavePublica();
-            EnviaMensagem();
-            sleep(5000);
-        }
+        mensagem = "77#" + usuario.getIdPublica() + "#" + usuario.getIdRede() + "#" + usuario.getPapel() + "#" + usuario.getChavePublica();
+        EnviaMensagem();
+        sleep(5000);
     }
 
     //Envia mensagem
@@ -78,31 +80,19 @@ public class ComunicacaoEnvioInicial extends Thread {
     }
 
     public void ParticiparLeilao() throws Exception {
-        System.out.println(conexao.getStatusLeilao().equalsIgnoreCase("andamento"));
         while (conexao.getStatusLeilao().equalsIgnoreCase("andamento")) {
-//            System.out.println("Balcão: " + conexao.getBalcao().size());
-
-            if (!conexao.getBalcao().isEmpty()) {
+            if (!(conexao.getBalcao().isEmpty())) {
                 EnviaLivro();
                 conexao.setBalcao(null);
-            }
-
-            //Caso seja servidor, envia um "olá" a cada 5 segundos para avisar que continua participando do leilão
-            if (usuario.getPapel().equals("servidor")) {
-                mensagem = "1#ola";
-                EnviaMensagem();
-                sleep(5000);
             }
         }
     }
 
     //Envia o livro para leilão
     public void EnviaLivro() throws Exception {
-
         mensagem = "Novo livro de " + usuario.getIdPublica();
         System.out.println("Novo livro de  " + usuario.getIdPublica());
         EnviaMensagem();
-
     }
 
 }
