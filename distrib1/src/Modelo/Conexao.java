@@ -18,7 +18,7 @@ public class Conexao {
     private int PORT;
     private int quantidadeUsuarios;
     private long ultimoHelloServer;
-    private ArrayList<Livro> balcao;
+    private ArrayList<Livro> balcao = new ArrayList<>();
     
     private static Conexao instancia;    
  

@@ -80,7 +80,7 @@ public class ComunicacaoEnvioInicial extends Thread {
     public void ParticiparLeilao() throws Exception {
         System.out.println(conexao.getStatusLeilao().equalsIgnoreCase("andamento"));
         while (conexao.getStatusLeilao().equalsIgnoreCase("andamento")) {
-            System.out.println("Balcão: " + conexao.getBalcao().size());
+//            System.out.println("Balcão: " + conexao.getBalcao().size());
 
             if (!conexao.getBalcao().isEmpty()) {
                 EnviaLivro();

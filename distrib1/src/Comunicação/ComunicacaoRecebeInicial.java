@@ -108,8 +108,12 @@ public class ComunicacaoRecebeInicial extends Thread {
             participantesTempoAdicional = 0;
             if (usuarioLocal.getPapel().equalsIgnoreCase("servidor")) {
                 JanelaConsole.escreveNaJanela("Característica já definida: SERVIDOR");
+                ControleHelloServidor hello = new ControleHelloServidor();
+                hello.start();
             } else {
                 JanelaConsole.escreveNaJanela("Característica já definida: CLIENTE");
+                ControleEscutaServidor helloescuta = new ControleEscutaServidor();
+                helloescuta.start();
             }
             JanelaConsole.escreveNaJanela("Aguardando inicio de Leilão.");
             JanelaCriaLeilao.mostraBotao(true);
