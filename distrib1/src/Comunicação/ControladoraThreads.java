@@ -21,24 +21,23 @@ public class ControladoraThreads extends Thread {
      */
     @Override
     public void run() {
-        ComunicacaoEnvioInicial envio = new ComunicacaoEnvioInicial();
-        envio.start();
         try {
-            JanelaConsole.escreveNaJanela("Thread Multicast inicial de envio iniciada.");
+            ComunicacaoEnvioInicial envio = new ComunicacaoEnvioInicial();
+            envio.start();
+            JanelaConsole.escreveNaJanela("Thread de envio iniciada.");
         } catch (InterruptedException ex) {
             Logger.getLogger(ControladoraThreads.class.getName()).log(Level.SEVERE, null, ex);
         }
-        ComunicacaoRecebeInicial recebe = new ComunicacaoRecebeInicial();
-        recebe.start();
         try {
-            JanelaConsole.escreveNaJanela("Thread Multicast inicial de recepção iniciada.");
+            ComunicacaoRecebeInicial recebe = new ComunicacaoRecebeInicial();
+            recebe.start();
+            JanelaConsole.escreveNaJanela("Thread de recepção iniciada.");
         } catch (InterruptedException ex) {
             Logger.getLogger(ControladoraThreads.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public void Controladora()
-    {
+
+    public void Controladora() {
         try {
             JanelaConsole.escreveNaJanela("Controladora de Threads iniciada.");
             JanelaCriaLeilao jcl = new JanelaCriaLeilao();
@@ -47,6 +46,5 @@ public class ControladoraThreads extends Thread {
         } catch (InterruptedException ex) {
             Logger.getLogger(ControladoraThreads.class.getName()).log(Level.SEVERE, null, ex);
         }
-                
     }
 }

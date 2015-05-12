@@ -16,6 +16,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -34,19 +36,29 @@ public class ComunicacaoRecebeInicial extends Thread {
 
     @Override
     public void run() {
-        try {
-            participantesTempoAdicional = 0;
-            //Obtem a conexão
-            conexao = Conexao.getInstancia();
-            //Obtem o usuário local
-            usuarioLocal = Usuario.getInstancia();
-            ConfiguraConexao();
-            while (true) {
-                RecebeMensagem();
+        participantesTempoAdicional = 0;
+        //Obtem a conexão
+        conexao = Conexao.getInstancia();
+        //Obtem o usuário local
+        usuarioLocal = Usuario.getInstancia();
+        ConfiguraConexao();
+        while (true) {
+            try {
+                byte[] buf = new byte[256];
+                DatagramPacket msgPacket = new DatagramPacket(buf, buf.length);
+                clientSocket.receive(msgPacket);
+                String mensagem;
+                mensagem = new String(buf);
+                mensagem = mensagem.trim();
+                Date now = new Date();
+                DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+                String dh = formatter.format(now);
+                JanelaConsole.escreveNaJanela(dh + " Recebeu: " + mensagem);
+                mensagemQuebrada = mensagem.split("#");
                 DirecionaMensagem();
+            } catch (Exception ex) {
+                Logger.getLogger(ComunicacaoRecebeInicial.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } catch (Exception e) {
-            System.out.println("Erro: " + e.getMessage());
         }
     }
 
@@ -54,7 +66,7 @@ public class ComunicacaoRecebeInicial extends Thread {
         Usuario usuario = new Usuario(Integer.parseInt(mensagemQuebrada[2]), mensagemQuebrada[1], null, null, mensagemQuebrada[3]);
         boolean naoAchou = true;
         for (Usuario us : usuarios) {
-            if (us.getChavePublica().equalsIgnoreCase(usuario.getChavePublica())) {
+            if (us.getIdPublica().equalsIgnoreCase(usuario.getIdPublica()) && us.getIdRede() == usuario.getIdRede()) {
                 naoAchou = false;
             }
         }
@@ -77,7 +89,7 @@ public class ComunicacaoRecebeInicial extends Thread {
         Usuario usuario = new Usuario(Integer.parseInt(mensagemQuebrada[2]), mensagemQuebrada[1], null, null, mensagemQuebrada[3]);
         boolean naoAchou = true;
         for (Usuario us : usuarios) {
-            if (us.getChavePublica().equalsIgnoreCase(usuario.getChavePublica())) {
+            if (us.getIdPublica().equalsIgnoreCase(usuario.getIdPublica()) && us.getIdRede() == usuario.getIdRede()) {
                 naoAchou = false;
             }
         }
@@ -116,24 +128,16 @@ public class ComunicacaoRecebeInicial extends Thread {
     }
 
     //Recebe mensagem através do multicast
-    public void RecebeMensagem() throws Exception {
-        byte[] buf = new byte[256];
-        DatagramPacket msgPacket = new DatagramPacket(buf, buf.length);
-        clientSocket.receive(msgPacket);
-        String mensagem;
-        mensagem = new String(buf);
-        mensagem = mensagem.trim();
-        Date now = new Date();
-        DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-        String dh = formatter.format(now);
-        JanelaConsole.escreveNaJanela(dh + " Recebeu: " + mensagem);
-        mensagemQuebrada = mensagem.split("#");
-    }
-
+//    public void RecebeMensagem() throws Exception {
+//
+//    }
     //direcionar mensagem para um método ou thread
     public void DirecionaMensagem() throws Exception {
         int tipoMensagem = Integer.parseInt(mensagemQuebrada[0]);
         switch (tipoMensagem) {
+            case 1:
+                
+                break;
             case 77:
                 if (conexao.getStatusLeilao().equalsIgnoreCase("aguardando")) {
                     RecebeParticipantes();
@@ -154,7 +158,7 @@ public class ComunicacaoRecebeInicial extends Thread {
 
     //Escuta os participantes do leilão
     public void EscutaLeilao() throws Exception {
-        RecebeMensagem();
+
     }
 
 }

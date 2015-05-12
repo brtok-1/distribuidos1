@@ -14,6 +14,8 @@ import java.net.InetAddress;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -30,15 +32,14 @@ public class ComunicacaoEnvioInicial extends Thread {
 
     @Override
     public void run() {
-
+        //Obtem a conexao
+        conexao = Conexao.getInstancia();
+        //Obtem o usuário
+        usuario = Usuario.getInstancia();
         try {
-            //Obtem a conexao
-            conexao = Conexao.getInstancia();
-            //Obtem o usuário
-            usuario = Usuario.getInstancia();
             ConfiguraConexao();
             while (true) {
-                if (conexao.getStatusLeilao().equals("aguardando")) {
+                if (conexao.getStatusLeilao().equalsIgnoreCase("aguardando") || conexao.getStatusLeilao().equalsIgnoreCase("tempoAdicional")) {
                     EnvioInicial();
                 }
                 if (conexao.getStatusLeilao().equals("andamento")) {
@@ -46,14 +47,14 @@ public class ComunicacaoEnvioInicial extends Thread {
                     ParticiparLeilao();
                 }
             }
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+        } catch (Exception ex) {
+            Logger.getLogger(ComunicacaoEnvioInicial.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     //Envio de informações enquanto se aguardam os usuários    
     public void EnvioInicial() throws Exception {
-        while (conexao.getStatusLeilao().equalsIgnoreCase("aguardando")) {
+        while (conexao.getStatusLeilao().equalsIgnoreCase("aguardando") || conexao.getStatusLeilao().equalsIgnoreCase("tempoAdicional")) {
             mensagem = "77#" + usuario.getIdPublica() + "#" + usuario.getIdRede() + "#" + usuario.getPapel() + "#" + usuario.getChavePublica();
             EnviaMensagem();
             sleep(5000);
@@ -62,12 +63,12 @@ public class ComunicacaoEnvioInicial extends Thread {
 
     //Envia mensagem
     public void EnviaMensagem() throws Exception {
-        DatagramPacket msgPacket = new DatagramPacket(mensagem.getBytes(), mensagem.getBytes().length, address, conexao.getPORT());
-        serverSocket.send(msgPacket);
         Date now = new Date();
         DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         String dh = formatter.format(now);
         JanelaConsole.escreveNaJanela(dh + " Mandou: " + mensagem);
+        DatagramPacket msgPacket = new DatagramPacket(mensagem.getBytes(), mensagem.getBytes().length, address, conexao.getPORT());
+        serverSocket.send(msgPacket);
     }
 
     //Configura a conexao
@@ -94,16 +95,14 @@ public class ComunicacaoEnvioInicial extends Thread {
             }
         }
     }
-    
+
     //Envia o livro para leilão
     public void EnviaLivro() throws Exception {
-        
+
         mensagem = "Novo livro de " + usuario.getIdPublica();
         System.out.println("Novo livro de  " + usuario.getIdPublica());
         EnviaMensagem();
 
     }
-
-    
 
 }
