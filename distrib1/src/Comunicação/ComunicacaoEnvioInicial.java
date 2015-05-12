@@ -87,11 +87,11 @@ public class ComunicacaoEnvioInicial extends Thread {
                 conexao.setBalcao(null);
             }
 
-            //Caso seja servidor, envia um "olá" a cada 10 segundos para avisar que continua participando do leilão
+            //Caso seja servidor, envia um "olá" a cada 5 segundos para avisar que continua participando do leilão
             if (usuario.getPapel().equals("servidor")) {
-                mensagem = "ola";
+                mensagem = "1#ola";
                 EnviaMensagem();
-                sleep(10000);
+                sleep(5000);
             }
         }
     }

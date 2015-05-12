@@ -17,7 +17,7 @@ public class Conexao {
     private String INET_ADDR;
     private int PORT;
     private int quantidadeUsuarios;
-    private boolean terminar;
+    private long ultimoHelloServer;
     private ArrayList<Livro> balcao;
     
     private static Conexao instancia;    
@@ -73,5 +73,13 @@ public class Conexao {
     public void setBalcao(ArrayList<Livro> balcao) {
         this.balcao = balcao;
     }  
+
+    public long getUltimoHelloServer() {
+        return ultimoHelloServer;
+    }
+
+    public void setUltimoHelloServer(long ultimoHelloServer) {
+        this.ultimoHelloServer = ultimoHelloServer;
+    }
     
 }

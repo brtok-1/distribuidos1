@@ -136,7 +136,7 @@ public class ComunicacaoRecebeInicial extends Thread {
         int tipoMensagem = Integer.parseInt(mensagemQuebrada[0]);
         switch (tipoMensagem) {
             case 1:
-                
+                HelloServer();
                 break;
             case 77:
                 if (conexao.getStatusLeilao().equalsIgnoreCase("aguardando")) {
@@ -161,4 +161,8 @@ public class ComunicacaoRecebeInicial extends Thread {
 
     }
 
+    //Escuta Hello Servidor
+    public void HelloServer() throws Exception {
+        conexao.setUltimoHelloServer(System.currentTimeMillis());
+    }
 }
