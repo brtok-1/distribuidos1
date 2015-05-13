@@ -61,7 +61,7 @@ public class ComunicacaoEnvioInicial extends Thread {
     public void EnvioInicial() throws Exception {
         mensagem = "77#" + usuario.getIdPublica() + "#" + usuario.getIdRede() + "#" + usuario.getPapel() + "#" + usuario.getChavePublica();
         EnviaMensagem();
-        sleep(5000);
+        sleep(8000);
     }
 
     //Envia mensagem

@@ -32,7 +32,7 @@ public class Distrib1 {
         Usuario usuario = Usuario.getInstancia();
         
         usuario.setIdRede((int) (Math.random() * 100));
-        usuario.setPapel("servidor");       
+        usuario.setPapel("servidor");
         
         //Cria e instancia a conexão
         Conexao conexao = Conexao.getInstancia();

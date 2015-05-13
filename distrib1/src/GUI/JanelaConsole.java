@@ -1,6 +1,7 @@
 package GUI;
 
 import Modelo.Usuario;
+import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
 /*
@@ -19,6 +20,8 @@ import javax.swing.table.DefaultTableModel;
  */
 public class JanelaConsole extends javax.swing.JFrame {
 
+    private static ArrayList<String> mensagens = new ArrayList<>();
+
     /**
      * Creates new form JanelaConsole
      */
@@ -29,15 +32,19 @@ public class JanelaConsole extends javax.swing.JFrame {
     }
 
     public static void escreveNaJanela(String s) throws InterruptedException {
-        Object mensagem[] = new Object[1];
-        mensagem[0] = s;
-        DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
-        jTable1.setModel(dtm);
-        if (dtm.getRowCount() > 9) {
-            dtm.removeRow(0);
+        mensagens.add(s);
+        if (mensagens.size() > 12) {
+            mensagens.remove(0);
         }
-        Thread.sleep(350);
-        dtm.addRow(mensagem);
+        String print = mensagens.get(0) + "\n";
+        for (int i = 1; i < mensagens.size(); i++) {
+            if (i == mensagens.size() - 1) {
+                print = print + mensagens.get(i);
+            } else {
+                print = print + mensagens.get(i) + "\n";
+            }
+        }
+        jTextArea1.setText(print);
     }
 
     /**
@@ -50,7 +57,7 @@ public class JanelaConsole extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTextArea1 = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Console");
@@ -59,33 +66,12 @@ public class JanelaConsole extends javax.swing.JFrame {
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setResizable(false);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Log de Transmissão Recente"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setResizable(false);
-        }
+        jTextArea1.setEditable(false);
+        jTextArea1.setBackground(new java.awt.Color(240, 240, 240));
+        jTextArea1.setColumns(20);
+        jTextArea1.setFont(new java.awt.Font("Consolas", 0, 11)); // NOI18N
+        jTextArea1.setRows(8);
+        jScrollPane1.setViewportView(jTextArea1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -95,14 +81,14 @@ public class JanelaConsole extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
-    private static javax.swing.JTable jTable1;
+    private static javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables
 
 }
