@@ -90,9 +90,8 @@ public class JanelaMinhaIDPublica extends javax.swing.JFrame {
                 usuario.setIdPublica(idPublica);
                 Usuario.setInstancia(usuario);
                 dispose();
-                JanelaConsole console = new JanelaConsole();
-                console.setVisible(true);
-                console.repaint();
+                JanelaConsole console = JanelaConsole.getInstancia();
+                console.atualizaTitulo();
                 ControladoraThreads threads = new ControladoraThreads();
                 threads.start();                
             }

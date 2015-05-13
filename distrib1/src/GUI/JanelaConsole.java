@@ -27,6 +27,15 @@ public class JanelaConsole extends javax.swing.JFrame {
      */
     public JanelaConsole() {
         initComponents();
+    }
+    
+    public static JanelaConsole instancia = new JanelaConsole();
+
+    public static JanelaConsole getInstancia() {
+        return instancia;
+    }
+    
+    public void atualizaTitulo() {
         Usuario usuario = Usuario.getInstancia();
         setTitle(usuario.getIdPublica() + " - Console");
     }
