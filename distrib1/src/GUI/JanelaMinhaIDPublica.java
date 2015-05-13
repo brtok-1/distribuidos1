@@ -93,7 +93,7 @@ public class JanelaMinhaIDPublica extends javax.swing.JFrame {
                 JanelaConsole console = JanelaConsole.getInstancia();
                 console.atualizaTitulo();
                 ControladoraThreads threads = new ControladoraThreads();
-                threads.start();                
+                threads.start();
             }
         } catch (Exception ex) {
             Logger.getLogger(JanelaMinhaIDPublica.class.getName()).log(Level.SEVERE, null, ex);

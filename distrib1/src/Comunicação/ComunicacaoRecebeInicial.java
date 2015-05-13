@@ -132,10 +132,6 @@ public class ComunicacaoRecebeInicial extends Thread {
         }
     }
 
-    //Recebe mensagem através do multicast
-//    public void RecebeMensagem() throws Exception {
-//
-//    }
     //direcionar mensagem para um método ou thread
     public void DirecionaMensagem() throws Exception {
         int tipoMensagem = Integer.parseInt(mensagemQuebrada[0]);

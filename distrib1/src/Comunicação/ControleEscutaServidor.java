@@ -30,7 +30,7 @@ public class ControleEscutaServidor extends Thread {
         }
 
         while (conexao.isServidorOnline()) {
-            if (System.currentTimeMillis() > (conexao.getUltimoHelloServer() + 10000)) {
+            if (System.currentTimeMillis() > (conexao.getUltimoHelloServer() + 12000)) {
                 conexao.setServidorOnline(false);
             }
         }

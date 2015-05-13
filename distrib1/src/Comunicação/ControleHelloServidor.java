@@ -47,7 +47,7 @@ public class ControleHelloServidor extends Thread {
                 JanelaConsole.escreveNaJanela(dh + " Mandou: " + mensagem);
                 DatagramPacket msgPacket = new DatagramPacket(mensagem.getBytes(), mensagem.getBytes().length, address, conexao.getPORT());
                 serverSocket.send(msgPacket);
-                sleep(5000);
+                sleep(8000);
             } catch (InterruptedException | IOException ex) {
                 Logger.getLogger(ControleHelloServidor.class.getName()).log(Level.SEVERE, null, ex);
             }
