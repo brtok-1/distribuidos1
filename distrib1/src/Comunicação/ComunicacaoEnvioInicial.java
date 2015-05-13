@@ -43,7 +43,7 @@ public class ComunicacaoEnvioInicial extends Thread {
                 while (conexao.getStatusLeilao().equalsIgnoreCase("aguardando") || conexao.getStatusLeilao().equalsIgnoreCase("tempoAdicional")) {
                     EnvioInicial();
                 }
-                while (!(conexao.getStatusLeilao().equalsIgnoreCase("quedaServidor"))) {
+                while (conexao.isServidorOnline()) {
                     if (conexao.getStatusLeilao().equals("andamento")) {
                         ParticiparLeilao();
                     }

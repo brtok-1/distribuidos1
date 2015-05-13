@@ -18,6 +18,7 @@ public class Conexao {
     private int PORT;
     private int quantidadeUsuarios;
     private long ultimoHelloServer;
+    private boolean servidorOnline;
     private ArrayList<Livro> balcao = new ArrayList<>();
     private ArrayList<Livro> estante = new ArrayList<>();
     
@@ -90,7 +91,13 @@ public class Conexao {
     public void setEstante(ArrayList<Livro> estante) {
         this.estante = estante;
     }
-    
-    
+
+    public boolean isServidorOnline() {
+        return servidorOnline;
+    }
+
+    public void setServidorOnline(boolean servidorOnline) {
+        this.servidorOnline = servidorOnline;
+    } 
     
 }

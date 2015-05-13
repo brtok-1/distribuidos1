@@ -43,7 +43,7 @@ public class ComunicacaoRecebeInicial extends Thread {
         //Obtem o usuário local
         usuarioLocal = Usuario.getInstancia();
         ConfiguraConexao();
-        while (!(conexao.getStatusLeilao().equalsIgnoreCase("quedaServidor"))) {
+        while (conexao.isServidorOnline()) {
             try {
                 byte[] buf = new byte[256];
                 DatagramPacket msgPacket = new DatagramPacket(buf, buf.length);

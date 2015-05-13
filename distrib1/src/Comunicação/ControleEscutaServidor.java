@@ -29,15 +29,9 @@ public class ControleEscutaServidor extends Thread {
             Logger.getLogger(ControleEscutaServidor.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        while (!(conexao.getStatusLeilao().equalsIgnoreCase("quedaServidor"))) {
-            try {
-                sleep(3500);
-                if (System.currentTimeMillis() > (conexao.getUltimoHelloServer() + 10000)) {
-                    conexao.setStatusLeilao("quedaServidor");
-                    
-                }
-            } catch (InterruptedException ex) {
-                Logger.getLogger(ControleEscutaServidor.class.getName()).log(Level.SEVERE, null, ex);
+        while (conexao.isServidorOnline()) {
+            if (System.currentTimeMillis() > (conexao.getUltimoHelloServer() + 10000)) {
+                conexao.setServidorOnline(false);
             }
         }
     }

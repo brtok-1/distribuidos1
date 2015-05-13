@@ -24,9 +24,7 @@ public class ControladoraThreads extends Thread {
     @Override
     public void run() {
         try {
-            Conexao c = Conexao.getInstancia();
-            Usuario usuario = Usuario.getInstancia();
-            while (c.getStatusLeilao().equalsIgnoreCase("aguardando")) {
+            while (true) {
                 JanelaConsole.escreveNaJanela("Controladora de Threads iniciada.");
                 JanelaCriaLeilao jcl = new JanelaCriaLeilao();
                 jcl.setVisible(true);
@@ -40,9 +38,13 @@ public class ControladoraThreads extends Thread {
                 synchronized (envio) {
                     envio.wait();
                     jcl.dispose();
+                    Usuario usuario = Usuario.getInstancia();
                     usuario.setPapel("servidor");
+                    Conexao c = Conexao.getInstancia();
                     c.setStatusLeilao("aguardando");
                     c.setQuantidadeUsuarios(0);
+                    sleep(5000);
+                    c.setServidorOnline(true);
                     JanelaCriaLeilao.mostraBotao(false);
                 }
             }

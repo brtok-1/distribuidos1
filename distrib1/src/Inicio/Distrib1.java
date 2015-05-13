@@ -46,6 +46,7 @@ public class Distrib1 {
         conexao.setINET_ADDR("228.5.6.7");
         conexao.setPORT(8885);
         conexao.setStatusLeilao("aguardando");
+        conexao.setServidorOnline(true);
 
         //Obtem o par de chaves para o usuário
         ControladoraChaves cc = new ControladoraChaves();

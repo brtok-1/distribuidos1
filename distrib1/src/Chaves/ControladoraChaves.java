@@ -28,8 +28,8 @@ public class ControladoraChaves {
         ArrayList<String> chaves = new ArrayList();
         
         //Locais onde as chaves serão armazenadas
-        PATH_CHAVE_PRIVADA = "C:/keys" + idUsuario + "/private.key";
-        PATH_CHAVE_PUBLICA = "C:/keys" + idUsuario + "/public.key";
+        PATH_CHAVE_PRIVADA = "C:/keys/" + idUsuario + "/private.key";
+        PATH_CHAVE_PUBLICA = "C:/keys/" + idUsuario + "/public.key";
         
         try
         {
