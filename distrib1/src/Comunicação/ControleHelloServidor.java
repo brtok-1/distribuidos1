@@ -34,7 +34,8 @@ public class ControleHelloServidor extends Thread {
             conexao = Conexao.getInstancia();
             serverSocket = new DatagramSocket();
             address = InetAddress.getByName(conexao.getINET_ADDR());
-        } catch (UnknownHostException | SocketException ex) {
+            JanelaConsole.escreveNaJanela("Envia Hello iniciada.");
+        } catch (UnknownHostException | SocketException | InterruptedException ex) {
             Logger.getLogger(ControleHelloServidor.class.getName()).log(Level.SEVERE, null, ex);
         }
         

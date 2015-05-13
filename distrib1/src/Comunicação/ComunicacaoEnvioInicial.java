@@ -33,27 +33,29 @@ public class ComunicacaoEnvioInicial extends Thread {
 
     @Override
     public void run() {
-        synchronized (this) {
-            //Obtem a conexao
-            conexao = Conexao.getInstancia();
-            //Obtem o usuário
-            usuario = Usuario.getInstancia();
-            try {
-                ConfiguraConexao();
-                while (conexao.getStatusLeilao().equalsIgnoreCase("aguardando") || conexao.getStatusLeilao().equalsIgnoreCase("tempoAdicional")) {
-                    EnvioInicial();
-                }
-                while (conexao.isServidorOnline()) {
-                    if (conexao.getStatusLeilao().equals("andamento")) {
-                        ParticiparLeilao();
-                    }
-                }
-                JanelaConsole.escreveNaJanela("O servidor caiu. A detecção de usuários e eleição");
-                JanelaConsole.escreveNaJanela("de um novo servidor, começará em instantes.");
-                notify();
-            } catch (Exception ex) {
-                Logger.getLogger(ComunicacaoEnvioInicial.class.getName()).log(Level.SEVERE, null, ex);
+        try {
+            JanelaConsole.escreveNaJanela("Thread de envio iniciada.");
+        } catch (InterruptedException ex) {
+            Logger.getLogger(ComunicacaoEnvioInicial.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        //Obtem a conexao
+        conexao = Conexao.getInstancia();
+        //Obtem o usuário
+        usuario = Usuario.getInstancia();
+        try {
+            ConfiguraConexao();
+            while (conexao.getStatusLeilao().equalsIgnoreCase("aguardando") || conexao.getStatusLeilao().equalsIgnoreCase("tempoAdicional")) {
+                EnvioInicial();
             }
+            while (conexao.isServidorOnline()) {
+                if (conexao.getStatusLeilao().equals("andamento")) {
+                    ParticiparLeilao();
+                }
+            }
+            JanelaConsole.escreveNaJanela("O servidor caiu. A detecção de usuários e eleição");
+            JanelaConsole.escreveNaJanela("de um novo servidor, começará em instantes.");
+        } catch (Exception ex) {
+            Logger.getLogger(ComunicacaoEnvioInicial.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -81,11 +83,9 @@ public class ComunicacaoEnvioInicial extends Thread {
     }
 
     public void ParticiparLeilao() throws Exception {
-        while (conexao.getStatusLeilao().equalsIgnoreCase("andamento")) {
-            if (!(conexao.getBalcao().isEmpty())) {
-                EnviaLivro();
-                conexao.setBalcao(null);
-            }
+        if (!(conexao.getBalcao().isEmpty())) {
+            EnviaLivro();
+            conexao.setBalcao(null);
         }
     }
 
@@ -93,7 +93,7 @@ public class ComunicacaoEnvioInicial extends Thread {
     public void EnviaLivro() throws Exception {
         Livro livro = new Livro();
         livro = conexao.getBalcao().get(0);
-        mensagem = "2#" + livro.getCodigo() + "#" + livro.getDescricao() + "#" + livro.getNome() + "#" + livro.getPrecoInicialString() 
+        mensagem = "2#" + livro.getCodigo() + "#" + livro.getDescricao() + "#" + livro.getNome() + "#" + livro.getPrecoInicialString()
                 + "#" + livro.getTempoTotalLeilao();
         JanelaConsole.escreveNaJanela("Novo livro de  " + usuario.getIdPublica());
         EnviaMensagem();

@@ -37,6 +37,11 @@ public class ComunicacaoRecebeInicial extends Thread {
 
     @Override
     public void run() {
+        try {
+            JanelaConsole.escreveNaJanela("Thread de recepção iniciada.");
+        } catch (InterruptedException ex) {
+            Logger.getLogger(ComunicacaoRecebeInicial.class.getName()).log(Level.SEVERE, null, ex);
+        }
         participantesTempoAdicional = 0;
         //Obtem a conexão
         conexao = Conexao.getInstancia();

@@ -49,7 +49,7 @@ public class JanelaIniciandoNovoLeilao extends javax.swing.JFrame {
         campoTempo = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel1.setText("Código:");
@@ -170,14 +170,6 @@ public class JanelaIniciandoNovoLeilao extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         dispose();
-        JanelaCriaLeilao jcl;
-        try {
-            jcl = new JanelaCriaLeilao();
-            jcl.setVisible(true);
-            jcl.repaint();
-        } catch (InterruptedException ex) {
-            Logger.getLogger(JanelaIniciandoNovoLeilao.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

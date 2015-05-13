@@ -5,6 +5,7 @@
  */
 package Comunicação;
 
+import GUI.JanelaConsole;
 import Modelo.Conexao;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,6 +26,7 @@ public class ControleEscutaServidor extends Thread {
         conexao = Conexao.getInstancia();
         try {
             sleep(10000);
+            JanelaConsole.escreveNaJanela("Escuta Hello iniciada.");
         } catch (InterruptedException ex) {
             Logger.getLogger(ControleEscutaServidor.class.getName()).log(Level.SEVERE, null, ex);
         }
