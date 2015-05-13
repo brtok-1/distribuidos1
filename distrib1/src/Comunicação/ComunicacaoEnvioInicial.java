@@ -7,6 +7,7 @@ package Comunicação;
 
 import GUI.JanelaConsole;
 import Modelo.Conexao;
+import Modelo.Livro;
 import Modelo.Usuario;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
@@ -90,8 +91,11 @@ public class ComunicacaoEnvioInicial extends Thread {
 
     //Envia o livro para leilão
     public void EnviaLivro() throws Exception {
-        mensagem = "Novo livro de " + usuario.getIdPublica();
-        System.out.println("Novo livro de  " + usuario.getIdPublica());
+        Livro livro = new Livro();
+        livro = conexao.getBalcao().get(0);
+        mensagem = "2#" + livro.getCodigo() + "#" + livro.getDescricao() + "#" + livro.getNome() + "#" + livro.getPrecoInicialString() 
+                + "#" + livro.getTempoTotalLeilao();
+        JanelaConsole.escreveNaJanela("Novo livro de  " + usuario.getIdPublica());
         EnviaMensagem();
     }
 

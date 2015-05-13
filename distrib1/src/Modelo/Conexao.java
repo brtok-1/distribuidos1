@@ -19,6 +19,7 @@ public class Conexao {
     private int quantidadeUsuarios;
     private long ultimoHelloServer;
     private ArrayList<Livro> balcao = new ArrayList<>();
+    private ArrayList<Livro> estante = new ArrayList<>();
     
     private static Conexao instancia;    
  
@@ -81,5 +82,15 @@ public class Conexao {
     public void setUltimoHelloServer(long ultimoHelloServer) {
         this.ultimoHelloServer = ultimoHelloServer;
     }
+
+    public ArrayList<Livro> getEstante() {
+        return estante;
+    }
+
+    public void setEstante(ArrayList<Livro> estante) {
+        this.estante = estante;
+    }
+    
+    
     
 }

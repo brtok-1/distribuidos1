@@ -8,6 +8,7 @@ package Comunicação;
 import GUI.JanelaConsole;
 import GUI.JanelaCriaLeilao;
 import Modelo.Conexao;
+import Modelo.Livro;
 import Modelo.Usuario;
 import java.net.DatagramPacket;
 import java.net.InetAddress;
@@ -142,6 +143,12 @@ public class ComunicacaoRecebeInicial extends Thread {
             case 1:
                 HelloServer();
                 break;
+            //Novo livro para leilão
+            case 2:
+                if(usuarioLocal.getPapel().equals("servidor"))
+                {
+                    AdicionaLivroEstante();
+                }
             case 77:
                 if (conexao.getStatusLeilao().equalsIgnoreCase("aguardando")) {
                     RecebeParticipantes();
@@ -168,5 +175,13 @@ public class ComunicacaoRecebeInicial extends Thread {
     //Escuta Hello Servidor
     public void HelloServer() throws Exception {
         conexao.setUltimoHelloServer(System.currentTimeMillis());
+    }
+    
+    //Adiciona o livro na fila para que sejam leiloados
+    public void AdicionaLivroEstante() throws Exception
+    {
+        ArrayList<Livro> estante = new ArrayList<>();
+        estante = conexao.getEstante();        
+        
     }
 }
