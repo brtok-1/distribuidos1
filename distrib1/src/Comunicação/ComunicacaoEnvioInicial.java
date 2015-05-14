@@ -35,14 +35,11 @@ public class ComunicacaoEnvioInicial extends Thread {
     public void run() {
         try {
             JanelaConsole.escreveNaJanela("Thread de envio iniciada.");
-        } catch (InterruptedException ex) {
-            Logger.getLogger(ComunicacaoEnvioInicial.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        //Obtem a conexao
-        conexao = Conexao.getInstancia();
-        //Obtem o usuário
-        usuario = Usuario.getInstancia();
-        try {
+
+            //Obtem a conexao
+            conexao = Conexao.getInstancia();
+            //Obtem o usuário
+            usuario = Usuario.getInstancia();
             ConfiguraConexao();
             while (conexao.getStatusLeilao().equalsIgnoreCase("aguardando") || conexao.getStatusLeilao().equalsIgnoreCase("tempoAdicional")) {
                 EnvioInicial();

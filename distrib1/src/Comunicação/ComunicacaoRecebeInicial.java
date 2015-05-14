@@ -39,17 +39,16 @@ public class ComunicacaoRecebeInicial extends Thread {
     public void run() {
         try {
             JanelaConsole.escreveNaJanela("Thread de recepção iniciada.");
-        } catch (InterruptedException ex) {
-            Logger.getLogger(ComunicacaoRecebeInicial.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        participantesTempoAdicional = 0;
-        //Obtem a conexão
-        conexao = Conexao.getInstancia();
-        //Obtem o usuário local
-        usuarioLocal = Usuario.getInstancia();
-        ConfiguraConexao();
-        while (conexao.isServidorOnline()) {
-            try {
+
+            participantesTempoAdicional = 0;
+            //Obtem a conexão
+            conexao = Conexao.getInstancia();
+            //Obtem o usuário local
+            usuarioLocal = Usuario.getInstancia();
+            ConfiguraConexao();
+            
+            while (conexao.isServidorOnline()) {
+
                 byte[] buf = new byte[256];
                 DatagramPacket msgPacket = new DatagramPacket(buf, buf.length);
                 clientSocket.receive(msgPacket);
@@ -62,9 +61,9 @@ public class ComunicacaoRecebeInicial extends Thread {
                 JanelaConsole.escreveNaJanela(dh + " Recebeu: " + mensagem);
                 mensagemQuebrada = mensagem.split("#");
                 DirecionaMensagem();
-            } catch (Exception ex) {
-                Logger.getLogger(ComunicacaoRecebeInicial.class.getName()).log(Level.SEVERE, null, ex);
             }
+        } catch (Exception ex) {
+            Logger.getLogger(ComunicacaoRecebeInicial.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -127,14 +126,10 @@ public class ComunicacaoRecebeInicial extends Thread {
     }
 
     //Configura a conexao
-    public void ConfiguraConexao() {
-        try {
+    public void ConfiguraConexao() throws Exception {
             address = InetAddress.getByName(conexao.getINET_ADDR());
             clientSocket = new MulticastSocket(conexao.getPORT());
             clientSocket.joinGroup(address);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
     }
 
     //direcionar mensagem para um método ou thread
@@ -146,8 +141,7 @@ public class ComunicacaoRecebeInicial extends Thread {
                 break;
             //Novo livro para leilão
             case 2:
-                if(usuarioLocal.getPapel().equals("servidor"))
-                {
+                if (usuarioLocal.getPapel().equals("servidor")) {
                     AdicionaLivroEstante();
                 }
             case 77:
@@ -177,12 +171,11 @@ public class ComunicacaoRecebeInicial extends Thread {
     public void HelloServer() throws Exception {
         conexao.setUltimoHelloServer(System.currentTimeMillis());
     }
-    
+
     //Adiciona o livro na fila para que sejam leiloados
-    public void AdicionaLivroEstante() throws Exception
-    {
+    public void AdicionaLivroEstante() throws Exception {
         ArrayList<Livro> estante = new ArrayList<>();
-        estante = conexao.getEstante();        
-        
+        estante = conexao.getEstante();
+
     }
 }
