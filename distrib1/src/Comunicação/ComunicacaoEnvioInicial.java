@@ -49,6 +49,9 @@ public class ComunicacaoEnvioInicial extends MinhaComunicacaoEnvio {
             }
             JanelaConsole.escreveNaJanela("O servidor caiu. A detecção de usuários e eleição");
             JanelaConsole.escreveNaJanela("de um novo servidor, começará em instantes.");
+            if (conexao.getStatusLeilao().equalsIgnoreCase("leiloando")) {
+                JanelaConsole.escreveNaJanela("O leilão ativo no momento foi cancelado.");
+            }
         } catch (Exception ex) {
             Logger.getLogger(ComunicacaoEnvioInicial.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -95,7 +98,7 @@ public class ComunicacaoEnvioInicial extends MinhaComunicacaoEnvio {
 
     //Executa o leilão do livro
     public void LeiloaLivro(Livro livro) throws Exception {
-        mensagem = "3#" + livro.getCodigo() + "#" + livro.getDescricao() + "#" + livro.getNome() + "#" + livro.getPrecoInicial()
+        mensagem = "10#" + livro.getCodigo() + "#" + livro.getDescricao() + "#" + livro.getNome() + "#" + livro.getPrecoInicial()
                 + "#" + livro.getTempoTotalLeilao();
         EnviaMensagem();
     }
