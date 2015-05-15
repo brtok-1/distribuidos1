@@ -23,15 +23,18 @@ public class ControleEscutaServidor extends Thread {
      */
     @Override
     public void run() {
-        conexao = Conexao.getInstancia();
         try {
             sleep(10000);
             JanelaConsole.escreveNaJanela("Escuta Hello iniciada.");
-
+            conexao = Conexao.getInstancia();
+            conexao.setUltimoHelloServer(System.currentTimeMillis()+10000);
+            Conexao.setInstancia(conexao);
             while (conexao.isServidorOnline()) {
-                if (System.currentTimeMillis() > (conexao.getUltimoHelloServer() + 12000)) {
+                if (System.currentTimeMillis() > (conexao.getUltimoHelloServer() + 10000)) {
                     conexao.setServidorOnline(false);
+                    Conexao.setInstancia(conexao);
                 }
+                conexao = Conexao.getInstancia();
             }
         } catch (InterruptedException ex) {
             Logger.getLogger(ControleEscutaServidor.class.getName()).log(Level.SEVERE, null, ex);

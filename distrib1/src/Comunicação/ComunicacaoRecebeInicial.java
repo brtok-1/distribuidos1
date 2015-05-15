@@ -27,7 +27,7 @@ import java.util.logging.Logger;
  */
 public class ComunicacaoRecebeInicial extends Thread {
 
-    private ArrayList<Usuario> usuarios = new ArrayList<>();
+    private final ArrayList<Usuario> usuarios = new ArrayList<>();
     private Conexao conexao;
     private Usuario usuarioLocal;
     private String[] mensagemQuebrada;
@@ -43,14 +43,13 @@ public class ComunicacaoRecebeInicial extends Thread {
             JanelaConsole.escreveNaJanela("Thread de recepção iniciada.");
 
             participantesTempoAdicional = 0;
-            //Obtem a conexão
-            conexao = Conexao.getInstancia();
             //Obtem o usuário local
             usuarioLocal = Usuario.getInstancia();
+            conexao = Conexao.getInstancia();
             ConfiguraConexao();
-            
             while (conexao.isServidorOnline()) {
-
+                //Obtem a conexão
+                conexao = Conexao.getInstancia();
                 byte[] buf = new byte[256];
                 DatagramPacket msgPacket = new DatagramPacket(buf, buf.length);
                 clientSocket.receive(msgPacket);
@@ -80,9 +79,11 @@ public class ComunicacaoRecebeInicial extends Thread {
         if (naoAchou) {
             usuarios.add(usuario);
             conexao.setQuantidadeUsuarios(conexao.getQuantidadeUsuarios() + 1);
+            Conexao.setInstancia(conexao);
             JanelaCriaLeilao.atualizar(usuarios);
             if (usuarioLocal.getPapel().equalsIgnoreCase("servidor") && ((!(usuario.getIdPublica().equals(usuarioLocal.getIdPublica()))) && (usuario.getIdRede() > usuarioLocal.getIdRede()))) {
                 usuarioLocal.setPapel("cliente");
+                Usuario.setInstancia(usuarioLocal);
             }
         }
         if (usuarios.size() >= 4) {
@@ -103,9 +104,11 @@ public class ComunicacaoRecebeInicial extends Thread {
         if (naoAchou) {
             usuarios.add(usuario);
             conexao.setQuantidadeUsuarios(conexao.getQuantidadeUsuarios() + 1);
+            Conexao.setInstancia(conexao);
             JanelaCriaLeilao.atualizar(usuarios);
             if (usuarioLocal.getPapel().equalsIgnoreCase("servidor") && ((!(usuario.getIdPublica().equals(usuarioLocal.getIdPublica()))) && (usuario.getIdRede() > usuarioLocal.getIdRede()))) {
                 usuarioLocal.setPapel("cliente");
+                Usuario.setInstancia(usuarioLocal);
             }
         }
         participantesTempoAdicional++;
@@ -122,6 +125,7 @@ public class ComunicacaoRecebeInicial extends Thread {
                 ControleEscutaServidor helloescuta = new ControleEscutaServidor();
                 helloescuta.start();
             }
+            Conexao.setInstancia(conexao);
             JanelaConsole.escreveNaJanela("Aguardando inicio de Leilão.");
             JanelaCriaLeilao.mostraBotao(true);
         }
@@ -129,9 +133,9 @@ public class ComunicacaoRecebeInicial extends Thread {
 
     //Configura a conexao
     public void ConfiguraConexao() throws Exception {
-            address = InetAddress.getByName(conexao.getINET_ADDR());
-            clientSocket = new MulticastSocket(conexao.getPORT());
-            clientSocket.joinGroup(address);
+        address = InetAddress.getByName(conexao.getINET_ADDR());
+        clientSocket = new MulticastSocket(conexao.getPORT());
+        clientSocket.joinGroup(address);
     }
 
     //direcionar mensagem para um método ou thread
@@ -139,7 +143,9 @@ public class ComunicacaoRecebeInicial extends Thread {
         int tipoMensagem = Integer.parseInt(mensagemQuebrada[0]);
         switch (tipoMensagem) {
             case 1:
-                HelloServer();
+                if (!(usuarioLocal.getPapel().equalsIgnoreCase("servidor"))) {
+                    HelloServer();
+                }
                 break;
             //Novo livro para leilão
             case 2:
@@ -148,7 +154,8 @@ public class ComunicacaoRecebeInicial extends Thread {
                 }
                 break;
             case 3:
-                    ParticipaLeilao();
+                ParticipaLeilao();
+                break;
             case 77:
                 if (conexao.getStatusLeilao().equalsIgnoreCase("aguardando")) {
                     RecebeParticipantes();
@@ -175,37 +182,37 @@ public class ComunicacaoRecebeInicial extends Thread {
     //Escuta Hello Servidor
     public void HelloServer() throws Exception {
         conexao.setUltimoHelloServer(System.currentTimeMillis());
+        Conexao.setInstancia(conexao);
     }
 
     //Adiciona o livro na fila para que sejam leiloados
     public void AdicionaLivroEstante() throws Exception {
         ArrayList<Livro> estante = new ArrayList<>();
         estante = conexao.getEstante();
-        
+
         Livro livro = new Livro();
         livro.setCodigo(mensagemQuebrada[1]);
         livro.setDescricao(mensagemQuebrada[2]);
         livro.setNome(mensagemQuebrada[3]);
         livro.setPrecoInicial(Double.parseDouble(mensagemQuebrada[4]));
         livro.setTempoTotalLeilao(Long.parseLong(mensagemQuebrada[5]));
-        
+
         estante.add(livro);
-        
+
         conexao.setEstante(estante);
 
     }
-    
-    public void ParticipaLeilao()
-    {
+
+    public void ParticipaLeilao() {
         Livro livro = new Livro();
         livro.setCodigo(mensagemQuebrada[1]);
         livro.setDescricao(mensagemQuebrada[2]);
         livro.setNome(mensagemQuebrada[3]);
         livro.setPrecoInicial(Double.parseDouble(mensagemQuebrada[4]));
         livro.setTempoTotalLeilao(Long.parseLong(mensagemQuebrada[5]));
-        
+
         janelaLeilao = JanelaLeilaoAcontecendo.getInstancia();
-        
+
         janelaLeilao.setVisible(true);
         janelaLeilao.setLivroLeiloando(livro);
         janelaLeilao.PreencheCampos();

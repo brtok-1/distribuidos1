@@ -44,6 +44,11 @@ public class JanelaConsole extends javax.swing.JFrame {
         mensagens.add(s);
         if (mensagens.size() > 12) {
             mensagens.remove(0);
+            if (mensagens.size() > 12) {
+                mensagens.clear();
+                mensagens.add("Houve um pequeno erro no Console. Ele foi esvaziado");
+                mensagens.add("mas exibirá as próximas mensagens normalmente.");
+            }
         }
         String print = mensagens.get(0) + "\n";
         for (int i = 1; i < mensagens.size(); i++) {
@@ -86,7 +91,7 @@ public class JanelaConsole extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 305, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 312, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

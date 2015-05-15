@@ -58,7 +58,8 @@ public class Distrib1 {
         usuario.setChavePrivada(chaves.get(1));
 
         Usuario.setInstancia(usuario);
-
+        Conexao.setInstancia(conexao);
+        
         JanelaConsole console = JanelaConsole.getInstancia();
         console.setVisible(true);
         console.repaint();

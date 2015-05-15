@@ -29,24 +29,28 @@ public class ControladoraThreads extends Thread {
                 JanelaCriaLeilao jcl = new JanelaCriaLeilao();
                 jcl.setVisible(true);
                 jcl.repaint();
-                ComunicacaoEnvioInicial envio = new ComunicacaoEnvioInicial();
-                envio.start();
+                Thread.sleep(3000);
                 ComunicacaoRecebeInicial recebe = new ComunicacaoRecebeInicial();
                 recebe.start();
+                ComunicacaoEnvioInicial envio = new ComunicacaoEnvioInicial();
+                envio.start();
                 Conexao c = Conexao.getInstancia();
                 while (c.isServidorOnline()) {
                     c = Conexao.getInstancia();
+                    Thread.sleep(3000);
                 }
-                System.out.println("passou");
+                c = Conexao.getInstancia();
                 jcl.dispose();
                 Usuario usuario = Usuario.getInstancia();
-                usuario.setPapel("servidor");
-                c.setStatusLeilao("aguardando");
-                c.setQuantidadeUsuarios(0);
                 sleep(10000);
                 envio.stop();
                 recebe.stop();
+                usuario.setPapel("servidor");
+                c.setStatusLeilao("aguardando");
+                c.setQuantidadeUsuarios(0);
                 c.setServidorOnline(true);
+                Conexao.setInstancia(c);
+                Usuario.setInstancia(usuario);
                 JanelaCriaLeilao.mostraBotao(false);
             }
         } catch (InterruptedException ex) {

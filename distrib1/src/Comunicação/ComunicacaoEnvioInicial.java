@@ -47,11 +47,13 @@ public class ComunicacaoEnvioInicial extends Thread {
             ConfiguraConexaoUnicast();
             while (conexao.getStatusLeilao().equalsIgnoreCase("aguardando") || conexao.getStatusLeilao().equalsIgnoreCase("tempoAdicional")) {
                 EnvioInicial();
+                conexao = Conexao.getInstancia();
             }
             while (conexao.isServidorOnline()) {
                 if (conexao.getStatusLeilao().equals("andamento")) {
                     ParticiparLeilao();
                 }
+                conexao = Conexao.getInstancia();
             }
             JanelaConsole.escreveNaJanela("O servidor caiu. A detecção de usuários e eleição");
             JanelaConsole.escreveNaJanela("de um novo servidor, começará em instantes.");
