@@ -32,7 +32,6 @@ public class ControleEscutaServidor extends Thread {
                 if (System.currentTimeMillis() > (conexao.getUltimoHelloServer() + 12000)) {
                     conexao.setServidorOnline(false);
                 }
-                sleep(10000);
             }
         } catch (InterruptedException ex) {
             Logger.getLogger(ControleEscutaServidor.class.getName()).log(Level.SEVERE, null, ex);

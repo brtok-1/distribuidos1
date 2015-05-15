@@ -22,7 +22,8 @@ public class Conexao {
     private ArrayList<Livro> balcao = new ArrayList<>();
     private ArrayList<Livro> estante = new ArrayList<>();
     
-    private static Conexao instancia;    
+    private static Conexao instancia;
+    private static Conexao instanciaUnicast;
  
     public String getINET_ADDR() {
         return INET_ADDR;
@@ -98,6 +99,13 @@ public class Conexao {
 
     public void setServidorOnline(boolean servidorOnline) {
         this.servidorOnline = servidorOnline;
-    } 
-    
+    }
+
+    public static Conexao getInstanciaUnicast() {
+        return instanciaUnicast;
+    }
+
+    public static void setInstanciaUnicast(Conexao instanciaUnicast) {
+        Conexao.instanciaUnicast = instanciaUnicast;
+    }
 }

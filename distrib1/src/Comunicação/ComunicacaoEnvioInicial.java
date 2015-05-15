@@ -6,6 +6,7 @@
 package Comunicação;
 
 import GUI.JanelaConsole;
+import GUI.JanelaLeilaoAcontecendo;
 import Modelo.Conexao;
 import Modelo.Livro;
 import Modelo.Usuario;
@@ -14,6 +15,7 @@ import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -27,6 +29,7 @@ public class ComunicacaoEnvioInicial extends Thread {
     private Usuario usuario;
     private Conexao conexao;
     private String mensagem;
+    private JanelaLeilaoAcontecendo janelaLeilao;
 
     InetAddress address;
     DatagramSocket serverSocket;
@@ -40,7 +43,8 @@ public class ComunicacaoEnvioInicial extends Thread {
             conexao = Conexao.getInstancia();
             //Obtem o usuário
             usuario = Usuario.getInstancia();
-            ConfiguraConexao();
+            ConfiguraConexaoMulticast();
+            ConfiguraConexaoUnicast();
             while (conexao.getStatusLeilao().equalsIgnoreCase("aguardando") || conexao.getStatusLeilao().equalsIgnoreCase("tempoAdicional")) {
                 EnvioInicial();
             }
@@ -73,26 +77,51 @@ public class ComunicacaoEnvioInicial extends Thread {
         serverSocket.send(msgPacket);
     }
 
-    //Configura a conexao
-    public void ConfiguraConexao() throws Exception {
+    //Configura a conexao multicast
+    public void ConfiguraConexaoMulticast() throws Exception {
         address = InetAddress.getByName(conexao.getINET_ADDR());
         serverSocket = new DatagramSocket();
     }
 
+    //Configura a conexao unicast
+    public void ConfiguraConexaoUnicast() throws Exception {
+
+    }
+
     public void ParticiparLeilao() throws Exception {
+               
         if (!(conexao.getBalcao().isEmpty())) {
             EnviaLivro();
-            conexao.setBalcao(null);
+            conexao.getBalcao().clear();
+        }
+        if (!conexao.getEstante().isEmpty()) {
+            
+            ArrayList<Livro> estante = new ArrayList<>();
+            estante = conexao.getEstante();
+            
+            for(Livro l : estante)
+            {
+                LeiloaLivro(l);
+            }
+            
         }
     }
 
     //Envia o livro para leilão
     public void EnviaLivro() throws Exception {
-        Livro livro = new Livro();
-        livro = conexao.getBalcao().get(0);
-        mensagem = "2#" + livro.getCodigo() + "#" + livro.getDescricao() + "#" + livro.getNome() + "#" + livro.getPrecoInicialString()
+
+        //Livro livro = new Livro();
+        Livro livro = conexao.getBalcao().get(0);
+        mensagem = "2#" + livro.getCodigo() + "#" + livro.getDescricao() + "#" + livro.getNome() + "#" + livro.getPrecoInicial()
                 + "#" + livro.getTempoTotalLeilao();
-        JanelaConsole.escreveNaJanela("Novo livro de  " + usuario.getIdPublica());
+        EnviaMensagem();
+    }
+    
+    //Executa o leilão do livro
+    public void LeiloaLivro(Livro livro) throws Exception
+    {
+        mensagem = "3#" + livro.getCodigo() + "#" + livro.getDescricao() + "#" + livro.getNome() + "#" + livro.getPrecoInicial()
+                + "#" + livro.getTempoTotalLeilao();
         EnviaMensagem();
     }
 

@@ -7,6 +7,7 @@ package Comunicação;
 
 import GUI.JanelaConsole;
 import GUI.JanelaCriaLeilao;
+import GUI.JanelaLeilaoAcontecendo;
 import Modelo.Conexao;
 import Modelo.Livro;
 import Modelo.Usuario;
@@ -31,6 +32,7 @@ public class ComunicacaoRecebeInicial extends Thread {
     private Usuario usuarioLocal;
     private String[] mensagemQuebrada;
     private int participantesTempoAdicional;
+    private JanelaLeilaoAcontecendo janelaLeilao;
 
     InetAddress address;
     MulticastSocket clientSocket;
@@ -144,6 +146,9 @@ public class ComunicacaoRecebeInicial extends Thread {
                 if (usuarioLocal.getPapel().equals("servidor")) {
                     AdicionaLivroEstante();
                 }
+                break;
+            case 3:
+                    ParticipaLeilao();
             case 77:
                 if (conexao.getStatusLeilao().equalsIgnoreCase("aguardando")) {
                     RecebeParticipantes();
@@ -176,6 +181,33 @@ public class ComunicacaoRecebeInicial extends Thread {
     public void AdicionaLivroEstante() throws Exception {
         ArrayList<Livro> estante = new ArrayList<>();
         estante = conexao.getEstante();
+        
+        Livro livro = new Livro();
+        livro.setCodigo(mensagemQuebrada[1]);
+        livro.setDescricao(mensagemQuebrada[2]);
+        livro.setNome(mensagemQuebrada[3]);
+        livro.setPrecoInicial(Double.parseDouble(mensagemQuebrada[4]));
+        livro.setTempoTotalLeilao(Long.parseLong(mensagemQuebrada[5]));
+        
+        estante.add(livro);
+        
+        conexao.setEstante(estante);
 
+    }
+    
+    public void ParticipaLeilao()
+    {
+        Livro livro = new Livro();
+        livro.setCodigo(mensagemQuebrada[1]);
+        livro.setDescricao(mensagemQuebrada[2]);
+        livro.setNome(mensagemQuebrada[3]);
+        livro.setPrecoInicial(Double.parseDouble(mensagemQuebrada[4]));
+        livro.setTempoTotalLeilao(Long.parseLong(mensagemQuebrada[5]));
+        
+        janelaLeilao = JanelaLeilaoAcontecendo.getInstancia();
+        
+        janelaLeilao.setVisible(true);
+        janelaLeilao.setLivroLeiloando(livro);
+        janelaLeilao.PreencheCampos();
     }
 }
