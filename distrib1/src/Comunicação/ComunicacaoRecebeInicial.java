@@ -153,8 +153,17 @@ public class ComunicacaoRecebeInicial extends Thread {
                     AdicionaLivroEstante();
                 }
                 break;
-            case 3:
+            case 7:
+                
+                break;
+            case 10:
                 ParticipaLeilao();
+                break;
+            case 11:
+                
+                break;
+            case 12:
+                
                 break;
             case 77:
                 if (conexao.getStatusLeilao().equalsIgnoreCase("aguardando")) {
@@ -174,7 +183,6 @@ public class ComunicacaoRecebeInicial extends Thread {
 
     }
 
-    //Escuta os participantes do leilão
     public void EscutaLeilao() throws Exception {
 
     }

@@ -5,7 +5,6 @@
  */
 package Modelo;
 
-import Inicio.Lance;
 import java.util.ArrayList;
 
 /**

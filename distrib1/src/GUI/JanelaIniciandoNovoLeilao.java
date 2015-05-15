@@ -8,8 +8,6 @@ package GUI;
 import Controle.ControleLeilao;
 import Modelo.Livro;
 import Modelo.Usuario;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
