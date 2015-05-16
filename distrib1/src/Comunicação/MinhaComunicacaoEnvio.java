@@ -21,9 +21,9 @@ import java.util.Date;
  */
 public class MinhaComunicacaoEnvio extends Thread {
 
-    private Usuario usuario;
-    private Conexao conexao;
-    private String mensagem;
+    Usuario usuario;
+    Conexao conexao;
+    String mensagem;
     
     InetAddress address;
     DatagramSocket serverSocket;

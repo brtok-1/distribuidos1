@@ -19,7 +19,6 @@ public class Conexao {
     private int quantidadeUsuarios;
     private long ultimoHelloServer;
     private boolean servidorOnline;
-    private ArrayList<Livro> balcao = new ArrayList<>();
     private ArrayList<Livro> estante = new ArrayList<>();
     
     private static Conexao instancia;
@@ -67,16 +66,8 @@ public class Conexao {
 
     public void setQuantidadeUsuarios(int quantidadeUsuarios) {
         this.quantidadeUsuarios = quantidadeUsuarios;
-    }   
-
-    public ArrayList<Livro> getBalcao() {
-        return balcao;
     }
-
-    public void setBalcao(ArrayList<Livro> balcao) {
-        this.balcao = balcao;
-    }  
-
+    
     public long getUltimoHelloServer() {
         return ultimoHelloServer;
     }

@@ -8,7 +8,6 @@ package Controle;
 import Modelo.Conexao;
 import Modelo.Livro;
 import Modelo.Usuario;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -34,11 +33,8 @@ public class ControleLeilao extends Thread {
     }
     
     //Adiciona o livro no balcão
-    public void AdicionarLivro(Livro livro)
-    {
-        ArrayList<Livro> balcao = new ArrayList<>();
-        balcao.add(livro);
-        conexao.setBalcao(balcao);
+    public void AdicionarLivro(Livro livro) {
+        
     }
 
     @Override

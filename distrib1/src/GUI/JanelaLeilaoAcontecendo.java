@@ -10,7 +10,6 @@ import Modelo.Usuario;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JSpinner;
 import javax.swing.JTextField;
 
 /**
@@ -19,24 +18,12 @@ import javax.swing.JTextField;
  */
 public class JanelaLeilaoAcontecendo extends javax.swing.JFrame {
 
-    private static JanelaLeilaoAcontecendo instancia = new JanelaLeilaoAcontecendo();
-    
-    private Livro livroLeiloando = new Livro();    
-    
     public JanelaLeilaoAcontecendo() {
         initComponents();
         Usuario usuario = Usuario.getInstancia();
         setTitle(usuario.getIdPublica() + " - O livro recebeu um lance!");
     }
     
-    public void PreencheCampos()
-    {
-        labelCodigo.setText(livroLeiloando.getCodigo());
-        labelDescricao.setText(livroLeiloando.getDescricao());
-        labelNome.setText(livroLeiloando.getNome());
-        labelPrecoInicial.setText(livroLeiloando.getPrecoInicialString());       
-    }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -197,7 +184,7 @@ public class JanelaLeilaoAcontecendo extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if (Integer.parseInt(txtValorLance.getText().replaceAll(".", ",")) > Integer.parseInt(labelPrecoInicial.getText())) {
+        if (Integer.parseInt(txtValorLance.getText().replaceAll(",", "\\.")) > Integer.parseInt(labelPrecoInicial.getText())) {
             JOptionPane.showMessageDialog(null, "Lance efetuado!");
         } else {
             JOptionPane.showMessageDialog(null, "O valor do lance deve ser maior que o valor atual!");
@@ -224,158 +211,5 @@ public class JanelaLeilaoAcontecendo extends javax.swing.JFrame {
     private javax.swing.JLabel labelTempoRestante;
     private javax.swing.JTextField txtValorLance;
     // End of variables declaration//GEN-END:variables
-
-    public JButton getjButton1() {
-        return jButton1;
-    }
-
-    public void setjButton1(JButton jButton1) {
-        this.jButton1 = jButton1;
-    }
-
-    public JButton getjButton2() {
-        return jButton2;
-    }
-
-    public void setjButton2(JButton jButton2) {
-        this.jButton2 = jButton2;
-    }
-
-    public JButton getjButton3() {
-        return jButton3;
-    }
-
-    public void setjButton3(JButton jButton3) {
-        this.jButton3 = jButton3;
-    }
-
-    public JLabel getjLabel1() {
-        return jLabel1;
-    }
-
-    public void setjLabel1(JLabel jLabel1) {
-        this.jLabel1 = jLabel1;
-    }
-
-    public JLabel getjLabel2() {
-        return jLabel2;
-    }
-
-    public void setjLabel2(JLabel jLabel2) {
-        this.jLabel2 = jLabel2;
-    }
-
-    public JLabel getjLabel3() {
-        return jLabel3;
-    }
-
-    public void setjLabel3(JLabel jLabel3) {
-        this.jLabel3 = jLabel3;
-    }
-
-    public JLabel getjLabel4() {
-        return jLabel4;
-    }
-
-    public void setjLabel4(JLabel jLabel4) {
-        this.jLabel4 = jLabel4;
-    }
-
-    public JLabel getjLabel5() {
-        return jLabel5;
-    }
-
-    public void setjLabel5(JLabel jLabel5) {
-        this.jLabel5 = jLabel5;
-    }
-
-    public JLabel getjLabel7() {
-        return jLabel7;
-    }
-
-    public void setjLabel7(JLabel jLabel7) {
-        this.jLabel7 = jLabel7;
-    }
-
-    public JLabel getjLabel9() {
-        return jLabel9;
-    }
-
-    public void setjLabel9(JLabel jLabel9) {
-        this.jLabel9 = jLabel9;
-    }
-
-    public JLabel getLabelCodigo() {
-        return labelCodigo;
-    }
-
-    public void setLabelCodigo(JLabel labelCodigo) {
-        this.labelCodigo = labelCodigo;
-    }
-
-    public JLabel getLabelDescricao() {
-        return labelDescricao;
-    }
-
-    public void setLabelDescricao(JLabel labelDescricao) {
-        this.labelDescricao = labelDescricao;
-    }
-
-    public JLabel getLabelMaiorLance() {
-        return labelMaiorLance;
-    }
-
-    public void setLabelMaiorLance(JLabel labelMaiorLance) {
-        this.labelMaiorLance = labelMaiorLance;
-    }
-
-    public JLabel getLabelNome() {
-        return labelNome;
-    }
-
-    public void setLabelNome(JLabel labelNome) {
-        this.labelNome = labelNome;
-    }
-
-    public JLabel getLabelPrecoInicial() {
-        return labelPrecoInicial;
-    }
-
-    public void setLabelPrecoInicial(JLabel labelPrecoInicial) {
-        this.labelPrecoInicial = labelPrecoInicial;
-    }
-
-    public JLabel getLabelTempoRestante() {
-        return labelTempoRestante;
-    }
-
-    public void setLabelTempoRestante(JLabel labelTempoRestante) {
-        this.labelTempoRestante = labelTempoRestante;
-    }
-
-    public JTextField getTxtValorLance() {
-        return txtValorLance;
-    }
-
-    public void setTxtValorLance(JTextField txtValorLance) {
-        this.txtValorLance = txtValorLance;
-    }
-
-    public Livro getLivroLeiloando() {
-        return livroLeiloando;
-    }
-
-    public void setLivroLeiloando(Livro livroLeiloando) {
-        this.livroLeiloando = livroLeiloando;
-    }   
-
-    public static JanelaLeilaoAcontecendo getInstancia() {
-        return instancia;
-    }
-
-    public static void setInstancia(JanelaLeilaoAcontecendo instancia) {
-        JanelaLeilaoAcontecendo.instancia = instancia;
-    }
-    
     
 }

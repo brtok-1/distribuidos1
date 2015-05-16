@@ -6,7 +6,7 @@
 package Comunicação;
 
 import GUI.JanelaConsole;
-import GUI.JanelaLeilaoAcontecendo;
+import GUI.JanelaLeilaoAcontecendo1;
 import Modelo.Conexao;
 import Modelo.Livro;
 import Modelo.Usuario;
@@ -21,11 +21,6 @@ import java.util.logging.Logger;
  */
 public class ComunicacaoEnvioInicial extends MinhaComunicacaoEnvio {
 
-    private JanelaLeilaoAcontecendo janelaLeilao;
-    private Usuario usuario;
-    private Conexao conexao;
-    private String mensagem;
-
     @Override
     public void run() {
         try {
@@ -36,21 +31,9 @@ public class ComunicacaoEnvioInicial extends MinhaComunicacaoEnvio {
             //Obtem o usuário
             usuario = Usuario.getInstancia();
             ConfiguraConexaoMulticast();
-            ConfiguraConexaoUnicast();
             while (conexao.getStatusLeilao().equalsIgnoreCase("aguardando") || conexao.getStatusLeilao().equalsIgnoreCase("tempoAdicional")) {
                 EnvioInicial();
                 conexao = Conexao.getInstancia();
-            }
-            while (conexao.isServidorOnline()) {
-                if (conexao.getStatusLeilao().equals("andamento")) {
-                    ParticiparLeilao();
-                }
-                conexao = Conexao.getInstancia();
-            }
-            JanelaConsole.escreveNaJanela("O servidor caiu. A detecção de usuários e eleição");
-            JanelaConsole.escreveNaJanela("de um novo servidor, começará em instantes.");
-            if (conexao.getStatusLeilao().equalsIgnoreCase("leiloando")) {
-                JanelaConsole.escreveNaJanela("O leilão ativo no momento foi cancelado.");
             }
         } catch (Exception ex) {
             Logger.getLogger(ComunicacaoEnvioInicial.class.getName()).log(Level.SEVERE, null, ex);
@@ -64,47 +47,7 @@ public class ComunicacaoEnvioInicial extends MinhaComunicacaoEnvio {
         sleep(6000);
     }
 
-    //Configura a conexao unicast
-    public void ConfiguraConexaoUnicast() throws Exception {
-
-    }
-
-    public void ParticiparLeilao() throws Exception {
-        if (!(conexao.getBalcao().isEmpty())) {
-            EnviaLivro();
-            conexao.getBalcao().clear();
-        }
-        if (!conexao.getEstante().isEmpty()) {
-
-            ArrayList<Livro> estante = new ArrayList<>();
-            estante = conexao.getEstante();
-
-            for (Livro l : estante) {
-                LeiloaLivro(l);
-            }
-
-        }
-    }
-
-    //Envia o livro para leilão
-    public void EnviaLivro() throws Exception {
-
-        //Livro livro = new Livro();
-        Livro livro = conexao.getBalcao().get(0);
-        mensagem = "2#" + livro.getCodigo() + "#" + livro.getDescricao() + "#" + livro.getNome() + "#" + livro.getPrecoInicial()
-                + "#" + livro.getTempoTotalLeilao();
-        EnviaMensagem();
-    }
-
-    //Executa o leilão do livro
-    public void LeiloaLivro(Livro livro) throws Exception {
-        mensagem = "10#" + livro.getCodigo() + "#" + livro.getDescricao() + "#" + livro.getNome() + "#" + livro.getPrecoInicial()
-                + "#" + livro.getTempoTotalLeilao();
-        EnviaMensagem();
-    }
-
 }
-
 
 //    @Override
 //    public void run() {

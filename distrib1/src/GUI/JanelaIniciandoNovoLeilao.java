@@ -5,9 +5,12 @@
  */
 package GUI;
 
-import Controle.ControleLeilao;
+import Comunicação.ComunicacaoEnviaLivro;
+import Modelo.Conexao;
 import Modelo.Livro;
 import Modelo.Usuario;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -152,6 +155,8 @@ public class JanelaIniciandoNovoLeilao extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botaoIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoIniciarActionPerformed
+        Usuario u = Usuario.getInstancia();
+        Conexao c = Conexao.getInstancia();
         String codigo = campoCodigo.getText();
         String nome = campoNome.getText();
         String descricao = campoDescricao.getText();
@@ -160,10 +165,21 @@ public class JanelaIniciandoNovoLeilao extends javax.swing.JFrame {
         long tempo = Long.parseLong(tempoString) * 60000;
         Livro livro = new Livro(codigo, nome, descricao, tempo, System.currentTimeMillis());
         livro.setPrecoInicialString(preco);
-        ControleLeilao ctl = new ControleLeilao();
-        ctl.AdicionarLivro(livro);
-        //ctl.start();
-        dispose();
+        livro.setIdPublicaDonoLivro(u.getIdPublica());
+        livro.setIdRedeDonoLivro(u.getIdRede());
+        if (c.getStatusLeilao().equalsIgnoreCase("leiloando")) {
+            JOptionPane.showMessageDialog(null, "<html><center>Um novo leilão foi iniciado enquanto você preenchia os dados.<br>Aguarde o fim desse leilão e tente novamente.");
+            dispose();
+        } else {
+            if (u.getPapel().equalsIgnoreCase("servidor")) {
+                ArrayList<Livro> estante = c.getEstante();
+                estante.add(livro);
+                c.setEstante(estante);
+            } else {
+                ComunicacaoEnviaLivro enviaLivro = new ComunicacaoEnviaLivro(livro);
+                enviaLivro.start();
+            }
+        }
     }//GEN-LAST:event_botaoIniciarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

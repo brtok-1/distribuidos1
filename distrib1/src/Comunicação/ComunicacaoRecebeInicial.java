@@ -7,7 +7,8 @@ package Comunicação;
 
 import GUI.JanelaConsole;
 import GUI.JanelaCriaLeilao;
-import GUI.JanelaLeilaoAcontecendo;
+import GUI.JanelaLeilaoAcontecendo1;
+import GUI.JanelaLeilaoIniciado;
 import Modelo.Conexao;
 import Modelo.Livro;
 import Modelo.Usuario;
@@ -31,8 +32,10 @@ public class ComunicacaoRecebeInicial extends Thread {
     private Conexao conexao;
     private Usuario usuarioLocal;
     private String[] mensagemQuebrada;
+    private String mensagem;
     private int participantesTempoAdicional;
-    private JanelaLeilaoAcontecendo janelaLeilao;
+    private JanelaLeilaoIniciado janelaNovoLeilao;
+    private JanelaLeilaoAcontecendo1 janelaLeilao;
 
     InetAddress address;
     MulticastSocket clientSocket;
@@ -53,15 +56,15 @@ public class ComunicacaoRecebeInicial extends Thread {
                 byte[] buf = new byte[256];
                 DatagramPacket msgPacket = new DatagramPacket(buf, buf.length);
                 clientSocket.receive(msgPacket);
-                String mensagem;
                 mensagem = new String(buf);
                 mensagem = mensagem.trim();
-                Date now = new Date();
-                DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-                String dh = formatter.format(now);
-                JanelaConsole.escreveNaJanela(dh + " Recebeu: " + mensagem);
                 mensagemQuebrada = mensagem.split("#");
                 DirecionaMensagem();
+            }
+            JanelaConsole.escreveNaJanela("O servidor caiu. A detecção de usuários e eleição");
+            JanelaConsole.escreveNaJanela("de um novo servidor, começará em instantes.");
+            if (conexao.getStatusLeilao().equalsIgnoreCase("leiloando")) {
+                JanelaConsole.escreveNaJanela("O leilão ativo no momento foi cancelado.");
             }
         } catch (Exception ex) {
             Logger.getLogger(ComunicacaoRecebeInicial.class.getName()).log(Level.SEVERE, null, ex);
@@ -140,32 +143,41 @@ public class ComunicacaoRecebeInicial extends Thread {
 
     //direcionar mensagem para um método ou thread
     public void DirecionaMensagem() throws Exception {
+        Date now = new Date();
+        DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        String dh = formatter.format(now);
         int tipoMensagem = Integer.parseInt(mensagemQuebrada[0]);
         switch (tipoMensagem) {
+            //Para Hello do Servidor
             case 1:
                 if (!(usuarioLocal.getPapel().equalsIgnoreCase("servidor"))) {
+                    JanelaConsole.escreveNaJanela(dh + " Recebeu: " + mensagem);
                     HelloServer();
                 }
                 break;
             //Novo livro para leilão
             case 2:
                 if (usuarioLocal.getPapel().equals("servidor")) {
+                    JanelaConsole.escreveNaJanela(dh + " Recebeu: " + mensagem);
                     AdicionaLivroEstante();
                 }
                 break;
-            case 7:
                 
+            case 7:
+
                 break;
+            //Inicio de novo Leilão
             case 10:
-                ParticipaLeilao();
+                InicioDoLeilao();
                 break;
             case 11:
-                
+
                 break;
             case 12:
-                
+
                 break;
             case 77:
+                JanelaConsole.escreveNaJanela(dh + " Recebeu: " + mensagem);
                 if (conexao.getStatusLeilao().equalsIgnoreCase("aguardando")) {
                     RecebeParticipantes();
                 }
@@ -195,23 +207,20 @@ public class ComunicacaoRecebeInicial extends Thread {
 
     //Adiciona o livro na fila para que sejam leiloados
     public void AdicionaLivroEstante() throws Exception {
-        ArrayList<Livro> estante = new ArrayList<>();
-        estante = conexao.getEstante();
-
+        ArrayList<Livro> estante = conexao.getEstante();
         Livro livro = new Livro();
         livro.setCodigo(mensagemQuebrada[1]);
         livro.setDescricao(mensagemQuebrada[2]);
         livro.setNome(mensagemQuebrada[3]);
         livro.setPrecoInicial(Double.parseDouble(mensagemQuebrada[4]));
         livro.setTempoTotalLeilao(Long.parseLong(mensagemQuebrada[5]));
-
+        livro.setIdPublicaDonoLivro(mensagemQuebrada[6]);
+        livro.setIdRedeDonoLivro(Integer.parseInt(mensagemQuebrada[7]));
         estante.add(livro);
-
         conexao.setEstante(estante);
-
     }
 
-    public void ParticipaLeilao() {
+    public void InicioDoLeilao() {
         Livro livro = new Livro();
         livro.setCodigo(mensagemQuebrada[1]);
         livro.setDescricao(mensagemQuebrada[2]);
@@ -219,7 +228,7 @@ public class ComunicacaoRecebeInicial extends Thread {
         livro.setPrecoInicial(Double.parseDouble(mensagemQuebrada[4]));
         livro.setTempoTotalLeilao(Long.parseLong(mensagemQuebrada[5]));
 
-        janelaLeilao = JanelaLeilaoAcontecendo.getInstancia();
+        janelaLeilao = JanelaLeilaoAcontecendo1.getInstancia();
 
         janelaLeilao.setVisible(true);
         janelaLeilao.setLivroLeiloando(livro);

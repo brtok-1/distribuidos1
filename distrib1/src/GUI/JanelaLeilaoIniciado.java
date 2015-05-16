@@ -6,8 +6,6 @@
 package GUI;
 
 import Modelo.Usuario;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -22,10 +20,6 @@ public class JanelaLeilaoIniciado extends javax.swing.JFrame {
         initComponents();
         Usuario usuario = Usuario.getInstancia();
         setTitle(usuario.getIdPublica() + " - Leilão iniciado");
-        if (usuario.getIdPublica().equalsIgnoreCase("servidor")) {
-            botaoDarLance.setVisible(false);
-            botaoNaoParticipar.setText("OK");
-        }
     }
 
     /**
@@ -170,15 +164,7 @@ public class JanelaLeilaoIniciado extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botaoNaoParticiparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoNaoParticiparActionPerformed
-        JanelaCriaLeilao jcl;
-        try {
-            jcl = new JanelaCriaLeilao();
-            dispose();
-            jcl.setVisible(true);
-            jcl.repaint();
-        } catch (InterruptedException ex) {
-            Logger.getLogger(JanelaLeilaoIniciado.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        dispose();
     }//GEN-LAST:event_botaoNaoParticiparActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

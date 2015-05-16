@@ -12,6 +12,8 @@ import java.util.ArrayList;
  * @author Bruno
  */
 public class Livro {
+    int idRedeDonoLivro;
+    String idPublicaDonoLivro;
     String codigo;
     String nome;
     String descricao;
@@ -100,5 +102,22 @@ public class Livro {
     public void setLances(ArrayList<Lance> lances) {
         this.lances = lances;
     }
+
+    public int getIdRedeDonoLivro() {
+        return idRedeDonoLivro;
+    }
+
+    public void setIdRedeDonoLivro(int idRedeDonoLivro) {
+        this.idRedeDonoLivro = idRedeDonoLivro;
+    }
+
+    public String getIdPublicaDonoLivro() {
+        return idPublicaDonoLivro;
+    }
+
+    public void setIdPublicaDonoLivro(String idPublicaDonoLivro) {
+        this.idPublicaDonoLivro = idPublicaDonoLivro;
+    }
+    
     
 }
