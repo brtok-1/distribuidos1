@@ -5,6 +5,7 @@
  */
 package Comunicação;
 
+import GUI.JanelaConsole;
 import Modelo.Conexao;
 import Modelo.Livro;
 import Modelo.Usuario;
@@ -27,6 +28,12 @@ public class ControleLeilaoServidor extends Thread {
 
     @Override
     public void run() {
+        try {
+            JanelaConsole.escreveNaJanela("Thread Controle de Leilão Iniciada.");
+        } catch (InterruptedException ex) {
+            Logger.getLogger(ControleLeilaoServidor.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         conexao = Conexao.getInstancia();
         while (true) {
             try {

@@ -117,6 +117,8 @@ public class ComunicacaoRecebe extends Thread {
                 JanelaConsole.escreveNaJanela("Característica já definida: SERVIDOR");
                 ControleHelloServidor hello = new ControleHelloServidor();
                 hello.start();
+                ControleLeilaoServidor leilao = new ControleLeilaoServidor();
+                leilao.start();
             } else {
                 JanelaConsole.escreveNaJanela("Característica já definida: CLIENTE");
                 ControleEscutaServidor helloescuta = new ControleEscutaServidor();
