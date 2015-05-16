@@ -16,18 +16,33 @@ import java.util.logging.Logger;
 public class ComunicacaoEnviaLivro extends MinhaComunicacaoEnvio {
 
     private Livro livro;
-    
-    public ComunicacaoEnviaLivro(Livro livro) {
+    private String tipoEnvio;
+//    Usuario usuario;
+//    Conexao conexao;
+//    String mensagem;
+
+    public ComunicacaoEnviaLivro(Livro livro, String tipoEnvio) {
+        this.tipoEnvio = tipoEnvio;
         this.livro = livro;
     }
 
     @Override
     public void run() {
+
         try {
-            setMensagem("2#" + livro.getCodigo() + "#" + livro.getDescricao() + "#" + livro.getNome()
-                    + "#" + livro.getPrecoInicial() + "#" + livro.getTempoTotalLeilao()
-                    + "#" + livro.getIdPublicaDonoLivro() + "#" + livro.getIdRedeDonoLivro());
-            EnviaMensagem();
+            if (tipoEnvio.equals("paraServidor")) {
+                setMensagem("2#" + livro.getCodigo() + "#" + livro.getDescricao() + "#" + livro.getNome()
+                        + "#" + livro.getPrecoInicial() + "#" + livro.getTempoTotalLeilao()
+                        + "#" + livro.getIdPublicaDonoLivro() + "#" + livro.getIdRedeDonoLivro());
+                EnviaMensagem();
+            }
+            if (tipoEnvio.equals("paraClientes")) {
+                mensagem = "3#" + livro.getCodigo() + "#" + livro.getDescricao() + "#" + livro.getNome()
+                        + "#" + livro.getPrecoInicial() + "#" + livro.getTempoTotalLeilao()
+                        + "#" + livro.getIdPublicaDonoLivro() + "#" + livro.getIdRedeDonoLivro();
+                EnviaMensagem();
+            }
+
         } catch (Exception ex) {
             Logger.getLogger(ComunicacaoEnviaLivro.class.getName()).log(Level.SEVERE, null, ex);
         }
