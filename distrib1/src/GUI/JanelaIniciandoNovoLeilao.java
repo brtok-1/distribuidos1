@@ -163,13 +163,12 @@ public class JanelaIniciandoNovoLeilao extends javax.swing.JFrame {
         String preco = campoPreco.getText();
         String tempoString = campoTempo.getText();
         long tempo = Long.parseLong(tempoString) * 60000;
-        Livro livro = new Livro(codigo, nome, descricao, tempo, System.currentTimeMillis());
+        Livro livro = new Livro(codigo, nome, descricao, tempo);
         livro.setPrecoInicialString(preco);
         livro.setIdPublicaDonoLivro(u.getIdPublica());
         livro.setIdRedeDonoLivro(u.getIdRede());
         if (c.getStatusLeilao().equalsIgnoreCase("leiloando")) {
             JOptionPane.showMessageDialog(null, "<html><center>Um novo leilão foi iniciado enquanto você preenchia os dados.<br>Aguarde o fim desse leilão e tente novamente.");
-            dispose();
         } else {
             if (u.getPapel().equalsIgnoreCase("servidor")) {
                 ArrayList<Livro> estante = c.getEstante();
@@ -180,6 +179,7 @@ public class JanelaIniciandoNovoLeilao extends javax.swing.JFrame {
                 enviaLivro.start();
             }
         }
+        dispose();
     }//GEN-LAST:event_botaoIniciarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

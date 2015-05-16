@@ -20,6 +20,7 @@ public class Conexao {
     private long ultimoHelloServer;
     private boolean servidorOnline;
     private ArrayList<Livro> estante = new ArrayList<>();
+    private Livro leilaoAtual;
     
     private static Conexao instancia;
     private static Conexao instanciaUnicast;
@@ -99,4 +100,13 @@ public class Conexao {
     public static void setInstanciaUnicast(Conexao instanciaUnicast) {
         Conexao.instanciaUnicast = instanciaUnicast;
     }
+
+    public Livro getLeilaoAtual() {
+        return leilaoAtual;
+    }
+
+    public void setLeilaoAtual(Livro leilaoAtual) {
+        this.leilaoAtual = leilaoAtual;
+    }
+    
 }

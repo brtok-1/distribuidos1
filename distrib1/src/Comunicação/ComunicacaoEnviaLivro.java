@@ -15,7 +15,7 @@ import java.util.logging.Logger;
  */
 public class ComunicacaoEnviaLivro extends MinhaComunicacaoEnvio {
 
-    private final Livro livro;
+    private Livro livro;
     
     public ComunicacaoEnviaLivro(Livro livro) {
         this.livro = livro;
@@ -24,9 +24,9 @@ public class ComunicacaoEnviaLivro extends MinhaComunicacaoEnvio {
     @Override
     public void run() {
         try {
-            mensagem = "2#" + livro.getCodigo() + "#" + livro.getDescricao() + "#" + livro.getNome()
+            setMensagem("2#" + livro.getCodigo() + "#" + livro.getDescricao() + "#" + livro.getNome()
                     + "#" + livro.getPrecoInicial() + "#" + livro.getTempoTotalLeilao()
-                    + "#" + livro.getIdPublicaDonoLivro() + "#" + livro.getIdRedeDonoLivro();
+                    + "#" + livro.getIdPublicaDonoLivro() + "#" + livro.getIdRedeDonoLivro());
             EnviaMensagem();
         } catch (Exception ex) {
             Logger.getLogger(ComunicacaoEnviaLivro.class.getName()).log(Level.SEVERE, null, ex);

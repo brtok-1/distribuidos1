@@ -30,7 +30,7 @@ public class ControladoraThreads extends Thread {
                 jcl.setVisible(true);
                 jcl.repaint();
                 Thread.sleep(3000);
-                ComunicacaoRecebeInicial recebe = new ComunicacaoRecebeInicial();
+                ComunicacaoRecebe recebe = new ComunicacaoRecebe();
                 recebe.start();
                 ComunicacaoEnvioInicial envio = new ComunicacaoEnvioInicial();
                 envio.start();
@@ -43,8 +43,12 @@ public class ControladoraThreads extends Thread {
                 jcl.dispose();
                 Usuario usuario = Usuario.getInstancia();
                 sleep(10000);
-                envio.stop();
-                recebe.stop();
+
+                JanelaConsole.escreveNaJanela("O servidor caiu. A detecção de usuários e eleição");
+                JanelaConsole.escreveNaJanela("de um novo servidor, começará em instantes.");
+                if (c.getStatusLeilao().equalsIgnoreCase("leiloando")) {
+                    JanelaConsole.escreveNaJanela("O leilão ativo no momento foi cancelado.");
+                }
                 usuario.setPapel("servidor");
                 c.setStatusLeilao("aguardando");
                 c.setQuantidadeUsuarios(0);

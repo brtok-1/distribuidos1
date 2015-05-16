@@ -52,9 +52,9 @@
                               </Group>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
+                              <Component id="labelLance" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jTextField1" min="-2" pref="74" max="-2" attributes="0"/>
+                              <Component id="txtValorLance" min="-2" pref="74" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -96,8 +96,8 @@
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtValorLance" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="labelLance" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -169,6 +169,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Dar o Lance"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botaoDarLanceActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="botaoNaoParticipar">
       <Properties>
@@ -187,12 +190,12 @@
         <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;center&gt;Um novo leil&#xe3;o foi iniciado&lt;/center&gt;"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel5">
+    <Component class="javax.swing.JLabel" name="labelLance">
       <Properties>
         <Property name="text" type="java.lang.String" value="Lance:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextField1">
+    <Component class="javax.swing.JTextField" name="txtValorLance">
     </Component>
   </SubComponents>
 </Form>

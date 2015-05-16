@@ -14,6 +14,8 @@ import java.net.InetAddress;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -34,7 +36,10 @@ public class MinhaComunicacaoEnvio extends Thread {
         serverSocket = new DatagramSocket();
     }
     
-    
+    public void setMensagem(String mensagem) {
+        this.mensagem = mensagem;
+    }    
+            
     //Envia mensagem
     public void EnviaMensagem() throws Exception {
         Date now = new Date();
@@ -44,5 +49,13 @@ public class MinhaComunicacaoEnvio extends Thread {
         DatagramPacket msgPacket = new DatagramPacket(mensagem.getBytes(), mensagem.getBytes().length, address, conexao.getPORT());
         serverSocket.send(msgPacket);
     }
-
+    
+    public void run() {
+        try {
+            EnviaMensagem();
+        } catch (Exception ex) {
+            Logger.getLogger(MinhaComunicacaoEnvio.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
 }

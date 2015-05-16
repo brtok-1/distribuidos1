@@ -6,12 +6,9 @@
 package Comunicação;
 
 import GUI.JanelaConsole;
-import GUI.JanelaLeilaoAcontecendo1;
 import Modelo.Conexao;
-import Modelo.Livro;
 import Modelo.Usuario;
 import static java.lang.Thread.sleep;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 

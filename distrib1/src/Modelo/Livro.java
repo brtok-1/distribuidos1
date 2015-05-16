@@ -5,8 +5,6 @@
  */
 package Modelo;
 
-import java.util.ArrayList;
-
 /**
  *
  * @author Bruno
@@ -20,14 +18,13 @@ public class Livro {
     double precoInicial;
     long tempoTotalLeilao;
     long tempoNoInicio;
-    ArrayList<Lance> lances = new ArrayList<>();
+    Lance maiorLance;
 
-    public Livro(String codigo, String nome, String descricao, long tempoTotalLeilao, long tempoInicial) {
+    public Livro(String codigo, String nome, String descricao, long tempoTotalLeilao) {
         this.codigo = codigo;
         this.nome = nome;
         this.descricao = descricao;
         this.tempoTotalLeilao = tempoTotalLeilao;
-        this.tempoNoInicio = tempoInicial;
     }
     
     public Livro()
@@ -83,24 +80,12 @@ public class Livro {
         this.tempoNoInicio = tempoNoInicio;
     }
 
-    public String getPrecoInicialString() {
-        String preco = String.valueOf(precoInicial);
-        preco = preco.replaceAll("\\.", ",");
-        return preco;
+    public Lance getMaiorLance() {
+        return maiorLance;
     }
 
-    public void setPrecoInicialString(String preco) {
-        preco = preco.replaceAll(",", "\\.");
-        double precoIn = Double.parseDouble(preco);
-        precoInicial = precoIn;
-    }
-
-    public ArrayList<Lance> getLances() {
-        return lances;
-    }
-
-    public void setLances(ArrayList<Lance> lances) {
-        this.lances = lances;
+    public void setMaiorLance(Lance maiorLance) {
+        this.maiorLance = maiorLance;
     }
 
     public int getIdRedeDonoLivro() {
@@ -119,5 +104,16 @@ public class Livro {
         this.idPublicaDonoLivro = idPublicaDonoLivro;
     }
     
-    
+    public String getPrecoInicialString() {
+        String preco = String.valueOf(precoInicial);
+        preco = preco.replaceAll("\\.", ",");
+        return preco;
+    }
+
+    public void setPrecoInicialString(String preco) {
+        preco = preco.replaceAll(",", "\\.");
+        double precoIn = Double.parseDouble(preco);
+        precoInicial = precoIn;
+    }
+
 }

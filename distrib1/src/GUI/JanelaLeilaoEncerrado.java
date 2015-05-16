@@ -27,15 +27,14 @@ public class JanelaLeilaoEncerrado extends javax.swing.JFrame {
         labelDescricao.setText(leilao.getDescricao());
         labelNome.setText(leilao.getNome());
         labelPrecoInicial.setText(leilao.getPrecoInicialString());
-        int tamanho = leilao.getLances().size();
-        if (tamanho == 0) {
+        if (leilao.getMaiorLance().getValorOferecido() == -1) {
             labelValorVenda.setVisible(false);
             jLabel5.setVisible(false);
             jLabel7.setVisible(false);
             labelVendidoPara.setText("Não houveram lances.");
         } else {
-            labelValorVenda.setText(leilao.getLances().get(tamanho - 1).getValorOferecidoString());
-            labelVendidoPara.setText(leilao.getLances().get(tamanho - 1).getQuemOfereceu());
+            labelValorVenda.setText(leilao.getMaiorLance().getValorOferecidoString());
+            labelVendidoPara.setText(leilao.getMaiorLance().getIdPublicaQuemOfereceu());
         }
     }
 

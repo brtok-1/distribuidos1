@@ -5,7 +5,11 @@
  */
 package GUI;
 
+import Comunicação.ComunicacaoEnviaLance;
+import Modelo.Lance;
+import Modelo.Livro;
 import Modelo.Usuario;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -13,13 +17,33 @@ import Modelo.Usuario;
  */
 public class JanelaLeilaoIniciado extends javax.swing.JFrame {
 
+    private Livro livro;
+
     /**
      * Creates new form JanelaLeilaoAcontecendo
+     *
+     * @param livro
      */
-    public JanelaLeilaoIniciado() {
+    public JanelaLeilaoIniciado(Livro livro) {
         initComponents();
+        this.livro = livro;
         Usuario usuario = Usuario.getInstancia();
         setTitle(usuario.getIdPublica() + " - Leilão iniciado");
+        labelCodigo.setText(livro.getCodigo());
+        labelDescricao.setText(livro.getDescricao());
+        labelNome.setText(livro.getNome());
+        labelPrecoInicial.setText(livro.getPrecoInicialString());
+        labelTempoRestante.setText(String.valueOf(livro.getTempoTotalLeilao() - livro.getTempoNoInicio() / 60000) + "minutos");
+        Usuario usuarioLocal = Usuario.getInstancia();
+        if (usuarioLocal.getIdPublica().equalsIgnoreCase(livro.getIdPublicaDonoLivro())
+                && usuarioLocal.getIdRede() == livro.getIdRedeDonoLivro()) {
+            labelLance.setVisible(false);
+            txtValorLance.setVisible(false);
+            botaoDarLance.setVisible(false);
+            botaoNaoParticipar.setText("OK");
+            EncerrarLeilao er = EncerrarLeilao.getInstancia();
+            er.setVisible(true);
+        }
     }
 
     /**
@@ -44,8 +68,8 @@ public class JanelaLeilaoIniciado extends javax.swing.JFrame {
         botaoDarLance = new javax.swing.JButton();
         botaoNaoParticipar = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        labelLance = new javax.swing.JLabel();
+        txtValorLance = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -75,6 +99,11 @@ public class JanelaLeilaoIniciado extends javax.swing.JFrame {
         labelTempoRestante.setText("labelTempoRestante");
 
         botaoDarLance.setText("Dar o Lance");
+        botaoDarLance.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoDarLanceActionPerformed(evt);
+            }
+        });
 
         botaoNaoParticipar.setText("Não participar");
         botaoNaoParticipar.addActionListener(new java.awt.event.ActionListener() {
@@ -87,7 +116,7 @@ public class JanelaLeilaoIniciado extends javax.swing.JFrame {
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel9.setText("<html><center>Um novo leilão foi iniciado</center>");
 
-        jLabel5.setText("Lance:");
+        labelLance.setText("Lance:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -118,9 +147,9 @@ public class JanelaLeilaoIniciado extends javax.swing.JFrame {
                                     .addComponent(labelDescricao)
                                     .addComponent(labelTempoRestante)))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel5)
+                                .addComponent(labelLance)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(txtValorLance, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -151,8 +180,8 @@ public class JanelaLeilaoIniciado extends javax.swing.JFrame {
                     .addComponent(labelTempoRestante))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
+                    .addComponent(txtValorLance, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelLance))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botaoNaoParticipar)
@@ -167,6 +196,18 @@ public class JanelaLeilaoIniciado extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_botaoNaoParticiparActionPerformed
 
+    private void botaoDarLanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoDarLanceActionPerformed
+        if (Double.parseDouble(txtValorLance.getText().replaceAll(",", "\\.")) > livro.getPrecoInicial()) {
+            Usuario usuarioLocal = Usuario.getInstancia();
+            Lance lance = new Lance(usuarioLocal.getIdPublica(), usuarioLocal.getIdRede(), 0);
+            ComunicacaoEnviaLance envia = new ComunicacaoEnviaLance(lance, labelCodigo.getText());
+            envia.start();
+            JOptionPane.showMessageDialog(null, "Lance efetuado!");
+        } else {
+            JOptionPane.showMessageDialog(null, "O valor do lance deve ser maior que o valor atual!");
+        }
+    }//GEN-LAST:event_botaoDarLanceActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botaoDarLance;
     private javax.swing.JButton botaoNaoParticipar;
@@ -174,14 +215,14 @@ public class JanelaLeilaoIniciado extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel labelCodigo;
     private javax.swing.JLabel labelDescricao;
+    private javax.swing.JLabel labelLance;
     private javax.swing.JLabel labelNome;
     private javax.swing.JLabel labelPrecoInicial;
     private javax.swing.JLabel labelTempoRestante;
+    private javax.swing.JTextField txtValorLance;
     // End of variables declaration//GEN-END:variables
 }
