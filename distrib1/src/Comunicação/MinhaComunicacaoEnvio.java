@@ -42,8 +42,6 @@ public class MinhaComunicacaoEnvio extends Thread {
             
     //Envia mensagem
     public void EnviaMensagem() throws Exception {
-        conexao = Conexao.getInstancia();
-        ConfiguraConexaoMulticast();
         Date now = new Date();
         DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         String dh = formatter.format(now);

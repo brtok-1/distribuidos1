@@ -26,46 +26,46 @@ public class ControleLeilaoServidor extends Thread {
     long tempoTotal;
     long horarioAgora;
 
-//    @Override
-//    public void run() {
-//        try {
-//            JanelaConsole.escreveNaJanela("Thread Controle de Leilão Iniciada.");
-//        } catch (InterruptedException ex) {
-//            Logger.getLogger(ControleLeilaoServidor.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//        
-//        conexao = Conexao.getInstancia();
-//        while (true) {
-//            try {
-//                if ((!(conexao.getEstante().isEmpty()))
-//                        && (conexao.getStatusLeilao().equalsIgnoreCase("andamento"))) {
-//                    ArrayList<Livro> estante = conexao.getEstante();
-//                    livro = estante.get(0);
-//                    estante.remove(0);
-//                    conexao.setEstante(estante);
-//                    MinhaComunicacaoEnvio envia = new MinhaComunicacaoEnvio();
-//                    conexao.setStatusLeilao("leiloando");
-//                    envia.setMensagem("3#" + livro.getCodigo() + "#" + livro.getDescricao()
-//                            + "#" + livro.getNome() + "#" + livro.getPrecoInicial() + "#"
-//                            + String.valueOf(System.currentTimeMillis() + livro.getTempoTotalLeilao())
-//                            + "#" + System.currentTimeMillis() + "#" + livro.getIdPublicaDonoLivro()
-//                            + "#" + livro.getIdRedeDonoLivro());
-//                }
-//                while (conexao.getStatusLeilao().equalsIgnoreCase("leiloando")) {
-//                    sleep(1000);
-//                    horarioAgora = System.currentTimeMillis();
-//                    if (horarioAgora >= tempoTotal) {
-//                        conexao.setStatusLeilao("finalizando");
-//                    }
-//                }
-//                if (conexao.getStatusLeilao().equalsIgnoreCase("finalizando")) {
-//                    
-//                }
-//            } catch (InterruptedException ex) {
-//                Logger.getLogger(ControleLeilaoServidor.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-//        }
-//    }
+    @Override
+    public void run() {
+        try {
+            JanelaConsole.escreveNaJanela("Thread Controle de Leilão Iniciada.");
+        } catch (InterruptedException ex) {
+            Logger.getLogger(ControleLeilaoServidor.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        conexao = Conexao.getInstancia();
+        while (true) {
+            try {
+                if ((!(conexao.getEstante().isEmpty()))
+                        && (conexao.getStatusLeilao().equalsIgnoreCase("andamento"))) {
+                    ArrayList<Livro> estante = conexao.getEstante();
+                    livro = estante.get(0);
+                    estante.remove(0);
+                    conexao.setEstante(estante);
+                    MinhaComunicacaoEnvio envia = new MinhaComunicacaoEnvio();
+                    conexao.setStatusLeilao("leiloando");
+                    envia.setMensagem("3#" + livro.getCodigo() + "#" + livro.getDescricao()
+                            + "#" + livro.getNome() + "#" + livro.getPrecoInicial() + "#"
+                            + String.valueOf(System.currentTimeMillis() + livro.getTempoTotalLeilao())
+                            + "#" + System.currentTimeMillis() + "#" + livro.getIdPublicaDonoLivro()
+                            + "#" + livro.getIdRedeDonoLivro());
+                }
+                while (conexao.getStatusLeilao().equalsIgnoreCase("leiloando")) {
+                    sleep(1000);
+                    horarioAgora = System.currentTimeMillis();
+                    if (horarioAgora >= tempoTotal) {
+                        conexao.setStatusLeilao("finalizando");
+                    }
+                }
+                if (conexao.getStatusLeilao().equalsIgnoreCase("finalizando")) {
+                    
+                }
+            } catch (InterruptedException ex) {
+                Logger.getLogger(ControleLeilaoServidor.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
 
 //metodo tempo leilao
 //    boolean naoAcabou = true;

@@ -175,7 +175,7 @@ public class JanelaIniciandoNovoLeilao extends javax.swing.JFrame {
                 estante.add(livro);
                 c.setEstante(estante);
             } else {
-                ComunicacaoEnviaLivro enviaLivro = new ComunicacaoEnviaLivro(livro, "paraServidor");
+                ComunicacaoEnviaLivro enviaLivro = new ComunicacaoEnviaLivro(livro);
                 enviaLivro.start();
             }
         }

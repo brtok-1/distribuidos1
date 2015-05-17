@@ -50,6 +50,8 @@ public class ComunicacaoRecebe extends Thread {
             conexao = Conexao.getInstancia();
             ConfiguraConexao();
             while (conexao.isServidorOnline()) {
+                //Obtem a conexão
+                conexao = Conexao.getInstancia();
                 byte[] buf = new byte[256];
                 DatagramPacket msgPacket = new DatagramPacket(buf, buf.length);
                 clientSocket.receive(msgPacket);
@@ -81,7 +83,7 @@ public class ComunicacaoRecebe extends Thread {
                 Usuario.setInstancia(usuarioLocal);
             }
         }
-        if (usuarios.size() >= 3) {
+        if (usuarios.size() >= 2) {
             JanelaConsole.escreveNaJanela("Aguarde mais alguns segundos");
             JanelaConsole.escreveNaJanela("enquanto identificamos se pode haver mais conexões.");
             conexao.setStatusLeilao("tempoAdicional");
@@ -115,8 +117,8 @@ public class ComunicacaoRecebe extends Thread {
                 JanelaConsole.escreveNaJanela("Característica já definida: SERVIDOR");
                 ControleHelloServidor hello = new ControleHelloServidor();
                 hello.start();
-                //ControleLeilaoServidor leilao = new ControleLeilaoServidor();
-                //leilao.start();
+                ControleLeilaoServidor leilao = new ControleLeilaoServidor();
+                leilao.start();
             } else {
                 JanelaConsole.escreveNaJanela("Característica já definida: CLIENTE");
                 ControleEscutaServidor helloescuta = new ControleEscutaServidor();
@@ -140,13 +142,12 @@ public class ComunicacaoRecebe extends Thread {
         Date now = new Date();
         DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         String dh = formatter.format(now);
-        JanelaConsole.escreveNaJanela(dh + " Recebeu: " + mensagem);
         int tipoMensagem = Integer.parseInt(mensagemQuebrada[0]);
         switch (tipoMensagem) {
             //Para Hello do Servidor
             case 1:
                 if (!(usuarioLocal.getPapel().equalsIgnoreCase("servidor"))) {
-                    
+                    JanelaConsole.escreveNaJanela(dh + " Recebeu: " + mensagem);
                     HelloServer();
                 }
                 break;
@@ -154,17 +155,20 @@ public class ComunicacaoRecebe extends Thread {
             //Novo livro para leilão
             case 2:
                 if (usuarioLocal.getPapel().equalsIgnoreCase("servidor")) {
+                    JanelaConsole.escreveNaJanela(dh + " Recebeu: " + mensagem);
                     AdicionaLivroEstante();
                 }
                 break;
 
             //Inicio de novo Leilão
             case 3:
+                JanelaConsole.escreveNaJanela(dh + " Recebeu: " + mensagem);
                 InicioDoLeilao();
                 break;
 
             //...
             case 4:
+                JanelaConsole.escreveNaJanela(dh + " Recebeu: " + mensagem);
                 LanceDeLeilao();
                 break;
 
@@ -176,12 +180,14 @@ public class ComunicacaoRecebe extends Thread {
             //finalização remota de leilão
             case 15:
                 if (usuarioLocal.getPapel().equalsIgnoreCase("servidor")) {
+                    JanelaConsole.escreveNaJanela(dh + " Recebeu: " + mensagem);
                     FinalizarLeilaoAgora();
                 }
                 break;
 
             //escuta o multicast inicial
             case 77:
+                JanelaConsole.escreveNaJanela(dh + " Recebeu: " + mensagem);
                 if (conexao.getStatusLeilao().equalsIgnoreCase("aguardando")) {
                     RecebeParticipantes();
                 }
@@ -223,9 +229,6 @@ public class ComunicacaoRecebe extends Thread {
         livro.setIdRedeDonoLivro(Integer.parseInt(mensagemQuebrada[7]));
         estante.add(livro);
         conexao.setEstante(estante);
-        ComunicacaoEnviaLivro enviaLivro = new ComunicacaoEnviaLivro(livro, "paraClientes");
-        enviaLivro.start();
-        
     }
 
     public void InicioDoLeilao() {
@@ -235,9 +238,9 @@ public class ComunicacaoRecebe extends Thread {
         livro.setNome(mensagemQuebrada[3]);
         livro.setPrecoInicial(Double.parseDouble(mensagemQuebrada[4]));
         livro.setTempoTotalLeilao(Long.parseLong(mensagemQuebrada[5]));
-        //livro.setTempoNoInicio(Long.parseLong(mensagemQuebrada[6]));
-        livro.setIdPublicaDonoLivro(mensagemQuebrada[6]);
-        livro.setIdRedeDonoLivro(Integer.parseInt(mensagemQuebrada[7]));
+        livro.setTempoNoInicio(Long.parseLong(mensagemQuebrada[6]));
+        livro.setIdPublicaDonoLivro(mensagemQuebrada[7]);
+        livro.setIdRedeDonoLivro(Integer.parseInt(mensagemQuebrada[8]));
         conexao = Conexao.getInstancia();
         conexao.setLeilaoAtual(livro);
         conexao.setStatusLeilao("leiloando");

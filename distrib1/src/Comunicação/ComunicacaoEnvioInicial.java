@@ -7,10 +7,8 @@ package Comunicação;
 
 import GUI.JanelaConsole;
 import Modelo.Conexao;
-import Modelo.Livro;
 import Modelo.Usuario;
 import static java.lang.Thread.sleep;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -32,6 +30,7 @@ public class ComunicacaoEnvioInicial extends MinhaComunicacaoEnvio {
             ConfiguraConexaoMulticast();
             while (conexao.getStatusLeilao().equalsIgnoreCase("aguardando") || conexao.getStatusLeilao().equalsIgnoreCase("tempoAdicional")) {
                 EnvioInicial();
+                conexao = Conexao.getInstancia();
             }
         } catch (Exception ex) {
             Logger.getLogger(ComunicacaoEnvioInicial.class.getName()).log(Level.SEVERE, null, ex);
@@ -45,7 +44,7 @@ public class ComunicacaoEnvioInicial extends MinhaComunicacaoEnvio {
         sleep(6000);
     }
 
-
+}
 
 //    @Override
 //    public void run() {
@@ -88,17 +87,16 @@ public class ComunicacaoEnvioInicial extends MinhaComunicacaoEnvio {
 //    }
 //
 //    public void ParticiparLeilao() throws Exception {
-//        
-//        JanelaConsole.escreveNaJanela("tem coisa na estante " + conexao.getEstante().size());
+//        if (!(conexao.getBalcao().isEmpty())) {
+//            EnviaLivro();
+//            conexao.getBalcao().clear();
+//        }
 //        if (!conexao.getEstante().isEmpty()) {
 //
 //            ArrayList<Livro> estante = new ArrayList<>();
 //            estante = conexao.getEstante();
-//            
-//            JanelaConsole.escreveNaJanela("tem coisa na estante " + estante.size());
 //
 //            for (Livro l : estante) {
-//                JanelaConsole.escreveNaJanela("Vai leiloar");
 //                LeiloaLivro(l);
 //            }
 //
@@ -115,12 +113,11 @@ public class ComunicacaoEnvioInicial extends MinhaComunicacaoEnvio {
 //        EnviaMensagem();
 //    }
 //
-    //Executa o leilão do livro
+//    //Executa o leilão do livro
 //    public void LeiloaLivro(Livro livro) throws Exception {
-//        mensagem = "3#" + livro.getCodigo() + "#" + livro.getDescricao() + "#" + livro.getNome()
-//                    + "#" + livro.getPrecoInicial() + "#" + livro.getTempoTotalLeilao()
-//                    + "#" + livro.getIdPublicaDonoLivro() + "#" + livro.getIdRedeDonoLivro();
+//        mensagem = "3#" + livro.getCodigo() + "#" + livro.getDescricao() + "#" + livro.getNome() + "#" + livro.getPrecoInicial()
+//                + "#" + livro.getTempoTotalLeilao();
 //        EnviaMensagem();
 //    }
-
-}
+//
+//}
