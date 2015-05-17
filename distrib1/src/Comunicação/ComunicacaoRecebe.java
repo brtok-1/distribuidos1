@@ -275,7 +275,8 @@ public class ComunicacaoRecebe extends Thread {
 
     public void FinalizarLeilaoAgora() {
         usuarioLocal = Usuario.getInstancia();
-        if ((usuarioLocal.getIdPublica().equalsIgnoreCase(mensagemQuebrada[1])) && usuarioLocal.getIdRede() == Integer.valueOf(mensagemQuebrada[2])) {
+        if ((usuarioLocal.getIdPublica().equalsIgnoreCase(mensagemQuebrada[1]))
+                && usuarioLocal.getIdRede() == Integer.valueOf(mensagemQuebrada[2])) {
             conexao = Conexao.getInstancia();
             conexao.setStatusLeilao("finalizando");
         }

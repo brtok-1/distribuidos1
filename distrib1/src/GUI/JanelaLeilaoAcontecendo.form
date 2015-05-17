@@ -195,11 +195,17 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="N&#xe3;o dar um Lance"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botaoNaoDarLanceActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="botaoFinalizar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Finalizar Leil&#xe3;o"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botaoFinalizarActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel9">
       <Properties>

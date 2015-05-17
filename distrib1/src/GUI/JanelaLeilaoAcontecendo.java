@@ -6,6 +6,7 @@
 package GUI;
 
 import Comunicação.ComunicacaoEnviaLance;
+import Comunicação.MinhaComunicacaoEnvio;
 import Modelo.Conexao;
 import Modelo.Lance;
 import Modelo.Livro;
@@ -112,8 +113,18 @@ public class JanelaLeilaoAcontecendo extends javax.swing.JFrame {
         });
 
         botaoNaoDarLance.setText("Não dar um Lance");
+        botaoNaoDarLance.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoNaoDarLanceActionPerformed(evt);
+            }
+        });
 
         botaoFinalizar.setText("Finalizar Leilão");
+        botaoFinalizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoFinalizarActionPerformed(evt);
+            }
+        });
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -220,6 +231,25 @@ public class JanelaLeilaoAcontecendo extends javax.swing.JFrame {
             Logger.getLogger(JanelaLeilaoAcontecendo.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_botaoDarLanceActionPerformed
+
+    private void botaoNaoDarLanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoNaoDarLanceActionPerformed
+        dispose();
+    }//GEN-LAST:event_botaoNaoDarLanceActionPerformed
+
+    private void botaoFinalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoFinalizarActionPerformed
+        Usuario u = Usuario.getInstancia();
+        if (u.getPapel().equalsIgnoreCase("servidor")) {
+            Conexao c = Conexao.getInstancia();
+            c.setStatusLeilao("finalizando");
+        } else {
+            MinhaComunicacaoEnvio envia = new MinhaComunicacaoEnvio();
+            envia.setMensagem("15#" + u.getIdPublica() + "#" + u.getIdRede());
+            envia.start();
+        }
+        setVisible(false);
+        EncerrarLeilao el = EncerrarLeilao.getInstancia();
+        el.setVisible(false);
+    }//GEN-LAST:event_botaoFinalizarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botaoDarLance;

@@ -40,8 +40,7 @@ public class ControladoraThreads extends Thread {
                 }
                 jcl.dispose();
                 Usuario usuario = Usuario.getInstancia();
-                sleep(10000);
-
+                sleep(8000);
                 JanelaConsole.escreveNaJanela("O servidor caiu. A detecção de usuários e eleição");
                 JanelaConsole.escreveNaJanela("de um novo servidor, começará em instantes.");
                 if (c.getStatusLeilao().equalsIgnoreCase("leiloando")) {
@@ -52,7 +51,6 @@ public class ControladoraThreads extends Thread {
                 c.setQuantidadeUsuarios(0);
                 c.setServidorOnline(true);
                 Conexao.setInstancia(c);
-                Usuario.setInstancia(usuario);
                 JanelaCriaLeilao.mostraBotao(false);
             }
         } catch (InterruptedException ex) {
