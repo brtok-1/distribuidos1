@@ -35,7 +35,7 @@ public class ControleLeilaoServidor extends Thread {
         }
 
         conexao = Conexao.getInstancia();
-        while (true) {
+        while (conexao.isServidorOnline()) {
             try {
                 ArrayList<Livro> estante = conexao.getEstante();
                 if ((!(estante.isEmpty()))
@@ -55,9 +55,11 @@ public class ControleLeilaoServidor extends Thread {
                     }
                 }
                 if (conexao.getStatusLeilao().equalsIgnoreCase("finalizando")) {
-
+                    ComunicacaoEnviaFinalLeilao finaliza = new ComunicacaoEnviaFinalLeilao(conexao.getLeilaoAtual());
+                    finaliza.start();
+                    conexao.setStatusLeilao("aguardando");
                 }
-                sleep(8000);
+                sleep(5000);
             } catch (InterruptedException ex) {
                 Logger.getLogger(ControleLeilaoServidor.class.getName()).log(Level.SEVERE, null, ex);
             } catch (Exception ex) {

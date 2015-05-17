@@ -34,7 +34,8 @@ public class JanelaLeilaoEncerrado extends javax.swing.JFrame {
             labelVendidoPara.setText("Não houveram lances.");
         } else {
             labelValorVenda.setText(leilao.getMaiorLance().getValorOferecidoString());
-            labelVendidoPara.setText(leilao.getMaiorLance().getIdPublicaQuemOfereceu());
+            labelVendidoPara.setText(leilao.getMaiorLance().getIdRedeQuemOfereceu() + " - "
+                    + leilao.getMaiorLance().getIdPublicaQuemOfereceu());
         }
     }
 
@@ -62,7 +63,7 @@ public class JanelaLeilaoEncerrado extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel1.setText("Código:");

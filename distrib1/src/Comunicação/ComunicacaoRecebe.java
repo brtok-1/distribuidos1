@@ -8,6 +8,7 @@ package Comunicação;
 import GUI.JanelaConsole;
 import GUI.JanelaCriaLeilao;
 import GUI.JanelaLeilaoAcontecendo;
+import GUI.JanelaLeilaoEncerrado;
 import GUI.JanelaLeilaoIniciado;
 import Modelo.Conexao;
 import Modelo.Lance;
@@ -166,15 +167,16 @@ public class ComunicacaoRecebe extends Thread {
                 InicioDoLeilao();
                 break;
 
-            //...
+            //Lance de leilão
             case 4:
                 JanelaConsole.escreveNaJanela(dh + " Recebeu: " + mensagem);
                 LanceDeLeilao();
                 break;
 
-            //...
+            //finalização de leilão
             case 11:
-
+                JanelaConsole.escreveNaJanela(dh + " Recebeu: " + mensagem);
+                FinalDeLeilao();
                 break;
 
             //finalização remota de leilão
@@ -274,12 +276,26 @@ public class ComunicacaoRecebe extends Thread {
     }
 
     public void FinalizarLeilaoAgora() {
-        usuarioLocal = Usuario.getInstancia();
-        if ((usuarioLocal.getIdPublica().equalsIgnoreCase(mensagemQuebrada[1]))
-                && usuarioLocal.getIdRede() == Integer.valueOf(mensagemQuebrada[2])) {
+        Livro l = conexao.getLeilaoAtual();
+        if ((l.getIdPublicaDonoLivro().equalsIgnoreCase(mensagemQuebrada[1]))
+                && l.getIdRedeDonoLivro() == Integer.valueOf(mensagemQuebrada[2])) {
             conexao = Conexao.getInstancia();
             conexao.setStatusLeilao("finalizando");
         }
+    }
+
+    public void FinalDeLeilao() {
+        conexao.setLeilaoAtual(null);
+        conexao.setStatusLeilao("andamento");
+        Lance lance1 = new Lance(mensagemQuebrada[9], Integer.parseInt(mensagemQuebrada[8]), 0);
+        lance1.setValorOferecidoString(mensagemQuebrada[7]);
+        Livro l = new Livro(mensagemQuebrada[1], mensagemQuebrada[3], mensagemQuebrada[2], 0);
+        l.setPrecoInicialString(mensagemQuebrada[4]);
+        l.setIdPublicaDonoLivro(mensagemQuebrada[5]);
+        l.setIdRedeDonoLivro(Integer.parseInt(mensagemQuebrada[6]));
+        l.setMaiorLance(lance1);
+        JanelaLeilaoEncerrado jle = new JanelaLeilaoEncerrado(l);
+        jle.setVisible(true);
     }
 
 }
