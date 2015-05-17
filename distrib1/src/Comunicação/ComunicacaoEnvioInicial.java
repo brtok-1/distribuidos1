@@ -30,7 +30,6 @@ public class ComunicacaoEnvioInicial extends MinhaComunicacaoEnvio {
             ConfiguraConexaoMulticast();
             while (conexao.getStatusLeilao().equalsIgnoreCase("aguardando") || conexao.getStatusLeilao().equalsIgnoreCase("tempoAdicional")) {
                 EnvioInicial();
-                conexao = Conexao.getInstancia();
             }
         } catch (Exception ex) {
             Logger.getLogger(ComunicacaoEnvioInicial.class.getName()).log(Level.SEVERE, null, ex);

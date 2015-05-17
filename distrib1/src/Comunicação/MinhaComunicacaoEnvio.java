@@ -36,6 +36,11 @@ public class MinhaComunicacaoEnvio extends Thread {
         serverSocket = new DatagramSocket();
     }
     
+    public void ConfConexaoSimplificado() throws Exception {
+        conexao = Conexao.getInstancia();
+        ConfiguraConexaoMulticast();
+    }
+    
     public void setMensagem(String mensagem) {
         this.mensagem = mensagem;
     }    
@@ -50,8 +55,10 @@ public class MinhaComunicacaoEnvio extends Thread {
         serverSocket.send(msgPacket);
     }
     
+    @Override
     public void run() {
         try {
+            ConfConexaoSimplificado();
             EnviaMensagem();
         } catch (Exception ex) {
             Logger.getLogger(MinhaComunicacaoEnvio.class.getName()).log(Level.SEVERE, null, ex);

@@ -218,6 +218,7 @@ public class ComunicacaoRecebe extends Thread {
 
     //Adiciona o livro na fila para que sejam leiloados
     public void AdicionaLivroEstante() throws Exception {
+        conexao = Conexao.getInstancia();
         ArrayList<Livro> estante = conexao.getEstante();
         Livro livro = new Livro();
         livro.setCodigo(mensagemQuebrada[1]);
@@ -254,12 +255,20 @@ public class ComunicacaoRecebe extends Thread {
         if (conexao.getLeilaoAtual().getCodigo().equalsIgnoreCase(mensagemQuebrada[1])) {
             Lance lance = new Lance(mensagemQuebrada[3], Integer.parseInt(mensagemQuebrada[4]), System.currentTimeMillis());
             lance.setValorOferecidoString(mensagemQuebrada[2]);
-            if (conexao.getLeilaoAtual().getMaiorLance().getValorOferecido() < lance.getValorOferecido()) {
+            if (conexao.getLeilaoAtual().getMaiorLance() == null) {
                 if (usuarioLocal.getPapel().equalsIgnoreCase("servidor")) {
                     conexao.getLeilaoAtual().setMaiorLance(lance);
                 }
                 JanelaLeilaoAcontecendo jla = new JanelaLeilaoAcontecendo(lance);
                 jla.setVisible(true);
+            } else {
+                if (conexao.getLeilaoAtual().getMaiorLance().getValorOferecido() < lance.getValorOferecido()) {
+                    if (usuarioLocal.getPapel().equalsIgnoreCase("servidor")) {
+                        conexao.getLeilaoAtual().setMaiorLance(lance);
+                    }
+                    JanelaLeilaoAcontecendo jla = new JanelaLeilaoAcontecendo(lance);
+                    jla.setVisible(true);
+                }
             }
         }
     }
@@ -271,5 +280,5 @@ public class ComunicacaoRecebe extends Thread {
             conexao.setStatusLeilao("finalizando");
         }
     }
-    
+
 }

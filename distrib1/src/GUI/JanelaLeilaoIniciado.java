@@ -9,6 +9,8 @@ import Comunicação.ComunicacaoEnviaLance;
 import Modelo.Lance;
 import Modelo.Livro;
 import Modelo.Usuario;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -71,7 +73,7 @@ public class JanelaLeilaoIniciado extends javax.swing.JFrame {
         labelLance = new javax.swing.JLabel();
         txtValorLance = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel1.setText("Código:");
@@ -190,6 +192,7 @@ public class JanelaLeilaoIniciado extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void botaoNaoParticiparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoNaoParticiparActionPerformed
@@ -197,14 +200,20 @@ public class JanelaLeilaoIniciado extends javax.swing.JFrame {
     }//GEN-LAST:event_botaoNaoParticiparActionPerformed
 
     private void botaoDarLanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoDarLanceActionPerformed
-        if (Double.parseDouble(txtValorLance.getText().replaceAll(",", "\\.")) > livro.getPrecoInicial()) {
-            Usuario usuarioLocal = Usuario.getInstancia();
-            Lance lance = new Lance(usuarioLocal.getIdPublica(), usuarioLocal.getIdRede(), 0);
-            ComunicacaoEnviaLance envia = new ComunicacaoEnviaLance(lance, labelCodigo.getText());
-            envia.start();
-            JOptionPane.showMessageDialog(null, "Lance efetuado!");
-        } else {
-            JOptionPane.showMessageDialog(null, "O valor do lance deve ser maior que o valor atual!");
+        try {
+            if (Double.parseDouble(txtValorLance.getText().replaceAll(",", "\\.")) > livro.getPrecoInicial()) {
+                Usuario usuarioLocal = Usuario.getInstancia();
+                Lance novoLance = new Lance(usuarioLocal.getIdPublica(), usuarioLocal.getIdRede(), 0);
+                novoLance.setValorOferecidoString(txtValorLance.getText());
+                ComunicacaoEnviaLance envia = new ComunicacaoEnviaLance(novoLance, labelCodigo.getText());
+                envia.start();
+                JOptionPane.showMessageDialog(null, "Lance efetuado!");
+                dispose();
+            } else {
+                JOptionPane.showMessageDialog(null, "O valor do lance deve ser maior que o valor atual!");
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(JanelaLeilaoIniciado.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_botaoDarLanceActionPerformed
 

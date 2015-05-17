@@ -10,6 +10,8 @@ import Modelo.Conexao;
 import Modelo.Lance;
 import Modelo.Livro;
 import Modelo.Usuario;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -19,7 +21,7 @@ import javax.swing.JOptionPane;
 public class JanelaLeilaoAcontecendo extends javax.swing.JFrame {
 
     Lance lance;
-    
+
     public JanelaLeilaoAcontecendo(Lance lance) {
         initComponents();
         this.lance = lance;
@@ -31,15 +33,17 @@ public class JanelaLeilaoAcontecendo extends javax.swing.JFrame {
         labelMaiorLance.setText(lance.getValorOferecidoString());
         labelNome.setText(leilaoAtual.getNome());
         labelPrecoInicial.setText(leilaoAtual.getPrecoInicialString());
-        labelTempoRestante.setText(String.valueOf(leilaoAtual.getTempoTotalLeilao()-lance.getTempoNaHora()));
+        labelTempoRestante.setText(String.valueOf(leilaoAtual.getTempoTotalLeilao() - lance.getTempoNaHora()));
         if ((usuario.getIdPublica().equalsIgnoreCase(lance.getIdPublicaQuemOfereceu())) && usuario.getIdRede() == lance.getIdRedeQuemOfereceu()) {
             botaoDarLance.setVisible(false);
             botaoNaoDarLance.setText("OK");
+            labelLance.setVisible(false);
+            txtValorLance.setVisible(false);
         } else {
             botaoFinalizar.setVisible(false);
         }
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -196,17 +200,24 @@ public class JanelaLeilaoAcontecendo extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void botaoDarLanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoDarLanceActionPerformed
-        if (Double.parseDouble(txtValorLance.getText().replaceAll(",", "\\.")) > lance.getValorOferecido()) {    
-            Usuario usuarioLocal = Usuario.getInstancia();
-            Lance lance = new Lance(usuarioLocal.getIdPublica(), usuarioLocal.getIdRede(), 0);
-            ComunicacaoEnviaLance envia = new ComunicacaoEnviaLance(lance, labelCodigo.getText());
-            envia.start();
-            JOptionPane.showMessageDialog(null, "Lance efetuado!");
-        } else {
-            JOptionPane.showMessageDialog(null, "O valor do lance deve ser maior que o valor atual!");
+        try {
+            if (Double.parseDouble(txtValorLance.getText().replaceAll(",", "\\.")) > lance.getValorOferecido()) {
+                Usuario usuarioLocal = Usuario.getInstancia();
+                Lance novoLance = new Lance(usuarioLocal.getIdPublica(), usuarioLocal.getIdRede(), 0);
+                novoLance.setValorOferecidoString(txtValorLance.getText());
+                ComunicacaoEnviaLance envia = new ComunicacaoEnviaLance(novoLance, labelCodigo.getText());
+                envia.start();
+                JOptionPane.showMessageDialog(null, "Lance efetuado!");
+                dispose();
+            } else {
+                JOptionPane.showMessageDialog(null, "O valor do lance deve ser maior que o valor atual!");
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(JanelaLeilaoAcontecendo.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_botaoDarLanceActionPerformed
 
@@ -230,5 +241,5 @@ public class JanelaLeilaoAcontecendo extends javax.swing.JFrame {
     private javax.swing.JLabel labelTempoRestante;
     private javax.swing.JTextField txtValorLance;
     // End of variables declaration//GEN-END:variables
-    
+
 }

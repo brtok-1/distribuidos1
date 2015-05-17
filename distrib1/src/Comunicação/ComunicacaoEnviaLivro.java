@@ -5,6 +5,7 @@
  */
 package Comunicação;
 
+import Modelo.Conexao;
 import Modelo.Livro;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -17,7 +18,9 @@ public class ComunicacaoEnviaLivro extends MinhaComunicacaoEnvio {
 
     private Livro livro;
     
-    public ComunicacaoEnviaLivro(Livro livro) {
+    public ComunicacaoEnviaLivro(Livro livro) throws Exception {
+        conexao = Conexao.getInstancia();
+        ConfiguraConexaoMulticast();
         this.livro = livro;
     }
 

@@ -29,17 +29,15 @@ public class ControladoraThreads extends Thread {
                 JanelaCriaLeilao jcl = new JanelaCriaLeilao();
                 jcl.setVisible(true);
                 jcl.repaint();
-                Thread.sleep(3000);
+                Thread.sleep(1000);
                 ComunicacaoRecebe recebe = new ComunicacaoRecebe();
                 recebe.start();
                 ComunicacaoEnvioInicial envio = new ComunicacaoEnvioInicial();
                 envio.start();
                 Conexao c = Conexao.getInstancia();
                 while (c.isServidorOnline()) {
-                    c = Conexao.getInstancia();
-                    Thread.sleep(3000);
+                    Thread.sleep(8000);
                 }
-                c = Conexao.getInstancia();
                 jcl.dispose();
                 Usuario usuario = Usuario.getInstancia();
                 sleep(10000);

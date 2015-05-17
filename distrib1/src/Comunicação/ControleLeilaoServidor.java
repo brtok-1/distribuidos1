@@ -33,23 +33,19 @@ public class ControleLeilaoServidor extends Thread {
         } catch (InterruptedException ex) {
             Logger.getLogger(ControleLeilaoServidor.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         conexao = Conexao.getInstancia();
         while (true) {
             try {
-                if ((!(conexao.getEstante().isEmpty()))
+                ArrayList<Livro> estante = conexao.getEstante();
+                if ((!(estante.isEmpty()))
                         && (conexao.getStatusLeilao().equalsIgnoreCase("andamento"))) {
-                    ArrayList<Livro> estante = conexao.getEstante();
                     livro = estante.get(0);
+                    ComunicacaoEnviaLeilao leiloa = new ComunicacaoEnviaLeilao(livro);
+                    leiloa.start();
+                    conexao.setStatusLeilao("leiloando");
                     estante.remove(0);
                     conexao.setEstante(estante);
-                    MinhaComunicacaoEnvio envia = new MinhaComunicacaoEnvio();
-                    conexao.setStatusLeilao("leiloando");
-                    envia.setMensagem("3#" + livro.getCodigo() + "#" + livro.getDescricao()
-                            + "#" + livro.getNome() + "#" + livro.getPrecoInicial() + "#"
-                            + String.valueOf(System.currentTimeMillis() + livro.getTempoTotalLeilao())
-                            + "#" + System.currentTimeMillis() + "#" + livro.getIdPublicaDonoLivro()
-                            + "#" + livro.getIdRedeDonoLivro());
                 }
                 while (conexao.getStatusLeilao().equalsIgnoreCase("leiloando")) {
                     sleep(1000);
@@ -59,32 +55,17 @@ public class ControleLeilaoServidor extends Thread {
                     }
                 }
                 if (conexao.getStatusLeilao().equalsIgnoreCase("finalizando")) {
-                    
+
                 }
+                sleep(8000);
             } catch (InterruptedException ex) {
+                Logger.getLogger(ControleLeilaoServidor.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (Exception ex) {
                 Logger.getLogger(ControleLeilaoServidor.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
 
-//metodo tempo leilao
-//    boolean naoAcabou = true;
-//                while (naoAcabou) {
-//                    try {
-//                        sleep(1000);
-//                        //tempoTotal = leilao.getTempoNoInicio() + leilao.getTempoTotalLeilao();
-//                        horarioAgora = System.currentTimeMillis();
-//                        if (horarioAgora >= tempoTotal) {
-//                            //ENCERRAR O LEILÃO
-//                            naoAcabou = false;
-//                    //JanelaLeilaoEncerrado jle = new JanelaLeilaoEncerrado(leilao);
-//                            //jle.setVisible(true);
-//                            //jle.repaint();
-//                        }
-//                    } catch (InterruptedException ex) {
-//                        Logger.getLogger(ControleLeilaoServidor.class.getName()).log(Level.SEVERE, null, ex);
-//                    }
-//                }
     public void tempoRestanteLeilaoEmMinutos() {
 
     }
