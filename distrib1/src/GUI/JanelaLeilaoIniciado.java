@@ -6,6 +6,8 @@
 package GUI;
 
 import Comunicação.ComunicacaoEnviaLance;
+import Comunicação.MinhaComunicacaoEnvio;
+import Modelo.Conexao;
 import Modelo.Lance;
 import Modelo.Livro;
 import Modelo.Usuario;
@@ -43,8 +45,12 @@ public class JanelaLeilaoIniciado extends javax.swing.JFrame {
             txtValorLance.setVisible(false);
             botaoDarLance.setVisible(false);
             botaoNaoParticipar.setText("OK");
-            EncerrarLeilao er = EncerrarLeilao.getInstancia();
-            er.setVisible(true);
+            //EncerrarLeilao er = EncerrarLeilao.getInstancia();
+            //er.setVisible(true);
+        }
+        else
+        {
+            btnEncerrarLeilao.setVisible(false);
         }
     }
 
@@ -72,6 +78,7 @@ public class JanelaLeilaoIniciado extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         labelLance = new javax.swing.JLabel();
         txtValorLance = new javax.swing.JTextField();
+        btnEncerrarLeilao = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -120,6 +127,13 @@ public class JanelaLeilaoIniciado extends javax.swing.JFrame {
 
         labelLance.setText("Lance:");
 
+        btnEncerrarLeilao.setText("Encerrar Meu Leilão Agora");
+        btnEncerrarLeilao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEncerrarLeilaoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -127,32 +141,32 @@ public class JanelaLeilaoIniciado extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 268, Short.MAX_VALUE)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 322, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(botaoDarLance, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(botaoNaoParticipar))
                     .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(labelPrecoInicial)
-                                    .addComponent(labelCodigo)
-                                    .addComponent(labelNome)
-                                    .addComponent(labelDescricao)
-                                    .addComponent(labelTempoRestante)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(labelLance)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtValorLance, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                            .addComponent(labelPrecoInicial)
+                            .addComponent(labelCodigo)
+                            .addComponent(labelNome)
+                            .addComponent(labelDescricao)
+                            .addComponent(labelTempoRestante))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(labelLance)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtValorLance, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnEncerrarLeilao)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -183,7 +197,8 @@ public class JanelaLeilaoIniciado extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtValorLance, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labelLance))
+                    .addComponent(labelLance)
+                    .addComponent(btnEncerrarLeilao))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botaoNaoParticipar)
@@ -217,9 +232,23 @@ public class JanelaLeilaoIniciado extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_botaoDarLanceActionPerformed
 
+    private void btnEncerrarLeilaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEncerrarLeilaoActionPerformed
+        Usuario u = Usuario.getInstancia();
+        if (u.getPapel().equalsIgnoreCase("servidor")) {
+            Conexao c = Conexao.getInstancia();
+            c.setStatusLeilao("finalizando");
+        } else {
+            MinhaComunicacaoEnvio envia = new MinhaComunicacaoEnvio();
+            envia.setMensagem("15#" + u.getIdPublica() + "#" + u.getIdRede());
+            envia.start();
+        }
+        setVisible(false);
+    }//GEN-LAST:event_btnEncerrarLeilaoActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botaoDarLance;
     private javax.swing.JButton botaoNaoParticipar;
+    private javax.swing.JButton btnEncerrarLeilao;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

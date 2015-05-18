@@ -26,38 +26,36 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jLabel9" pref="268" max="32767" attributes="0"/>
+                  <Component id="jLabel9" pref="322" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="botaoDarLance" min="-2" pref="110" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="botaoNaoParticipar" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="jLabel7" max="32767" attributes="0"/>
+                          <Component id="jLabel1" max="32767" attributes="0"/>
+                          <Component id="jLabel2" alignment="1" max="32767" attributes="0"/>
+                          <Component id="jLabel3" alignment="1" max="32767" attributes="0"/>
+                          <Component id="jLabel4" alignment="1" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="jLabel7" max="32767" attributes="0"/>
-                                  <Component id="jLabel1" max="32767" attributes="0"/>
-                                  <Component id="jLabel2" alignment="1" max="32767" attributes="0"/>
-                                  <Component id="jLabel3" alignment="1" max="32767" attributes="0"/>
-                                  <Component id="jLabel4" alignment="1" max="32767" attributes="0"/>
-                              </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="labelPrecoInicial" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="labelCodigo" min="-2" max="-2" attributes="0"/>
-                                  <Component id="labelNome" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="labelDescricao" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="labelTempoRestante" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="labelLance" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="txtValorLance" min="-2" pref="74" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="labelPrecoInicial" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="labelCodigo" min="-2" max="-2" attributes="0"/>
+                          <Component id="labelNome" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="labelDescricao" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="labelTempoRestante" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="labelLance" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="txtValorLance" min="-2" pref="74" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="btnEncerrarLeilao" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -98,6 +96,7 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="txtValorLance" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="labelLance" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnEncerrarLeilao" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -196,6 +195,14 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtValorLance">
+    </Component>
+    <Component class="javax.swing.JButton" name="btnEncerrarLeilao">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Encerrar Meu Leil&#xe3;o Agora"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEncerrarLeilaoActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

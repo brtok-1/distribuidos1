@@ -21,7 +21,7 @@ import java.util.logging.Logger;
  *
  * @author Bruno
  */
-public class MinhaComunicacaoEnvio extends Thread {
+public class MinhaComunicacaoEnvio extends Thread{
 
     Usuario usuario;
     Conexao conexao;
@@ -32,13 +32,9 @@ public class MinhaComunicacaoEnvio extends Thread {
 
     //Configura a conexao multicast
     public void ConfiguraConexaoMulticast() throws Exception {
-        address = InetAddress.getByName(conexao.getINET_ADDR());
-        serverSocket = new DatagramSocket();
-    }
-    
-    public void ConfConexaoSimplificado() throws Exception {
         conexao = Conexao.getInstancia();
-        ConfiguraConexaoMulticast();
+        serverSocket = new DatagramSocket();
+        address = InetAddress.getByName(conexao.getINET_ADDR());
     }
     
     public void setMensagem(String mensagem) {
@@ -58,7 +54,7 @@ public class MinhaComunicacaoEnvio extends Thread {
     @Override
     public void run() {
         try {
-            ConfConexaoSimplificado();
+            ConfiguraConexaoMulticast();
             EnviaMensagem();
         } catch (Exception ex) {
             Logger.getLogger(MinhaComunicacaoEnvio.class.getName()).log(Level.SEVERE, null, ex);

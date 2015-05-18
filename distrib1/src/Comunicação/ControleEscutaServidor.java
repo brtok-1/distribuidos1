@@ -30,6 +30,7 @@ public class ControleEscutaServidor extends Thread {
             conexao.setUltimoHelloServer(System.currentTimeMillis()+10000);
             Conexao.setInstancia(conexao);
             while (conexao.isServidorOnline()) {
+                sleep(9000);
                 if (System.currentTimeMillis() > (conexao.getUltimoHelloServer() + 10000)) {
                     conexao.setServidorOnline(false);
                     Conexao.setInstancia(conexao);
