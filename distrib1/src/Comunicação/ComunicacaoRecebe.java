@@ -247,8 +247,18 @@ public class ComunicacaoRecebe extends Thread {
         conexao = Conexao.getInstancia();
         conexao.setLeilaoAtual(livro);
         conexao.setStatusLeilao("leiloando");
-        JanelaLeilaoIniciado jli = new JanelaLeilaoIniciado(livro);
-        jli.setVisible(true);
+        //JanelaLeilaoIniciado jli = new JanelaLeilaoIniciado(livro);
+        //jli.setVisible(true);
+        Lance lance = new Lance();
+        lance.setIdPublicaQuemOfereceu(usuarioLocal.getIdPublica());
+        lance.setIdRedeQuemOfereceu(usuarioLocal.getIdRede());
+        lance.setTempoNaHora(0);
+        lance.setValorOferecido(0);
+        lance.setValorOferecidoString("0");
+        JanelaLeilaoAcontecendo jla = JanelaLeilaoAcontecendo.getInstancia();
+        jla.setLance(lance);
+        jla.AtualizaJanela();
+        jla.setVisible(true);
     }
 
     public void LanceDeLeilao() {
@@ -261,8 +271,12 @@ public class ComunicacaoRecebe extends Thread {
                 if (usuarioLocal.getPapel().equalsIgnoreCase("servidor")) {
                     conexao.getLeilaoAtual().setMaiorLance(lance);
                 }
-                JanelaLeilaoAcontecendo jla = new JanelaLeilaoAcontecendo(lance);
-                jla.setVisible(true);
+                //JanelaLeilaoAcontecendo jla = new JanelaLeilaoAcontecendo(lance);
+                JanelaLeilaoAcontecendo jla = JanelaLeilaoAcontecendo.getInstancia();
+                jla.setLance(lance);
+                jla.NotificaoNovoLance();
+                jla.AtualizaJanela();
+                //jla.setVisible(true);
             } else {
                 if (conexao.getLeilaoAtual().getMaiorLance().getValorOferecido() < lance.getValorOferecido()) {
                     if (usuarioLocal.getPapel().equalsIgnoreCase("servidor")) {

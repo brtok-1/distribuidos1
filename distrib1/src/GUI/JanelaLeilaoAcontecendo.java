@@ -21,7 +21,13 @@ import javax.swing.JOptionPane;
  */
 public class JanelaLeilaoAcontecendo extends javax.swing.JFrame {
 
-    Lance lance;
+    private Lance lance;
+    private static JanelaLeilaoAcontecendo instancia;
+    
+    public JanelaLeilaoAcontecendo()
+    {
+        
+    }
 
     public JanelaLeilaoAcontecendo(Lance lance) {
         initComponents();
@@ -43,6 +49,34 @@ public class JanelaLeilaoAcontecendo extends javax.swing.JFrame {
         } else {
             botaoFinalizar.setVisible(false);
         }
+    }
+    
+    public void AtualizaJanela()
+    {
+        initComponents();
+        Usuario usuario = Usuario.getInstancia();
+        setTitle(usuario.getIdPublica() + " - O livro recebeu um lance!");
+        Livro leilaoAtual = Conexao.getInstancia().getLeilaoAtual();
+        labelCodigo.setText(leilaoAtual.getCodigo());
+        labelDescricao.setText(leilaoAtual.getDescricao());
+        labelMaiorLance.setText(lance.getValorOferecidoString());
+        labelNome.setText(leilaoAtual.getNome());
+        labelPrecoInicial.setText(leilaoAtual.getPrecoInicialString());
+        labelTempoRestante.setText(String.valueOf(leilaoAtual.getTempoTotalLeilao() - lance.getTempoNaHora()));
+        if ((usuario.getIdPublica().equalsIgnoreCase(lance.getIdPublicaQuemOfereceu())) && usuario.getIdRede() == lance.getIdRedeQuemOfereceu()) {
+            botaoDarLance.setVisible(false);
+            botaoNaoDarLance.setText("OK");
+            labelLance.setVisible(false);
+            txtValorLance.setVisible(false);
+        } else {
+            botaoFinalizar.setVisible(false);
+        }
+    }
+    
+    //Notifica o participante quando um novo lance é recebido
+    public void NotificaoNovoLance()
+    {
+        JOptionPane.showMessageDialog(null, "Novo Lance de " + lance.getIdPublicaQuemOfereceu());
     }
 
     /**
@@ -202,7 +236,7 @@ public class JanelaLeilaoAcontecendo extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtValorLance, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(labelLance))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(9, 9, 9)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botaoFinalizar)
                     .addComponent(botaoDarLance, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -222,8 +256,8 @@ public class JanelaLeilaoAcontecendo extends javax.swing.JFrame {
                 novoLance.setValorOferecidoString(txtValorLance.getText());
                 ComunicacaoEnviaLance envia = new ComunicacaoEnviaLance(novoLance, labelCodigo.getText());
                 envia.start();
-                JOptionPane.showMessageDialog(null, "Lance efetuado!");
-                dispose();
+                JOptionPane.showMessageDialog(null, "Lance efetuado com sucesso!");
+                //dispose();
             } else {
                 JOptionPane.showMessageDialog(null, "O valor do lance deve ser maior que o valor atual!");
             }
@@ -271,5 +305,27 @@ public class JanelaLeilaoAcontecendo extends javax.swing.JFrame {
     private javax.swing.JLabel labelTempoRestante;
     private javax.swing.JTextField txtValorLance;
     // End of variables declaration//GEN-END:variables
+
+    public static JanelaLeilaoAcontecendo getInstancia() {
+        if(instancia == null)
+        {
+            instancia = new JanelaLeilaoAcontecendo();
+        }
+        return instancia;
+    }
+
+    public static void setInstancia(JanelaLeilaoAcontecendo instancia) {
+        JanelaLeilaoAcontecendo.instancia = instancia;
+    }
+
+    public Lance getLance() {
+        return lance;
+    }
+
+    public void setLance(Lance lance) {
+        this.lance = lance;
+    }
+    
+    
 
 }
