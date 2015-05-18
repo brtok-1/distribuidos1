@@ -215,7 +215,6 @@ public class ComunicacaoRecebe extends Thread {
     //Escuta Hello Servidor
     public void HelloServer() throws Exception {
         conexao.setUltimoHelloServer(System.currentTimeMillis());
-        Conexao.setInstancia(conexao);
     }
 
     //Adiciona o livro na fila para que sejam leiloados
