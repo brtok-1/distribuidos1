@@ -250,8 +250,8 @@ public class ComunicacaoRecebe extends Thread {
         //JanelaLeilaoIniciado jli = new JanelaLeilaoIniciado(livro);
         //jli.setVisible(true);
         Lance lance = new Lance();
-        lance.setIdPublicaQuemOfereceu(usuarioLocal.getIdPublica());
-        lance.setIdRedeQuemOfereceu(usuarioLocal.getIdRede());
+        lance.setIdPublicaQuemOfereceu(livro.getIdPublicaDonoLivro());
+        lance.setIdRedeQuemOfereceu(livro.getIdRedeDonoLivro());
         lance.setTempoNaHora(0);
         lance.setValorOferecido(0);
         lance.setValorOferecidoString("0");

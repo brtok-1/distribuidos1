@@ -30,7 +30,7 @@ public class ComunicacaoEnviaFinalLeilao extends MinhaComunicacaoEnvio {
         try {
             setMensagem("11#" + livro.getCodigo() + "#" + livro.getDescricao() + "#" + livro.getNome()
                     + "#" + livro.getPrecoInicial() + "#" + livro.getIdPublicaDonoLivro() + "#" 
-                    + livro.getIdRedeDonoLivro() + "#" + livro.getMaiorLance() + "#" 
+                    + livro.getIdRedeDonoLivro() + "#" + livro.getMaiorLance().getValorOferecidoString() + "#" 
                     + livro.getMaiorLance().getIdRedeQuemOfereceu() + "#"
                     + livro.getMaiorLance().getIdPublicaQuemOfereceu());
             EnviaMensagem();

@@ -26,7 +26,7 @@ public class JanelaLeilaoAcontecendo extends javax.swing.JFrame {
     
     public JanelaLeilaoAcontecendo()
     {
-        
+        initComponents();
     }
 
     public JanelaLeilaoAcontecendo(Lance lance) {
@@ -52,8 +52,8 @@ public class JanelaLeilaoAcontecendo extends javax.swing.JFrame {
     }
     
     public void AtualizaJanela()
-    {
-        initComponents();
+    {        
+        LimparCampos();
         Usuario usuario = Usuario.getInstancia();
         setTitle(usuario.getIdPublica() + " - O livro recebeu um lance!");
         Livro leilaoAtual = Conexao.getInstancia().getLeilaoAtual();
@@ -71,6 +71,17 @@ public class JanelaLeilaoAcontecendo extends javax.swing.JFrame {
         } else {
             botaoFinalizar.setVisible(false);
         }
+        //this.repaint();
+    }
+    
+    public void LimparCampos()
+    {
+        labelCodigo.setText(null);
+        labelDescricao.setText(null);
+        labelMaiorLance.setText(null);
+        labelNome.setText(null);
+        labelPrecoInicial.setText(null);
+        labelTempoRestante.setText(null);
     }
     
     //Notifica o participante quando um novo lance é recebido
