@@ -292,8 +292,6 @@ public class JanelaLeilaoAcontecendo extends javax.swing.JFrame {
             envia.start();
         }
         setVisible(false);
-        EncerrarLeilao el = EncerrarLeilao.getInstancia();
-        el.setVisible(false);
     }//GEN-LAST:event_botaoFinalizarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
