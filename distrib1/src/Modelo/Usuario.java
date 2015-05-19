@@ -13,8 +13,8 @@ public class Usuario {
     
     private int idRede;
     private String idPublica;
-    private String chavePublica;
-    private String chavePrivada;
+    private String chavePublicaString;
+    private String chavePrivadaString;
     private String papel;
     
     private static Usuario instancia;
@@ -27,8 +27,8 @@ public class Usuario {
     public Usuario(int idRede, String idPublica, String chavePublica, String chavePrivada, String papel) {
         this.idRede = idRede;
         this.idPublica = idPublica;
-        this.chavePublica = chavePublica;
-        this.chavePrivada = chavePrivada;
+        this.chavePublicaString = chavePublica;
+        this.chavePrivadaString = chavePrivada;
         this.papel = papel;
     }   
 
@@ -48,21 +48,21 @@ public class Usuario {
         this.idPublica = idPublica;
     }
 
-    public String getChavePublica() {
-        return chavePublica;
+    public String getChavePublicaString() {
+        return chavePublicaString;
     }
 
-    public void setChavePublica(String chavePublica) {
-        this.chavePublica = chavePublica;
+    public void setChavePublicaString(String chavePublicaString) {
+        this.chavePublicaString = chavePublicaString;
     }
 
-    public String getChavePrivada() {
-        return chavePrivada;
+    public String getChavePrivadaString() {
+        return chavePrivadaString;
     }
 
-    public void setChavePrivada(String chavePrivada) {
-        this.chavePrivada = chavePrivada;
-    }
+    public void setChavePrivadaString(String chavePrivadaString) {
+        this.chavePrivadaString = chavePrivadaString;
+    }  
 
     public String getPapel() {
         return papel;

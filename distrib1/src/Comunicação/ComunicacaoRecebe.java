@@ -66,7 +66,7 @@ public class ComunicacaoRecebe extends Thread {
     }
 
     public void RecebeParticipantes() throws Exception {
-        Usuario usuario = new Usuario(Integer.parseInt(mensagemQuebrada[2]), mensagemQuebrada[1], null, null, mensagemQuebrada[3]);
+        Usuario usuario = new Usuario(Integer.parseInt(mensagemQuebrada[2]), mensagemQuebrada[1], null, mensagemQuebrada[4], mensagemQuebrada[3]);
         boolean naoAchou = true;
         for (Usuario us : usuarios) {
             if (us.getIdPublica().equalsIgnoreCase(usuario.getIdPublica()) && us.getIdRede() == usuario.getIdRede()) {
@@ -115,6 +115,10 @@ public class ComunicacaoRecebe extends Thread {
             participantesTempoAdicional = 0;
             if (usuarioLocal.getPapel().equalsIgnoreCase("servidor")) {
                 JanelaConsole.escreveNaJanela("Característica já definida: SERVIDOR");
+                
+                //Salva os usuários
+                conexao.setParticipantes(usuarios);
+                
                 ControleHelloServidor hello = new ControleHelloServidor();
                 hello.start();
                 ControleLeilaoServidor leilao = new ControleLeilaoServidor();

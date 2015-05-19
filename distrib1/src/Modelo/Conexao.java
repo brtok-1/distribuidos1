@@ -20,6 +20,7 @@ public class Conexao {
     private long ultimoHelloServer;
     private boolean servidorOnline;
     private ArrayList<Livro> estante = new ArrayList<>();
+    private ArrayList<Usuario> participantes = new ArrayList<>();
     private Livro leilaoAtual;
     
     private static Conexao instancia;
@@ -108,5 +109,15 @@ public class Conexao {
     public void setLeilaoAtual(Livro leilaoAtual) {
         this.leilaoAtual = leilaoAtual;
     }
+
+    public ArrayList<Usuario> getParticipantes() {
+        return participantes;
+    }
+
+    public void setParticipantes(ArrayList<Usuario> participantes) {
+        this.participantes = participantes;
+    }
+    
+    
     
 }
