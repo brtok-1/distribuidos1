@@ -27,11 +27,9 @@ public class ComunicacaoEnviaLeilao extends MinhaComunicacaoEnvio {
     @Override
     public void run() {
         try {
-            mensagem = "3#" + livro.getCodigo() + "#" + livro.getDescricao() + "#" + livro.getNome() 
-                    + "#" + livro.getPrecoInicial() + "#" 
-                    + String.valueOf(System.currentTimeMillis()+ livro.getTempoTotalLeilao())
-                    + "#" + System.currentTimeMillis() + "#" + livro.getIdPublicaDonoLivro()
-                    + "#" + livro.getIdRedeDonoLivro();
+            mensagem = "3#" + livro.getCodigo() + "#" + livro.getDescricao() + "#" + livro.getNome() + "#"
+                    + livro.getPrecoInicial() + "#" + livro.getTempoTotalLeilao() + "#" + System.currentTimeMillis()
+                    + "#" + livro.getIdPublicaDonoLivro() + "#" + livro.getIdRedeDonoLivro();
             EnviaMensagem();
         } catch (Exception ex) {
             Logger.getLogger(ComunicacaoEnviaLeilao.class.getName()).log(Level.SEVERE, null, ex);

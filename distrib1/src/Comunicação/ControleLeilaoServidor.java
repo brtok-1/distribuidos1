@@ -71,18 +71,5 @@ public class ControleLeilaoServidor extends Thread {
     public void tempoRestanteLeilaoEmMinutos() {
 
     }
-
-    public void criaLeilao() {
-        usuario = Usuario.getInstancia();
-
-        if (usuario.getPapel().equalsIgnoreCase("servidor")) {
-
-        } else {
-
-        }
-    }
-
-    public void salvaLivro() {
-
-    }
+    
 }

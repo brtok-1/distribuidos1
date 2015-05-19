@@ -6,7 +6,6 @@
 package Comunicação;
 
 import Modelo.Conexao;
-import Modelo.Lance;
 import Modelo.Livro;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,7 +17,7 @@ import java.util.logging.Logger;
 public class ComunicacaoEnviaFinalLeilao extends MinhaComunicacaoEnvio {
 
     private Livro livro;
-    
+
     public ComunicacaoEnviaFinalLeilao(Livro livro) throws Exception {
         conexao = Conexao.getInstancia();
         ConfiguraConexaoMulticast();
@@ -28,11 +27,17 @@ public class ComunicacaoEnviaFinalLeilao extends MinhaComunicacaoEnvio {
     @Override
     public void run() {
         try {
-            setMensagem("11#" + livro.getCodigo() + "#" + livro.getDescricao() + "#" + livro.getNome()
-                    + "#" + livro.getPrecoInicial() + "#" + livro.getIdPublicaDonoLivro() + "#" 
-                    + livro.getIdRedeDonoLivro() + "#" + livro.getMaiorLance().getValorOferecidoString() + "#" 
-                    + livro.getMaiorLance().getIdRedeQuemOfereceu() + "#"
-                    + livro.getMaiorLance().getIdPublicaQuemOfereceu());
+            if (livro.getMaiorLance() == null) {
+                setMensagem("11#" + livro.getCodigo() + "#" + livro.getDescricao() + "#" + livro.getNome()
+                        + "#" + livro.getPrecoInicial() + "#" + livro.getIdPublicaDonoLivro() + "#"
+                        + livro.getIdRedeDonoLivro() + "#-1#-1#ninguem");
+            } else {
+                setMensagem("11#" + livro.getCodigo() + "#" + livro.getDescricao() + "#" + livro.getNome()
+                        + "#" + livro.getPrecoInicial() + "#" + livro.getIdPublicaDonoLivro() + "#"
+                        + livro.getIdRedeDonoLivro() + "#" + livro.getMaiorLance().getValorOferecidoString() + "#"
+                        + livro.getMaiorLance().getIdRedeQuemOfereceu() + "#"
+                        + livro.getMaiorLance().getIdPublicaQuemOfereceu());
+            }
             EnviaMensagem();
         } catch (Exception ex) {
             Logger.getLogger(ComunicacaoEnviaFinalLeilao.class.getName()).log(Level.SEVERE, null, ex);
