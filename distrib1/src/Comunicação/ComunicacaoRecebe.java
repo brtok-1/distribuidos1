@@ -234,7 +234,7 @@ public class ComunicacaoRecebe extends Thread {
         livro.setNome(mensagemQuebrada[3]);
         livro.setPrecoInicial(Double.parseDouble(mensagemQuebrada[4]));
         livro.setTempoTotalLeilao(Long.parseLong(mensagemQuebrada[5]));
-        livro.setTempoNoInicio(Long.parseLong(mensagemQuebrada[6]));
+        livro.setTempoNoInicio(System.currentTimeMillis());
         livro.setIdPublicaDonoLivro(mensagemQuebrada[7]);
         livro.setIdRedeDonoLivro(Integer.parseInt(mensagemQuebrada[8]));
         conexao = Conexao.getInstancia();
@@ -243,9 +243,8 @@ public class ComunicacaoRecebe extends Thread {
         Lance lance = new Lance();
         lance.setIdPublicaQuemOfereceu(livro.getIdPublicaDonoLivro());
         lance.setIdRedeQuemOfereceu(livro.getIdRedeDonoLivro());
-        lance.setTempoNaHora(0);
-        lance.setValorOferecido(0);
-        lance.setValorOferecidoString("0");
+        lance.setTempoNaHora(livro.getTempoTotalLeilao());
+        lance.setValorOferecido(-1);
         JanelaLeilaoAcontecendo jla = JanelaLeilaoAcontecendo.getInstancia();
         jla.setLance(lance);
         jla.AtualizaJanela();
@@ -256,7 +255,10 @@ public class ComunicacaoRecebe extends Thread {
         conexao = Conexao.getInstancia();
         usuarioLocal = Usuario.getInstancia();
         if (conexao.getLeilaoAtual().getCodigo().equalsIgnoreCase(mensagemQuebrada[1])) {
-            Lance lance = new Lance(mensagemQuebrada[3], Integer.parseInt(mensagemQuebrada[4]), Long.parseLong(mensagemQuebrada[5]));
+            Long horarioAtual = System.currentTimeMillis();
+            Long horarioTerminoLeilao = conexao.getLeilaoAtual().getTempoNoInicio() + conexao.getLeilaoAtual().getTempoTotalLeilao();
+            Long tempoNaHora = horarioTerminoLeilao - horarioAtual;
+            Lance lance = new Lance(mensagemQuebrada[3], Integer.parseInt(mensagemQuebrada[4]), tempoNaHora);
             lance.setValorOferecidoString(mensagemQuebrada[2]);
             if (conexao.getLeilaoAtual().getMaiorLance() == null) {
                 if (usuarioLocal.getPapel().equalsIgnoreCase("servidor")) {
@@ -264,8 +266,8 @@ public class ComunicacaoRecebe extends Thread {
                 }
                 JanelaLeilaoAcontecendo jla = JanelaLeilaoAcontecendo.getInstancia();
                 jla.setLance(lance);
-                jla.NotificaoNovoLance();
                 jla.AtualizaJanela();
+                jla.NotificaoNovoLance();
             } else {
                 if (conexao.getLeilaoAtual().getMaiorLance().getValorOferecido() < lance.getValorOferecido()) {
                     if (usuarioLocal.getPapel().equalsIgnoreCase("servidor")) {
@@ -273,8 +275,8 @@ public class ComunicacaoRecebe extends Thread {
                     }
                     JanelaLeilaoAcontecendo jla = JanelaLeilaoAcontecendo.getInstancia();
                     jla.setLance(lance);
-                    jla.NotificaoNovoLance();
                     jla.AtualizaJanela();
+                    jla.NotificaoNovoLance();
                 }
             }
         }

@@ -40,7 +40,7 @@ public class JanelaLeilaoAcontecendo extends javax.swing.JFrame {
         labelMaiorLance.setText(lance.getValorOferecidoString());
         labelNome.setText(leilaoAtual.getNome());
         labelPrecoInicial.setText(leilaoAtual.getPrecoInicialString());
-        labelTempoRestante.setText(String.valueOf(leilaoAtual.getTempoTotalLeilao() - lance.getTempoNaHora()));
+        labelTempoRestante.setText(String.valueOf(lance.getTempoNaHora()/60000) + " minutos e " + String.valueOf((lance.getTempoNaHora()%60000)/1000) + " segundos");
         if (((usuario.getIdPublica().equalsIgnoreCase(lance.getIdPublicaQuemOfereceu())) && usuario.getIdRede() == lance.getIdRedeQuemOfereceu())
                 || leilaoAtual.getIdRedeDonoLivro() == usuario.getIdRede()) {
             botaoFinalizar.setVisible(true);
@@ -54,6 +54,13 @@ public class JanelaLeilaoAcontecendo extends javax.swing.JFrame {
             //botaoNaoDarLance.setText("OK");
             labelLance.setVisible(true);
             txtValorLance.setVisible(true);
+        }
+        if (lance.getValorOferecido() == -1) {
+            labelMaiorLance.setVisible(false);
+            labelUltimoLance.setVisible(false);
+        } else {
+            labelMaiorLance.setVisible(true);
+            labelUltimoLance.setVisible(true);
         }
     }
     
@@ -90,7 +97,7 @@ public class JanelaLeilaoAcontecendo extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         labelDescricao = new javax.swing.JLabel();
         labelPrecoInicial = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        labelUltimoLance = new javax.swing.JLabel();
         labelMaiorLance = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         labelTempoRestante = new javax.swing.JLabel();
@@ -123,8 +130,8 @@ public class JanelaLeilaoAcontecendo extends javax.swing.JFrame {
 
         labelPrecoInicial.setText("labelPrecoInicial");
 
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel5.setText("Último Lance Dado:");
+        labelUltimoLance.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        labelUltimoLance.setText("Último Lance Dado:");
 
         labelMaiorLance.setText("labelMaiorLance");
 
@@ -175,7 +182,7 @@ public class JanelaLeilaoAcontecendo extends javax.swing.JFrame {
                             .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(labelUltimoLance, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(labelCodigo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -220,7 +227,7 @@ public class JanelaLeilaoAcontecendo extends javax.swing.JFrame {
                     .addComponent(labelPrecoInicial))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
+                    .addComponent(labelUltimoLance)
                     .addComponent(labelMaiorLance))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -285,7 +292,6 @@ public class JanelaLeilaoAcontecendo extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel labelCodigo;
@@ -295,6 +301,7 @@ public class JanelaLeilaoAcontecendo extends javax.swing.JFrame {
     private javax.swing.JLabel labelNome;
     private javax.swing.JLabel labelPrecoInicial;
     private javax.swing.JLabel labelTempoRestante;
+    private javax.swing.JLabel labelUltimoLance;
     private javax.swing.JTextField txtValorLance;
     // End of variables declaration//GEN-END:variables
 

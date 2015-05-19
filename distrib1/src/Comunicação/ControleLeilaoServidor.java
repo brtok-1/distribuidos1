@@ -23,9 +23,6 @@ public class ControleLeilaoServidor extends Thread {
     private Conexao conexao;
     private Livro livro;
 
-    long tempoTotal;
-    long horarioAgora;
-
     @Override
     public void run() {
         try {
@@ -49,15 +46,16 @@ public class ControleLeilaoServidor extends Thread {
                 }
                 while (conexao.getStatusLeilao().equalsIgnoreCase("leiloando")) {
                     sleep(1000);
-                    horarioAgora = System.currentTimeMillis();
-                    if (horarioAgora >= tempoTotal) {
+                    Long horarioTerminoLeilao = conexao.getLeilaoAtual().getTempoNoInicio() + conexao.getLeilaoAtual().getTempoTotalLeilao();
+                    Long horarioAgora = System.currentTimeMillis();
+                    if (horarioAgora >= horarioTerminoLeilao) {
                         conexao.setStatusLeilao("finalizando");
                     }
                 }
                 if (conexao.getStatusLeilao().equalsIgnoreCase("finalizando")) {
                     ComunicacaoEnviaFinalLeilao finaliza = new ComunicacaoEnviaFinalLeilao(conexao.getLeilaoAtual());
                     finaliza.start();
-                    conexao.setStatusLeilao("aguardando");
+                    conexao.setStatusLeilao("andamento");
                 }
                 sleep(5000);
             } catch (InterruptedException ex) {
