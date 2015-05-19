@@ -73,8 +73,8 @@ public class ControladoraChaves {
 //            chavePrivadaOS.writeObject(key.getPrivate());
 //            chavePrivadaOS.close();
             
-            usuario.setChavePublica(key.getPublic());
-            usuario.setChavePrivada(key.getPrivate());
+            usuario.setChavePublicaString(key.getPublic().toString());
+            usuario.setChavePrivadaString(key.getPrivate().toString());
 
             //Converte as chaves para string
             String ChavePublicaString = Base64.getEncoder().encodeToString(key.getPublic().getEncoded());

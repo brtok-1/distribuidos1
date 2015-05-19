@@ -83,7 +83,7 @@ public class ComunicacaoRecebe extends Thread {
                 Usuario.setInstancia(usuarioLocal);
             }
         }
-        if (usuarios.size() >= 2) {
+        if (usuarios.size() >= 4) {
             JanelaConsole.escreveNaJanela("Aguarde mais alguns segundos");
             JanelaConsole.escreveNaJanela("enquanto identificamos se pode haver mais conexões.");
             conexao.setStatusLeilao("tempoAdicional");
@@ -110,7 +110,7 @@ public class ComunicacaoRecebe extends Thread {
         }
         participantesTempoAdicional++;
         sleep(1000);
-        if (participantesTempoAdicional > 9) {
+        if (participantesTempoAdicional > 7) {
             conexao.setStatusLeilao("andamento");
             participantesTempoAdicional = 0;
             if (usuarioLocal.getPapel().equalsIgnoreCase("servidor")) {
