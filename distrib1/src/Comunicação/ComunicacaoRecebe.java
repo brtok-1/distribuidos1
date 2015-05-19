@@ -281,8 +281,12 @@ public class ComunicacaoRecebe extends Thread {
                     if (usuarioLocal.getPapel().equalsIgnoreCase("servidor")) {
                         conexao.getLeilaoAtual().setMaiorLance(lance);
                     }
-                    JanelaLeilaoAcontecendo jla = new JanelaLeilaoAcontecendo(lance);
-                    jla.setVisible(true);
+                    //JanelaLeilaoAcontecendo jla = new JanelaLeilaoAcontecendo(lance);
+                    //jla.setVisible(true);
+                    JanelaLeilaoAcontecendo jla = JanelaLeilaoAcontecendo.getInstancia();
+                    jla.setLance(lance);
+                    jla.NotificaoNovoLance();
+                    jla.AtualizaJanela();
                 }
             }
         }

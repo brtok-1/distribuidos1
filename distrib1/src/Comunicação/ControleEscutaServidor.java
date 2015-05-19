@@ -30,8 +30,14 @@ public class ControleEscutaServidor extends Thread {
             conexao.setUltimoHelloServer(System.currentTimeMillis()+10000);
             Conexao.setInstancia(conexao);
             while (conexao.isServidorOnline()) {
+                System.out.println("Verificando o servidor.");
                 if (System.currentTimeMillis() > (conexao.getUltimoHelloServer() + 10000)) {
                     conexao.setServidorOnline(false);
+                    System.out.println("Servidor offline.");
+                }
+                else
+                {
+                    System.out.println("Servidor online");
                 }
                 sleep(8000);
             }

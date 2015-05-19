@@ -28,28 +28,6 @@ public class JanelaLeilaoAcontecendo extends javax.swing.JFrame {
     {
         initComponents();
     }
-
-    public JanelaLeilaoAcontecendo(Lance lance) {
-        initComponents();
-        this.lance = lance;
-        Usuario usuario = Usuario.getInstancia();
-        setTitle(usuario.getIdPublica() + " - O livro recebeu um lance!");
-        Livro leilaoAtual = Conexao.getInstancia().getLeilaoAtual();
-        labelCodigo.setText(leilaoAtual.getCodigo());
-        labelDescricao.setText(leilaoAtual.getDescricao());
-        labelMaiorLance.setText(lance.getValorOferecidoString());
-        labelNome.setText(leilaoAtual.getNome());
-        labelPrecoInicial.setText(leilaoAtual.getPrecoInicialString());
-        labelTempoRestante.setText(String.valueOf(leilaoAtual.getTempoTotalLeilao() - lance.getTempoNaHora()));
-        if ((usuario.getIdPublica().equalsIgnoreCase(lance.getIdPublicaQuemOfereceu())) && usuario.getIdRede() == lance.getIdRedeQuemOfereceu()) {
-            botaoDarLance.setVisible(false);
-            botaoNaoDarLance.setText("OK");
-            labelLance.setVisible(false);
-            txtValorLance.setVisible(false);
-        } else {
-            botaoFinalizar.setVisible(false);
-        }
-    }
     
     public void AtualizaJanela()
     {        
@@ -63,15 +41,20 @@ public class JanelaLeilaoAcontecendo extends javax.swing.JFrame {
         labelNome.setText(leilaoAtual.getNome());
         labelPrecoInicial.setText(leilaoAtual.getPrecoInicialString());
         labelTempoRestante.setText(String.valueOf(leilaoAtual.getTempoTotalLeilao() - lance.getTempoNaHora()));
-        if ((usuario.getIdPublica().equalsIgnoreCase(lance.getIdPublicaQuemOfereceu())) && usuario.getIdRede() == lance.getIdRedeQuemOfereceu()) {
+        if (((usuario.getIdPublica().equalsIgnoreCase(lance.getIdPublicaQuemOfereceu())) && usuario.getIdRede() == lance.getIdRedeQuemOfereceu())
+                || leilaoAtual.getIdRedeDonoLivro() == usuario.getIdRede()) {
+            botaoFinalizar.setVisible(true);
             botaoDarLance.setVisible(false);
-            botaoNaoDarLance.setText("OK");
+            //botaoNaoDarLance.setText("OK");
             labelLance.setVisible(false);
             txtValorLance.setVisible(false);
         } else {
             botaoFinalizar.setVisible(false);
+            botaoDarLance.setVisible(true);
+            //botaoNaoDarLance.setText("OK");
+            labelLance.setVisible(true);
+            txtValorLance.setVisible(true);
         }
-        //this.repaint();
     }
     
     public void LimparCampos()
