@@ -5,6 +5,7 @@
  */
 package Comunicação;
 
+import Chaves.ControladoraChaves;
 import GUI.JanelaConsole;
 import GUI.JanelaCriaLeilao;
 import GUI.JanelaLeilaoAcontecendo;
@@ -16,6 +17,7 @@ import Modelo.Usuario;
 import java.net.DatagramPacket;
 import java.net.InetAddress;
 import java.net.MulticastSocket;
+import java.security.PublicKey;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -66,7 +68,7 @@ public class ComunicacaoRecebe extends Thread {
     }
 
     public void RecebeParticipantes() throws Exception {
-        Usuario usuario = new Usuario(Integer.parseInt(mensagemQuebrada[2]), mensagemQuebrada[1], null, mensagemQuebrada[4], mensagemQuebrada[3]);
+        Usuario usuario = new Usuario(Integer.parseInt(mensagemQuebrada[2]), mensagemQuebrada[1], mensagemQuebrada[4], null, mensagemQuebrada[3]);
         boolean naoAchou = true;
         for (Usuario us : usuarios) {
             if (us.getIdPublica().equalsIgnoreCase(usuario.getIdPublica()) && us.getIdRede() == usuario.getIdRede()) {
@@ -83,7 +85,7 @@ public class ComunicacaoRecebe extends Thread {
                 Usuario.setInstancia(usuarioLocal);
             }
         }
-        if (usuarios.size() >= 4) {
+        if (usuarios.size() >= 3) {
             JanelaConsole.escreveNaJanela("Aguarde mais alguns segundos");
             JanelaConsole.escreveNaJanela("enquanto identificamos se pode haver mais conexões.");
             conexao.setStatusLeilao("tempoAdicional");
@@ -91,7 +93,7 @@ public class ComunicacaoRecebe extends Thread {
     }
 
     public void RecebeParticipantesTempoAdicional() throws Exception {
-        Usuario usuario = new Usuario(Integer.parseInt(mensagemQuebrada[2]), mensagemQuebrada[1], null, null, mensagemQuebrada[3]);
+        Usuario usuario = new Usuario(Integer.parseInt(mensagemQuebrada[2]), mensagemQuebrada[1], mensagemQuebrada[4], null, mensagemQuebrada[3]);
         boolean naoAchou = true;
         for (Usuario us : usuarios) {
             if (us.getIdPublica().equalsIgnoreCase(usuario.getIdPublica()) && us.getIdRede() == usuario.getIdRede()) {
@@ -115,10 +117,20 @@ public class ComunicacaoRecebe extends Thread {
             participantesTempoAdicional = 0;
             if (usuarioLocal.getPapel().equalsIgnoreCase("servidor")) {
                 JanelaConsole.escreveNaJanela("Característica já definida: SERVIDOR");
-                
+
                 //Salva os usuários
                 conexao.setParticipantes(usuarios);
-                
+                //Obtem a publickey dos usuários no formato
+                ControladoraChaves cc = new ControladoraChaves();
+                cc.ConverteChaves();
+//                for (Usuario u : usuarios)
+//                {
+//                    if(u.getIdRede() != usuario.getIdRede())
+//                    {
+//                        cc.ConverteChaves();
+//                    }
+//                }
+
                 ControleHelloServidor hello = new ControleHelloServidor();
                 hello.start();
                 ControleLeilaoServidor leilao = new ControleLeilaoServidor();
@@ -251,14 +263,39 @@ public class ComunicacaoRecebe extends Thread {
         jla.setVisible(true);
     }
 
-    public void LanceDeLeilao() {
+    public void LanceDeLeilao() throws Exception {
+
         conexao = Conexao.getInstancia();
         usuarioLocal = Usuario.getInstancia();
+
+        //String idParticipanteLance = mensagemQuebrada[1];
+        String mensagemCriptografadaLance = mensagemQuebrada[5];
+        PublicKey chavePublicaParticipante = null;
+
+//        ControladoraChaves cc = new ControladoraChaves();
+//        String mensagemLance = cc.DecriptaLance(mensagemCriptografadaLance, chavePublicaParticipante);
+//
+//        mensagem = "4" + mensagemLance;
+//        System.out.println("Mensagem: " + mensagem);
+//        mensagemQuebrada = mensagem.split("#");
         if (conexao.getLeilaoAtual().getCodigo().equalsIgnoreCase(mensagemQuebrada[1])) {
             Long horarioAtual = System.currentTimeMillis();
             Long horarioTerminoLeilao = conexao.getLeilaoAtual().getTempoNoInicio() + conexao.getLeilaoAtual().getTempoTotalLeilao();
             Long tempoNaHora = horarioTerminoLeilao - horarioAtual;
             Lance lance = new Lance(mensagemQuebrada[3], Integer.parseInt(mensagemQuebrada[4]), tempoNaHora);
+
+            //obtem a chave publica do participante que efetuou o lance
+            for (Usuario u : conexao.getParticipantes()) {
+                if (u.getIdRede() == Integer.parseInt(mensagemQuebrada[4])) {
+                    chavePublicaParticipante = u.getChavePublica();
+                    System.out.println("Obteve a chave pública do participante " + chavePublicaParticipante);
+                }
+            }
+            
+            mensagemCriptografadaLance = mensagemQuebrada[5];
+            ControladoraChaves cc = new ControladoraChaves();
+            String mensagemLance = cc.DecriptaLance(mensagemCriptografadaLance, chavePublicaParticipante);
+
             lance.setValorOferecidoString(mensagemQuebrada[2]);
             if (conexao.getLeilaoAtual().getMaiorLance() == null) {
                 if (usuarioLocal.getPapel().equalsIgnoreCase("servidor")) {

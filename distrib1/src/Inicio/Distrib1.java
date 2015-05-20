@@ -10,7 +10,6 @@ import GUI.JanelaConsole;
 import GUI.JanelaMinhaIDPublica;
 import Modelo.Conexao;
 import Modelo.Usuario;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.UIManager;
@@ -51,12 +50,6 @@ public class Distrib1 {
         //Obtem o par de chaves para o usuário
         ControladoraChaves cc = new ControladoraChaves();
         cc.GeraChaves();
-        //ArrayList<String> chaves = cc.GeraChaves(usuario.getIdRede());
-
-        //JanelaConsole.escreveNaJanela("Chave pública: " + chaves.get(0));
-        //usuario.setChavePublica(chaves.get(0));
-        //JanelaConsole.escreveNaJanela("Chave privada: " + chaves.get(1));
-        //usuario.setChavePrivada(chaves.get(1));
 
         Usuario.setInstancia(usuario);
         Conexao.setInstancia(conexao);

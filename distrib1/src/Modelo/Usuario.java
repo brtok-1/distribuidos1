@@ -5,6 +5,9 @@
  */
 package Modelo;
 
+import java.security.PrivateKey;
+import java.security.PublicKey;
+
 /**
  *
  * @author Rafael
@@ -17,6 +20,9 @@ public class Usuario {
     private String chavePrivadaString;
     private String papel;
     
+    private PublicKey chavePublica;
+    private PrivateKey chavePrivada;
+    
     private static Usuario instancia;
     
     public Usuario()
@@ -24,11 +30,11 @@ public class Usuario {
         
     }
 
-    public Usuario(int idRede, String idPublica, String chavePublica, String chavePrivada, String papel) {
+    public Usuario(int idRede, String idPublica, String chavePublicaString, String chavePrivadaString, String papel) {
         this.idRede = idRede;
         this.idPublica = idPublica;
-        this.chavePublicaString = chavePublica;
-        this.chavePrivadaString = chavePrivada;
+        this.chavePublicaString = chavePublicaString;
+        this.chavePrivadaString = chavePrivadaString;
         this.papel = papel;
     }   
 
@@ -48,6 +54,14 @@ public class Usuario {
         this.idPublica = idPublica;
     }
 
+    public String getChavePrivadaString() {
+        return chavePrivadaString;
+    }
+
+    public void setChavePrivadaString(String chavePrivadaString) {
+        this.chavePrivadaString = chavePrivadaString;
+    }  
+
     public String getChavePublicaString() {
         return chavePublicaString;
     }
@@ -56,13 +70,22 @@ public class Usuario {
         this.chavePublicaString = chavePublicaString;
     }
 
-    public String getChavePrivadaString() {
-        return chavePrivadaString;
+    public PublicKey getChavePublica() {
+        return chavePublica;
     }
 
-    public void setChavePrivadaString(String chavePrivadaString) {
-        this.chavePrivadaString = chavePrivadaString;
-    }  
+    public void setChavePublica(PublicKey chavePublica) {
+        this.chavePublica = chavePublica;
+    }
+
+    public PrivateKey getChavePrivada() {
+        return chavePrivada;
+    }
+
+    public void setChavePrivada(PrivateKey chavePrivada) {
+        this.chavePrivada = chavePrivada;
+    }    
+    
 
     public String getPapel() {
         return papel;
@@ -82,7 +105,7 @@ public class Usuario {
 
     public static void setInstancia(Usuario instancia) {
         Usuario.instancia = instancia;
-    } 
+    }
     
     
 }

@@ -5,6 +5,7 @@
  */
 package Comunicação;
 
+import Chaves.ControladoraChaves;
 import Modelo.Conexao;
 import Modelo.Lance;
 import java.util.logging.Level;
@@ -29,7 +30,16 @@ public class ComunicacaoEnviaLance extends MinhaComunicacaoEnvio {
     @Override
     public void run() {
         try {
-            mensagem = "4#" + codigoLivro + "#" + lance.getValorOferecidoString() + "#" + lance.getIdPublicaQuemOfereceu() + "#" + lance.getIdRedeQuemOfereceu();
+            String mensagemLance = "#" + codigoLivro + "#" + lance.getValorOferecidoString() + "#" + lance.getIdPublicaQuemOfereceu() + "#" + lance.getIdRedeQuemOfereceu();
+            
+            ControladoraChaves cc = new ControladoraChaves();
+            
+            //String lanceCriptografado = cc.EncriptaLance(mensagemLance);
+            String lanceCriptografado = cc.EncriptaLance("cu");
+            mensagem = "4#" + codigoLivro + "#" + lance.getValorOferecidoString() + "#" + lance.getIdPublicaQuemOfereceu() + "#" + 
+                    lance.getIdRedeQuemOfereceu() + "#" + lanceCriptografado;
+            //mensagem = "4#" + lance.getIdRedeQuemOfereceu() + "#" + lanceCriptografado;
+            
             EnviaMensagem();
         } catch (Exception ex) {
             Logger.getLogger(ComunicacaoEnviaLance.class.getName()).log(Level.SEVERE, null, ex);
