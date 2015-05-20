@@ -131,20 +131,20 @@ public class ControladoraChaves {
 
     //Decripta o lance utilizando a chave publica do jogador
     public String DecriptaLance(String lanceEncriptado, PublicKey chavePublicaParticipante) throws Exception {
-        String lance;
+        String lance = "";
 
-        Cipher cifrador = Cipher.getInstance("RSA");
-        cifrador.init(Cipher.DECRYPT_MODE, chavePublicaParticipante);
-
-        byte[] textoCifrado = Base64.getDecoder().decode(lanceEncriptado);
-
-        System.out.println("Tamanho dos bytes " + textoCifrado.length );
-        byte[] lanceBytes = cifrador.doFinal(textoCifrado);
-        
-
-        lance = new String(lanceBytes);
-
-        System.out.println("Testo decifrado: " + lance);
+//        Cipher cifrador = Cipher.getInstance("RSA");
+//        cifrador.init(Cipher.DECRYPT_MODE, chavePublicaParticipante);
+//
+//        byte[] textoCifrado = Base64.getDecoder().decode(lanceEncriptado);
+//
+//        System.out.println("Tamanho dos bytes " + textoCifrado.length );
+//        byte[] lanceBytes = cifrador.doFinal(textoCifrado);
+//        
+//
+//        lance = new String(lanceBytes);
+//
+//        System.out.println("Testo decifrado: " + lance);
 
         return lance;
     }
