@@ -182,10 +182,18 @@ public class ComunicacaoRecebe extends Thread {
                 InicioDoLeilao();
                 break;
 
-            //Lance de leilão
+            //Lance de leilão para Servidor
             case 4:
+                if (usuarioLocal.getPapel().equalsIgnoreCase("servidor")) {
+                    JanelaConsole.escreveNaJanela(dh + " Recebeu: " + mensagem);
+                    LanceDeLeilaoServidor();
+                }
+                break;
+
+            //Lance de leilão para Cliente
+            case 5:
                 JanelaConsole.escreveNaJanela(dh + " Recebeu: " + mensagem);
-                LanceDeLeilao();
+                LanceDeLeilaoCliente();
                 break;
 
             //finalização de leilão
@@ -263,8 +271,7 @@ public class ComunicacaoRecebe extends Thread {
         jla.setVisible(true);
     }
 
-    public void LanceDeLeilao() throws Exception {
-
+    public void LanceDeLeilaoServidor() throws Exception {
         conexao = Conexao.getInstancia();
         usuarioLocal = Usuario.getInstancia();
 
@@ -274,7 +281,6 @@ public class ComunicacaoRecebe extends Thread {
 
 //        ControladoraChaves cc = new ControladoraChaves();
 //        String mensagemLance = cc.DecriptaLance(mensagemCriptografadaLance, chavePublicaParticipante);
-//
 //        mensagem = "4" + mensagemLance;
 //        System.out.println("Mensagem: " + mensagem);
 //        mensagemQuebrada = mensagem.split("#");
@@ -291,7 +297,7 @@ public class ComunicacaoRecebe extends Thread {
                     System.out.println("Obteve a chave pública do participante " + chavePublicaParticipante);
                 }
             }
-            
+
             mensagemCriptografadaLance = mensagemQuebrada[5];
             ControladoraChaves cc = new ControladoraChaves();
             String mensagemLance = cc.DecriptaLance(mensagemCriptografadaLance, chavePublicaParticipante);
@@ -301,21 +307,33 @@ public class ComunicacaoRecebe extends Thread {
                 if (usuarioLocal.getPapel().equalsIgnoreCase("servidor")) {
                     conexao.getLeilaoAtual().setMaiorLance(lance);
                 }
-                JanelaLeilaoAcontecendo jla = JanelaLeilaoAcontecendo.getInstancia();
-                jla.setLance(lance);
-                jla.AtualizaJanela();
-                jla.NotificaoNovoLance();
+                ComunicacaoEnviaLanceParaCliente celpc = new ComunicacaoEnviaLanceParaCliente(lance, conexao.getLeilaoAtual().getCodigo());
+                celpc.start();
             } else {
                 if (conexao.getLeilaoAtual().getMaiorLance().getValorOferecido() < lance.getValorOferecido()) {
                     if (usuarioLocal.getPapel().equalsIgnoreCase("servidor")) {
                         conexao.getLeilaoAtual().setMaiorLance(lance);
                     }
-                    JanelaLeilaoAcontecendo jla = JanelaLeilaoAcontecendo.getInstancia();
-                    jla.setLance(lance);
-                    jla.AtualizaJanela();
-                    jla.NotificaoNovoLance();
+                    ComunicacaoEnviaLanceParaCliente celpc = new ComunicacaoEnviaLanceParaCliente(lance, conexao.getLeilaoAtual().getCodigo());
+                    celpc.start();
                 }
             }
+        }
+    }
+
+    public void LanceDeLeilaoCliente() throws Exception {
+        conexao = Conexao.getInstancia();
+        usuarioLocal = Usuario.getInstancia();
+        if (conexao.getLeilaoAtual().getCodigo().equalsIgnoreCase(mensagemQuebrada[1])) {
+            Long horarioAtual = System.currentTimeMillis();
+            Long horarioTerminoLeilao = conexao.getLeilaoAtual().getTempoNoInicio() + conexao.getLeilaoAtual().getTempoTotalLeilao();
+            Long tempoNaHora = horarioTerminoLeilao - horarioAtual;
+            Lance lance = new Lance(mensagemQuebrada[3], Integer.parseInt(mensagemQuebrada[4]), tempoNaHora);
+            lance.setValorOferecidoString(mensagemQuebrada[2]);
+            JanelaLeilaoAcontecendo jla = JanelaLeilaoAcontecendo.getInstancia();
+            jla.setLance(lance);
+            jla.AtualizaJanela();
+            jla.NotificaoNovoLance();
         }
     }
 

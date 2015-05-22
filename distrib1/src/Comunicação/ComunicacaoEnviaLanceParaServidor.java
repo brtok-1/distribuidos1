@@ -15,12 +15,12 @@ import java.util.logging.Logger;
  *
  * @author Bruno
  */
-public class ComunicacaoEnviaLance extends MinhaComunicacaoEnvio {
+public class ComunicacaoEnviaLanceParaServidor extends MinhaComunicacaoEnvio {
 
     Lance lance;
     String codigoLivro;
 
-    public ComunicacaoEnviaLance(Lance lance, String codigoLivro) throws Exception {
+    public ComunicacaoEnviaLanceParaServidor(Lance lance, String codigoLivro) throws Exception {
         conexao = Conexao.getInstancia();
         ConfiguraConexaoMulticast();
         this.lance = lance;
@@ -42,7 +42,7 @@ public class ComunicacaoEnviaLance extends MinhaComunicacaoEnvio {
             
             EnviaMensagem();
         } catch (Exception ex) {
-            Logger.getLogger(ComunicacaoEnviaLance.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ComunicacaoEnviaLanceParaServidor.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

@@ -5,7 +5,7 @@
  */
 package GUI;
 
-import Comunicação.ComunicacaoEnviaLance;
+import Comunicação.ComunicacaoEnviaLanceParaServidor;
 import Comunicação.MinhaComunicacaoEnvio;
 import Modelo.Conexao;
 import Modelo.Lance;
@@ -220,7 +220,7 @@ public class JanelaLeilaoIniciado extends javax.swing.JFrame {
                 Usuario usuarioLocal = Usuario.getInstancia();
                 Lance novoLance = new Lance(usuarioLocal.getIdPublica(), usuarioLocal.getIdRede(), 0);
                 novoLance.setValorOferecidoString(txtValorLance.getText());
-                ComunicacaoEnviaLance envia = new ComunicacaoEnviaLance(novoLance, labelCodigo.getText());
+                ComunicacaoEnviaLanceParaServidor envia = new ComunicacaoEnviaLanceParaServidor(novoLance, labelCodigo.getText());
                 envia.start();
                 JOptionPane.showMessageDialog(null, "Lance efetuado!");
                 dispose();
