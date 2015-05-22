@@ -24,9 +24,7 @@ import javax.crypto.Cipher;
  * @author Rafael
  */
 public class ControladoraChaves {
-
-    //String PATH_CHAVE_PRIVADA;
-    //String PATH_CHAVE_PUBLICA;
+    
     private Usuario usuario;
     private Conexao conexao;
 
@@ -36,42 +34,14 @@ public class ControladoraChaves {
     }
 
     public void GeraChaves() {
-        ArrayList<String> chaves = new ArrayList();
-
-//        //Locais onde as chaves serão armazenadas
-//        PATH_CHAVE_PRIVADA = "C:/keys/" + idUsuario + "/private.key";
-//        PATH_CHAVE_PUBLICA = "C:/keys/" + idUsuario + "/public.key";
+        
         try {
 
             final KeyPairGenerator keyGen = KeyPairGenerator.getInstance("RSA");
 
             keyGen.initialize(1024);
             final KeyPair key = keyGen.generateKeyPair();
-
-//            File chavePrivadaFile = new File(PATH_CHAVE_PRIVADA);
-//            File chavePublicaFile = new File(PATH_CHAVE_PUBLICA);
-            // Cria os arquivos para armazenar a chave Privada e a chave Publica
-//            if (chavePrivadaFile.getParentFile() != null) {
-//                chavePrivadaFile.getParentFile().mkdirs();
-//            }
-//
-//            chavePrivadaFile.createNewFile();
-//
-//            if (chavePublicaFile.getParentFile() != null) {
-//                chavePublicaFile.getParentFile().mkdirs();
-//            }
-//
-//            chavePublicaFile.createNewFile();
-//            // Salva a Chave Pública no arquivo
-//            ObjectOutputStream chavePublicaOS = new ObjectOutputStream(new FileOutputStream(chavePublicaFile));
-//            chavePublicaOS.writeObject(key.getPublic());
-//            chavePublicaOS.close();
-//
-//            // Salva a Chave Privada no arquivo
-//            ObjectOutputStream chavePrivadaOS;
-//            chavePrivadaOS = new ObjectOutputStream(new FileOutputStream(chavePrivadaFile));
-//            chavePrivadaOS.writeObject(key.getPrivate());
-//            chavePrivadaOS.close();
+            
             usuario.setChavePublica(key.getPublic());
             usuario.setChavePrivada(key.getPrivate());
 
@@ -81,9 +51,7 @@ public class ControladoraChaves {
 
             usuario.setChavePublicaString(ChavePublicaString);
             usuario.setChavePrivadaString(ChavePrivadaString);
-
-//            chaves.add(ChavePublica);
-//            chaves.add(ChavePrivada);    
+            
         } catch (Exception ex) {
             Logger.getLogger(ControladoraChaves.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -91,7 +59,6 @@ public class ControladoraChaves {
 
     //Converte as chaves de String para PublicKey e PrivateKay
     public void ConverteChaves() throws Exception {
-        //ArrayList<Usuario> participantes = conexao.getParticipantes();
         System.out.println("Atribuindo chave privada");
         for (Usuario u : conexao.getParticipantes()) {
             System.out.println((u.getChavePublicaString() != null) + " e " + (u.getIdRede() != usuario.getIdRede()));
