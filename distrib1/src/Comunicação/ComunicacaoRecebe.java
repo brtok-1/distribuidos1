@@ -155,6 +155,7 @@ public class ComunicacaoRecebe extends Thread {
      * @throws Exception 
      */
     public void ConfiguraConexao() throws Exception {
+        
         address = InetAddress.getByName(conexao.getINET_ADDR());
         clientSocket = new MulticastSocket(conexao.getPORT());
         clientSocket.joinGroup(address);

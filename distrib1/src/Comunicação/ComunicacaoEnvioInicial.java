@@ -18,7 +18,7 @@ import java.util.logging.Logger;
  * @author Bruno Tokarski e Rafael Vidal
  */
 public class ComunicacaoEnvioInicial extends MinhaComunicacaoEnvio {
-
+    
     /**
      * Monta a mensagem contendo informações do usuário e aciona o método de envio
      */
@@ -31,7 +31,6 @@ public class ComunicacaoEnvioInicial extends MinhaComunicacaoEnvio {
             conexao = Conexao.getInstancia();
             //Obtem o usuário
             usuario = Usuario.getInstancia();
-            ConfiguraConexaoMulticast();
             while (conexao.getStatusLeilao().equalsIgnoreCase("aguardando") || conexao.getStatusLeilao().equalsIgnoreCase("tempoAdicional")) {
                 mensagem = "77#" + usuario.getIdPublica() + "#" + usuario.getIdRede() + "#" + usuario.getPapel() + "#" + usuario.getChavePublicaString();
                 EnviaMensagem();

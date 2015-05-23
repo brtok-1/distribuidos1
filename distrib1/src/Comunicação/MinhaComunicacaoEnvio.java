@@ -19,36 +19,42 @@ import java.util.logging.Logger;
 
 /**
  * Envio de mensagens via multicast
+ *
  * @author Bruno Tokarski e Rafael Vidal
  */
-public class MinhaComunicacaoEnvio extends Thread{
+public class MinhaComunicacaoEnvio extends Thread {
 
     Usuario usuario;
     Conexao conexao;
     String mensagem;
-    
+
     InetAddress address;
     DatagramSocket serverSocket;
 
     /**
      * Configura a conexão multicast
-     * @throws Exception 
+     *
+     * @throws Exception
      */
     public void ConfiguraConexaoMulticast() throws Exception {
-        conexao = Conexao.getInstancia();
+        
+        conexao = Conexao.getInstancia();        
         serverSocket = new DatagramSocket();
         address = InetAddress.getByName(conexao.getINET_ADDR());
+
     }
-    
+
     public void setMensagem(String mensagem) {
         this.mensagem = mensagem;
-    }    
-            
+    }
+
     /**
      * Envia a mensagem via multicast
-     * @throws Exception 
+     *
+     * @throws Exception
      */
     public void EnviaMensagem() throws Exception {
+        ConfiguraConexaoMulticast();
         Date now = new Date();
         DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         String dh = formatter.format(now);
@@ -56,18 +62,17 @@ public class MinhaComunicacaoEnvio extends Thread{
         DatagramPacket msgPacket = new DatagramPacket(mensagem.getBytes(), mensagem.getBytes().length, address, conexao.getPORT());
         serverSocket.send(msgPacket);
     }
-    
+
     /**
      * Thread de envio de mensagens via multicast
      */
     @Override
     public void run() {
         try {
-            ConfiguraConexaoMulticast();
             EnviaMensagem();
         } catch (Exception ex) {
             Logger.getLogger(MinhaComunicacaoEnvio.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
 }

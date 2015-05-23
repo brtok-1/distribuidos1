@@ -9,6 +9,8 @@ import GUI.JanelaConsole;
 import GUI.JanelaCriaLeilao;
 import Modelo.Conexao;
 import Modelo.Usuario;
+import java.net.InetAddress;
+import java.net.MulticastSocket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -29,9 +31,9 @@ public class ControladoraThreads extends Thread {
                 JanelaCriaLeilao jcl = new JanelaCriaLeilao();
                 jcl.setVisible(true);
                 jcl.repaint();
-                Thread.sleep(1000);
                 ComunicacaoRecebe recebe = new ComunicacaoRecebe();
                 recebe.start();
+                sleep(1000);
                 ComunicacaoEnvioInicial envio = new ComunicacaoEnvioInicial();
                 envio.start();
                 Conexao c = Conexao.getInstancia();
@@ -57,4 +59,15 @@ public class ControladoraThreads extends Thread {
             Logger.getLogger(ControladoraThreads.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    /**
+     * Configura a conexão multicast
+     * @throws Exception 
+     */
+//    public void ConfiguraConexao() throws Exception {
+//        //address = InetAddress.getByName(conexao.getINET_ADDR());
+//        clientSocket = new MulticastSocket(conexao.getPORT());
+//        clientSocket.joinGroup(address);
+//    }
+
 }

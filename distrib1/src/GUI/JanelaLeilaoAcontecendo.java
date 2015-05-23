@@ -26,8 +26,7 @@ public class JanelaLeilaoAcontecendo extends javax.swing.JFrame {
     
     public JanelaLeilaoAcontecendo()
     {
-        initComponents();
-        setTitle("Leilão em andamento");
+        initComponents();        
     }
     
     /**
@@ -36,7 +35,8 @@ public class JanelaLeilaoAcontecendo extends javax.swing.JFrame {
     public void AtualizaJanela()
     {        
         LimparCampos();
-        Usuario usuario = Usuario.getInstancia();        
+        Usuario usuario = Usuario.getInstancia();       
+        setTitle(usuario.getIdPublica() + " - O livro recebeu um lance!");
         Livro leilaoAtual = Conexao.getInstancia().getLeilaoAtual();
         labelCodigo.setText(leilaoAtual.getCodigo());
         labelDescricao.setText(leilaoAtual.getDescricao());
