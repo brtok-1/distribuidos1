@@ -7,18 +7,16 @@ package GUI;
 
 import Comunicação.ControladoraThreads;
 import Modelo.Usuario;
-//import Inicio.Distrib1;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
- *
- * @author Bruno
+ * Receber o apelido do usuário
+ * @author Bruno Tokarski e Rafael Vidal
  */
 public class JanelaMinhaIDPublica extends javax.swing.JFrame {
 
-    //private Usuario usuario;
     /**
      * Creates new form JanelaMinhaIDPublica
      */
@@ -80,6 +78,10 @@ public class JanelaMinhaIDPublica extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Iniciar o envio de informações do usuário
+     * @param evt 
+     */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
             String idPublica = jTextField1.getText();

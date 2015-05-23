@@ -213,7 +213,7 @@
           <Font name="Tahoma" size="18" style="1"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;center&gt;Um novo lance foi dado no leil&#xe3;o&lt;br&gt;que voc&#xea; est&#xe1; participando&lt;/center&gt;"/>
+        <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;center&gt;Leil&#xe3;o em andamento&lt;/center&gt;"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtValorLance">

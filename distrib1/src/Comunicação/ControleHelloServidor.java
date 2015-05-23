@@ -20,15 +20,18 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
- * @author Bruno
+ * Envio de hello para clientes
+ * @author Bruno Tokarski e Rafael Vidal
  */
 public class ControleHelloServidor extends Thread {
 
     private Conexao conexao;
     DatagramSocket serverSocket;
     InetAddress address;
-
+    
+    /**
+     * Thread de envio de hello para clientes a fim de manter o status online frente aos mesmos
+     */
     public void run() {
         try {
             conexao = Conexao.getInstancia();

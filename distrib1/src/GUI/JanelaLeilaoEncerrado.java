@@ -9,8 +9,8 @@ import Modelo.Livro;
 import Modelo.Usuario;
 
 /**
- *
- * @author Bruno
+ * Janela com informações do fim do leilão
+ * @author Bruno Tokarski e Rafael Vidal
  */
 public class JanelaLeilaoEncerrado extends javax.swing.JFrame {
 

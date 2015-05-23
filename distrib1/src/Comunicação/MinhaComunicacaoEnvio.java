@@ -18,8 +18,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
- * @author Bruno
+ * Envio de mensagens via multicast
+ * @author Bruno Tokarski e Rafael Vidal
  */
 public class MinhaComunicacaoEnvio extends Thread{
 
@@ -30,7 +30,10 @@ public class MinhaComunicacaoEnvio extends Thread{
     InetAddress address;
     DatagramSocket serverSocket;
 
-    //Configura a conexao multicast
+    /**
+     * Configura a conexão multicast
+     * @throws Exception 
+     */
     public void ConfiguraConexaoMulticast() throws Exception {
         conexao = Conexao.getInstancia();
         serverSocket = new DatagramSocket();
@@ -41,7 +44,10 @@ public class MinhaComunicacaoEnvio extends Thread{
         this.mensagem = mensagem;
     }    
             
-    //Envia mensagem
+    /**
+     * Envia a mensagem via multicast
+     * @throws Exception 
+     */
     public void EnviaMensagem() throws Exception {
         Date now = new Date();
         DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
@@ -51,6 +57,9 @@ public class MinhaComunicacaoEnvio extends Thread{
         serverSocket.send(msgPacket);
     }
     
+    /**
+     * Thread de envio de mensagens via multicast
+     */
     @Override
     public void run() {
         try {

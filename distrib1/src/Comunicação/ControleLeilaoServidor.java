@@ -14,8 +14,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
- * @author Bruno
+ * Controladora de leilões
+ * @author Bruno Tokarski e Rafael Vidal
  */
 public class ControleLeilaoServidor extends Thread {
 
@@ -23,6 +23,9 @@ public class ControleLeilaoServidor extends Thread {
     private Conexao conexao;
     private Livro livro;
 
+    /**
+     * Thread responsável por administrar o leilão
+     */
     @Override
     public void run() {
         try {
@@ -64,10 +67,6 @@ public class ControleLeilaoServidor extends Thread {
                 Logger.getLogger(ControleLeilaoServidor.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-    }
-
-    public void tempoRestanteLeilaoEmMinutos() {
-
     }
     
 }

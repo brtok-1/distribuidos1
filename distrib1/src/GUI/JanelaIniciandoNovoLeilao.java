@@ -15,8 +15,8 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
- *
- * @author Bruno
+ * Janela para a criação de um novo leilão
+ * @author Bruno Tokarski e Rafael Vidal
  */
 public class JanelaIniciandoNovoLeilao extends javax.swing.JFrame {
 
@@ -156,6 +156,10 @@ public class JanelaIniciandoNovoLeilao extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Inicia um novo leião
+     * @param evt 
+     */
     private void botaoIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoIniciarActionPerformed
         try {
             Usuario u = Usuario.getInstancia();

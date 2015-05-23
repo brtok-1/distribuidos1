@@ -6,8 +6,8 @@
 package Modelo;
 
 /**
- *
- * @author Bruno
+ * Classe de modelo para o lance
+ * @author Bruno Tokarski e Rafael Vidal
  */
 public class Lance {
     double valorOferecido;

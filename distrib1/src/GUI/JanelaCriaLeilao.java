@@ -5,14 +5,13 @@
  */
 package GUI;
 
-import Modelo.Conexao;
 import Modelo.Usuario;
 
 import java.util.ArrayList;
 
 /**
- *
- * @author Bruno
+ * Janela exibindo os participantes e oferecendo a opção de criar um novo leilão
+ * @author Bruno Tokarski e Rafael Vidal
  */
 public class JanelaCriaLeilao extends javax.swing.JFrame {
 
@@ -27,10 +26,12 @@ public class JanelaCriaLeilao extends javax.swing.JFrame {
         jButton1.setVisible(false);
     }
 
+    /**
+     * Atualiza as informações da janela
+     * @param usuarios 
+     */
     public static void atualizar(ArrayList<Usuario> usuarios) {
         
-        Conexao conexao = Conexao.getInstancia();
-//        txtNumeroParticipantes.setText(String.valueOf(conexao.getQuantidadeUsuarios()));
         
         Object [][] tabela = new Object[usuarios.size()][2];
         for (int i = 0; i < usuarios.size(); i++) {

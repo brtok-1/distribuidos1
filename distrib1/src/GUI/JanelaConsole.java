@@ -2,7 +2,6 @@ package GUI;
 
 import Modelo.Usuario;
 import java.util.ArrayList;
-import javax.swing.table.DefaultTableModel;
 
 /*
  * To change this template, choose Tools | Templates
@@ -15,8 +14,8 @@ import javax.swing.table.DefaultTableModel;
  * Created on 03/12/2010, 16:55:02
  */
 /**
- *
- * @author Bruno
+ * Janela com exibição de informações de execução do programa
+ * @author Bruno Tokarski e Rafael Vidal
  */
 public class JanelaConsole extends javax.swing.JFrame {
 
@@ -35,11 +34,19 @@ public class JanelaConsole extends javax.swing.JFrame {
         return instancia;
     }
     
+    /**
+     * Atualiza o título da janela
+     */
     public void atualizaTitulo() {
         Usuario usuario = Usuario.getInstancia();
         setTitle(usuario.getIdPublica() + " - Console");
     }
 
+    /**
+     * Escreve mensagem na janela de console
+     * @param s
+     * @throws InterruptedException 
+     */
     public static void escreveNaJanela(String s) throws InterruptedException {
         mensagens.add(s);
         if (mensagens.size() > 12) {

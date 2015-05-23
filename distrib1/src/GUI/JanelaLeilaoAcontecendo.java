@@ -16,8 +16,8 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
- *
- * @author Bruno
+ * Janela de andamento do leilão
+ * @author Bruno Tokarski e Rafael Vidal
  */
 public class JanelaLeilaoAcontecendo extends javax.swing.JFrame {
 
@@ -27,13 +27,16 @@ public class JanelaLeilaoAcontecendo extends javax.swing.JFrame {
     public JanelaLeilaoAcontecendo()
     {
         initComponents();
+        setTitle("Leilão em andamento");
     }
     
+    /**
+     * Atualiza os dados da janela
+     */
     public void AtualizaJanela()
     {        
         LimparCampos();
-        Usuario usuario = Usuario.getInstancia();
-        setTitle(usuario.getIdPublica() + " - O livro recebeu um lance!");
+        Usuario usuario = Usuario.getInstancia();        
         Livro leilaoAtual = Conexao.getInstancia().getLeilaoAtual();
         labelCodigo.setText(leilaoAtual.getCodigo());
         labelDescricao.setText(leilaoAtual.getDescricao());
@@ -74,7 +77,9 @@ public class JanelaLeilaoAcontecendo extends javax.swing.JFrame {
         labelTempoRestante.setText(null);
     }
     
-    //Notifica o participante quando um novo lance é recebido
+    /**
+     * Notifica o participante ao recebimento de um novo lance
+     */
     public void NotificaoNovoLance()
     {
         JOptionPane.showMessageDialog(null, "Novo Lance de " + lance.getIdPublicaQuemOfereceu());
@@ -163,7 +168,7 @@ public class JanelaLeilaoAcontecendo extends javax.swing.JFrame {
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel9.setText("<html><center>Um novo lance foi dado no leilão<br>que você está participando</center>");
+        jLabel9.setText("<html><center>Leilão em andamento</center>");
 
         labelLance.setText("Lance:");
 
@@ -249,6 +254,10 @@ public class JanelaLeilaoAcontecendo extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Dar um novo lance
+     * @param evt 
+     */
     private void botaoDarLanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoDarLanceActionPerformed
         try {
             if (Double.parseDouble(txtValorLance.getText().replaceAll(",", "\\.")) > lance.getValorOferecido()) {
@@ -267,10 +276,18 @@ public class JanelaLeilaoAcontecendo extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_botaoDarLanceActionPerformed
 
+    /**
+     * Sair do leilão
+     * @param evt 
+     */
     private void botaoNaoDarLanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoNaoDarLanceActionPerformed
         dispose();
     }//GEN-LAST:event_botaoNaoDarLanceActionPerformed
 
+    /**
+     * Finalizar o leilão
+     * @param evt 
+     */
     private void botaoFinalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoFinalizarActionPerformed
         Usuario u = Usuario.getInstancia();
         if (u.getPapel().equalsIgnoreCase("servidor")) {

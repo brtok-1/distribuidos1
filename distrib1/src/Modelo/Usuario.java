@@ -9,8 +9,8 @@ import java.security.PrivateKey;
 import java.security.PublicKey;
 
 /**
- *
- * @author Rafael
+ * Classe de modelo para o usuário
+ * @author Bruno Tokarski e Rafael Vidal
  */
 public class Usuario {
     

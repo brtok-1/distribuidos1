@@ -18,11 +18,12 @@ import javax.swing.UnsupportedLookAndFeelException;
 /**
  * Classe inicial do programa
  *
- * @author Bruno
+ * @author Bruno Tokarski e Rafael Vidal
  */
 public class Distrib1 {
 
     /**
+     * Inicia a execução do programa
      * @param args the command line arguments
      * @throws java.lang.InterruptedException
      */

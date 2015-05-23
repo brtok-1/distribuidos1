@@ -8,8 +8,8 @@ package Modelo;
 import java.util.ArrayList;
 
 /**
- *
- * @author Bruno
+ * Classe de modelo da entidade Conexao
+ * @author Bruno Tokarski e Rafael Vidal
  */
 public class Conexao {
     

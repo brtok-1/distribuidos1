@@ -6,8 +6,8 @@
 package Modelo;
 
 /**
- *
- * @author Bruno
+ * Classe de modelo para o livro
+ * @author Bruno Tokaski e Rafael Vidal
  */
 public class Livro {
     int idRedeDonoLivro;
