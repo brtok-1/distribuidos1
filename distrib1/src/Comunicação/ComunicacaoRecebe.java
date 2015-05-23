@@ -123,13 +123,6 @@ public class ComunicacaoRecebe extends Thread {
                 //Obtem a publickey dos usuários no formato
                 ControladoraChaves cc = new ControladoraChaves();
                 cc.ConverteChaves();
-//                for (Usuario u : usuarios)
-//                {
-//                    if(u.getIdRede() != usuario.getIdRede())
-//                    {
-//                        cc.ConverteChaves();
-//                    }
-//                }
 
                 ControleHelloServidor hello = new ControleHelloServidor();
                 hello.start();
@@ -275,50 +268,52 @@ public class ComunicacaoRecebe extends Thread {
         conexao = Conexao.getInstancia();
         usuarioLocal = Usuario.getInstancia();
 
-        //String idParticipanteLance = mensagemQuebrada[1];
-        String mensagemCriptografadaLance = mensagemQuebrada[5];
+        String idParticipanteLance = mensagemQuebrada[1];
+        String mensagemCriptografadaLance = mensagemQuebrada[2];
         PublicKey chavePublicaParticipante = null;
 
-//        ControladoraChaves cc = new ControladoraChaves();
-//        String mensagemLance = cc.DecriptaLance(mensagemCriptografadaLance, chavePublicaParticipante);
-//        mensagem = "4" + mensagemLance;
-//        System.out.println("Mensagem: " + mensagem);
-//        mensagemQuebrada = mensagem.split("#");
-        if (conexao.getLeilaoAtual().getCodigo().equalsIgnoreCase(mensagemQuebrada[1])) {
-            Long horarioAtual = System.currentTimeMillis();
-            Long horarioTerminoLeilao = conexao.getLeilaoAtual().getTempoNoInicio() + conexao.getLeilaoAtual().getTempoTotalLeilao();
-            Long tempoNaHora = horarioTerminoLeilao - horarioAtual;
-            Lance lance = new Lance(mensagemQuebrada[3], Integer.parseInt(mensagemQuebrada[4]), tempoNaHora);
-
-            //obtem a chave publica do participante que efetuou o lance
-            for (Usuario u : conexao.getParticipantes()) {
-                if (u.getIdRede() == Integer.parseInt(mensagemQuebrada[4])) {
-                    chavePublicaParticipante = u.getChavePublica();
-                    System.out.println("Obteve a chave pública do participante " + chavePublicaParticipante);
-                }
+        //obtem a chave publica do participante que efetuou o lance
+        for (Usuario u : conexao.getParticipantes()) {
+            if (u.getIdRede() == Integer.parseInt(idParticipanteLance)) {
+                chavePublicaParticipante = u.getChavePublica();
+                System.out.println("Obteve a chave pública do participante " + chavePublicaParticipante);
             }
+        }
 
-            mensagemCriptografadaLance = mensagemQuebrada[5];
-            ControladoraChaves cc = new ControladoraChaves();
-            String mensagemLance = cc.DecriptaLance(mensagemCriptografadaLance, chavePublicaParticipante);
+        ControladoraChaves cc = new ControladoraChaves();
+        String mensagemLance = cc.DecriptaLance(mensagemCriptografadaLance, chavePublicaParticipante);
 
-            lance.setValorOferecidoString(mensagemQuebrada[2]);
-            if (conexao.getLeilaoAtual().getMaiorLance() == null) {
-                if (usuarioLocal.getPapel().equalsIgnoreCase("servidor")) {
-                    conexao.getLeilaoAtual().setMaiorLance(lance);
-                }
-                ComunicacaoEnviaLanceParaCliente celpc = new ComunicacaoEnviaLanceParaCliente(lance, conexao.getLeilaoAtual().getCodigo());
-                celpc.start();
-            } else {
-                if (conexao.getLeilaoAtual().getMaiorLance().getValorOferecido() < lance.getValorOferecido()) {
+        if (conexao.isUsuarioAutenticado()) {
+            mensagem = "4#" + idParticipanteLance + mensagemLance;
+            mensagemQuebrada = mensagem.split("#");
+            if (conexao.getLeilaoAtual().getCodigo().equalsIgnoreCase(mensagemQuebrada[2])) {
+                Long horarioAtual = System.currentTimeMillis();
+                Long horarioTerminoLeilao = conexao.getLeilaoAtual().getTempoNoInicio() + conexao.getLeilaoAtual().getTempoTotalLeilao();
+                Long tempoNaHora = horarioTerminoLeilao - horarioAtual;
+                Lance lance = new Lance(mensagemQuebrada[4], Integer.parseInt(mensagemQuebrada[1]), tempoNaHora);
+
+                lance.setValorOferecidoString(mensagemQuebrada[3]);
+                if (conexao.getLeilaoAtual().getMaiorLance() == null) {
                     if (usuarioLocal.getPapel().equalsIgnoreCase("servidor")) {
                         conexao.getLeilaoAtual().setMaiorLance(lance);
                     }
                     ComunicacaoEnviaLanceParaCliente celpc = new ComunicacaoEnviaLanceParaCliente(lance, conexao.getLeilaoAtual().getCodigo());
                     celpc.start();
+                } else {
+                    if (conexao.getLeilaoAtual().getMaiorLance().getValorOferecido() < lance.getValorOferecido()) {
+                        if (usuarioLocal.getPapel().equalsIgnoreCase("servidor")) {
+                            conexao.getLeilaoAtual().setMaiorLance(lance);
+                        }
+                        ComunicacaoEnviaLanceParaCliente celpc = new ComunicacaoEnviaLanceParaCliente(lance, conexao.getLeilaoAtual().getCodigo());
+                        celpc.start();
+                    }
                 }
             }
+        } else
+        {
+            JanelaConsole.escreveNaJanela("Falha na autenticação de usuário. Um lance não pôde ser considerado.");
         }
+
     }
 
     public void LanceDeLeilaoCliente() throws Exception {

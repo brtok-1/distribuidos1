@@ -30,15 +30,14 @@ public class ComunicacaoEnviaLanceParaServidor extends MinhaComunicacaoEnvio {
     @Override
     public void run() {
         try {
-            String mensagemLance = "#" + codigoLivro + "#" + lance.getValorOferecidoString() + "#" + lance.getIdPublicaQuemOfereceu() + "#" + lance.getIdRedeQuemOfereceu();
+            String mensagemLance = "#" + codigoLivro + "#" + lance.getValorOferecidoString() + "#" + lance.getIdPublicaQuemOfereceu();
             
             ControladoraChaves cc = new ControladoraChaves();
             
-            //String lanceCriptografado = cc.EncriptaLance(mensagemLance);
-            String lanceCriptografado = cc.EncriptaLance("cu");
-            mensagem = "4#" + codigoLivro + "#" + lance.getValorOferecidoString() + "#" + lance.getIdPublicaQuemOfereceu() + "#" + 
-                    lance.getIdRedeQuemOfereceu() + "#" + lanceCriptografado;
-            //mensagem = "4#" + lance.getIdRedeQuemOfereceu() + "#" + lanceCriptografado;
+            String lanceCriptografado = cc.EncriptaLance(mensagemLance);
+//            mensagem = "4#" + lance.getIdRedeQuemOfereceu() +codigoLivro + "#" + lance.getValorOferecidoString() + "#" + 
+//                    lance.getIdPublicaQuemOfereceu();
+            mensagem = "4#" + lance.getIdRedeQuemOfereceu() + "#" + lanceCriptografado;
             
             EnviaMensagem();
         } catch (Exception ex) {

@@ -19,6 +19,7 @@ public class Conexao {
     private int quantidadeUsuarios;
     private long ultimoHelloServer;
     private boolean servidorOnline;
+    private boolean usuarioAutenticado;
     private ArrayList<Livro> estante = new ArrayList<>();
     private ArrayList<Usuario> participantes = new ArrayList<>();
     private Livro leilaoAtual;
@@ -117,7 +118,13 @@ public class Conexao {
     public void setParticipantes(ArrayList<Usuario> participantes) {
         this.participantes = participantes;
     }
-    
-    
+
+    public boolean isUsuarioAutenticado() {
+        return usuarioAutenticado;
+    }
+
+    public void setUsuarioAutenticado(boolean usuarioAutenticado) {
+        this.usuarioAutenticado = usuarioAutenticado;
+    }    
     
 }
