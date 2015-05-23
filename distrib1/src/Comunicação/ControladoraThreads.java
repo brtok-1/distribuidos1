@@ -13,13 +13,13 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
- * @author Bruno
+ * Controladora de execução das threads responsáveis pelo envio e recebimento de informações via multicast
+ * @author Bruno Tokarski e Rafael Vidal
  */
 public class ControladoraThreads extends Thread {
 
     /**
-     *
+     * Thread responsável pela manutenção da comunicação entre os participantes do multicast
      */
     @Override
     public void run() {

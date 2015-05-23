@@ -11,15 +11,15 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
- * @author Bruno
+ * Escuta servidor a fim de certificar-se que o mesmo encontra-se online
+ * @author Bruno Tokarski e Rafael Vidal
  */
 public class ControleEscutaServidor extends Thread {
 
     private Conexao conexao;
 
     /**
-     *
+     * Thread responsável por escutar o hello do servidor
      */
     @Override
     public void run() {

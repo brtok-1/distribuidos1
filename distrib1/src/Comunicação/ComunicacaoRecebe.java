@@ -26,8 +26,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
- * @author Bruno
+ * Recebimento de mensagens via multicast
+ * @author Bruno Tokarski e Rafael Vidal
  */
 public class ComunicacaoRecebe extends Thread {
 
@@ -41,6 +41,9 @@ public class ComunicacaoRecebe extends Thread {
     InetAddress address;
     MulticastSocket clientSocket;
 
+    /**
+     * Thread responsável por manter o servidor escutando o canal multicast
+     */
     @Override
     public void run() {
         try {
@@ -67,6 +70,10 @@ public class ComunicacaoRecebe extends Thread {
         }
     }
 
+    /**
+     * Recebimento de participantes do leilão
+     * @throws Exception 
+     */
     public void RecebeParticipantes() throws Exception {
         Usuario usuario = new Usuario(Integer.parseInt(mensagemQuebrada[2]), mensagemQuebrada[1], mensagemQuebrada[4], null, mensagemQuebrada[3]);
         boolean naoAchou = true;
@@ -92,6 +99,10 @@ public class ComunicacaoRecebe extends Thread {
         }
     }
 
+    /**
+     * Tempo adicional para o recebimento de participantes e configuração incial do leilão
+     * @throws Exception 
+     */
     public void RecebeParticipantesTempoAdicional() throws Exception {
         Usuario usuario = new Usuario(Integer.parseInt(mensagemQuebrada[2]), mensagemQuebrada[1], mensagemQuebrada[4], null, mensagemQuebrada[3]);
         boolean naoAchou = true;
@@ -139,14 +150,20 @@ public class ComunicacaoRecebe extends Thread {
         }
     }
 
-    //Configura a conexao
+    /**
+     * Configura a conexão multicast
+     * @throws Exception 
+     */
     public void ConfiguraConexao() throws Exception {
         address = InetAddress.getByName(conexao.getINET_ADDR());
         clientSocket = new MulticastSocket(conexao.getPORT());
         clientSocket.joinGroup(address);
     }
 
-    //direcionar mensagem para um método ou thread
+    /**
+     * Interpreta a mensagem recebida e a direciona para os métodos adequados
+     * @throws Exception 
+     */
     public void DirecionaMensagem() throws Exception {
         Date now = new Date();
         DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
@@ -219,12 +236,18 @@ public class ComunicacaoRecebe extends Thread {
         }
     }
 
-    //Escuta Hello Servidor
+    /**
+     * Escuta o hello do servidor
+     * @throws Exception 
+     */
     public void HelloServer() throws Exception {
         conexao.setUltimoHelloServer(System.currentTimeMillis());
     }
 
-    //Adiciona o livro na fila para que sejam leiloados
+    /**
+     * Adiciona o livro na estante do servidor para que o mesmo seja leiloado
+     * @throws Exception 
+     */
     public void AdicionaLivroEstante() throws Exception {
         conexao = Conexao.getInstancia();
         ArrayList<Livro> estante = conexao.getEstante();
@@ -240,6 +263,9 @@ public class ComunicacaoRecebe extends Thread {
         conexao.setEstante(estante);
     }
 
+    /**
+     * Inicia um novo leilão
+     */
     public void InicioDoLeilao() {
         Livro livro = new Livro();
         livro.setCodigo(mensagemQuebrada[1]);
@@ -264,6 +290,10 @@ public class ComunicacaoRecebe extends Thread {
         jla.setVisible(true);
     }
 
+    /**
+     * Lance de leilão do servidor para os clientes
+     * @throws Exception 
+     */
     public void LanceDeLeilaoServidor() throws Exception {
         conexao = Conexao.getInstancia();
         usuarioLocal = Usuario.getInstancia();
@@ -316,6 +346,10 @@ public class ComunicacaoRecebe extends Thread {
 
     }
 
+    /**
+     * Lance de leilão de um cliente para o servidor
+     * @throws Exception 
+     */
     public void LanceDeLeilaoCliente() throws Exception {
         conexao = Conexao.getInstancia();
         usuarioLocal = Usuario.getInstancia();
@@ -331,7 +365,10 @@ public class ComunicacaoRecebe extends Thread {
             jla.NotificaoNovoLance();
         }
     }
-
+    
+    /**
+     * Finalização de leilão
+     */
     public void FinalizarLeilaoAgora() {
         Livro l = conexao.getLeilaoAtual();
         if ((l.getIdPublicaDonoLivro().equalsIgnoreCase(mensagemQuebrada[1]))
@@ -341,6 +378,9 @@ public class ComunicacaoRecebe extends Thread {
         }
     }
 
+    /**
+     * Exivir informações de leilão encerrado
+     */
     public void FinalDeLeilao() {
         JanelaLeilaoAcontecendo jla = JanelaLeilaoAcontecendo.getInstancia();
         jla.dispose();

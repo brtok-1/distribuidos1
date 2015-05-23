@@ -11,8 +11,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
- * @author Bruno
+ * Classe responsável pelo envio de livro para o início de um novo leilão
+ * @author Bruno Tokarski e Rafael Vidal
  */
 public class ComunicacaoEnviaLivro extends MinhaComunicacaoEnvio {
 
@@ -24,6 +24,9 @@ public class ComunicacaoEnviaLivro extends MinhaComunicacaoEnvio {
         this.livro = livro;
     }
 
+    /**
+     * Monta a mensagem de envio de livro e aciona o método de envio
+     */
     @Override
     public void run() {
         try {

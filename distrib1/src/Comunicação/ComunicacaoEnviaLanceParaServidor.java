@@ -12,8 +12,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
- * @author Bruno
+ * Classe responsável pelo envio de mensagens do cliente para o servidor
+ * @author Bruno Tokarski e Rafael Vidal
  */
 public class ComunicacaoEnviaLanceParaServidor extends MinhaComunicacaoEnvio {
 
@@ -27,6 +27,9 @@ public class ComunicacaoEnviaLanceParaServidor extends MinhaComunicacaoEnvio {
         this.codigoLivro = codigoLivro;
     }
 
+    /**
+     * Monta a mensagem de lance de cliente para servidor e aciona o método de envio
+     */
     @Override
     public void run() {
         try {
@@ -35,8 +38,6 @@ public class ComunicacaoEnviaLanceParaServidor extends MinhaComunicacaoEnvio {
             ControladoraChaves cc = new ControladoraChaves();
             
             String lanceCriptografado = cc.EncriptaLance(mensagemLance);
-//            mensagem = "4#" + lance.getIdRedeQuemOfereceu() +codigoLivro + "#" + lance.getValorOferecidoString() + "#" + 
-//                    lance.getIdPublicaQuemOfereceu();
             mensagem = "4#" + lance.getIdRedeQuemOfereceu() + "#" + lanceCriptografado;
             
             EnviaMensagem();

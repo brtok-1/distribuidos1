@@ -18,8 +18,8 @@ import java.util.logging.Logger;
 import javax.crypto.Cipher;
 
 /**
- *
- * @author Rafael
+ * Controladora responsável pela utilização de chaves para autenticação de usuários
+ * @author Bruno Tokarski e Rafael Vidal
  */
 public class ControladoraChaves {
 
@@ -30,7 +30,11 @@ public class ControladoraChaves {
         usuario = Usuario.getInstancia();
         conexao = Conexao.getInstancia();
     }
-
+    
+    /**
+     * Método responsável pela geração de um par de chaves para o usuário
+     * 
+     */
     public void GeraChaves() {
 
         try {
@@ -55,7 +59,11 @@ public class ControladoraChaves {
         }
     }
 
-    //Converte as chaves de String para PublicKey e PrivateKay
+    /**
+     * Converte as chaves de String para PublicKey e PrivateKay
+     * 
+     * @throws Exception 
+     */
     public void ConverteChaves() throws Exception {
         for (Usuario u : conexao.getParticipantes()) {
             if (u.getChavePublicaString() != null) {
@@ -69,7 +77,13 @@ public class ControladoraChaves {
 
     }
 
-    //Encripta o lance utilizando a chave privada do participante
+    /**
+     * Encripta o lance utilizando a chave privada do participante
+     * 
+     * @param lance
+     * @return
+     * @throws Exception 
+     */
     public String EncriptaLance(String lance) throws Exception {
         String lanceEncriptado;
 
@@ -83,7 +97,12 @@ public class ControladoraChaves {
         return lanceEncriptado;
     }
 
-    //Decripta o lance utilizando a chave publica do jogador
+    /**
+     * Decripta o lance utilizando a chave publica do jogador
+     * @param lanceEncriptado
+     * @param chavePublicaParticipante
+     * @return 
+     */
     public String DecriptaLance(String lanceEncriptado, PublicKey chavePublicaParticipante){
 
         conexao = Conexao.getInstancia();

@@ -5,15 +5,14 @@
  */
 package Comunicação;
 
-import Chaves.ControladoraChaves;
 import Modelo.Conexao;
 import Modelo.Lance;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
- * @author Bruno
+ * Classe responsável pelo envio de lances do servidor para o cliente
+ * @author Bruno Tokarski e Rafael Vidal
  */
 public class ComunicacaoEnviaLanceParaCliente extends MinhaComunicacaoEnvio {
 
@@ -27,6 +26,9 @@ public class ComunicacaoEnviaLanceParaCliente extends MinhaComunicacaoEnvio {
         this.codigoLivro = codigoLivro;
     }
 
+    /**
+     * Monta a mensagem de lance de servidor para cliente e aciona o método de envio
+     */
     @Override
     public void run() {
         try {

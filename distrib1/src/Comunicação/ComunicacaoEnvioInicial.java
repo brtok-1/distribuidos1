@@ -13,11 +13,15 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
+ * Envio de informações via multicast
  *
- * @author Bruno
+ * @author Bruno Tokarski e Rafael Vidal
  */
 public class ComunicacaoEnvioInicial extends MinhaComunicacaoEnvio {
 
+    /**
+     * Monta a mensagem contendo informações do usuário e aciona o método de envio
+     */
     @Override
     public void run() {
         try {
@@ -29,18 +33,13 @@ public class ComunicacaoEnvioInicial extends MinhaComunicacaoEnvio {
             usuario = Usuario.getInstancia();
             ConfiguraConexaoMulticast();
             while (conexao.getStatusLeilao().equalsIgnoreCase("aguardando") || conexao.getStatusLeilao().equalsIgnoreCase("tempoAdicional")) {
-                EnvioInicial();
+                mensagem = "77#" + usuario.getIdPublica() + "#" + usuario.getIdRede() + "#" + usuario.getPapel() + "#" + usuario.getChavePublicaString();
+                EnviaMensagem();
+                sleep(6000);
             }
         } catch (Exception ex) {
             Logger.getLogger(ComunicacaoEnvioInicial.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
-
-    //Envio de informações enquanto se aguardam os usuários    
-    public void EnvioInicial() throws Exception {
-        mensagem = "77#" + usuario.getIdPublica() + "#" + usuario.getIdRede() + "#" + usuario.getPapel() + "#" + usuario.getChavePublicaString();
-        EnviaMensagem();
-        sleep(6000);
     }
 
 }
