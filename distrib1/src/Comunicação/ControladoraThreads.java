@@ -9,8 +9,6 @@ import GUI.JanelaConsole;
 import GUI.JanelaCriaLeilao;
 import Modelo.Conexao;
 import Modelo.Usuario;
-import java.net.InetAddress;
-import java.net.MulticastSocket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 

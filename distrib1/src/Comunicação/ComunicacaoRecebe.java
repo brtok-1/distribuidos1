@@ -312,6 +312,8 @@ public class ComunicacaoRecebe extends Thread {
         }
 
         ControladoraChaves cc = new ControladoraChaves();
+        
+        conexao.setUsuarioAutenticado(false);
         String mensagemLance = cc.DecriptaLance(mensagemCriptografadaLance, chavePublicaParticipante);
 
         if (conexao.isUsuarioAutenticado()) {

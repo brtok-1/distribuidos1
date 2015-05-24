@@ -36,7 +36,7 @@ public class JanelaLeilaoAcontecendo extends javax.swing.JFrame {
     {        
         LimparCampos();
         Usuario usuario = Usuario.getInstancia();       
-        setTitle(usuario.getIdPublica() + " - O livro recebeu um lance!");
+        setTitle(usuario.getIdPublica() + " - Leilão em andamento");
         Livro leilaoAtual = Conexao.getInstancia().getLeilaoAtual();
         labelCodigo.setText(leilaoAtual.getCodigo());
         labelDescricao.setText(leilaoAtual.getDescricao());
