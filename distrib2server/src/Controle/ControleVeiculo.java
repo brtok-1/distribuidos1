@@ -30,6 +30,7 @@ public class ControleVeiculo {
      * @throws java.lang.Exception
      */
     public void SalvaVeiculo(Veiculo veiculo) throws Exception {
+<<<<<<< HEAD
         //File arquivo = new File("C:/Distrib2/Veiculo.dst");
         FileOutputStream arquivoGrav = new FileOutputStream("C:/Distrib2/Veiculo.dst", true);
 //        if (!arquivo.exists()) {
@@ -49,6 +50,22 @@ public class ControleVeiculo {
         for (Veiculo v : veiculos) {
             System.out.println(v.getIdVeiculo());
             System.out.println(v.getModelo());
+=======
+        File arquivo = new File("C:/Distrib2/Veiculo.dst");
+        try (FileOutputStream arquivoGrav = new FileOutputStream(arquivo)) {
+            if (!arquivo.exists()) {
+                veiculos = new ArrayList<>();
+            } else {
+                veiculos = new ArrayList<>();
+                veiculos = RecuperarVeiculos();
+            }
+            veiculos.add(veiculo);
+            try (ObjectOutputStream objGravar = new ObjectOutputStream(arquivoGrav)) {
+                objGravar.writeObject(veiculos);
+                JOptionPane.showMessageDialog(null, "<html>Veículo ID " + veiculo.getIdVeiculo()
+                        + "<br>cadastrado com sucesso.");
+            }
+>>>>>>> origin/master
         }
     }
 

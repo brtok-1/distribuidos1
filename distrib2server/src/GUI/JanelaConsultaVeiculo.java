@@ -9,17 +9,18 @@ import Controle.ControleVeiculo;
 import Modelo.Veiculo;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Rafael
  */
-public class JanelaCadastroVeiculo extends javax.swing.JDialog {
+public class JanelaConsultaVeiculo extends javax.swing.JDialog {
 
     /**
      * Creates new form JanelaCadastroVeiculo
      */
-    public JanelaCadastroVeiculo() {
+    public JanelaConsultaVeiculo() {
         initComponents();
         setModal(true);
     }
@@ -46,8 +47,7 @@ public class JanelaCadastroVeiculo extends javax.swing.JDialog {
         lblModelo = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         lblAno = new javax.swing.JTextField();
-        botaoSalvar = new javax.swing.JButton();
-        botaoCancelar = new javax.swing.JButton();
+        botaoProcurar = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
 
         jLabel3.setText("Código:");
@@ -57,34 +57,35 @@ public class JanelaCadastroVeiculo extends javax.swing.JDialog {
         jButton2.setText("jButton1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Cadastrar Veículo");
+        setTitle("Consultar Veículo");
 
         jLabel1.setText("Código:");
 
         jLabel2.setText("Placa:");
 
+        lblPlaca.setEditable(false);
+
         jLabel4.setText("Fabricante:");
+
+        lblFabricante.setEditable(false);
 
         jLabel5.setText("Modelo:");
 
+        lblModelo.setEditable(false);
+
         jLabel6.setText("Ano:");
 
-        botaoSalvar.setText("Salvar");
-        botaoSalvar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botaoSalvarActionPerformed(evt);
-            }
-        });
+        lblAno.setEditable(false);
 
-        botaoCancelar.setText("Cancelar");
-        botaoCancelar.addActionListener(new java.awt.event.ActionListener() {
+        botaoProcurar.setText("Procurar");
+        botaoProcurar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botaoCancelarActionPerformed(evt);
+                botaoProcurarActionPerformed(evt);
             }
         });
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel7.setText("Cadastrar Veículo");
+        jLabel7.setText("Consulta Veículo");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -94,25 +95,23 @@ public class JanelaCadastroVeiculo extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addComponent(botaoSalvar)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(botaoCancelar))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel1)
-                                .addComponent(jLabel2)
-                                .addComponent(jLabel4)
-                                .addComponent(jLabel5)
-                                .addComponent(jLabel6))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(lblPlaca, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(lblFabricante, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
-                                .addComponent(lblModelo)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel6))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lblPlaca, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblAno, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(lblCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(lblAno, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(botaoProcurar))
+                            .addComponent(lblFabricante)
+                            .addComponent(lblModelo))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -123,7 +122,8 @@ public class JanelaCadastroVeiculo extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(lblCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botaoProcurar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -140,40 +140,34 @@ public class JanelaCadastroVeiculo extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(botaoSalvar)
-                    .addComponent(botaoCancelar))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        setSize(new java.awt.Dimension(220, 261));
+        setSize(new java.awt.Dimension(227, 223));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void botaoSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoSalvarActionPerformed
+    private void botaoProcurarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoProcurarActionPerformed
         try {
-            Veiculo veiculo = new Veiculo();
-            veiculo.setIdVeiculo(Integer.parseInt(lblCodigo.getText()));
-            veiculo.setAno(Integer.parseInt(lblAno.getText()));
-            veiculo.setPlaca(lblPlaca.getText());
-            veiculo.setFabricante(lblFabricante.getText());
-            veiculo.setModelo(lblModelo.getText());
-            ControleVeiculo cv = new ControleVeiculo();
-            cv.SalvaVeiculo(veiculo);
-            dispose();
+            String id = lblCodigo.getText().trim();
+            if (id.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Código está vazio");
+            } else {
+                ControleVeiculo cv = new ControleVeiculo();
+                Veiculo v = cv.RecuperarVeiculosPorID(Integer.parseInt(id));
+                lblAno.setText(String.valueOf(v.getAno()));
+                lblFabricante.setText(v.getFabricante());
+                lblModelo.setText(v.getModelo());
+                lblPlaca.setText(v.getPlaca());
+                repaint();
+            }
         } catch (Exception ex) {
-            Logger.getLogger(JanelaCadastroVeiculo.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JanelaConsultaVeiculo.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_botaoSalvarActionPerformed
-
-    private void botaoCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCancelarActionPerformed
-        dispose();
-    }//GEN-LAST:event_botaoCancelarActionPerformed
+    }//GEN-LAST:event_botaoProcurarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton botaoCancelar;
-    private javax.swing.JButton botaoSalvar;
+    private javax.swing.JButton botaoProcurar;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
