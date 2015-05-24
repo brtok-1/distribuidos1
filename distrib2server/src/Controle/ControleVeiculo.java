@@ -6,11 +6,13 @@
 package Controle;
 
 import Modelo.Veiculo;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  * Controle da entidade veículo
@@ -20,33 +22,27 @@ import java.util.ArrayList;
 public class ControleVeiculo {
 
     private ArrayList<Veiculo> veiculos;
-    
+
     /**
      * Salvar o objeto veículo
      *
      * @param veiculo
+     * @throws java.lang.Exception
      */
     public void SalvaVeiculo(Veiculo veiculo) throws Exception {
-        FileOutputStream arquivoGrav = new FileOutputStream("C:/Distrib2/Veiculo.dst");
-        veiculos = new ArrayList<>();
-        
-        veiculos = RecuperarVeiculos();
-        
-        veiculos.add(veiculo);
-        
-        ObjectOutputStream objGravar = new ObjectOutputStream(arquivoGrav);
-        objGravar.writeObject(veiculos);
-        objGravar.flush();
-        objGravar.close();
-        arquivoGrav.flush();
-        arquivoGrav.close();
-        
-        veiculos.clear();
-        
-        veiculos = RecuperarVeiculos();
-        
-        for (Veiculo v : veiculos)
-        {
+        File arquivo = new File("C:/Distrib2/Veiculo.dst");
+        try (FileOutputStream arquivoGrav = new FileOutputStream(arquivo)) {
+            if (arquivo.exists()) {
+                veiculos = new ArrayList<>();
+            } else {
+                veiculos = RecuperarVeiculos();
+            }
+            veiculos.add(veiculo);
+            try (ObjectOutputStream objGravar = new ObjectOutputStream(arquivoGrav)) {
+                objGravar.writeObject(veiculos);
+            }
+        }
+        for (Veiculo v : veiculos) {
             System.out.println(v.getIdVeiculo());
             System.out.println(v.getModelo());
         }
@@ -54,29 +50,9 @@ public class ControleVeiculo {
 
     /**
      * Recuperar todos os veículos salvos
-     * @return
-     * @throws Exception 
-     */
-    public ArrayList<Veiculo> RecuperarVeiculos() throws Exception
-    {
-        FileInputStream arquivoLeitura = new FileInputStream("C:/Distrib2/Veiculo.dst");
-
-        ObjectInputStream objLeitura = new ObjectInputStream(arquivoLeitura);
-        
-        veiculos = (ArrayList<Veiculo>) objLeitura.readObject();    
-        
-        objLeitura.close();
-
-        arquivoLeitura.close();
-        
-        return veiculos;
-    }
-    
-    /**
-     * Recuperar um veículo salvo
      *
-     * @return 
-     * @throws java.lang.Exception
+     * @return
+     * @throws Exception
      */
     public ArrayList<Veiculo> RecuperarVeiculos() throws Exception {
         try (FileInputStream arquivoLeitura = new FileInputStream("C:/Distrib2/Veiculo.dst");
@@ -86,4 +62,28 @@ public class ControleVeiculo {
         return veiculos;
     }
 
+    /**
+     * Recuperar um veículo salvo
+     *
+     * @param id
+     * @return
+     * @throws java.lang.Exception
+     */
+    public Veiculo RecuperarVeiculosPorID(int id) throws Exception {
+        File arquivo = new File("C:/Distrib2/Veiculo.dst");
+        if (arquivo.exists()) {
+            veiculos = RecuperarVeiculos();
+            Veiculo v = null;
+            for (Veiculo veiculo : veiculos) {
+                if (veiculo.getIdVeiculo() == id) {
+                    v = veiculo;
+                }
+            }
+            return v;
+        } else {
+            JOptionPane.showMessageDialog(null, "Ainda não existe nenhum veículo cadastrado");
+            return null;
+        }
+
+    }
 }

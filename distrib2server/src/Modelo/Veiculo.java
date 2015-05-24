@@ -13,14 +13,10 @@ import java.io.Serializable;
  */
 public class Veiculo implements Serializable{
     
-    private int idVeiculo;
-    
+    private int idVeiculo;    
     private int ano;
-    
     private String  fabricante;
-    
     private String modelo;
-    
     private String placa;
 
     public int getIdVeiculo() {
