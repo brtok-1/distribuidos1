@@ -30,19 +30,22 @@ public class ControleVeiculo {
      * @throws java.lang.Exception
      */
     public void SalvaVeiculo(Veiculo veiculo) throws Exception {
-        File arquivo = new File("C:/Distrib2/Veiculo.dst");
-        try (FileOutputStream arquivoGrav = new FileOutputStream(arquivo)) {
-            if (!arquivo.exists()) {
-                veiculos = new ArrayList<>();
-            } else {
-                veiculos = new ArrayList<>();
-                veiculos = RecuperarVeiculos();
-            }
-            veiculos.add(veiculo);
-            try (ObjectOutputStream objGravar = new ObjectOutputStream(arquivoGrav)) {
-                objGravar.writeObject(veiculos);
-            }
-        }
+        //File arquivo = new File("C:/Distrib2/Veiculo.dst");
+        FileOutputStream arquivoGrav = new FileOutputStream("C:/Distrib2/Veiculo.dst", true);
+//        if (!arquivo.exists()) {
+//            veiculos = new ArrayList<>();
+//        } else {
+//            veiculos = new ArrayList<>();
+//
+//        }
+        veiculos = new ArrayList<>();
+        veiculos = RecuperarVeiculos();
+        veiculos.add(veiculo);
+        ObjectOutputStream objGravar = new ObjectOutputStream(arquivoGrav);
+        objGravar.writeObject(veiculos);
+        
+        veiculos = RecuperarVeiculos();
+
         for (Veiculo v : veiculos) {
             System.out.println(v.getIdVeiculo());
             System.out.println(v.getModelo());
@@ -58,11 +61,13 @@ public class ControleVeiculo {
     public ArrayList<Veiculo> RecuperarVeiculos() throws Exception {
         FileInputStream arquivoLeitura = new FileInputStream("C:/Distrib2/Veiculo.dst");
         
-        if (arquivoLeitura.available() != 0)
-        {
+        //arquivoLeitura.
+        System.out.println("Avalible " + arquivoLeitura.available());
+        if (arquivoLeitura.available() != 0) {
+            System.out.println("Lendo arquivo");
             ObjectInputStream objLeitura = new ObjectInputStream(arquivoLeitura);
             veiculos = (ArrayList<Veiculo>) objLeitura.readObject();
-        }       
+        }
 
         return veiculos;
     }
