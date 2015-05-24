@@ -5,11 +5,13 @@
  */
 package Modelo;
 
+import java.io.Serializable;
+
 /**
  * Classe modelo da entidade veículo
  * @author Bruno Tokarski e Rafael Vidal
  */
-public class Veiculo {
+public class Veiculo implements Serializable{
     
     private int idVeiculo;
     

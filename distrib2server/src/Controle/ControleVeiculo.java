@@ -31,6 +31,9 @@ public class ControleVeiculo {
         FileOutputStream arquivoGrav = new FileOutputStream("C:/Distrib2/Veiculo.dst");        
 
         veiculos = new ArrayList<>();
+        
+        veiculos = RecuperarVeiculos();
+        
         veiculos.add(veiculo);
         
         ObjectOutputStream objGravar = new ObjectOutputStream(arquivoGrav);
@@ -39,10 +42,40 @@ public class ControleVeiculo {
         objGravar.close();
         arquivoGrav.flush();
         arquivoGrav.close();
+        
+        veiculos.clear();
+        
+        veiculos = RecuperarVeiculos();
+        
+        for (Veiculo v : veiculos)
+        {
+            System.out.println(v.getIdVeiculo());
+            System.out.println(v.getModelo());
+        }
     }
 
     /**
-     * Recuperar o objeto veículo salvo
+     * Recuperar todos os veículos salvos
+     * @return
+     * @throws Exception 
+     */
+    public ArrayList<Veiculo> RecuperarVeiculos() throws Exception
+    {
+        FileInputStream arquivoLeitura = new FileInputStream("C:/Distrib2/Veiculo.dst");
+
+        ObjectInputStream objLeitura = new ObjectInputStream(arquivoLeitura);
+        
+        veiculos = (ArrayList<Veiculo>) objLeitura.readObject();    
+        
+        objLeitura.close();
+
+        arquivoLeitura.close();
+        
+        return veiculos;
+    }
+    
+    /**
+     * Recuperar um veículo salvo
      *
      */
     public Veiculo RecuperarVeiculo() throws Exception {
