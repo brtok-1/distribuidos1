@@ -155,11 +155,15 @@ public class JanelaConsultaVeiculo extends javax.swing.JDialog {
             } else {
                 ControleVeiculo cv = new ControleVeiculo();
                 Veiculo v = cv.RecuperarVeiculosPorID(Integer.parseInt(id));
-                lblAno.setText(String.valueOf(v.getAno()));
-                lblFabricante.setText(v.getFabricante());
-                lblModelo.setText(v.getModelo());
-                lblPlaca.setText(v.getPlaca());
-                repaint();
+                if (v == null) {
+                    JOptionPane.showMessageDialog(null, "Não foi encontrado veículo com o código " + id);
+                } else {
+                    lblAno.setText(String.valueOf(v.getAno()));
+                    lblFabricante.setText(v.getFabricante());
+                    lblModelo.setText(v.getModelo());
+                    lblPlaca.setText(v.getPlaca());
+                    repaint();
+                }
             }
         } catch (Exception ex) {
             Logger.getLogger(JanelaConsultaVeiculo.class.getName()).log(Level.SEVERE, null, ex);

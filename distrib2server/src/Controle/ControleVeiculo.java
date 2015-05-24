@@ -32,11 +32,10 @@ public class ControleVeiculo {
     public void SalvaVeiculo(Veiculo veiculo) throws Exception {
         File arquivo = new File("C:/Distrib2/Veiculo.dst");
         try (FileOutputStream arquivoGrav = new FileOutputStream(arquivo)) {
-            if (!arquivo.exists()) {
-                veiculos = new ArrayList<>();
+            if (arquivo.exists()) {
+                veiculos = RecuperarVeiculos();
             } else {
                 veiculos = new ArrayList<>();
-                veiculos = RecuperarVeiculos();
             }
             veiculos.add(veiculo);
             try (ObjectOutputStream objGravar = new ObjectOutputStream(arquivoGrav)) {
