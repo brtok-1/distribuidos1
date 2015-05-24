@@ -27,9 +27,7 @@ public class ControleVeiculo {
      * @param veiculo
      */
     public void SalvaVeiculo(Veiculo veiculo) throws Exception {
-
-        FileOutputStream arquivoGrav = new FileOutputStream("C:/Distrib2/Veiculo.dst");        
-
+        FileOutputStream arquivoGrav = new FileOutputStream("C:/Distrib2/Veiculo.dst");
         veiculos = new ArrayList<>();
         
         veiculos = RecuperarVeiculos();
@@ -77,21 +75,15 @@ public class ControleVeiculo {
     /**
      * Recuperar um veículo salvo
      *
+     * @return 
+     * @throws java.lang.Exception
      */
-    public Veiculo RecuperarVeiculo() throws Exception {
-        FileInputStream arquivoLeitura = new FileInputStream("C:/Distrib2/Veiculo.dst");
-
-        ObjectInputStream objLeitura = new ObjectInputStream(arquivoLeitura);
-        
-        veiculos = (ArrayList<Veiculo>) objLeitura.readObject();        
-        
-        Veiculo veiculo = new Veiculo();
-        
-        objLeitura.close();
-
-        arquivoLeitura.close();
-        
-        return veiculo;
+    public ArrayList<Veiculo> RecuperarVeiculos() throws Exception {
+        try (FileInputStream arquivoLeitura = new FileInputStream("C:/Distrib2/Veiculo.dst");
+                ObjectInputStream objLeitura = new ObjectInputStream(arquivoLeitura)) {
+            veiculos = (ArrayList<Veiculo>) objLeitura.readObject();
+        }
+        return veiculos;
     }
 
 }
