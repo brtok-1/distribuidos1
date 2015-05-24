@@ -72,7 +72,9 @@ public class JanelaInicialServidor extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCadastrarVeiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarVeiculoActionPerformed
-        // TODO add your handling code here:
+        JanelaCadastroVeiculo jcv = new JanelaCadastroVeiculo();
+        jcv.setVisible(true);
+        dispose();
     }//GEN-LAST:event_btnCadastrarVeiculoActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

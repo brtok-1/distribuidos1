@@ -30,6 +30,9 @@ public class ControleVeiculo {
 
         FileOutputStream arquivoGrav = new FileOutputStream("C:/Distrib2/Veiculo.dst");        
 
+        veiculos = new ArrayList<>();
+        veiculos.add(veiculo);
+        
         ObjectOutputStream objGravar = new ObjectOutputStream(arquivoGrav);
         objGravar.writeObject(veiculos);
         objGravar.flush();

@@ -57,11 +57,8 @@ public class JanelaCadastroVeiculo extends javax.swing.JFrame {
 
         jLabel1.setText("Código:");
 
-        lblCodigo.setText("jTextField1");
-
         jLabel2.setText("Placa");
 
-        lblPlaca.setText("jTextField1");
         lblPlaca.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 lblPlacaActionPerformed(evt);
@@ -70,15 +67,21 @@ public class JanelaCadastroVeiculo extends javax.swing.JFrame {
 
         jLabel4.setText("Fabricante:");
 
-        lblFabricante.setText("jTextField1");
+        lblFabricante.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                lblFabricanteActionPerformed(evt);
+            }
+        });
 
         jLabel5.setText("Modelo:");
 
-        lblModelo.setText("jTextField1");
-
         jLabel6.setText("Ano:");
 
-        lblAno.setText("jTextField1");
+        lblAno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                lblAnoActionPerformed(evt);
+            }
+        });
 
         jButton1.setText("Salvar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -97,27 +100,27 @@ public class JanelaCadastroVeiculo extends javax.swing.JFrame {
                 .addGap(46, 46, 46)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(lblAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(lblPlaca, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel4)
                                 .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
-                                .addComponent(lblCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel4)
+                                .addComponent(jLabel2))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(lblFabricante))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(lblFabricante)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(lblPlaca, javax.swing.GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE)
+                                        .addComponent(lblCodigo))
+                                    .addGap(0, 0, Short.MAX_VALUE))))
                         .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel5)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel5)
+                                .addComponent(jLabel6))
                             .addGap(27, 27, 27)
-                            .addComponent(lblModelo, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(lblModelo, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lblAno, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(37, 37, 37)
@@ -176,11 +179,19 @@ public class JanelaCadastroVeiculo extends javax.swing.JFrame {
             cv.SalvaVeiculo(veiculo);
         }catch(Exception e)
         {
-            System.out.println("Erro ao salvar o veículo: " + e.getMessage());
+            e.printStackTrace();
         }
 
 
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void lblFabricanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lblFabricanteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lblFabricanteActionPerformed
+
+    private void lblAnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lblAnoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lblAnoActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
