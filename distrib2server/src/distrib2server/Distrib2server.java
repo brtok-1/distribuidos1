@@ -5,6 +5,8 @@
  */
 package distrib2server;
 
+import GUI.JanelaInicialServidor;
+
 /**
  *
  * @author Bruno
@@ -16,6 +18,8 @@ public class Distrib2server {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        JanelaInicialServidor jis = new JanelaInicialServidor();
+        jis.setVisible(true);
     }
     
 }
