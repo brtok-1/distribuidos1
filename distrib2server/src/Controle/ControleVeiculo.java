@@ -30,42 +30,29 @@ public class ControleVeiculo {
      * @throws java.lang.Exception
      */
     public void SalvaVeiculo(Veiculo veiculo) throws Exception {
-<<<<<<< HEAD
-        //File arquivo = new File("C:/Distrib2/Veiculo.dst");
-        FileOutputStream arquivoGrav = new FileOutputStream("C:/Distrib2/Veiculo.dst", true);
-//        if (!arquivo.exists()) {
-//            veiculos = new ArrayList<>();
-//        } else {
-//            veiculos = new ArrayList<>();
-//
-//        }
+
         veiculos = new ArrayList<>();
         veiculos = RecuperarVeiculos();
         veiculos.add(veiculo);
+
+        //Deleta o arquivo
+        File arquivo = new File("C:/Distrib2/Veiculo.dst");
+        arquivo.delete();
+
+        //Cria um arquivo novo
+        FileOutputStream arquivoGrav = new FileOutputStream(arquivo);
+
         ObjectOutputStream objGravar = new ObjectOutputStream(arquivoGrav);
         objGravar.writeObject(veiculos);
-        
+
+        //Exibir todos veículos salvos no array (só pra testar)
         veiculos = RecuperarVeiculos();
 
         for (Veiculo v : veiculos) {
             System.out.println(v.getIdVeiculo());
             System.out.println(v.getModelo());
-=======
-        File arquivo = new File("C:/Distrib2/Veiculo.dst");
-        try (FileOutputStream arquivoGrav = new FileOutputStream(arquivo)) {
-            if (arquivo.exists()) {
-                veiculos = RecuperarVeiculos();
-            } else {
-                veiculos = new ArrayList<>();
-            }
-            veiculos.add(veiculo);
-            try (ObjectOutputStream objGravar = new ObjectOutputStream(arquivoGrav)) {
-                objGravar.writeObject(veiculos);
-                JOptionPane.showMessageDialog(null, "<html>Veículo ID " + veiculo.getIdVeiculo()
-                        + "<br>cadastrado com sucesso.");
-            }
->>>>>>> origin/master
         }
+
     }
 
     /**
@@ -75,14 +62,18 @@ public class ControleVeiculo {
      * @throws Exception
      */
     public ArrayList<Veiculo> RecuperarVeiculos() throws Exception {
-        FileInputStream arquivoLeitura = new FileInputStream("C:/Distrib2/Veiculo.dst");
-        
-        //arquivoLeitura.
-        System.out.println("Avalible " + arquivoLeitura.available());
-        if (arquivoLeitura.available() != 0) {
-            System.out.println("Lendo arquivo");
-            ObjectInputStream objLeitura = new ObjectInputStream(arquivoLeitura);
-            veiculos = (ArrayList<Veiculo>) objLeitura.readObject();
+
+        File arquivo = new File("C:/Distrib2/Veiculo.dst");
+
+        if (arquivo.exists()) {
+            FileInputStream arquivoLeitura = new FileInputStream("C:/Distrib2/Veiculo.dst");
+
+            System.out.println("Avalible " + arquivoLeitura.available());
+            if (arquivoLeitura.available() != 0) {
+                System.out.println("Lendo arquivo");
+                ObjectInputStream objLeitura = new ObjectInputStream(arquivoLeitura);
+                veiculos = (ArrayList<Veiculo>) objLeitura.readObject();
+            }
         }
 
         return veiculos;
