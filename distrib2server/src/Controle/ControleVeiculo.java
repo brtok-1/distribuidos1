@@ -41,11 +41,9 @@ public class ControleVeiculo {
             veiculos.add(veiculo);
             try (ObjectOutputStream objGravar = new ObjectOutputStream(arquivoGrav)) {
                 objGravar.writeObject(veiculos);
+                JOptionPane.showMessageDialog(null, "<html>Veículo ID " + veiculo.getIdVeiculo()
+                        + "<br>cadastrado com sucesso.");
             }
-        }
-        for (Veiculo v : veiculos) {
-            System.out.println(v.getIdVeiculo());
-            System.out.println(v.getModelo());
         }
     }
 
