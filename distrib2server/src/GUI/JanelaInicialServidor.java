@@ -5,6 +5,9 @@
  */
 package GUI;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Rafael
@@ -46,7 +49,7 @@ public class JanelaInicialServidor extends javax.swing.JFrame {
             }
         });
 
-        jButton4.setText("Consultar Veículos");
+        jButton4.setText("Relatório de Veículos");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
@@ -74,7 +77,7 @@ public class JanelaInicialServidor extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        setSize(new java.awt.Dimension(278, 84));
+        setSize(new java.awt.Dimension(290, 84));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -85,9 +88,13 @@ public class JanelaInicialServidor extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCadastrarVeiculoActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        JanelaConsultaVeiculo jcv = new JanelaConsultaVeiculo();
-        jcv.setVisible(true);
-        jcv.repaint();
+        try {
+            JanelaRelatorioVeiculo jcv = new JanelaRelatorioVeiculo();
+            jcv.setVisible(true);
+            jcv.repaint();
+        } catch (Exception ex) {
+            Logger.getLogger(JanelaInicialServidor.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton4ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

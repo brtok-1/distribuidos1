@@ -21,7 +21,6 @@ public class Distrib2server {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
@@ -30,6 +29,7 @@ public class Distrib2server {
 
         JanelaInicialServidor jis = new JanelaInicialServidor();
         jis.setVisible(true);
+        jis.repaint();
     }
 
 }

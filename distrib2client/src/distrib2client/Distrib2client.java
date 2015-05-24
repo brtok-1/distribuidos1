@@ -5,6 +5,12 @@
  */
 package distrib2client;
 
+import GUI.InicialClient;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+
 /**
  *
  * @author Bruno
@@ -15,7 +21,15 @@ public class Distrib2client {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
+            Logger.getLogger(Distrib2client.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        InicialClient ic = new InicialClient();
+        ic.setVisible(true);
+        ic.repaint();
     }
     
 }
