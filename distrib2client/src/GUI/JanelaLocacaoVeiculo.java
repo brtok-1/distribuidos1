@@ -5,6 +5,7 @@
  */
 package GUI;
 
+import Controle.ControleRMICliente;
 import Modelo.Locacao;
 import Modelo.Veiculo;
 import java.util.ArrayList;
@@ -27,17 +28,19 @@ public class JanelaLocacaoVeiculo extends javax.swing.JDialog {
         initComponents();
         setModal(true);
 
-//        ControleVeiculo cv = new ControleVeiculo();
-//        ArrayList<Veiculo> veiculos = cv.RecuperarVeiculos();
-//        Object[][] tabela = new Object[veiculos.size()][5];
-//        for (int i = 0; i < veiculos.size(); i++) {
-//            tabela[i][0] = veiculos.get(i).getIdVeiculo();
-//            tabela[i][1] = veiculos.get(i).getPlaca();
-//            tabela[i][2] = veiculos.get(i).getFabricante();
-//            tabela[i][3] = veiculos.get(i).getModelo();
-//            tabela[i][4] = veiculos.get(i).getAno();
-//        }
-//        fazTabela(tabela);
+        setContentPane(jPanel1);
+        jPanel1.setVisible(true);
+        ControleRMICliente crmic = new ControleRMICliente();
+        veiculos = crmic.RecuperarVeiculos();
+        Object[][] tabela = new Object[veiculos.size()][5];
+        for (int i = 0; i < veiculos.size(); i++) {
+            tabela[i][0] = veiculos.get(i).getIdVeiculo();
+            tabela[i][1] = veiculos.get(i).getPlaca();
+            tabela[i][2] = veiculos.get(i).getFabricante();
+            tabela[i][3] = veiculos.get(i).getModelo();
+            tabela[i][4] = veiculos.get(i).getAno();
+        }
+        fazTabela(tabela);
     }
 
     public final void fazTabela(Object[][] tabela) {
@@ -380,10 +383,10 @@ public class JanelaLocacaoVeiculo extends javax.swing.JDialog {
 
     private void botaoConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoConfirmarActionPerformed
         Locacao loc = new Locacao();
-        loc.setDataInicio(labelDataInicio.getText());
-        loc.setDataTermino(labelDataTermino.getText());
-        loc.setHorarioInicio(labelHorarioInicio.getText());
-        loc.setHorarioTermino(labelHorarioTermino.getText());
+//        loc.setDataInicio(labelDataInicio.getText());
+//        loc.setDataTermino(labelDataTermino.getText());
+//        loc.setHorarioInicio(labelHorarioInicio.getText());
+//        loc.setHorarioTermino(labelHorarioTermino.getText());
         loc.setIdadeCondutor(Integer.parseInt(spinnerIdade.getValue().toString()));
         loc.setLocalDevolucao(labelLocalDevolucao.getText());
         loc.setLocalRetirada(labelLocalRetirada.getText());

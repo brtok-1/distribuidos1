@@ -30,6 +30,11 @@ public class JanelaConsole extends javax.swing.JFrame {
     public static JanelaConsole instancia = new JanelaConsole();
 
     public static JanelaConsole getInstancia() {
+        if(instancia == null)
+        {
+            System.out.println("Criou nova instancia da janela");
+            instancia = new JanelaConsole();
+        }
         return instancia;
     }
 
@@ -38,7 +43,7 @@ public class JanelaConsole extends javax.swing.JFrame {
      * @param s
      * @throws InterruptedException 
      */
-    public static void escreveNaJanela(String s) throws InterruptedException {
+    public void EscreveNaJanela(String s) throws InterruptedException {
         mensagens.add(s);
         if (mensagens.size() > 12) {
             mensagens.remove(0);

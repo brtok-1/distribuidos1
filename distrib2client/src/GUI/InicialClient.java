@@ -5,17 +5,23 @@
  */
 package GUI;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Bruno
  */
 public class InicialClient extends javax.swing.JFrame {
 
+    JanelaConsole console;
     /**
      * Creates new form InicialClient
      */
     public InicialClient() {
         initComponents();
+        
+        
     }
 
     /**
@@ -34,6 +40,11 @@ public class InicialClient extends javax.swing.JFrame {
         setTitle("Cliente");
 
         jButton1.setText("Locar Carro");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Registrar interesse em eventos de um Carro");
 
@@ -59,7 +70,27 @@ public class InicialClient extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        console = JanelaConsole.getInstancia();
+        try {
+            System.out.println("Vai abrir janela");
+            JanelaLocacaoVeiculo jlv = new JanelaLocacaoVeiculo();
+            jlv.setVisible(true);
+            System.out.println("Abriu nova janela");
+        } catch (Exception e)
+        {
+            try { 
+                console.EscreveNaJanela("Erro: " + e.getMessage());
+                e.printStackTrace();
+            } catch (InterruptedException ex) {
+                Logger.getLogger(InicialClient.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

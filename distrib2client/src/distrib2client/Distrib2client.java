@@ -7,6 +7,7 @@ package distrib2client;
 
 import Controle.ControleRMICliente;
 import GUI.InicialClient;
+import GUI.JanelaConsole;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.UIManager;
@@ -21,19 +22,27 @@ public class Distrib2client {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
+        JanelaConsole janelaConsole = JanelaConsole.getInstancia();
+        janelaConsole.setVisible(true);
+
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
-            Logger.getLogger(Distrib2client.class.getName()).log(Level.SEVERE, null, ex);
+
+            InicialClient ic = new InicialClient();
+            ic.setVisible(true);
+            ic.repaint();
+
+            janelaConsole.EscreveNaJanela("Aplicação iniciada.");
+
+            ControleRMICliente crmic = new ControleRMICliente();
+            crmic.IniciaRMI();
+
+        } catch (Exception e) {
+            janelaConsole.EscreveNaJanela("Erro: " + e.getMessage());
+            e.printStackTrace();
         }
 
-        InicialClient ic = new InicialClient();
-        ic.setVisible(true);
-        ic.repaint();
-        
-        ControleRMICliente crmic = new ControleRMICliente();
-        crmic.IniciaRMI();
     }
-    
+
 }
