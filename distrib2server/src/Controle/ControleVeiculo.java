@@ -73,7 +73,7 @@ public class ControleVeiculo {
      * @return
      * @throws java.lang.Exception
      */
-    public Veiculo RecuperarVeiculosPorID(int id) throws Exception {
+    public Veiculo RecuperarVeiculoPorID(int id) throws Exception {
         File arquivo = new File("C:/Distrib2/Veiculo.dst");
         if (arquivo.exists()) {
             veiculos = RecuperarVeiculos();
