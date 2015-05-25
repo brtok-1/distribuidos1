@@ -5,8 +5,9 @@
  */
 package Comunicacao;
 
+import Controle.ControleClientes;
 import Controle.ControleVeiculo;
-import Interface.Comunicacao;
+import Interface.ComunicacaoServer;
 import Modelo.Veiculo;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
@@ -15,7 +16,7 @@ import java.util.ArrayList;
  * Métodos acessíveis aos clientes via RMI
  * @author Bruno Tokarski e Rafael Vidal
  */
-public class RMIServer extends UnicastRemoteObject implements Comunicacao {
+public class RMIServer extends UnicastRemoteObject implements ComunicacaoServer {
 
     public RMIServer() throws Exception {
         super();
@@ -24,10 +25,7 @@ public class RMIServer extends UnicastRemoteObject implements Comunicacao {
     @Override
     public ArrayList<Veiculo> ConsultarVeiculos() throws Exception {
         ControleVeiculo cv = new ControleVeiculo();
-
-        ArrayList<Veiculo> veiculos = cv.RecuperarVeiculos();
-
-        return veiculos;
+        return cv.RecuperarVeiculos();
     }
 
     @Override
@@ -40,9 +38,9 @@ public class RMIServer extends UnicastRemoteObject implements Comunicacao {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public String TesteRMI() throws Exception {
-        return "Conexão RMI estabelecida.";
+    public void SalvarCredencialRMI(String idClient) throws Exception {
+        ControleClientes cc = ControleClientes.getInstancia();
+        
     }
 
 }

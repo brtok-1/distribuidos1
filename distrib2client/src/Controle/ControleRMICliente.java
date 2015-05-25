@@ -6,7 +6,7 @@
 package Controle;
 
 import GUI.JanelaConsole;
-import Interface.Comunicacao;
+import Interface.ComunicacaoServer;
 import Modelo.Veiculo;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -19,7 +19,7 @@ import java.util.ArrayList;
 public class ControleRMICliente {
 
     Registry reg;
-    Comunicacao obj;
+    ComunicacaoServer obj;
     JanelaConsole janelaConsole;
 
     public ControleRMICliente() throws Exception {
@@ -27,7 +27,7 @@ public class ControleRMICliente {
         janelaConsole = JanelaConsole.getInstancia();
         
         reg = LocateRegistry.getRegistry("localhost", 1099);
-        obj = (Comunicacao) reg.lookup("servidor");
+        obj = (ComunicacaoServer) reg.lookup("servidor");
     }
     
     /**
@@ -36,14 +36,6 @@ public class ControleRMICliente {
      */
     public void IniciaRMI() throws InterruptedException {
 
-        try
-        {
-            janelaConsole.EscreveNaJanela(obj.TesteRMI());
-        }catch (Exception e)
-        {
-            janelaConsole.EscreveNaJanela("Erro na comunicação com o servidor: " + e.getMessage());
-            e.printStackTrace();
-        }      
 
     }
     

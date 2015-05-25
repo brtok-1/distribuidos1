@@ -13,7 +13,7 @@ import java.util.ArrayList;
  *
  * @author Rafael
  */
-public interface Comunicacao extends Remote {
+public interface ComunicacaoServer extends Remote {
     
     /**
      * 
@@ -26,6 +26,6 @@ public interface Comunicacao extends Remote {
     
     void ManifestarInteresse() throws Exception;
     
-    String TesteRMI() throws Exception;
+    void SalvarCredencialRMI(String idClient) throws Exception;
     
 }
