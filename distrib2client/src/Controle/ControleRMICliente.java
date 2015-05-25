@@ -32,7 +32,7 @@ public class ControleRMICliente {
     
     /**
      * Teste inicial da comunicação RMI
-     * @throws Exception 
+     * @throws InterruptedException 
      */
     public void IniciaRMI() throws InterruptedException {
 
@@ -47,14 +47,15 @@ public class ControleRMICliente {
 
     }
     
-    public ArrayList<Veiculo> RecuperarVeiculos() throws Exception
-    {
+    /**
+     * 
+     * @return
+     * @throws Exception 
+     */
+    public ArrayList<Veiculo> RecuperarVeiculos() throws Exception {
         janelaConsole.EscreveNaJanela("Recuperando veículos...");
-        ArrayList<Veiculo> veiculos = new ArrayList<>();
-        
-        veiculos = obj.ConsultarVeiculos();
+        ArrayList<Veiculo> veiculos = obj.ConsultarVeiculos();
         janelaConsole.EscreveNaJanela("Veículos recuperados. Total: " + veiculos.size());
-        
         return veiculos;
     }
 }

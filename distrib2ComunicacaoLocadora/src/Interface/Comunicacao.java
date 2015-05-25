@@ -15,6 +15,11 @@ import java.util.ArrayList;
  */
 public interface Comunicacao extends Remote {
     
+    /**
+     * 
+     * @return
+     * @throws Exception 
+     */
     ArrayList<Veiculo> ConsultarVeiculos() throws Exception;
     
     void EfetuarLocacao() throws Exception;
