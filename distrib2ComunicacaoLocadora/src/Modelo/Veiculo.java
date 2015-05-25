@@ -67,4 +67,14 @@ public class Veiculo implements Serializable{
     public void setValorDiaria(double valorDiaria) {
         this.valorDiaria = valorDiaria;
     }
+    
+    public String getValorDiariaString() {
+        String valor = String.valueOf(valorDiaria).replaceAll("\\.", ",");
+        return valor;
+    }
+
+    public void setValorDiariaString(String valor) {
+        valor = valor.replaceAll(",", "\\.");
+        this.valorDiaria = Double.parseDouble(valor);
+    }
 }
