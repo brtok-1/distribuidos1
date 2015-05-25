@@ -5,8 +5,11 @@
  */
 package GUI;
 
+import Modelo.Locacao;
 import Modelo.Veiculo;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -14,24 +17,27 @@ import java.util.ArrayList;
  */
 public class JanelaLocacaoVeiculo extends javax.swing.JDialog {
 
+    ArrayList<Veiculo> veiculos;
+    Veiculo selecionado;
+            
     /**
      * Creates new form JanelaCadastroVeiculo
      */
     public JanelaLocacaoVeiculo() throws Exception {
         initComponents();
         setModal(true);
-
-        ControleVeiculo cv = new ControleVeiculo();
-        ArrayList<Veiculo> veiculos = cv.RecuperarVeiculos();
-        Object[][] tabela = new Object[veiculos.size()][5];
-        for (int i = 0; i < veiculos.size(); i++) {
-            tabela[i][0] = veiculos.get(i).getIdVeiculo();
-            tabela[i][1] = veiculos.get(i).getPlaca();
-            tabela[i][2] = veiculos.get(i).getFabricante();
-            tabela[i][3] = veiculos.get(i).getModelo();
-            tabela[i][4] = veiculos.get(i).getAno();
-        }
-        fazTabela(tabela);
+        this.setContentPane(jPanel1);
+        jPanel1.setVisible(true);
+//        ArrayList<Veiculo> veiculos = cv.RecuperarVeiculos();
+//        Object[][] tabela = new Object[veiculos.size()][5];
+//        for (int i = 0; i < veiculos.size(); i++) {
+//            tabela[i][0] = veiculos.get(i).getIdVeiculo();
+//            tabela[i][1] = veiculos.get(i).getPlaca();
+//            tabela[i][2] = veiculos.get(i).getFabricante();
+//            tabela[i][3] = veiculos.get(i).getModelo();
+//            tabela[i][4] = veiculos.get(i).getAno();
+//        }
+//        fazTabela(tabela);
     }
 
     public final void fazTabela(Object[][] tabela) {
@@ -95,24 +101,29 @@ public class JanelaLocacaoVeiculo extends javax.swing.JDialog {
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jFormattedTextField1 = new javax.swing.JFormattedTextField();
-        jFormattedTextField2 = new javax.swing.JFormattedTextField();
-        jFormattedTextField3 = new javax.swing.JFormattedTextField();
-        jFormattedTextField4 = new javax.swing.JFormattedTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jSpinner1 = new javax.swing.JSpinner();
-        jSpinner2 = new javax.swing.JSpinner();
-        jButton1 = new javax.swing.JButton();
-        jLabel13 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        labelLocalRetirada = new javax.swing.JTextField();
+        labelLocalDevolucao = new javax.swing.JTextField();
+        labelDataInicio = new javax.swing.JFormattedTextField();
+        labelHorarioInicio = new javax.swing.JFormattedTextField();
+        labelHorarioTermino = new javax.swing.JFormattedTextField();
+        labelDataTermino = new javax.swing.JFormattedTextField();
+        labelNomeCondutor = new javax.swing.JTextField();
+        labelNumeroCartao = new javax.swing.JTextField();
+        spinnerIdade = new javax.swing.JSpinner();
+        spinnerParcelas = new javax.swing.JSpinner();
+        botaoConfirmar = new javax.swing.JButton();
+        labelDados = new javax.swing.JLabel();
+        botaoVoltar = new javax.swing.JButton();
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel7.setText("Selecione um Veículo Cadastrado");
 
         botaoAvancar.setText("Avançar >>");
+        botaoAvancar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoAvancarActionPerformed(evt);
+            }
+        });
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -198,23 +209,33 @@ public class JanelaLocacaoVeiculo extends javax.swing.JDialog {
 
         jLabel12.setText("Número de Parcelas:");
 
-        jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter()));
+        labelDataInicio.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter()));
 
-        jFormattedTextField2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getTimeInstance(java.text.DateFormat.SHORT))));
+        labelHorarioInicio.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getTimeInstance(java.text.DateFormat.SHORT))));
 
-        jFormattedTextField3.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getTimeInstance(java.text.DateFormat.SHORT))));
+        labelHorarioTermino.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getTimeInstance(java.text.DateFormat.SHORT))));
 
-        jFormattedTextField4.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter()));
+        labelDataTermino.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter()));
 
-        jSpinner1.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(18), Integer.valueOf(18), null, Integer.valueOf(1)));
+        spinnerIdade.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(18), Integer.valueOf(18), null, Integer.valueOf(1)));
 
-        jSpinner2.setModel(new javax.swing.SpinnerNumberModel(1, 1, 6, 1));
+        spinnerParcelas.setModel(new javax.swing.SpinnerNumberModel(1, 1, 6, 1));
 
-        jButton1.setText("Confirmar Locação");
+        botaoConfirmar.setText("Confirmar Locação");
+        botaoConfirmar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoConfirmarActionPerformed(evt);
+            }
+        });
 
-        jLabel13.setText("Dados do Veículo Selecionado");
+        labelDados.setText("Dados do Veículo Selecionado");
 
-        jButton2.setText("<< Voltar e Escolher outro Carro");
+        botaoVoltar.setText("<< Voltar e Escolher outro Carro");
+        botaoVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoVoltarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -237,28 +258,28 @@ public class JanelaLocacaoVeiculo extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jTextField2)
-                                .addComponent(jFormattedTextField1)
-                                .addComponent(jFormattedTextField2)
-                                .addComponent(jFormattedTextField3)
-                                .addComponent(jFormattedTextField4)
-                                .addComponent(jTextField1)
-                                .addComponent(jTextField3)
-                                .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(labelLocalDevolucao)
+                                .addComponent(labelDataInicio)
+                                .addComponent(labelHorarioInicio)
+                                .addComponent(labelHorarioTermino)
+                                .addComponent(labelDataTermino)
+                                .addComponent(labelLocalRetirada)
+                                .addComponent(labelNomeCondutor)
+                                .addComponent(labelNumeroCartao, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(spinnerIdade, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel12)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(spinnerParcelas, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jButton2)
+                        .addComponent(botaoVoltar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1))
+                        .addComponent(botaoConfirmar))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel8)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(labelDados, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -267,49 +288,49 @@ public class JanelaLocacaoVeiculo extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel13)
+                .addComponent(labelDados)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(labelLocalRetirada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(labelLocalDevolucao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(labelDataInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jFormattedTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(labelHorarioInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(jFormattedTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(labelDataTermino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jFormattedTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(labelHorarioTermino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(labelNomeCondutor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
-                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(spinnerIdade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel12)
-                    .addComponent(jSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(spinnerParcelas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(labelNumeroCartao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(botaoConfirmar)
+                    .addComponent(botaoVoltar))
                 .addContainerGap(31, Short.MAX_VALUE))
         );
 
@@ -331,19 +352,55 @@ public class JanelaLocacaoVeiculo extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void botaoVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoVoltarActionPerformed
+        jPanel2.setVisible(false);
+        this.setContentPane(jPanel1);
+        jPanel1.setVisible(true);
+    }//GEN-LAST:event_botaoVoltarActionPerformed
+
+    private void botaoConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoConfirmarActionPerformed
+        Locacao loc = new Locacao();
+        loc.setDataInicio(labelDataInicio.getText());
+        loc.setDataTermino(labelDataTermino.getText());
+        loc.setHorarioInicio(labelHorarioInicio.getText());
+        loc.setHorarioTermino(labelHorarioTermino.getText());
+        loc.setIdadeCondutor(Integer.parseInt(spinnerIdade.getValue().toString()));
+        loc.setLocalDevolucao(labelLocalDevolucao.getText());
+        loc.setLocalRetirada(labelLocalRetirada.getText());
+        loc.setNomeCondutor(labelNomeCondutor.getText());
+        loc.setNumeroCartao(labelNumeroCartao.getText());
+        loc.setParcelasCartao(Integer.parseInt(spinnerParcelas.getValue().toString()));
+        loc.setVeiculo(selecionado);
+    }//GEN-LAST:event_botaoConfirmarActionPerformed
+
+    private void botaoAvancarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoAvancarActionPerformed
+        DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
+        int linha = jTable1.getSelectedRow();
+        if (linha < 0) {
+            JOptionPane.showMessageDialog(null, "É necessário selecionar um carro, clicando na sua linha");
+        } else {
+            int codigo = (int) dtm.getValueAt(linha, 0);
+            for (Veiculo v : veiculos) {
+                if (v.getIdVeiculo() == codigo) {
+                    selecionado = v;
+                }
+            }
+            jPanel1.setVisible(false);
+            this.setContentPane(jPanel2);
+            jPanel2.setVisible(true);
+            labelDados.setText(selecionado.getIdVeiculo() + " - " + selecionado.getFabricante() + " - "
+                    + selecionado.getModelo() + " - " + selecionado.getAno() + " - " + selecionado.getPlaca());
+        }
+    }//GEN-LAST:event_botaoAvancarActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botaoAvancar;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JFormattedTextField jFormattedTextField1;
-    private javax.swing.JFormattedTextField jFormattedTextField2;
-    private javax.swing.JFormattedTextField jFormattedTextField3;
-    private javax.swing.JFormattedTextField jFormattedTextField4;
+    private javax.swing.JButton botaoConfirmar;
+    private javax.swing.JButton botaoVoltar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -355,12 +412,17 @@ public class JanelaLocacaoVeiculo extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JSpinner jSpinner1;
-    private javax.swing.JSpinner jSpinner2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField5;
+    private javax.swing.JLabel labelDados;
+    private javax.swing.JFormattedTextField labelDataInicio;
+    private javax.swing.JFormattedTextField labelDataTermino;
+    private javax.swing.JFormattedTextField labelHorarioInicio;
+    private javax.swing.JFormattedTextField labelHorarioTermino;
+    private javax.swing.JTextField labelLocalDevolucao;
+    private javax.swing.JTextField labelLocalRetirada;
+    private javax.swing.JTextField labelNomeCondutor;
+    private javax.swing.JTextField labelNumeroCartao;
+    private javax.swing.JSpinner spinnerIdade;
+    private javax.swing.JSpinner spinnerParcelas;
     // End of variables declaration//GEN-END:variables
 }
