@@ -5,23 +5,23 @@
  */
 package Modelo;
 
+import java.util.Date;
+
 /**
- *
- * @author Bruno
+ * Modelo da entidade locação
+ * @author Bruno Tokarski e Rafael Vidal
  */
 public class Locacao {
-
-    String localRetirada;
-    String localDevolucao;
-    String dataInicio;
-    String horarioInicio;
-    String dataTermino;
-    String horarioTermino;
-    String nomeCondutor;
-    int idadeCondutor;
-    String numeroCartao;
-    int parcelasCartao;
-    Veiculo veiculo;
+    
+    private String localRetirada;
+    private String localDevolucao;
+    private Date dataHoraRetirada;
+    private Date dataHoraDevolucao;
+    private String nomeCondutor;
+    private int idadeCondutor;
+    private String numeroCartao;
+    private int parcelasCartao;
+    private Veiculo veiculo;
 
     public String getLocalRetirada() {
         return localRetirada;
@@ -39,36 +39,20 @@ public class Locacao {
         this.localDevolucao = localDevolucao;
     }
 
-    public String getDataInicio() {
-        return dataInicio;
+    public Date getDataHoraRetirada() {
+        return dataHoraRetirada;
     }
 
-    public void setDataInicio(String dataInicio) {
-        this.dataInicio = dataInicio;
+    public void setDataHoraRetirada(Date dataHoraRetirada) {
+        this.dataHoraRetirada = dataHoraRetirada;
     }
 
-    public String getHorarioInicio() {
-        return horarioInicio;
+    public Date getDataHoraDevolucao() {
+        return dataHoraDevolucao;
     }
 
-    public void setHorarioInicio(String horarioInicio) {
-        this.horarioInicio = horarioInicio;
-    }
-
-    public String getDataTermino() {
-        return dataTermino;
-    }
-
-    public void setDataTermino(String dataTermino) {
-        this.dataTermino = dataTermino;
-    }
-
-    public String getHorarioTermino() {
-        return horarioTermino;
-    }
-
-    public void setHorarioTermino(String horarioTermino) {
-        this.horarioTermino = horarioTermino;
+    public void setDataHoraDevolucao(Date dataHoraDevolucao) {
+        this.dataHoraDevolucao = dataHoraDevolucao;
     }
 
     public String getNomeCondutor() {
@@ -110,5 +94,5 @@ public class Locacao {
     public void setVeiculo(Veiculo veiculo) {
         this.veiculo = veiculo;
     }
-    
+
 }
