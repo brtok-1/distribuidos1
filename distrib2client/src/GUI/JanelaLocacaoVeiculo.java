@@ -21,17 +21,17 @@ public class JanelaLocacaoVeiculo extends javax.swing.JDialog {
         initComponents();
         setModal(true);
 
-        ControleVeiculo cv = new ControleVeiculo();
-        ArrayList<Veiculo> veiculos = cv.RecuperarVeiculos();
-        Object[][] tabela = new Object[veiculos.size()][5];
-        for (int i = 0; i < veiculos.size(); i++) {
-            tabela[i][0] = veiculos.get(i).getIdVeiculo();
-            tabela[i][1] = veiculos.get(i).getPlaca();
-            tabela[i][2] = veiculos.get(i).getFabricante();
-            tabela[i][3] = veiculos.get(i).getModelo();
-            tabela[i][4] = veiculos.get(i).getAno();
-        }
-        fazTabela(tabela);
+//        ControleVeiculo cv = new ControleVeiculo();
+//        ArrayList<Veiculo> veiculos = cv.RecuperarVeiculos();
+//        Object[][] tabela = new Object[veiculos.size()][5];
+//        for (int i = 0; i < veiculos.size(); i++) {
+//            tabela[i][0] = veiculos.get(i).getIdVeiculo();
+//            tabela[i][1] = veiculos.get(i).getPlaca();
+//            tabela[i][2] = veiculos.get(i).getFabricante();
+//            tabela[i][3] = veiculos.get(i).getModelo();
+//            tabela[i][4] = veiculos.get(i).getAno();
+//        }
+//        fazTabela(tabela);
     }
 
     public final void fazTabela(Object[][] tabela) {

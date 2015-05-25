@@ -41,7 +41,7 @@ public class ControleVeiculo {
         //Deleta o arquivo
         arquivo.delete();
 
-        //Cria um arquivo novo
+        //Cria um arquivo novo para salvar o array atualizado
         FileOutputStream arquivoGrav = new FileOutputStream(arquivo);
         ObjectOutputStream objGravar = new ObjectOutputStream(arquivoGrav);
         objGravar.writeObject(veiculos);

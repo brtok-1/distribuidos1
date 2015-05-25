@@ -5,6 +5,7 @@
  */
 package distrib2client;
 
+import Controle.ControleRMICliente;
 import GUI.InicialClient;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -30,6 +31,9 @@ public class Distrib2client {
         InicialClient ic = new InicialClient();
         ic.setVisible(true);
         ic.repaint();
+        
+        ControleRMICliente crmic = new ControleRMICliente();
+        crmic.IniciaRMI();
     }
     
 }

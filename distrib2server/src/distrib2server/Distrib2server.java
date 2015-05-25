@@ -5,11 +5,11 @@
  */
 package distrib2server;
 
+import Controle.ControleRMI;
 import GUI.JanelaInicialServidor;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
 
 /**
  *
@@ -23,13 +23,18 @@ public class Distrib2server {
     public static void main(String[] args) {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
+
+            JanelaInicialServidor jis = new JanelaInicialServidor();
+            jis.setVisible(true);
+            jis.repaint();
+            
+            ControleRMI crmi = new ControleRMI();
+            crmi.IniciaRMI();
+
+        } catch (Exception ex) {
+            System.out.println("Erro: " + ex.getMessage());
             Logger.getLogger(Distrib2server.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-        JanelaInicialServidor jis = new JanelaInicialServidor();
-        jis.setVisible(true);
-        jis.repaint();
     }
 
 }
