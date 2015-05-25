@@ -260,7 +260,8 @@ public class JanelaLeilaoAcontecendo extends javax.swing.JFrame {
      */
     private void botaoDarLanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoDarLanceActionPerformed
         try {
-            if (Double.parseDouble(txtValorLance.getText().replaceAll(",", "\\.")) > lance.getValorOferecido()) {
+            if (Double.parseDouble(txtValorLance.getText().replaceAll(",", "\\.")) > lance.getValorOferecido()
+                    && Double.parseDouble(txtValorLance.getText().replaceAll(",", "\\.")) > Double.parseDouble(labelPrecoInicial.getText().replaceAll(",", "\\."))) {
                 Usuario usuarioLocal = Usuario.getInstancia();
                 Lance novoLance = new Lance(usuarioLocal.getIdPublica(), usuarioLocal.getIdRede(), 0);
                 novoLance.setValorOferecidoString(txtValorLance.getText());
