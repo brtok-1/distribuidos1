@@ -41,8 +41,7 @@ public class RMICliente extends UnicastRemoteObject implements ComunicacaoClient
     @Override
     public void ReceberNotificacao(String mensagem) throws Exception {
         java.awt.Toolkit.getDefaultToolkit().beep();
-        JOptionPane.showMessageDialog(null, "<html><center>" + mensagem +  "<br>"
-                + "Verifique em \"Locar Veículo\" para alugá-lo!");
+        JOptionPane.showMessageDialog(null, mensagem);
     }
     
     

@@ -27,12 +27,53 @@ public class ControleVeiculo {
      * Salvar o objeto veículo
      *
      * @param veiculo
+     * @return sucesso
      * @throws java.lang.Exception
      */
-    public void SalvaVeiculo(Veiculo veiculo) throws Exception {
+    public boolean SalvaVeiculo(Veiculo veiculo) throws Exception {
+        boolean duplicado = false;
         File arquivo = new File("C:/Distrib2/Veiculo.dst");
         if (arquivo.exists()) {
             veiculos = RecuperarVeiculos();
+            for (Veiculo v : veiculos) {
+                if (v.getIdVeiculo() == veiculo.getIdVeiculo()) {
+                    duplicado = true;
+                }
+            }
+        } else {
+            veiculos = new ArrayList<>();
+        }
+        
+        if (duplicado) {
+            JOptionPane.showMessageDialog(null, "Já existe um veículo cadastrado com ID " + veiculo.getIdVeiculo() + ".");
+            return false;
+        } else {
+            veiculos.add(veiculo);
+
+            //Deleta o arquivo
+            arquivo.delete();
+
+            //Cria um arquivo novo para salvar o array atualizado
+            FileOutputStream arquivoGrav = new FileOutputStream(arquivo);
+            ObjectOutputStream objGravar = new ObjectOutputStream(arquivoGrav);
+            objGravar.writeObject(veiculos);
+            JOptionPane.showMessageDialog(null, "Veículo ID " + veiculo.getIdVeiculo() + " cadastrado com sucesso.");
+            return true;
+        }
+    }
+
+    public void EditaVeiculo(Veiculo veiculo) throws Exception {
+        File arquivo = new File("C:/Distrib2/Veiculo.dst");
+        Veiculo veiculoAntes = new Veiculo();
+        if (arquivo.exists()) {
+            veiculos = RecuperarVeiculos();
+            for (Veiculo v : veiculos) {
+                if (v.getIdVeiculo() == veiculo.getIdVeiculo()) {
+                    veiculoAntes = v;
+                    veiculos.remove(v);
+                    break;
+                }
+            }
         } else {
             veiculos = new ArrayList<>();
         }
@@ -45,7 +86,11 @@ public class ControleVeiculo {
         FileOutputStream arquivoGrav = new FileOutputStream(arquivo);
         ObjectOutputStream objGravar = new ObjectOutputStream(arquivoGrav);
         objGravar.writeObject(veiculos);
-        JOptionPane.showMessageDialog(null, "Veículo ID " + veiculo.getIdVeiculo() + " cadastrado com sucesso.");
+        JOptionPane.showMessageDialog(null, "Veículo ID " + veiculo.getIdVeiculo() + " modificado com sucesso.");
+        if (veiculo.getValorDiaria() < veiculoAntes.getValorDiaria()) {
+            ControleNotificacao cn = new ControleNotificacao(veiculo, veiculoAntes.getValorDiariaString());
+            cn.start();
+        }
     }
 
     /**

@@ -16,12 +16,31 @@ import java.util.logging.Logger;
  */
 public class JanelaCadastroVeiculo extends javax.swing.JDialog {
 
+    int codigoVeiculo;
+
     /**
      * Creates new form JanelaCadastroVeiculo
+     *
+     * @param codigoVeiculo
+     * @throws java.lang.Exception
      */
-    public JanelaCadastroVeiculo() {
+    public JanelaCadastroVeiculo(int codigoVeiculo) throws Exception {
         initComponents();
+        this.codigoVeiculo = codigoVeiculo;
         setModal(true);
+        if (codigoVeiculo != -1) {
+            labelTitulo.setText("Edição de Veículo");
+            botaoSalvar.setText("Salvar Edição");
+            lblCodigo.setText(String.valueOf(codigoVeiculo));
+            lblCodigo.setEditable(false);
+            ControleVeiculo cv = new ControleVeiculo();
+            Veiculo v = cv.RecuperarVeiculoPorID(codigoVeiculo);
+            lblAno.setText(String.valueOf(v.getAno()));
+            lblFabricante.setText(v.getFabricante());
+            lblModelo.setText(v.getModelo());
+            lblPlaca.setText(v.getPlaca());
+            lblValorDiaria.setText(v.getValorDiariaString());
+        }
     }
 
     /**
@@ -48,7 +67,7 @@ public class JanelaCadastroVeiculo extends javax.swing.JDialog {
         lblAno = new javax.swing.JTextField();
         botaoSalvar = new javax.swing.JButton();
         botaoCancelar = new javax.swing.JButton();
-        jLabel7 = new javax.swing.JLabel();
+        labelTitulo = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         lblValorDiaria = new javax.swing.JTextField();
 
@@ -85,8 +104,8 @@ public class JanelaCadastroVeiculo extends javax.swing.JDialog {
             }
         });
 
-        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel7.setText("Cadastrar Veículo");
+        labelTitulo.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        labelTitulo.setText("Cadastrar Veículo");
 
         jLabel8.setText("Valor Diária:");
 
@@ -117,7 +136,7 @@ public class JanelaCadastroVeiculo extends javax.swing.JDialog {
                                     .addComponent(lblValorDiaria, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(0, 70, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel7)
+                        .addComponent(labelTitulo)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(botaoSalvar)
@@ -129,7 +148,7 @@ public class JanelaCadastroVeiculo extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel7)
+                .addComponent(labelTitulo)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
@@ -166,19 +185,39 @@ public class JanelaCadastroVeiculo extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botaoSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoSalvarActionPerformed
-        try {
-            Veiculo veiculo = new Veiculo();
-            veiculo.setIdVeiculo(Integer.parseInt(lblCodigo.getText()));
-            veiculo.setAno(Integer.parseInt(lblAno.getText()));
-            veiculo.setPlaca(lblPlaca.getText());
-            veiculo.setFabricante(lblFabricante.getText());
-            veiculo.setModelo(lblModelo.getText());
-            //veiculo.setValorDiariaString(lblValorDiaria.getText());
-            ControleVeiculo cv = new ControleVeiculo();
-            cv.SalvaVeiculo(veiculo);
-            dispose();
-        } catch (Exception ex) {
-            Logger.getLogger(JanelaCadastroVeiculo.class.getName()).log(Level.SEVERE, null, ex);
+        if (codigoVeiculo == -1) {
+            try {
+                Veiculo veiculo = new Veiculo();
+                veiculo.setIdVeiculo(Integer.parseInt(lblCodigo.getText()));
+                veiculo.setAno(Integer.parseInt(lblAno.getText()));
+                veiculo.setPlaca(lblPlaca.getText());
+                veiculo.setFabricante(lblFabricante.getText());
+                veiculo.setModelo(lblModelo.getText());
+                veiculo.setValorDiariaString(lblValorDiaria.getText());
+                ControleVeiculo cv = new ControleVeiculo();
+                boolean sucesso = cv.SalvaVeiculo(veiculo);
+                if (sucesso) {
+                    dispose();
+                }
+            } catch (Exception ex) {
+                Logger.getLogger(JanelaCadastroVeiculo.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            try {
+                Veiculo veiculo = new Veiculo();
+                veiculo.setIdVeiculo(Integer.parseInt(lblCodigo.getText()));
+                veiculo.setAno(Integer.parseInt(lblAno.getText()));
+                veiculo.setPlaca(lblPlaca.getText());
+                veiculo.setFabricante(lblFabricante.getText());
+                veiculo.setModelo(lblModelo.getText());
+                veiculo.setValorDiariaString(lblValorDiaria.getText());
+                ControleVeiculo cv = new ControleVeiculo();
+                cv.EditaVeiculo(veiculo);
+                dispose();
+            } catch (Exception ex) {
+                Logger.getLogger(JanelaCadastroVeiculo.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
         }
     }//GEN-LAST:event_botaoSalvarActionPerformed
 
@@ -196,9 +235,9 @@ public class JanelaCadastroVeiculo extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JTextField jTextField3;
+    private javax.swing.JLabel labelTitulo;
     private javax.swing.JTextField lblAno;
     private javax.swing.JTextField lblCodigo;
     private javax.swing.JTextField lblFabricante;

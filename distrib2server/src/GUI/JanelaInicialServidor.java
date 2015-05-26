@@ -82,9 +82,13 @@ public class JanelaInicialServidor extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCadastrarVeiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarVeiculoActionPerformed
-        JanelaCadastroVeiculo jcv = new JanelaCadastroVeiculo();
-        jcv.setVisible(true);
-        jcv.repaint();
+        try {
+            JanelaCadastroVeiculo jcv = new JanelaCadastroVeiculo(-1);
+            jcv.setVisible(true);
+            jcv.repaint();
+        } catch (Exception ex) {
+            Logger.getLogger(JanelaInicialServidor.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnCadastrarVeiculoActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
