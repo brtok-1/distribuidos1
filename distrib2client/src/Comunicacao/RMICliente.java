@@ -64,6 +64,7 @@ public class RMICliente extends UnicastRemoteObject implements ComunicacaoClient
     }
     
     public void ManifestarInteresse(int idVeiculo) throws Exception {
+        rmic = new RMICliente();
         obj.RegistrarParaNotificacao(rmic, idVeiculo);
         JOptionPane.showMessageDialog(null, "Interesse no Veiculo " + idVeiculo + " registrado com sucesso!");
     }

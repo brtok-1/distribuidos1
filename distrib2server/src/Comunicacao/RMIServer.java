@@ -15,9 +15,6 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
-import java.util.Enumeration;
-import java.util.List;
-import java.util.Vector;
 
 /**
  * Métodos acessíveis aos clientes via RMI
@@ -50,8 +47,10 @@ public class RMIServer extends UnicastRemoteObject implements ComunicacaoServer 
         Notificacao n = new Notificacao();
         n.setIdVeiculo(idVeiculo);
         n.setComClient(cliente);
+        System.out.println(cliente);
         ListaClientes lc = ListaClientes.getInstancia();
         lc.getListaClientesNotificar().add(n);
+        
         System.out.println("Registrado interesse de um cliente no veiculo " + idVeiculo);
     }
     
