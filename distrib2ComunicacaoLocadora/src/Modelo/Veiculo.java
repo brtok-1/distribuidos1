@@ -74,7 +74,7 @@ public class Veiculo implements Serializable{
     }
 
     public void setValorDiariaString(String valor) {
-        valor = valor.replaceAll(",", "\\.");
+        valor = valor.trim().replaceAll(",", "\\.");
         this.valorDiaria = Double.parseDouble(valor);
     }
 }

@@ -24,8 +24,6 @@ public interface ComunicacaoServer extends Remote {
     
     void EfetuarLocacao() throws Exception;
     
-    void ManifestarInteresse() throws Exception;
-    
     void SalvarCredencialRMI(String idClient) throws Exception;
     
     void RegistrarParaNotificacao(ComunicacaoClient cliente, int idVeiculo) throws Exception;

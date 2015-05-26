@@ -28,14 +28,9 @@ public class RMICliente extends UnicastRemoteObject implements ComunicacaoClient
     private RMICliente rmic;
 
     public RMICliente() throws Exception {
-
         super();
-
-        janelaConsole = JanelaConsole.getInstancia();
-
         reg = LocateRegistry.getRegistry("localhost", 1099);
         obj = (ComunicacaoServer) reg.lookup("servidor");
-
     }
 
     @Override
@@ -53,9 +48,7 @@ public class RMICliente extends UnicastRemoteObject implements ComunicacaoClient
      * @throws InterruptedException
      */
     public void IniciaRMI() throws Exception {
-
         rmic = new RMICliente();
-
     }
 
     /**
@@ -69,8 +62,7 @@ public class RMICliente extends UnicastRemoteObject implements ComunicacaoClient
         return veiculos;
     }
     
-    public void ManifestarInteresse(int idVeiculo) throws Exception
-    {
+    public void ManifestarInteresse(int idVeiculo) throws Exception {
         obj.RegistrarParaNotificacao(rmic, idVeiculo);
     }
 

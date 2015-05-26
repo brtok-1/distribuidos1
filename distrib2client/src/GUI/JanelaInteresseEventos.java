@@ -5,8 +5,11 @@
  */
 package GUI;
 
+import Comunicacao.RMICliente;
 import Modelo.Veiculo;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -18,37 +21,39 @@ public class JanelaInteresseEventos extends javax.swing.JDialog {
 
     ArrayList<Veiculo> veiculos;
     Veiculo selecionado;
-            
+
     /**
      * Creates new form JanelaCadastroVeiculo
      */
     public JanelaInteresseEventos() throws Exception {
         initComponents();
         setModal(true);
-//        ArrayList<Veiculo> veiculos = cv.RecuperarVeiculos();
-//        Object[][] tabela = new Object[veiculos.size()][5];
-//        for (int i = 0; i < veiculos.size(); i++) {
-//            tabela[i][0] = veiculos.get(i).getIdVeiculo();
-//            tabela[i][1] = veiculos.get(i).getPlaca();
-//            tabela[i][2] = veiculos.get(i).getFabricante();
-//            tabela[i][3] = veiculos.get(i).getModelo();
-//            tabela[i][4] = veiculos.get(i).getAno();
-//        }
-//        fazTabela(tabela);
+        RMICliente crmic = new RMICliente();
+        veiculos = crmic.RecuperarVeiculos();
+        Object[][] tabela = new Object[veiculos.size()][6];
+        for (int i = 0; i < veiculos.size(); i++) {
+            tabela[i][0] = veiculos.get(i).getIdVeiculo();
+            tabela[i][1] = veiculos.get(i).getPlaca();
+            tabela[i][2] = veiculos.get(i).getFabricante();
+            tabela[i][3] = veiculos.get(i).getModelo();
+            tabela[i][4] = veiculos.get(i).getAno();
+            tabela[i][5] = veiculos.get(i).getValorDiariaString();
+        }
+        fazTabela(tabela);
     }
 
     public final void fazTabela(Object[][] tabela) {
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
                 tabela,
                 new String[]{
-                    "ID", "Placa", "Fabricante", "Modelo", "Ano"
+                    "ID", "Placa", "Fabricante", "Modelo", "Ano", "Valor Diária"
                 }
         ) {
             Class[] types = new Class[]{
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean[]{
-                false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -64,11 +69,12 @@ public class JanelaInteresseEventos extends javax.swing.JDialog {
         jTable1.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         if (jTable1.getColumnModel().getColumnCount() > 0) {
             jTable1.getColumnModel().getColumn(0).setResizable(false);
-            jTable1.getColumnModel().getColumn(0).setPreferredWidth(42);
-            jTable1.getColumnModel().getColumn(1).setPreferredWidth(115);
-            jTable1.getColumnModel().getColumn(2).setPreferredWidth(115);
-            jTable1.getColumnModel().getColumn(3).setPreferredWidth(115);
-            jTable1.getColumnModel().getColumn(4).setPreferredWidth(50);
+            jTable1.getColumnModel().getColumn(0).setPreferredWidth(28);
+            jTable1.getColumnModel().getColumn(1).setPreferredWidth(95);
+            jTable1.getColumnModel().getColumn(2).setPreferredWidth(95);
+            jTable1.getColumnModel().getColumn(3).setPreferredWidth(95);
+            jTable1.getColumnModel().getColumn(4).setPreferredWidth(47);
+            jTable1.getColumnModel().getColumn(5).setPreferredWidth(77);
         }
     }
 
@@ -170,13 +176,18 @@ public class JanelaInteresseEventos extends javax.swing.JDialog {
         if (linha < 0) {
             JOptionPane.showMessageDialog(null, "É necessário selecionar um carro, clicando na sua linha");
         } else {
-            int codigo = (int) dtm.getValueAt(linha, 0);
-            for (Veiculo v : veiculos) {
-                if (v.getIdVeiculo() == codigo) {
-                    selecionado = v;
+            try {
+                int codigo = (int) dtm.getValueAt(linha, 0);
+                for (Veiculo v : veiculos) {
+                    if (v.getIdVeiculo() == codigo) {
+                        selecionado = v;
+                    }
                 }
+                RMICliente rmic = new RMICliente();
+                rmic.ManifestarInteresse(selecionado.getIdVeiculo());
+            } catch (Exception ex) {
+                Logger.getLogger(JanelaInteresseEventos.class.getName()).log(Level.SEVERE, null, ex);
             }
-
         }
     }//GEN-LAST:event_botaoAvancarActionPerformed
 

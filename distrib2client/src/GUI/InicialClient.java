@@ -15,13 +15,13 @@ import java.util.logging.Logger;
 public class InicialClient extends javax.swing.JFrame {
 
     JanelaConsole console;
+
     /**
      * Creates new form InicialClient
      */
     public InicialClient() {
         initComponents();
-        
-        
+
     }
 
     /**
@@ -47,6 +47,11 @@ public class InicialClient extends javax.swing.JFrame {
         });
 
         jButton2.setText("Registrar interesse em eventos de um Carro");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -74,23 +79,22 @@ public class InicialClient extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        console = JanelaConsole.getInstancia();
         try {
-            System.out.println("Vai abrir janela");
             JanelaLocacaoVeiculo jlv = new JanelaLocacaoVeiculo();
             jlv.setVisible(true);
-            System.out.println("Abriu nova janela");
-        } catch (Exception e)
-        {
-            try { 
-                console.EscreveNaJanela("Erro: " + e.getMessage());
-                e.printStackTrace();
-            } catch (InterruptedException ex) {
-                Logger.getLogger(InicialClient.class.getName()).log(Level.SEVERE, null, ex);
-            }
+        } catch (Exception ex) {
+            Logger.getLogger(InicialClient.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        try {
+            JanelaInteresseEventos jie = new JanelaInteresseEventos();
+            jie.setVisible(true);
+        } catch (Exception ex) {
+            Logger.getLogger(InicialClient.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
