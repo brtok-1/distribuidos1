@@ -5,10 +5,12 @@
  */
 package Comunicacao;
 
+import Controle.ControleLocacao;
 import Controle.ListaClientes;
 import Controle.ControleVeiculo;
 import Interface.ComunicacaoClient;
 import Interface.ComunicacaoServer;
+import Modelo.Locacao;
 import Modelo.Notificacao;
 import Modelo.Veiculo;
 import java.rmi.registry.LocateRegistry;
@@ -33,16 +35,6 @@ public class RMIServer extends UnicastRemoteObject implements ComunicacaoServer 
     }
 
     @Override
-    public void EfetuarLocacao() throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public void SalvarCredencialRMI(String idClient) throws Exception {
-        ListaClientes cc = ListaClientes.getInstancia();
-        
-    }
-
-    @Override
     public void RegistrarParaNotificacao(ComunicacaoClient cliente, int idVeiculo) throws Exception {
         Notificacao n = new Notificacao();
         n.setIdVeiculo(idVeiculo);
@@ -54,6 +46,15 @@ public class RMIServer extends UnicastRemoteObject implements ComunicacaoServer 
         System.out.println("Registrado interesse de um cliente no veiculo " + idVeiculo);
     }
     
+    @Override
+    public boolean EfetuarLocacao(Locacao locacao) throws Exception {        
+        
+        ControleLocacao cl = new ControleLocacao();
+        
+        boolean veiculoDisponivel = cl.addLocacao(locacao);
+        
+        return veiculoDisponivel;
+    }   
     
     //Unificando a implementação da interface com o controle
 
@@ -62,5 +63,6 @@ public class RMIServer extends UnicastRemoteObject implements ComunicacaoServer 
         reg.bind("servidor", new RMIServer());
         System.out.println("RMIServer criado e registrado");
     }
+
     
 }

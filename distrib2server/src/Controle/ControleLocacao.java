@@ -38,14 +38,16 @@ public class ControleLocacao {
         return resultado;
     }
     
-    public boolean verificaDisponibilidade(Date dataInicio, Time horaInicio, Date dataFim, Time horaFim, int idVeiculo) {
-        ArrayList<Locacao> locacoes = getLocacoesPorVeiculo(idVeiculo);
+   //Date dataInicio, Time horaInicio, Date dataFim, Time horaFim, int idVeiculo
+    public boolean verificaDisponibilidade(Locacao locacao) {
+        ArrayList<Locacao> locacoesVeiculo = getLocacoesPorVeiculo(locacao.getVeiculo().getIdVeiculo());
         Date hoje = new Date();
         
+        return true;
     }
     
-    public boolean addLocacao(Locacao l) {
-        boolean disponivel = verificaDisponibilidade(l.getDataRetirada(), l.getHoraRetirada(), l.getDataDevolucao(), l.getHoraDevolucao(), l.getVeiculo().getIdVeiculo());
+    public boolean addLocacao(Locacao locacao) {
+        boolean disponivel = verificaDisponibilidade(locacao);
         if (disponivel) {
             //CODIGO PARA ADICIONAR A LOCACAO
             JOptionPane.showMessageDialog(null, "Locação solicitada com sucesso para o veículo.");

@@ -5,6 +5,7 @@
  */
 package Interface;
 
+import Modelo.Locacao;
 import Modelo.Veiculo;
 import java.rmi.Remote;
 import java.util.ArrayList;
@@ -22,9 +23,7 @@ public interface ComunicacaoServer extends Remote {
      */
     ArrayList<Veiculo> ConsultarVeiculos() throws Exception;
     
-    void EfetuarLocacao() throws Exception;
-    
-    void SalvarCredencialRMI(String idClient) throws Exception;
+    boolean EfetuarLocacao(Locacao locacao) throws Exception;
     
     void RegistrarParaNotificacao(ComunicacaoClient cliente, int idVeiculo) throws Exception;
     

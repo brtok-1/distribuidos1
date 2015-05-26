@@ -9,6 +9,7 @@ import GUI.JanelaConsole;
 import GUI.JanelaNotificacao;
 import Interface.ComunicacaoClient;
 import Interface.ComunicacaoServer;
+import Modelo.Locacao;
 import Modelo.Veiculo;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -33,6 +34,7 @@ public class RMICliente extends UnicastRemoteObject implements ComunicacaoClient
         janelaConsole = JanelaConsole.getInstancia();
         reg = LocateRegistry.getRegistry("localhost", 1099);
         obj = (ComunicacaoServer) reg.lookup("servidor");
+        rmic = new RMICliente();
     }
 
     @Override
@@ -41,19 +43,16 @@ public class RMICliente extends UnicastRemoteObject implements ComunicacaoClient
         JanelaNotificacao jn = new JanelaNotificacao(mensagem);
         jn.setVisible(true);
     }
-    
-    
-    //******************* Unificando o controle ***********************************
 
+    //******************* Unificando o controle ***********************************
     /**
      * Teste inicial da comunicação RMI
      *
      * @throws InterruptedException
      */
-    public void IniciaRMI() throws Exception {
-        rmic = new RMICliente();
-    }
-
+//    public void IniciaRMI() throws Exception {
+//        rmic = new RMICliente();
+//    }
     /**
      *
      * @return @throws Exception
@@ -64,11 +63,24 @@ public class RMICliente extends UnicastRemoteObject implements ComunicacaoClient
         janelaConsole.EscreveNaJanela("Veículos recuperados. Total: " + veiculos.size());
         return veiculos;
     }
-    
+
     public void ManifestarInteresse(int idVeiculo) throws Exception {
-        rmic = new RMICliente();
+
         obj.RegistrarParaNotificacao(rmic, idVeiculo);
         JOptionPane.showMessageDialog(null, "Interesse no Veiculo " + idVeiculo + " registrado com sucesso!");
+    }
+
+    public void EfetuarLocacao(Locacao locacao) throws Exception {
+        boolean locacaoEfetuada = obj.EfetuarLocacao(locacao);
+
+        if (locacaoEfetuada) {
+            JanelaNotificacao jn = new JanelaNotificacao("Locação efetuada com sucesso!");
+            jn.setVisible(true);
+        } else {
+            JanelaNotificacao jn = new JanelaNotificacao("Não foi possível efetuar a locação. "
+                    + "O veículo já possui locação agendada para o período informado.");
+            jn.setVisible(true);
+        }
     }
 
 }
