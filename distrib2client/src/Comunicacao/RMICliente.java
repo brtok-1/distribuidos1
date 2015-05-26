@@ -6,6 +6,7 @@
 package Comunicacao;
 
 import GUI.JanelaConsole;
+import GUI.JanelaNotificacao;
 import Interface.ComunicacaoClient;
 import Interface.ComunicacaoServer;
 import Modelo.Veiculo;
@@ -37,7 +38,8 @@ public class RMICliente extends UnicastRemoteObject implements ComunicacaoClient
     @Override
     public void ReceberNotificacao(String mensagem) throws Exception {
         java.awt.Toolkit.getDefaultToolkit().beep();
-        JOptionPane.showMessageDialog(null, mensagem);
+        JanelaNotificacao jn = new JanelaNotificacao(mensagem);
+        jn.setVisible(true);
     }
     
     

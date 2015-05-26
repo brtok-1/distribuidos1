@@ -8,7 +8,10 @@ package GUI;
 import Comunicacao.RMICliente;
 import Modelo.Locacao;
 import Modelo.Veiculo;
+import java.sql.Date;
+import java.sql.Time;
 import java.util.ArrayList;
+import java.util.logging.Formatter;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -17,17 +20,17 @@ import javax.swing.table.DefaultTableModel;
  * @author Rafael
  */
 public class JanelaLocacaoVeiculo extends javax.swing.JDialog {
-
+    
     private ArrayList<Veiculo> veiculos;
     private Veiculo selecionado;
-    
+
     /**
      * Creates new form JanelaCadastroVeiculo
      */
     public JanelaLocacaoVeiculo() throws Exception {
         initComponents();
         setModal(true);
-
+        
         setContentPane(jPanel1);
         jPanel1.setVisible(true);
         RMICliente crmic = new RMICliente();
@@ -43,7 +46,7 @@ public class JanelaLocacaoVeiculo extends javax.swing.JDialog {
         }
         fazTabela(tabela);
     }
-
+    
     public final void fazTabela(Object[][] tabela) {
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
                 tabela,
@@ -57,11 +60,11 @@ public class JanelaLocacaoVeiculo extends javax.swing.JDialog {
             boolean[] canEdit = new boolean[]{
                 false, false, false, false, false, false
             };
-
+            
             public Class getColumnClass(int columnIndex) {
                 return types[columnIndex];
             }
-
+            
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit[columnIndex];
             }
@@ -214,13 +217,13 @@ public class JanelaLocacaoVeiculo extends javax.swing.JDialog {
 
         jLabel12.setText("Número de Parcelas:");
 
-        labelDataInicio.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter()));
+        labelDataInicio.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("yyyy-MM-dd"))));
 
         labelHorarioInicio.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getTimeInstance(java.text.DateFormat.SHORT))));
 
         labelHorarioTermino.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getTimeInstance(java.text.DateFormat.SHORT))));
 
-        labelDataTermino.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter()));
+        labelDataTermino.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("yyyy-MM-dd"))));
 
         spinnerIdade.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(18), Integer.valueOf(18), null, Integer.valueOf(1)));
 
@@ -385,10 +388,14 @@ public class JanelaLocacaoVeiculo extends javax.swing.JDialog {
 
     private void botaoConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoConfirmarActionPerformed
         Locacao loc = new Locacao();
-//        loc.setDataInicio(labelDataInicio.getText());
-//        loc.setDataTermino(labelDataTermino.getText());
-//        loc.setHorarioInicio(labelHorarioInicio.getText());
-//        loc.setHorarioTermino(labelHorarioTermino.getText());
+        String dataInicio = labelDataInicio.getText();
+        String horarioInicio = labelHorarioInicio.getText() + ":00";
+        String dataTermino = labelDataTermino.getText();
+        String horarioTermino = labelHorarioTermino.getText() + ":00";
+        loc.setDataRetirada(Date.valueOf(dataInicio));
+        loc.setHoraRetirada(Time.valueOf(horarioInicio));
+        loc.setDataDevolucao(Date.valueOf(dataTermino));
+        loc.setHoraDevolucao(Time.valueOf(horarioTermino));
         loc.setIdadeCondutor(Integer.parseInt(spinnerIdade.getValue().toString()));
         loc.setLocalDevolucao(labelLocalDevolucao.getText());
         loc.setLocalRetirada(labelLocalRetirada.getText());
@@ -396,6 +403,7 @@ public class JanelaLocacaoVeiculo extends javax.swing.JDialog {
         loc.setNumeroCartao(labelNumeroCartao.getText());
         loc.setParcelasCartao(Integer.parseInt(spinnerParcelas.getValue().toString()));
         loc.setVeiculo(selecionado);
+        System.out.println(loc);
     }//GEN-LAST:event_botaoConfirmarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

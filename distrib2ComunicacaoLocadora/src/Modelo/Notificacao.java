@@ -14,7 +14,6 @@ import Interface.ComunicacaoClient;
 public class Notificacao {
     
     private int idVeiculo;
-    
     private ComunicacaoClient comClient;
 
     public int getIdVeiculo() {

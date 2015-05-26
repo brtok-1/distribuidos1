@@ -5,6 +5,7 @@
  */
 package Modelo;
 
+import java.sql.Time;
 import java.util.Date;
 
 /**
@@ -15,8 +16,10 @@ public class Locacao {
     
     private String localRetirada;
     private String localDevolucao;
-    private Date dataHoraRetirada;
-    private Date dataHoraDevolucao;
+    private Date dataRetirada;
+    private Time horaRetirada;
+    private Date dataDevolucao;
+    private Time horaDevolucao;
     private String nomeCondutor;
     private int idadeCondutor;
     private String numeroCartao;
@@ -37,22 +40,6 @@ public class Locacao {
 
     public void setLocalDevolucao(String localDevolucao) {
         this.localDevolucao = localDevolucao;
-    }
-
-    public Date getDataHoraRetirada() {
-        return dataHoraRetirada;
-    }
-
-    public void setDataHoraRetirada(Date dataHoraRetirada) {
-        this.dataHoraRetirada = dataHoraRetirada;
-    }
-
-    public Date getDataHoraDevolucao() {
-        return dataHoraDevolucao;
-    }
-
-    public void setDataHoraDevolucao(Date dataHoraDevolucao) {
-        this.dataHoraDevolucao = dataHoraDevolucao;
     }
 
     public String getNomeCondutor() {
@@ -95,4 +82,36 @@ public class Locacao {
         this.veiculo = veiculo;
     }
 
+    public Date getDataRetirada() {
+        return dataRetirada;
+    }
+
+    public void setDataRetirada(Date dataRetirada) {
+        this.dataRetirada = dataRetirada;
+    }
+
+    public Time getHoraRetirada() {
+        return horaRetirada;
+    }
+
+    public void setHoraRetirada(Time horaRetirada) {
+        this.horaRetirada = horaRetirada;
+    }
+
+    public Date getDataDevolucao() {
+        return dataDevolucao;
+    }
+
+    public void setDataDevolucao(Date dataDevolucao) {
+        this.dataDevolucao = dataDevolucao;
+    }
+
+    public Time getHoraDevolucao() {
+        return horaDevolucao;
+    }
+
+    public void setHoraDevolucao(Time horaDevolucao) {
+        this.horaDevolucao = horaDevolucao;
+    }
+    
 }
