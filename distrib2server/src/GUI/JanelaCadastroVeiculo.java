@@ -173,7 +173,7 @@ public class JanelaCadastroVeiculo extends javax.swing.JDialog {
             veiculo.setPlaca(lblPlaca.getText());
             veiculo.setFabricante(lblFabricante.getText());
             veiculo.setModelo(lblModelo.getText());
-            veiculo.setValorDiariaString(lblValorDiaria.getText());
+            //veiculo.setValorDiariaString(lblValorDiaria.getText());
             ControleVeiculo cv = new ControleVeiculo();
             cv.SalvaVeiculo(veiculo);
             dispose();

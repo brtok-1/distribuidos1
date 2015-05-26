@@ -5,13 +5,10 @@
  */
 package distrib2client;
 
-import Controle.ControleRMICliente;
+import Comunicacao.RMICliente;
 import GUI.InicialClient;
 import GUI.JanelaConsole;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
 
 /**
  *
@@ -35,8 +32,8 @@ public class Distrib2client {
 
             janelaConsole.EscreveNaJanela("Aplicação iniciada.");
 
-            ControleRMICliente crmic = new ControleRMICliente();
-            crmic.IniciaRMI();
+            RMICliente rmic = new RMICliente();
+            rmic.IniciaRMI();
 
         } catch (Exception e) {
             janelaConsole.EscreveNaJanela("Erro: " + e.getMessage());

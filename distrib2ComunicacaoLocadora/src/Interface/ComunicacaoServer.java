@@ -28,4 +28,7 @@ public interface ComunicacaoServer extends Remote {
     
     void SalvarCredencialRMI(String idClient) throws Exception;
     
+    void RegistrarParaNotificacao(ComunicacaoClient cliente, int idVeiculo) throws Exception;
+    
+    
 }

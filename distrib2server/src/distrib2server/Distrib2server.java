@@ -5,7 +5,7 @@
  */
 package distrib2server;
 
-import Controle.ControleRMI;
+import Comunicacao.RMIServer;
 import GUI.JanelaInicialServidor;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -28,8 +28,8 @@ public class Distrib2server {
             jis.setVisible(true);
             jis.repaint();
             
-            ControleRMI crmi = new ControleRMI();
-            crmi.IniciaRMI();
+            RMIServer rmis = new RMIServer();
+            rmis.IniciaRMI();
 
         } catch (Exception ex) {
             System.out.println("Erro: " + ex.getMessage());

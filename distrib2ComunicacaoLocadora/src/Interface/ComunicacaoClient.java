@@ -5,7 +5,6 @@
  */
 package Interface;
 
-import Modelo.Veiculo;
 import java.rmi.Remote;
 
 /**
@@ -14,6 +13,7 @@ import java.rmi.Remote;
  */
 public interface ComunicacaoClient extends Remote {
     
-    void NotificarCliente(Veiculo veiculo, double precoAntigo) throws Exception;
+    
+    void ReceberNotificacao(String mensagem) throws Exception;
     
 }
