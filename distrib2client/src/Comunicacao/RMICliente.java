@@ -29,6 +29,7 @@ public class RMICliente extends UnicastRemoteObject implements ComunicacaoClient
 
     public RMICliente() throws Exception {
         super();
+        janelaConsole = JanelaConsole.getInstancia();
         reg = LocateRegistry.getRegistry("localhost", 1099);
         obj = (ComunicacaoServer) reg.lookup("servidor");
     }
@@ -64,6 +65,7 @@ public class RMICliente extends UnicastRemoteObject implements ComunicacaoClient
     
     public void ManifestarInteresse(int idVeiculo) throws Exception {
         obj.RegistrarParaNotificacao(rmic, idVeiculo);
+        JOptionPane.showMessageDialog(null, "Interesse no Veiculo " + idVeiculo + " registrado com sucesso!");
     }
 
 }

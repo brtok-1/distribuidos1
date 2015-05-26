@@ -185,6 +185,7 @@ public class JanelaInteresseEventos extends javax.swing.JDialog {
                 }
                 RMICliente rmic = new RMICliente();
                 rmic.ManifestarInteresse(selecionado.getIdVeiculo());
+                dispose();
             } catch (Exception ex) {
                 Logger.getLogger(JanelaInteresseEventos.class.getName()).log(Level.SEVERE, null, ex);
             }
