@@ -36,7 +36,6 @@ public class ControleNotificacao extends Thread {
             for (Notificacao n : lc.getListaClientesNotificar()) {
                 if (n.getIdVeiculo() == veiculo.getIdVeiculo()) {
                     ComunicacaoClient notificacao = (ComunicacaoClient) n.getComClient();
-                    System.out.println(mensagem);
                     notificacao.ReceberNotificacao(mensagem);
                 }
             }
