@@ -5,7 +5,6 @@
  */
 package Comunicacao;
 
-import GUI.JanelaConsole;
 import GUI.JanelaNotificacao;
 import Interface.ComunicacaoClient;
 import Interface.ComunicacaoServer;
@@ -36,14 +35,19 @@ public class RMICliente extends UnicastRemoteObject implements ComunicacaoClient
         
     }
 
+    /**
+     * Método que recebe a notificação de interesse do cliente
+     * 
+     * @param mensagem
+     * @throws Exception 
+     */
     @Override
     public void ReceberNotificacao(String mensagem) throws Exception {
         java.awt.Toolkit.getDefaultToolkit().beep();
         JanelaNotificacao jn = new JanelaNotificacao(mensagem);
         jn.setVisible(true);
     }
-
-    //******************* Unificando o controle ***********************************
+    
     /**
      * Teste inicial da comunicação RMI
      *
@@ -52,8 +56,10 @@ public class RMICliente extends UnicastRemoteObject implements ComunicacaoClient
     public void IniciaRMI() throws Exception {
         rmic = new RMICliente();
     }
+    
     /**
-     *
+     * Recupera uma lista de veículos do servidor
+     * 
      * @return @throws Exception
      */
     public ArrayList<Veiculo> RecuperarVeiculos() throws Exception {
@@ -62,18 +68,39 @@ public class RMICliente extends UnicastRemoteObject implements ComunicacaoClient
         return veiculos;
     }
 
+    /**
+     * Recupera do servidor uma lista de locações para determinado veiculo
+     * 
+     * @param idVeiculo
+     * @return ArrayList de locações
+     * @throws Exception 
+     */
     public ArrayList<Locacao> RecuperarLocacoesPorVeiculo(int idVeiculo) throws Exception {
         IniciaRMI();
         ArrayList<Locacao> locacoes = obj.RecuperarLocacoesPorVeiculo(idVeiculo);
         return locacoes;
     }
     
+    /**
+     * Método que registra o interesse do Cliente em um veículo, passando a referência do
+     * Objeto Remoto e a ID do veículo
+     * 
+     * @param idVeiculo
+     * @throws Exception 
+     */
     public void ManifestarInteresse(int idVeiculo) throws Exception {
         IniciaRMI();
         obj.RegistrarParaNotificacao(rmic, idVeiculo);
         JOptionPane.showMessageDialog(null, "Interesse no Veiculo " + idVeiculo + " registrado com sucesso!");
     }
 
+    /**
+     * Faz a locação do veículo no servidor
+     * 
+     * @param locacao
+     * @return Resultado da Operação = sucesso
+     * @throws Exception 
+     */
     public boolean EfetuarLocacao(Locacao locacao) throws Exception {
         IniciaRMI();
         return obj.EfetuarLocacao(locacao);

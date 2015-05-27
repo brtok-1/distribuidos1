@@ -10,6 +10,8 @@ import Controle.ControleVeiculo;
 import Modelo.Locacao;
 import Modelo.Veiculo;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -294,33 +296,37 @@ public class JanelaRelatorioLocacoes extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botaoAvancarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoAvancarActionPerformed
-        DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
-        int linha = jTable1.getSelectedRow();
-        if (linha < 0) {
-            JOptionPane.showMessageDialog(null, "É necessário selecionar um veículo, clicando na sua linha");
-        } else {
-            int codigo = (int) dtm.getValueAt(linha, 0);
-            for (Veiculo v : veiculos) {
-                if (v.getIdVeiculo() == codigo) {
-                    selecionado = v;
+        try {
+            DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
+            int linha = jTable1.getSelectedRow();
+            if (linha < 0) {
+                JOptionPane.showMessageDialog(null, "É necessário selecionar um veículo, clicando na sua linha");
+            } else {
+                int codigo = (int) dtm.getValueAt(linha, 0);
+                for (Veiculo v : veiculos) {
+                    if (v.getIdVeiculo() == codigo) {
+                        selecionado = v;
+                    }
                 }
+                jLabel13.setText("Relatório de Locações para o Veículo" + selecionado.getIdVeiculo() + "-" + selecionado.getModelo());
+                jPanel1.setVisible(false);
+                this.setContentPane(jPanel2);
+                jPanel2.setVisible(true);
+                ControleLocacao cl = new ControleLocacao();
+                ArrayList<Locacao> locacoes = cl.getLocacoesPorVeiculo(selecionado.getIdVeiculo());
+                Object[][] tabelaLocacao = new Object[locacoes.size()][4];
+                for (int i = 0; i < locacoes.size(); i++) {
+                    String dataHoraRetirada = locacoes.get(i).getDataRetirada().toString() + "  " + locacoes.get(i).getHoraRetirada().toString();
+                    String dataHoraDevolucao = locacoes.get(i).getDataDevolucao().toString() + locacoes.get(i).getHoraDevolucao().toString();
+                    tabelaLocacao[i][0] = dataHoraRetirada;
+                    tabelaLocacao[i][1] = dataHoraDevolucao;
+                    tabelaLocacao[i][2] = locacoes.get(i).getLocalRetirada();
+                    tabelaLocacao[i][3] = locacoes.get(i).getLocalDevolucao();
+                }
+                fazTabela2(tabelaLocacao);
             }
-            jLabel13.setText("Relatório de Locações para o Veículo" + selecionado.getIdVeiculo() + "-" + selecionado.getModelo());
-            jPanel1.setVisible(false);
-            this.setContentPane(jPanel2);
-            jPanel2.setVisible(true);
-            ControleLocacao cl = new ControleLocacao();
-            ArrayList<Locacao> locacoes = cl.getLocacoesPorVeiculo(selecionado.getIdVeiculo());
-            Object[][] tabelaLocacao = new Object[locacoes.size()][4];
-            for (int i = 0; i < locacoes.size(); i++) {
-                String dataHoraRetirada = locacoes.get(i).getDataRetirada().toString();
-                String dataHoraDevolucao = locacoes.get(i).getDataDevolucao().toString();
-                tabelaLocacao[i][0] = dataHoraRetirada;
-                tabelaLocacao[i][1] = dataHoraDevolucao;
-                tabelaLocacao[i][2] = locacoes.get(i).getLocalRetirada();
-                tabelaLocacao[i][3] = locacoes.get(i).getLocalDevolucao();
-            }
-            fazTabela1(tabelaLocacao);
+        } catch (Exception ex) {
+            Logger.getLogger(JanelaRelatorioLocacoes.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_botaoAvancarActionPerformed
 

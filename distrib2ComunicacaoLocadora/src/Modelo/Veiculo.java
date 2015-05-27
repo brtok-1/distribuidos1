@@ -11,7 +11,7 @@ import java.io.Serializable;
  * Classe modelo da entidade veículo
  * @author Bruno Tokarski e Rafael Vidal
  */
-public class Veiculo implements Serializable{
+public class Veiculo implements Serializable {
     
     private int idVeiculo;    
     private int ano;

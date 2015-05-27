@@ -62,6 +62,12 @@ public class ControleVeiculo {
         }
     }
 
+    /**
+     * Salvar uma edição de um veículo específico
+     * 
+     * @param veiculo
+     * @throws Exception 
+     */
     public void EditaVeiculo(Veiculo veiculo) throws Exception {
         File arquivo = new File("C:/Distrib2/Veiculo.dst");
         Veiculo veiculoAntes = new Veiculo();

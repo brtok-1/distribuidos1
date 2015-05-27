@@ -430,7 +430,7 @@ public class JanelaLocacaoVeiculo extends javax.swing.JDialog {
                                 dispose();
                             } else {
                                 JOptionPane.showMessageDialog(null, "<html><center>A locação solicitada não pode ser realizada.<br>"
-                                        + "Na data e horário solicitados já foi feita uma reserva.");
+                                        + "Na data e horário solicitados já há uma reserva.");
                             }
                         }
                     }

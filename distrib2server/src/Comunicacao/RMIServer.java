@@ -35,7 +35,7 @@ public class RMIServer extends UnicastRemoteObject implements ComunicacaoServer 
     }
     
     @Override
-    public ArrayList<Locacao> RecuperarLocacoesPorVeiculo(int idVeiculo) {
+    public ArrayList<Locacao> RecuperarLocacoesPorVeiculo(int idVeiculo) throws Exception {
         ControleLocacao cl = new ControleLocacao();
         return cl.getLocacoesPorVeiculo(idVeiculo);
     }

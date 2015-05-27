@@ -6,12 +6,13 @@
 package Modelo;
 
 import Interface.ComunicacaoClient;
+import java.io.Serializable;
 
 /**
  *
  * @author Rafael
  */
-public class Notificacao {
+public class Notificacao implements Serializable {
     
     private int idVeiculo;
     private ComunicacaoClient comClient;

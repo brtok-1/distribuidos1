@@ -172,14 +172,13 @@ public class JanelaRelatorioLocacoes extends javax.swing.JDialog {
         });
         jTable1.setColumnSelectionAllowed(true);
         jScrollPane1.setViewportView(jTable1);
-        jTable1.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jTable1.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         if (jTable1.getColumnModel().getColumnCount() > 0) {
             jTable1.getColumnModel().getColumn(0).setPreferredWidth(130);
             jTable1.getColumnModel().getColumn(1).setPreferredWidth(130);
             jTable1.getColumnModel().getColumn(2).setPreferredWidth(88);
             jTable1.getColumnModel().getColumn(3).setPreferredWidth(89);
             jTable1.getColumnModel().getColumn(4).setPreferredWidth(50);
-            jTable1.getColumnModel().getColumn(4).setHeaderValue("Ano");
         }
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -234,8 +233,10 @@ public class JanelaRelatorioLocacoes extends javax.swing.JDialog {
                 return canEdit [columnIndex];
             }
         });
+        jTable2.setColumnSelectionAllowed(true);
+        jTable2.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(jTable2);
-        jTable2.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jTable2.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
         if (jTable2.getColumnModel().getColumnCount() > 0) {
             jTable2.getColumnModel().getColumn(0).setPreferredWidth(130);
             jTable2.getColumnModel().getColumn(1).setPreferredWidth(130);
@@ -322,7 +323,7 @@ public class JanelaRelatorioLocacoes extends javax.swing.JDialog {
                     tabelaLocacao[i][2] = locacoes.get(i).getLocalRetirada();
                     tabelaLocacao[i][3] = locacoes.get(i).getLocalDevolucao();
                 }
-                fazTabela1(tabelaLocacao);
+                fazTabela2(tabelaLocacao);
             }
         } catch (Exception ex) {
             Logger.getLogger(JanelaRelatorioLocacoes.class.getName()).log(Level.SEVERE, null, ex);
