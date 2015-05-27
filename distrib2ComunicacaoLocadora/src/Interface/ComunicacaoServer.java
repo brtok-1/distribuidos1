@@ -27,6 +27,6 @@ public interface ComunicacaoServer extends Remote {
     
     void RegistrarParaNotificacao(ComunicacaoClient cliente, int idVeiculo) throws Exception;
 
-    public ArrayList<Locacao> RecuperarLocacoesPorVeiculo(int idVeiculo);    
+    public ArrayList<Locacao> RecuperarLocacoesPorVeiculo(int idVeiculo);
     
 }
