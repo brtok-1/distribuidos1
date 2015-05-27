@@ -9,8 +9,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
- * @author Bruno
+ * Janela de início do cliente
+ * @author Bruno Tokarski e Rafael Vidal
  */
 public class InicialClient extends javax.swing.JFrame {
 
@@ -33,31 +33,31 @@ public class InicialClient extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnLocarCarro = new javax.swing.JButton();
+        btnRegistrarInteresse = new javax.swing.JButton();
+        btnLocacoes = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cliente");
 
-        jButton1.setText("Locar Carro");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnLocarCarro.setText("Locar Carro");
+        btnLocarCarro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnLocarCarroActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Registrar interesse em eventos de um Carro");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnRegistrarInteresse.setText("Registrar interesse em eventos de um Carro");
+        btnRegistrarInteresse.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnRegistrarInteresseActionPerformed(evt);
             }
         });
 
-        jButton3.setText("Ver Locações");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btnLocacoes.setText("Ver Locações");
+        btnLocacoes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btnLocacoesActionPerformed(evt);
             }
         });
 
@@ -67,11 +67,11 @@ public class InicialClient extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton1)
+                .addComponent(btnLocarCarro)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2)
+                .addComponent(btnRegistrarInteresse)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton3)
+                .addComponent(btnLocacoes)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -79,9 +79,9 @@ public class InicialClient extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
+                    .addComponent(btnLocarCarro)
+                    .addComponent(btnRegistrarInteresse)
+                    .addComponent(btnLocacoes))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -89,25 +89,37 @@ public class InicialClient extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    /**
+     * Efetuar a locação de um carro
+     * @param evt 
+     */
+    private void btnLocarCarroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLocarCarroActionPerformed
         try {
             JanelaLocacaoVeiculo jlv = new JanelaLocacaoVeiculo();
             jlv.setVisible(true);
         } catch (Exception ex) {
             Logger.getLogger(InicialClient.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnLocarCarroActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    /**
+     * Registrar interesse nos eventos de um determinado veículo
+     * @param evt 
+     */
+    private void btnRegistrarInteresseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarInteresseActionPerformed
         try {
             JanelaInteresseEventos jie = new JanelaInteresseEventos();
             jie.setVisible(true);
         } catch (Exception ex) {
             Logger.getLogger(InicialClient.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnRegistrarInteresseActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    /**
+     * Visualizar locações para um determinado veículo
+     * @param evt 
+     */
+    private void btnLocacoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLocacoesActionPerformed
         try {
             JanelaRelatorioLocacoes jrl = new JanelaRelatorioLocacoes();
             jrl.setVisible(true);
@@ -115,11 +127,11 @@ public class InicialClient extends javax.swing.JFrame {
         } catch (Exception ex) {
             Logger.getLogger(InicialClient.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_btnLocacoesActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton btnLocacoes;
+    private javax.swing.JButton btnLocarCarro;
+    private javax.swing.JButton btnRegistrarInteresse;
     // End of variables declaration//GEN-END:variables
 }

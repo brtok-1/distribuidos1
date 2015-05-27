@@ -9,8 +9,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
- * @author Bruno
+ * Janela de notificação ao cliente
+ * @author Bruno Tokarski e Rafael Vidal
  */
 public class JanelaNotificacao extends javax.swing.JDialog {
 
@@ -32,8 +32,8 @@ public class JanelaNotificacao extends javax.swing.JDialog {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnIrLocacao = new javax.swing.JButton();
+        btnFecharAviso = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Baixou!");
@@ -43,17 +43,17 @@ public class JanelaNotificacao extends javax.swing.JDialog {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("notificacao");
 
-        jButton1.setText("Ir para Locação!");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnIrLocacao.setText("Ir para Locação!");
+        btnIrLocacao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnIrLocacaoActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Fechar Aviso");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnFecharAviso.setText("Fechar Aviso");
+        btnFecharAviso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnFecharAvisoActionPerformed(evt);
             }
         });
 
@@ -66,9 +66,9 @@ public class JanelaNotificacao extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(btnIrLocacao)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 234, Short.MAX_VALUE)
-                        .addComponent(jButton2)))
+                        .addComponent(btnFecharAviso)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -78,8 +78,8 @@ public class JanelaNotificacao extends javax.swing.JDialog {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(btnIrLocacao)
+                    .addComponent(btnFecharAviso))
                 .addContainerGap())
         );
 
@@ -87,7 +87,11 @@ public class JanelaNotificacao extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    /**
+     * Avançar para a tela de locação
+     * @param evt 
+     */
+    private void btnIrLocacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIrLocacaoActionPerformed
         try {
             dispose();
             JanelaLocacaoVeiculo jlv = new JanelaLocacaoVeiculo();
@@ -95,15 +99,19 @@ public class JanelaNotificacao extends javax.swing.JDialog {
         } catch (Exception ex) {
             Logger.getLogger(JanelaNotificacao.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnIrLocacaoActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    /**
+     * Fechar a janela de notificação
+     * @param evt 
+     */
+    private void btnFecharAvisoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFecharAvisoActionPerformed
         dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnFecharAvisoActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btnFecharAviso;
+    private javax.swing.JButton btnIrLocacao;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

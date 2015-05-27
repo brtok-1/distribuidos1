@@ -8,7 +8,6 @@ package GUI;
 import Comunicacao.RMICliente;
 import Modelo.Locacao;
 import Modelo.Veiculo;
-//import java.sql.Date;
 import java.sql.Time;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -22,8 +21,8 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
- * @author Rafael
+ * Janela de locação de veículo
+ * @author Bruno Tokarski e Rafael Vidal
  */
 public class JanelaLocacaoVeiculo extends javax.swing.JDialog {
 
@@ -53,6 +52,10 @@ public class JanelaLocacaoVeiculo extends javax.swing.JDialog {
         fazTabela(tabela);
     }
 
+    /**
+     * Popula a tabela de veículos
+     * @param tabela 
+     */
     public final void fazTabela(Object[][] tabela) {
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
                 tabela,
@@ -366,6 +369,10 @@ public class JanelaLocacaoVeiculo extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Após selecionar um veículo, efetuar a locação
+     * @param evt 
+     */
     private void botaoAvancarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoAvancarActionPerformed
         DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
         int linha = jTable1.getSelectedRow();
@@ -386,12 +393,20 @@ public class JanelaLocacaoVeiculo extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_botaoAvancarActionPerformed
 
+    /**
+     * Voltar à tela anterior
+     * @param evt 
+     */
     private void botaoVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoVoltarActionPerformed
         jPanel2.setVisible(false);
         this.setContentPane(jPanel1);
         jPanel1.setVisible(true);
     }//GEN-LAST:event_botaoVoltarActionPerformed
 
+    /**
+     * Confirar locação de veículo
+     * @param evt 
+     */
     private void botaoConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoConfirmarActionPerformed
         try {
             Locacao loc = new Locacao();

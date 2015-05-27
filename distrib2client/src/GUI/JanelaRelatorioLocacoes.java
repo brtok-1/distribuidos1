@@ -8,18 +8,16 @@ package GUI;
 import Comunicacao.RMICliente;
 import Modelo.Locacao;
 import Modelo.Veiculo;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
- * @author Rafael
+ * Janela listando locações para um determinado veículo
+ * @author Bruno Tokarski e Rafael Vidal
  */
 public class JanelaRelatorioLocacoes extends javax.swing.JDialog {
 
@@ -138,7 +136,7 @@ public class JanelaRelatorioLocacoes extends javax.swing.JDialog {
         jLabel13 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        btnVoltar = new javax.swing.JButton();
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel7.setText("Relatório de Locações");
@@ -247,10 +245,10 @@ public class JanelaRelatorioLocacoes extends javax.swing.JDialog {
             jTable2.getColumnModel().getColumn(3).setPreferredWidth(89);
         }
 
-        jButton1.setText("<< Voltar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnVoltar.setText("<< Voltar");
+        btnVoltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnVoltarActionPerformed(evt);
             }
         });
 
@@ -265,7 +263,7 @@ public class JanelaRelatorioLocacoes extends javax.swing.JDialog {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, 354, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1)))
+                        .addComponent(btnVoltar)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -274,7 +272,7 @@ public class JanelaRelatorioLocacoes extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
-                    .addComponent(jButton1))
+                    .addComponent(btnVoltar))
                 .addGap(7, 7, 7)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 314, Short.MAX_VALUE)
                 .addContainerGap())
@@ -298,6 +296,10 @@ public class JanelaRelatorioLocacoes extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Após selecionado o veículo, visualizar suas locações
+     * @param evt 
+     */
     private void botaoAvancarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoAvancarActionPerformed
         try {
             DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
@@ -340,16 +342,20 @@ public class JanelaRelatorioLocacoes extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_botaoAvancarActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    /**
+     * Voltar à tela anterior
+     * @param evt 
+     */
+    private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
         jPanel2.setVisible(false);
         this.setContentPane(jPanel1);
         jPanel1.setVisible(true);
         fazTabela1(tabelaVeiculos);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnVoltarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botaoAvancar;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnVoltar;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
