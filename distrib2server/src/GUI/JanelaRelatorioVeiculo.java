@@ -14,8 +14,8 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
- * @author Rafael
+ * Relatório de veículos cadastrados
+ * @author Bruno Tokarski e Rafael Vidal
  */
 public class JanelaRelatorioVeiculo extends javax.swing.JDialog {
 
@@ -40,6 +40,10 @@ public class JanelaRelatorioVeiculo extends javax.swing.JDialog {
         fazTabela(tabela);
     }
 
+    /**
+     * Imprime a tabela de veículos
+     * @param tabela tabela montada
+     */
     public final void fazTabela(Object[][] tabela) {
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
                 tabela,

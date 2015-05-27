@@ -17,8 +17,8 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
- * @author Rafael
+ * Exibição das locações
+ * @author Bruno Tokarski e Rafael Vidal
  */
 public class JanelaRelatorioLocacoes extends javax.swing.JDialog {
 
@@ -49,6 +49,10 @@ public class JanelaRelatorioLocacoes extends javax.swing.JDialog {
         fazTabela1(tabelaVeiculos);
     }
 
+    /**
+     * Imprime a tabela de veículos
+     * @param tabela 
+     */    
     public final void fazTabela1(Object[][] tabela) {
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
                 tabela,
@@ -85,6 +89,10 @@ public class JanelaRelatorioLocacoes extends javax.swing.JDialog {
         }
     }
 
+    /**
+     * Imprime a tabela de locações
+     * @param tabela tabela montada
+     */
     public void fazTabela2(Object[][] tabela) {
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
                 tabela,
@@ -296,6 +304,10 @@ public class JanelaRelatorioLocacoes extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Após selecionado um veículo, avançar para a locação
+     * @param evt acionamento do botão "Avançar"
+     */
     private void botaoAvancarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoAvancarActionPerformed
         try {
             DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
@@ -338,6 +350,10 @@ public class JanelaRelatorioLocacoes extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_botaoAvancarActionPerformed
 
+    /**
+     * Retorna para o painel anterior
+     * @param evt acionamento do botão voltar
+     */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         jPanel2.setVisible(false);
         this.setContentPane(jPanel1);

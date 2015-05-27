@@ -49,7 +49,7 @@ public class JanelaRelatorioLocacoes extends javax.swing.JDialog {
     }
 
     /**
-     * Imprime a tabela
+     * Imprime a tabela de veículos
      * @param tabela tabela montada
      */
     public final void fazTabela1(Object[][] tabela) {
@@ -88,6 +88,10 @@ public class JanelaRelatorioLocacoes extends javax.swing.JDialog {
         }
     }
 
+    /**
+     * Imprime a tabela de locações
+     * @param tabela tabela locações
+     */
     public void fazTabela2(Object[][] tabela) {
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
                 tabela,
@@ -302,7 +306,7 @@ public class JanelaRelatorioLocacoes extends javax.swing.JDialog {
 
     /**
      * Após selecionado o veículo, visualizar suas locações
-     * @param evt 
+     * @param evt acionamento do botão avançar
      */
     private void botaoAvancarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoAvancarActionPerformed
         try {
@@ -348,7 +352,7 @@ public class JanelaRelatorioLocacoes extends javax.swing.JDialog {
 
     /**
      * Voltar à tela anterior
-     * @param evt 
+     * @param evt acionamento do botão voltar
      */
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
         jPanel2.setVisible(false);

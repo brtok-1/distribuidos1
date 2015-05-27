@@ -190,7 +190,7 @@ public class JanelaCadastroVeiculo extends javax.swing.JDialog {
      * Verifica se foi iniciado como Inclusão ou Edição e Salvas as modificações
      * Fecha a janela em caso de sucesso
      * 
-     * @param evt 
+     * @param evt acionamento do botão salvar
      */
     private void botaoSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoSalvarActionPerformed
         if (codigoVeiculo == -1) {
@@ -232,7 +232,7 @@ public class JanelaCadastroVeiculo extends javax.swing.JDialog {
     /**
      * Fecha a janela, cancelando a operação
      * 
-     * @param evt 
+     * @param evt acionamento do botão cancelar
      */
     private void botaoCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCancelarActionPerformed
         dispose();

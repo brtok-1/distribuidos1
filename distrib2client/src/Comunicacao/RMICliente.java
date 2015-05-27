@@ -38,7 +38,7 @@ public class RMICliente extends UnicastRemoteObject implements ComunicacaoClient
     /**
      * Método que recebe a notificação de interesse do cliente
      * 
-     * @param mensagem
+     * @param mensagem Texto da notificação
      * @throws Exception 
      */
     @Override
@@ -50,7 +50,6 @@ public class RMICliente extends UnicastRemoteObject implements ComunicacaoClient
     
     /**
      * Início da comunicação RMI
-     *
      * @throws InterruptedException
      */
     public void IniciaRMI() throws Exception {
@@ -71,7 +70,7 @@ public class RMICliente extends UnicastRemoteObject implements ComunicacaoClient
     /**
      * Recupera do servidor uma lista de locações para determinado veiculo
      * 
-     * @param idVeiculo
+     * @param idVeiculo Código do veículo
      * @return ArrayList de locações
      * @throws Exception 
      */
@@ -85,7 +84,7 @@ public class RMICliente extends UnicastRemoteObject implements ComunicacaoClient
      * Método que registra o interesse do Cliente em um veículo, passando a referência do
      * Objeto Remoto e a ID do veículo
      * 
-     * @param idVeiculo
+     * @param idVeiculo Código do veículo
      * @throws Exception 
      */
     public void ManifestarInteresse(int idVeiculo) throws Exception {
@@ -97,7 +96,7 @@ public class RMICliente extends UnicastRemoteObject implements ComunicacaoClient
     /**
      * Faz a locação do veículo no servidor
      * 
-     * @param locacao 
+     * @param locacao Objeto locacao preenchido
      * @return Resultado da Operação = sucesso
      * @throws Exception 
      */

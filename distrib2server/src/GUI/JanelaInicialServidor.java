@@ -9,8 +9,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
- * @author Rafael
+ * Janela inicial do servidor
+ * @author Bruno Tokarski e Rafael Vidal
  */
 public class JanelaInicialServidor extends javax.swing.JFrame {
 
@@ -93,6 +93,10 @@ public class JanelaInicialServidor extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Cadastrar novo veículo
+     * @param evt acionamento do botão cadastrar veículo
+     */
     private void btnCadastrarVeiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarVeiculoActionPerformed
         try {
             JanelaCadastroVeiculo jcv = new JanelaCadastroVeiculo(-1);
@@ -113,6 +117,10 @@ public class JanelaInicialServidor extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    /**
+     * Visualizar locações
+     * @param evt acionamento do botão "Ver Locações"
+     */
     private void btnLocacoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLocacoesActionPerformed
         try {
             JanelaRelatorioLocacoes jrl = new JanelaRelatorioLocacoes();

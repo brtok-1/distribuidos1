@@ -13,7 +13,11 @@ import java.rmi.Remote;
  */
 public interface ComunicacaoClient extends Remote {
     
-    
+    /**
+     * Recebimento de notificação do servidor
+     * @param mensagem texto da notificação
+     * @throws Exception 
+     */
     void ReceberNotificacao(String mensagem) throws Exception;
     
 }

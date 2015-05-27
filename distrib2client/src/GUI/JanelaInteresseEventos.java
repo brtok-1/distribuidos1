@@ -42,6 +42,10 @@ public class JanelaInteresseEventos extends javax.swing.JDialog {
         fazTabela(tabela);
     }
 
+    /**
+     * Imprime a tabela
+     * @param tabela tabela montada
+     */
     public final void fazTabela(Object[][] tabela) {
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
                 tabela,

@@ -13,8 +13,8 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
 /**
- *
- * @author Bruno
+ * Classe inicial do servidor
+ * @author Bruno Tokarski e Rafael Vidal
  */
 public class Distrib2server {
 
