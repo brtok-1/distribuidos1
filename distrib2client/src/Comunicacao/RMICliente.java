@@ -34,7 +34,8 @@ public class RMICliente extends UnicastRemoteObject implements ComunicacaoClient
         janelaConsole = JanelaConsole.getInstancia();
         reg = LocateRegistry.getRegistry("localhost", 1099);
         obj = (ComunicacaoServer) reg.lookup("servidor");
-        rmic = new RMICliente();
+  
+        
     }
 
     @Override
@@ -50,14 +51,15 @@ public class RMICliente extends UnicastRemoteObject implements ComunicacaoClient
      *
      * @throws InterruptedException
      */
-//    public void IniciaRMI() throws Exception {
-//        rmic = new RMICliente();
-//    }
+    public void IniciaRMI() throws Exception {
+        rmic = new RMICliente();
+    }
     /**
      *
      * @return @throws Exception
      */
     public ArrayList<Veiculo> RecuperarVeiculos() throws Exception {
+        IniciaRMI();
         janelaConsole.EscreveNaJanela("Recuperando veículos...");
         ArrayList<Veiculo> veiculos = obj.ConsultarVeiculos();
         janelaConsole.EscreveNaJanela("Veículos recuperados. Total: " + veiculos.size());
@@ -66,11 +68,14 @@ public class RMICliente extends UnicastRemoteObject implements ComunicacaoClient
 
     public void ManifestarInteresse(int idVeiculo) throws Exception {
 
+        IniciaRMI();
         obj.RegistrarParaNotificacao(rmic, idVeiculo);
         JOptionPane.showMessageDialog(null, "Interesse no Veiculo " + idVeiculo + " registrado com sucesso!");
     }
 
     public void EfetuarLocacao(Locacao locacao) throws Exception {
+        
+        IniciaRMI();
         boolean locacaoEfetuada = obj.EfetuarLocacao(locacao);
 
         if (locacaoEfetuada) {

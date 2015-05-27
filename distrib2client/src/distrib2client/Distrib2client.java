@@ -38,9 +38,7 @@ public class Distrib2client {
             InicialClient ic = new InicialClient();
             ic.setVisible(true);
             ic.repaint();
-            janelaConsole.EscreveNaJanela("Aplicação iniciada.");
-            RMICliente rmic = new RMICliente();
-            rmic.IniciaRMI();
+            janelaConsole.EscreveNaJanela("Aplicação iniciada.");            
             
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
             Logger.getLogger(Distrib2client.class.getName()).log(Level.SEVERE, null, ex);

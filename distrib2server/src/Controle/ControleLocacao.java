@@ -6,10 +6,8 @@
 package Controle;
 
 import Modelo.Locacao;
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Date;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -39,9 +37,26 @@ public class ControleLocacao {
     }
     
    //Date dataInicio, Time horaInicio, Date dataFim, Time horaFim, int idVeiculo
-    public boolean verificaDisponibilidade(Locacao locacao) {
-        ArrayList<Locacao> locacoesVeiculo = getLocacoesPorVeiculo(locacao.getVeiculo().getIdVeiculo());
+    public boolean verificaDisponibilidade(Locacao minhaLocacao) {
+        ArrayList<Locacao> locacoesVeiculo = getLocacoesPorVeiculo(minhaLocacao.getVeiculo().getIdVeiculo());
         Date hoje = new Date();
+        
+        for(Locacao outraLocacao : locacoesVeiculo)
+        {
+            //Se a data de retirada da outra for antes da minha, a data de devolução da outra deve ser antes da minha retirada 
+            if(!(outraLocacao.getDataRetirada().before(minhaLocacao.getDataRetirada()) && 
+                    outraLocacao.getDataDevolucao().before(minhaLocacao.getDataRetirada())))
+            {
+                return false;
+            }
+            
+            //Se a data de retirada da outra for depois da minha, a minha data de devolução deve ser antes da de retirada da outra
+            if(!(outraLocacao.getDataRetirada().after(minhaLocacao.getDataRetirada()) && 
+                    outraLocacao.getDataRetirada().after(minhaLocacao.getDataDevolucao())))
+            {
+                return false;
+            }
+        }
         
         return true;
     }
@@ -49,14 +64,23 @@ public class ControleLocacao {
     public boolean addLocacao(Locacao locacao) {
         boolean disponivel = verificaDisponibilidade(locacao);
         if (disponivel) {
-            //CODIGO PARA ADICIONAR A LOCACAO
-            JOptionPane.showMessageDialog(null, "Locação solicitada com sucesso para o veículo.");
-            return true;
-        } else {
-            //CODIGO QUE CONFIRMA QUE NÃO ESTÁ DISPONÍVEL
-            JOptionPane.showMessageDialog(null, "O veículo já está locado no período solicitado.");
-            return false;
-        }
+            
+            ControleLocacao controleLocacao = ControleLocacao.getInstancia();
+            controleLocacao.getLocacoes().add(locacao);
+            
+        }      
+        
+        return disponivel;
     }
+
+    public ArrayList<Locacao> getLocacoes() {
+        return locacoes;
+    }
+
+    public void setLocacoes(ArrayList<Locacao> locacoes) {
+        this.locacoes = locacoes;
+    }
+    
+    
 
 }

@@ -11,7 +11,6 @@ import Modelo.Veiculo;
 import java.sql.Date;
 import java.sql.Time;
 import java.util.ArrayList;
-import java.util.logging.Formatter;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -404,6 +403,18 @@ public class JanelaLocacaoVeiculo extends javax.swing.JDialog {
         loc.setParcelasCartao(Integer.parseInt(spinnerParcelas.getValue().toString()));
         loc.setVeiculo(selecionado);
         System.out.println(loc);
+        
+        try
+        {
+            RMICliente rmic = new RMICliente();
+            rmic.EfetuarLocacao(loc);
+        }catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+        
+        
+        
     }//GEN-LAST:event_botaoConfirmarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
