@@ -34,6 +34,7 @@ public class JanelaInicialServidor extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         btnCadastrarVeiculo = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        btnLocacoes = new javax.swing.JButton();
 
         jButton2.setText("Cadastrar Veículo");
 
@@ -56,6 +57,13 @@ public class JanelaInicialServidor extends javax.swing.JFrame {
             }
         });
 
+        btnLocacoes.setText("Locações");
+        btnLocacoes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLocacoesActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -64,7 +72,9 @@ public class JanelaInicialServidor extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(btnCadastrarVeiculo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton4)
+                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnLocacoes, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -73,11 +83,13 @@ public class JanelaInicialServidor extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnCadastrarVeiculo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnLocacoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        setSize(new java.awt.Dimension(290, 84));
+        setSize(new java.awt.Dimension(427, 84));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -101,8 +113,21 @@ public class JanelaInicialServidor extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    private void btnLocacoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLocacoesActionPerformed
+        try
+        {
+            JanelaRelatorioLocacao jrl = new JanelaRelatorioLocacao();
+            jrl.setVisible(true);
+            jrl.repaint();
+        }catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_btnLocacoesActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCadastrarVeiculo;
+    private javax.swing.JButton btnLocacoes;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
