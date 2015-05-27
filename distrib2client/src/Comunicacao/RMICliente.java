@@ -70,17 +70,8 @@ public class RMICliente extends UnicastRemoteObject implements ComunicacaoClient
         JOptionPane.showMessageDialog(null, "Interesse no Veiculo " + idVeiculo + " registrado com sucesso!");
     }
 
-    public void EfetuarLocacao(Locacao locacao) throws Exception {
-        boolean locacaoEfetuada = obj.EfetuarLocacao(locacao);
-
-        if (locacaoEfetuada) {
-            JanelaNotificacao jn = new JanelaNotificacao("Locação efetuada com sucesso!");
-            jn.setVisible(true);
-        } else {
-            JanelaNotificacao jn = new JanelaNotificacao("Não foi possível efetuar a locação. "
-                    + "O veículo já possui locação agendada para o período informado.");
-            jn.setVisible(true);
-        }
+    public boolean EfetuarLocacao(Locacao locacao) throws Exception {
+        return obj.EfetuarLocacao(locacao);
     }
 
 }

@@ -48,12 +48,8 @@ public class RMIServer extends UnicastRemoteObject implements ComunicacaoServer 
     
     @Override
     public boolean EfetuarLocacao(Locacao locacao) throws Exception {        
-        
         ControleLocacao cl = new ControleLocacao();
-        
-        boolean veiculoDisponivel = cl.addLocacao(locacao);
-        
-        return veiculoDisponivel;
+        return cl.addLocacao(locacao);
     }   
     
     //Unificando a implementação da interface com o controle

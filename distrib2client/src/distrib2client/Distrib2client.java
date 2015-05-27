@@ -26,9 +26,6 @@ public class Distrib2client {
      * @throws java.lang.InterruptedException
      */
     public static void main(String[] args) throws InterruptedException {
-        Calendar gregoriano = new GregorianCalendar();
-        String print = gregoriano.get(Calendar.HOUR_OF_DAY) + ":" + gregoriano.get(Calendar.MINUTE) + ":00";
-        System.out.println(print);
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 

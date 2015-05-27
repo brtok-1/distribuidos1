@@ -11,7 +11,10 @@ import Modelo.Veiculo;
 import java.sql.Date;
 import java.sql.Time;
 import java.util.ArrayList;
-import java.util.logging.Formatter;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -20,7 +23,7 @@ import javax.swing.table.DefaultTableModel;
  * @author Rafael
  */
 public class JanelaLocacaoVeiculo extends javax.swing.JDialog {
-    
+
     private ArrayList<Veiculo> veiculos;
     private Veiculo selecionado;
 
@@ -30,7 +33,7 @@ public class JanelaLocacaoVeiculo extends javax.swing.JDialog {
     public JanelaLocacaoVeiculo() throws Exception {
         initComponents();
         setModal(true);
-        
+
         setContentPane(jPanel1);
         jPanel1.setVisible(true);
         RMICliente crmic = new RMICliente();
@@ -46,7 +49,7 @@ public class JanelaLocacaoVeiculo extends javax.swing.JDialog {
         }
         fazTabela(tabela);
     }
-    
+
     public final void fazTabela(Object[][] tabela) {
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
                 tabela,
@@ -60,11 +63,11 @@ public class JanelaLocacaoVeiculo extends javax.swing.JDialog {
             boolean[] canEdit = new boolean[]{
                 false, false, false, false, false, false
             };
-            
+
             public Class getColumnClass(int columnIndex) {
                 return types[columnIndex];
             }
-            
+
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit[columnIndex];
             }
@@ -387,23 +390,56 @@ public class JanelaLocacaoVeiculo extends javax.swing.JDialog {
     }//GEN-LAST:event_botaoVoltarActionPerformed
 
     private void botaoConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoConfirmarActionPerformed
-        Locacao loc = new Locacao();
-        String dataInicio = labelDataInicio.getText();
-        String horarioInicio = labelHorarioInicio.getText() + ":00";
-        String dataTermino = labelDataTermino.getText();
-        String horarioTermino = labelHorarioTermino.getText() + ":00";
-        loc.setDataRetirada(Date.valueOf(dataInicio));
-        loc.setHoraRetirada(Time.valueOf(horarioInicio));
-        loc.setDataDevolucao(Date.valueOf(dataTermino));
-        loc.setHoraDevolucao(Time.valueOf(horarioTermino));
-        loc.setIdadeCondutor(Integer.parseInt(spinnerIdade.getValue().toString()));
-        loc.setLocalDevolucao(labelLocalDevolucao.getText());
-        loc.setLocalRetirada(labelLocalRetirada.getText());
-        loc.setNomeCondutor(labelNomeCondutor.getText());
-        loc.setNumeroCartao(labelNumeroCartao.getText());
-        loc.setParcelasCartao(Integer.parseInt(spinnerParcelas.getValue().toString()));
-        loc.setVeiculo(selecionado);
-        System.out.println(loc);
+        try {
+            Locacao loc = new Locacao();
+            String dataInicio = labelDataInicio.getText();
+            String horarioInicio = labelHorarioInicio.getText() + ":00";
+            String dataTermino = labelDataTermino.getText();
+            String horarioTermino = labelHorarioTermino.getText() + ":00";
+            loc.setDataRetirada(Date.valueOf(dataInicio));
+            loc.setHoraRetirada(Time.valueOf(horarioInicio));
+            loc.setDataDevolucao(Date.valueOf(dataTermino));
+            loc.setHoraDevolucao(Time.valueOf(horarioTermino));
+            loc.setIdadeCondutor(Integer.parseInt(spinnerIdade.getValue().toString()));
+            loc.setLocalDevolucao(labelLocalDevolucao.getText());
+            loc.setLocalRetirada(labelLocalRetirada.getText());
+            loc.setNomeCondutor(labelNomeCondutor.getText());
+            loc.setNumeroCartao(labelNumeroCartao.getText());
+            loc.setParcelasCartao(Integer.parseInt(spinnerParcelas.getValue().toString()));
+            loc.setVeiculo(selecionado);
+            if (loc.getDataDevolucao().before(loc.getDataRetirada())) {
+                JOptionPane.showMessageDialog(null, "<html><center>Incorreto!<br>Data de devolução anterior a data de retirada.");
+            } else {
+                if (loc.getDataDevolucao().equals(loc.getDataRetirada()) && loc.getHoraDevolucao().before(loc.getHoraRetirada())) {
+                    JOptionPane.showMessageDialog(null, "<html><center>Incorreto!<br>Hora de devolução anterior a hora de retirada.");
+                } else {
+                    java.util.Date hoje = new java.util.Date();
+                    Calendar gregoriano = new GregorianCalendar();
+                    String agoraString = gregoriano.get(Calendar.HOUR_OF_DAY) + ":" + gregoriano.get(Calendar.MINUTE) + ":00";
+                    Time agora = Time.valueOf(agoraString);
+                    if (hoje.after(loc.getDataRetirada())) {
+                        JOptionPane.showMessageDialog(null, "<html><center>Incorreto!<br>A data de retirada é anterior ao dia de hoje.");
+                    } else {
+                        if (hoje.equals(loc.getDataRetirada()) && agora.after(loc.getHoraRetirada())) {
+                            JOptionPane.showMessageDialog(null, "<html><center>Incorreto!<br>A hora de retirada já passou.");
+                        } else {
+                            RMICliente rmi = new RMICliente();
+                            boolean sucesso = rmi.EfetuarLocacao(loc);
+                            if (sucesso) {
+                                JOptionPane.showMessageDialog(null, "Locação efetuada com sucesso.");
+                                dispose();
+                            } else {
+                                JOptionPane.showMessageDialog(null, "<html><center>A locação solicitada não pode ser realizada.<br>"
+                                        + "Na data e horário solicitados já foi feita uma reserva.");
+                            }
+                        }
+                    }
+                }
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(JanelaLocacaoVeiculo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }//GEN-LAST:event_botaoConfirmarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
