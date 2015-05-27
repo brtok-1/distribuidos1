@@ -8,10 +8,13 @@ package GUI;
 import Comunicacao.RMICliente;
 import Modelo.Locacao;
 import Modelo.Veiculo;
-import java.sql.Date;
+//import java.sql.Date;
 import java.sql.Time;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -220,13 +223,13 @@ public class JanelaLocacaoVeiculo extends javax.swing.JDialog {
 
         jLabel12.setText("Número de Parcelas:");
 
-        labelDataInicio.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("yyyy-MM-dd"))));
+        labelDataInicio.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter()));
 
         labelHorarioInicio.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getTimeInstance(java.text.DateFormat.SHORT))));
 
         labelHorarioTermino.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getTimeInstance(java.text.DateFormat.SHORT))));
 
-        labelDataTermino.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("yyyy-MM-dd"))));
+        labelDataTermino.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter()));
 
         spinnerIdade.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(18), Integer.valueOf(18), null, Integer.valueOf(1)));
 
@@ -394,11 +397,18 @@ public class JanelaLocacaoVeiculo extends javax.swing.JDialog {
             Locacao loc = new Locacao();
             String dataInicio = labelDataInicio.getText();
             String horarioInicio = labelHorarioInicio.getText() + ":00";
-            String dataTermino = labelDataTermino.getText();
+            String dataFim = labelDataTermino.getText();
             String horarioTermino = labelHorarioTermino.getText() + ":00";
-            loc.setDataRetirada(Date.valueOf(dataInicio));
+            DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+            Date dataRetirada = (Date) formatter.parse(dataInicio);
+            dataRetirada.setHours(23);
+            dataRetirada.setMinutes(59);
+            loc.setDataRetirada(dataRetirada);
             loc.setHoraRetirada(Time.valueOf(horarioInicio));
-            loc.setDataDevolucao(Date.valueOf(dataTermino));
+            Date dataTermino = (Date) formatter.parse(dataFim);
+            loc.setDataDevolucao(dataTermino);
+            System.out.println("Retirada: " + dataRetirada);
+            System.out.println("Devolução: " + dataTermino);
             loc.setHoraDevolucao(Time.valueOf(horarioTermino));
             loc.setIdadeCondutor(Integer.parseInt(spinnerIdade.getValue().toString()));
             loc.setLocalDevolucao(labelLocalDevolucao.getText());
@@ -413,7 +423,8 @@ public class JanelaLocacaoVeiculo extends javax.swing.JDialog {
                 if (loc.getDataDevolucao().equals(loc.getDataRetirada()) && loc.getHoraDevolucao().before(loc.getHoraRetirada())) {
                     JOptionPane.showMessageDialog(null, "<html><center>Incorreto!<br>Hora de devolução anterior a hora de retirada.");
                 } else {
-                    java.util.Date hoje = new java.util.Date();
+                    Date hoje = new Date();
+                    System.out.println("Hoje: " + hoje);
                     Calendar gregoriano = new GregorianCalendar();
                     String agoraString = gregoriano.get(Calendar.HOUR_OF_DAY) + ":" + gregoriano.get(Calendar.MINUTE) + ":00";
                     Time agora = Time.valueOf(agoraString);
