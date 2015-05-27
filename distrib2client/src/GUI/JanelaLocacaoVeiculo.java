@@ -11,13 +11,10 @@ import Modelo.Veiculo;
 import java.sql.Date;
 import java.sql.Time;
 import java.util.ArrayList;
-<<<<<<< HEAD
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-=======
->>>>>>> origin/master
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -393,7 +390,6 @@ public class JanelaLocacaoVeiculo extends javax.swing.JDialog {
     }//GEN-LAST:event_botaoVoltarActionPerformed
 
     private void botaoConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoConfirmarActionPerformed
-<<<<<<< HEAD
         try {
             Locacao loc = new Locacao();
             String dataInicio = labelDataInicio.getText();
@@ -443,38 +439,6 @@ public class JanelaLocacaoVeiculo extends javax.swing.JDialog {
         } catch (Exception ex) {
             Logger.getLogger(JanelaLocacaoVeiculo.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-=======
-        Locacao loc = new Locacao();
-        String dataInicio = labelDataInicio.getText();
-        String horarioInicio = labelHorarioInicio.getText() + ":00";
-        String dataTermino = labelDataTermino.getText();
-        String horarioTermino = labelHorarioTermino.getText() + ":00";
-        loc.setDataRetirada(Date.valueOf(dataInicio));
-        loc.setHoraRetirada(Time.valueOf(horarioInicio));
-        loc.setDataDevolucao(Date.valueOf(dataTermino));
-        loc.setHoraDevolucao(Time.valueOf(horarioTermino));
-        loc.setIdadeCondutor(Integer.parseInt(spinnerIdade.getValue().toString()));
-        loc.setLocalDevolucao(labelLocalDevolucao.getText());
-        loc.setLocalRetirada(labelLocalRetirada.getText());
-        loc.setNomeCondutor(labelNomeCondutor.getText());
-        loc.setNumeroCartao(labelNumeroCartao.getText());
-        loc.setParcelasCartao(Integer.parseInt(spinnerParcelas.getValue().toString()));
-        loc.setVeiculo(selecionado);
-        System.out.println(loc);
-        
-        try
-        {
-            RMICliente rmic = new RMICliente();
-            rmic.EfetuarLocacao(loc);
-        }catch(Exception e)
-        {
-            e.printStackTrace();
-        }
-        
-        
-        
->>>>>>> origin/master
     }//GEN-LAST:event_botaoConfirmarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
