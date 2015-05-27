@@ -74,7 +74,7 @@ public class JanelaInicialServidor extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnLocacoes, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnLocacoes)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -89,7 +89,7 @@ public class JanelaInicialServidor extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        setSize(new java.awt.Dimension(427, 84));
+        setSize(new java.awt.Dimension(373, 84));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -114,14 +114,12 @@ public class JanelaInicialServidor extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void btnLocacoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLocacoesActionPerformed
-        try
-        {
-            JanelaRelatorioLocacao jrl = new JanelaRelatorioLocacao();
+        try {
+            JanelaRelatorioLocacoes jrl = new JanelaRelatorioLocacoes();
             jrl.setVisible(true);
             jrl.repaint();
-        }catch(Exception e)
-        {
-            e.printStackTrace();
+        } catch (Exception ex) {
+            Logger.getLogger(JanelaInicialServidor.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnLocacoesActionPerformed
 

@@ -62,6 +62,12 @@ public class RMICliente extends UnicastRemoteObject implements ComunicacaoClient
         return veiculos;
     }
 
+    public ArrayList<Locacao> RecuperarLocacoesPorVeiculo(int idVeiculo) throws Exception {
+        IniciaRMI();
+        ArrayList<Locacao> locacoes = obj.RecuperarLocacoesPorVeiculo(idVeiculo);
+        return locacoes;
+    }
+    
     public void ManifestarInteresse(int idVeiculo) throws Exception {
         IniciaRMI();
         obj.RegistrarParaNotificacao(rmic, idVeiculo);

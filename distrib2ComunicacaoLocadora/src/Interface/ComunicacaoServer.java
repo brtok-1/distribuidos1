@@ -26,6 +26,7 @@ public interface ComunicacaoServer extends Remote {
     boolean EfetuarLocacao(Locacao locacao) throws Exception;
     
     void RegistrarParaNotificacao(ComunicacaoClient cliente, int idVeiculo) throws Exception;
-    
+
+    public ArrayList<Locacao> RecuperarLocacoesPorVeiculo(int idVeiculo);    
     
 }

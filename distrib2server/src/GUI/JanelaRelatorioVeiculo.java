@@ -28,13 +28,14 @@ public class JanelaRelatorioVeiculo extends javax.swing.JDialog {
 
         ControleVeiculo cv = new ControleVeiculo();
         ArrayList<Veiculo> veiculos = cv.RecuperarVeiculos();
-        Object[][] tabela = new Object[veiculos.size()][5];
+        Object[][] tabela = new Object[veiculos.size()][6];
         for (int i = 0; i < veiculos.size(); i++) {
             tabela[i][0] = veiculos.get(i).getIdVeiculo();
             tabela[i][1] = veiculos.get(i).getPlaca();
             tabela[i][2] = veiculos.get(i).getFabricante();
             tabela[i][3] = veiculos.get(i).getModelo();
             tabela[i][4] = veiculos.get(i).getAno();
+            tabela[i][5] = veiculos.get(i).getValorDiariaString();
         }
         fazTabela(tabela);
     }
@@ -43,14 +44,14 @@ public class JanelaRelatorioVeiculo extends javax.swing.JDialog {
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
                 tabela,
                 new String[]{
-                    "ID", "Placa", "Fabricante", "Modelo", "Ano"
+                    "ID", "Placa", "Fabricante", "Modelo", "Ano", "Valor Diária"
                 }
         ) {
             Class[] types = new Class[]{
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean[]{
-                false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -66,11 +67,12 @@ public class JanelaRelatorioVeiculo extends javax.swing.JDialog {
         jTable1.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         if (jTable1.getColumnModel().getColumnCount() > 0) {
             jTable1.getColumnModel().getColumn(0).setResizable(false);
-            jTable1.getColumnModel().getColumn(0).setPreferredWidth(42);
-            jTable1.getColumnModel().getColumn(1).setPreferredWidth(115);
-            jTable1.getColumnModel().getColumn(2).setPreferredWidth(115);
-            jTable1.getColumnModel().getColumn(3).setPreferredWidth(115);
-            jTable1.getColumnModel().getColumn(4).setPreferredWidth(50);
+            jTable1.getColumnModel().getColumn(0).setPreferredWidth(28);
+            jTable1.getColumnModel().getColumn(1).setPreferredWidth(95);
+            jTable1.getColumnModel().getColumn(2).setPreferredWidth(95);
+            jTable1.getColumnModel().getColumn(3).setPreferredWidth(95);
+            jTable1.getColumnModel().getColumn(4).setPreferredWidth(47);
+            jTable1.getColumnModel().getColumn(5).setPreferredWidth(77);
         }
     }
 

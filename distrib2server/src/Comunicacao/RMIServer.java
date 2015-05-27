@@ -33,6 +33,12 @@ public class RMIServer extends UnicastRemoteObject implements ComunicacaoServer 
         ControleVeiculo cv = new ControleVeiculo();
         return cv.RecuperarVeiculos();
     }
+    
+    @Override
+    public ArrayList<Locacao> RecuperarLocacoesPorVeiculo(int idVeiculo) {
+        ControleLocacao cl = new ControleLocacao();
+        return cl.getLocacoesPorVeiculo(idVeiculo);
+    }
 
     @Override
     public void RegistrarParaNotificacao(ComunicacaoClient cliente, int idVeiculo) throws Exception {
@@ -59,6 +65,5 @@ public class RMIServer extends UnicastRemoteObject implements ComunicacaoServer 
         reg.bind("servidor", new RMIServer());
         System.out.println("RMIServer criado e registrado");
     }
-
     
 }

@@ -29,7 +29,7 @@ public class ControleLocacao {
         ArrayList<Locacao> resultado = new ArrayList<>();
         ControleLocacao controle = ControleLocacao.getInstancia();
         locacoes = controle.getLocacoes();
-        
+
         for (Locacao l : locacoes) {
             if (l.getVeiculo().getIdVeiculo() == idVeiculo) {
                 resultado.add(l);
@@ -40,6 +40,23 @@ public class ControleLocacao {
 
     public boolean verificaDisponibilidade(Locacao minhaLocacao) {
         ArrayList<Locacao> locacoesVeiculo = getLocacoesPorVeiculo(minhaLocacao.getVeiculo().getIdVeiculo());
+//        if (locacoesVeiculo.isEmpty()) {
+//            return true;
+//        }
+//        boolean disponivel = true;
+//        for (Locacao outraLocacao : locacoesVeiculo) {
+//            if (outraLocacao.getDataDevolucao().equals(minhaLocacao.getDataRetirada())) {
+//                if (minhaLocacao.getHoraRetirada().before(outraLocacao.getHoraRetirada())) {
+//                    if (minhaLocacao.getHoraDevolucao().after(outraLocacao.getHoraRetirada())) {
+//                        disponivel = false;
+//                    }
+//                }
+//            } else {
+//                
+//            }
+//        }
+//        return disponivel;
+        
         for (Locacao outraLocacao : locacoesVeiculo) {
             
             //Quando a data de retirada da outra é antes da minha
