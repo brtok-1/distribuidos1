@@ -11,17 +11,18 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
+ * Interface Gráfica para Cadastro e Edição de Veículos
  *
- * @author Rafael
+ * @author Bruno Tokarski e Rafael Vidal
  */
 public class JanelaCadastroVeiculo extends javax.swing.JDialog {
 
     int codigoVeiculo;
 
     /**
-     * Creates new form JanelaCadastroVeiculo
+     * Cria nova JanelaCadastroVeiculo
      *
-     * @param codigoVeiculo
+     * @param codigoVeiculo Define se há algum veiculo para editar ou abre a janela para inclusão caso seja igual a -1
      * @throws java.lang.Exception
      */
     public JanelaCadastroVeiculo(int codigoVeiculo) throws Exception {
@@ -184,6 +185,13 @@ public class JanelaCadastroVeiculo extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Método executado ao clicar do Botão Salvar da Janela
+     * Verifica se foi iniciado como Inclusão ou Edição e Salvas as modificações
+     * Fecha a janela em caso de sucesso
+     * 
+     * @param evt 
+     */
     private void botaoSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoSalvarActionPerformed
         if (codigoVeiculo == -1) {
             try {
@@ -221,6 +229,11 @@ public class JanelaCadastroVeiculo extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_botaoSalvarActionPerformed
 
+    /**
+     * Fecha a janela, cancelando a operação
+     * 
+     * @param evt 
+     */
     private void botaoCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCancelarActionPerformed
         dispose();
     }//GEN-LAST:event_botaoCancelarActionPerformed

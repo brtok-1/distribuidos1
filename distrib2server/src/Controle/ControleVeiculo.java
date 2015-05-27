@@ -24,10 +24,10 @@ public class ControleVeiculo {
     private ArrayList<Veiculo> veiculos;
 
     /**
-     * Salvar o objeto veículo
+     * Salvar em arquivo o objeto veículo recebido por parâmetro
      *
-     * @param veiculo
-     * @return sucesso
+     * @param veiculo Veiculo a ser salvo
+     * @return sucesso Variável boolean que indica o sucesso ou fracasso da operação de salvamento
      * @throws java.lang.Exception
      */
     public boolean SalvaVeiculo(Veiculo veiculo) throws Exception {
@@ -63,9 +63,9 @@ public class ControleVeiculo {
     }
 
     /**
-     * Salvar uma edição de um veículo específico
+     * Salvar uma edição de um veículo específico, ao final testa seu novo preço para disparar ou não a notificação de clientes
      * 
-     * @param veiculo
+     * @param veiculo Veiculo a ser salvo
      * @throws Exception 
      */
     public void EditaVeiculo(Veiculo veiculo) throws Exception {
@@ -100,9 +100,9 @@ public class ControleVeiculo {
     }
 
     /**
-     * Recuperar todos os veículos salvos
+     * Recupera todos os veículos salvos no arquivo
      *
-     * @return
+     * @return ArrayList com todos os Veiculos salvos
      * @throws Exception
      */
     public ArrayList<Veiculo> RecuperarVeiculos() throws Exception {
@@ -118,10 +118,10 @@ public class ControleVeiculo {
     }
 
     /**
-     * Recuperar um veículo salvo
+     * Recupera o veiculo salvo que possui a identificação recebida por parâmetro
      *
-     * @param id
-     * @return
+     * @param id Identificação do veiculo procurado
+     * @return Veiculo solicitado
      * @throws java.lang.Exception
      */
     public Veiculo RecuperarVeiculoPorID(int id) throws Exception {

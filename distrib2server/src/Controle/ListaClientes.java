@@ -9,28 +9,34 @@ import Modelo.Notificacao;
 import java.util.ArrayList;
 
 /**
+ * Classe que fará o armazenamento dos Clientes que desejam ser notificados
  *
- * @author Bruno
+ * @author Bruno Tokarski e Rafael Vidal
  */
 public class ListaClientes {
     
-    private static ListaClientes instancia = new ListaClientes();
-    private ArrayList<Notificacao> listaClientesNotificar = new ArrayList<>();
+    private static ListaClientes instancia;
+    private final ArrayList<Notificacao> listaClientesNotificar = new ArrayList<>();
 
+    /**
+     * Retorna Instância estática de ListaClientes
+     * 
+     * @return  Retorna uma instância da Classe
+     */
     public static ListaClientes getInstancia() {
+        if (instancia == null) {
+            instancia = new ListaClientes();
+        }
         return instancia;
     }
 
-    public static void setInstancia(ListaClientes instancia) {
-        ListaClientes.instancia = instancia;
-    }
-
+    /**
+     * Método que retorna um ArrayList de clientes a ser notificados
+     * 
+     * @return ArrayList de Clientes a Notificar
+     */
     public ArrayList<Notificacao> getListaClientesNotificar() {
         return listaClientesNotificar;
-    }
-
-    public void setListaClientesNotificar(ArrayList<Notificacao> listaClientesNotificar) {
-        this.listaClientesNotificar = listaClientesNotificar;
     }
     
 }

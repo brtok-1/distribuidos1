@@ -15,16 +15,23 @@ import static java.lang.Thread.sleep;
 import java.util.ArrayList;
 
 /**
- *
- * @author Bruno
+ * Classe que faz o controle das Locações para inserir e verificar em arquivo novas e antigas locações
+ * 
+ * @author Bruno Tokarski e Rafael Vidal
  */
 public class ControleLocacao {
 
     private static ControleLocacao instancia;
-
     private ArrayList<Locacao> locacoes = new ArrayList<>();
     private boolean sistemaDisponivel = true;
-
+    
+    /**
+     * Método que após recuperar todas as locações, filtra apenas aquelas que o Veículo do parâmetro se faz presente
+     * 
+     * @param idVeiculo Identificação do Veiculo a qual se desejam as locações
+     * @return ArrayList de Locacoes filtrados pela identificação do Veiculo fornecida
+     * @throws Exception 
+     */
     public ArrayList<Locacao> getLocacoesPorVeiculo(int idVeiculo) throws Exception {
         ArrayList<Locacao> resultado = new ArrayList<>();
         locacoes = RecuperarLocacoes();
@@ -36,6 +43,13 @@ public class ControleLocacao {
         return resultado;
     }
 
+    /**
+     * Método que verifica se a disponibilidade do horário para a locação de parâmetro
+     * 
+     * @param minhaLocacao Locacao que vai ser feita e que pretende-se validar
+     * @return disponivel Retorna um boolean que responde se a locação para aquele momento está disponível
+     * @throws Exception 
+     */
     public boolean verificaDisponibilidade(Locacao minhaLocacao) throws Exception {
         ArrayList<Locacao> locacoesVeiculo = getLocacoesPorVeiculo(minhaLocacao.getVeiculo().getIdVeiculo());
         if (locacoesVeiculo.isEmpty()) {
@@ -97,22 +111,26 @@ public class ControleLocacao {
         return disponivel;
     }
 
+    /**
+     * Classe que recebe a locação para salvá-la, realizando essa operação após realizar as suas verificações
+     * 
+     * @param locacao Locacao que se deseja fazer
+     * @return sucesso Retorna um boolean que indica o sucesso da operação
+     * @throws Exception 
+     */
     public boolean addLocacao(Locacao locacao) throws Exception {
-
         ControleLocacao controle = ControleLocacao.getInstancia();
-
         while (true) {
             if (controle.sistemaDisponivel) {
-                System.out.println("Sistema disponível");
                 //Locka o sistema
                 controle.setSistemaDisponivel(false);
+                System.out.println("Sistema disponível");
                 boolean disponivel = verificaDisponibilidade(locacao);
                 if (disponivel) {
                     SalvaLocacao(locacao);
                 }
                 //Deslocka o sistema
                 controle.setSistemaDisponivel(true);
-                
                 return disponivel;
             }
             System.out.println("Sistema indisponível. Agurandando.");
@@ -120,14 +138,12 @@ public class ControleLocacao {
         }        
     }
 
-    public ArrayList<Locacao> getLocacoes() {
-        return locacoes;
-    }
-
-    public void setLocacoes(ArrayList<Locacao> locacoes) {
-        this.locacoes = locacoes;
-    }
-
+    /**
+     * Salva a locação de parâmetro em arquivo
+     * 
+     * @param locacao Locacao que se deseja gravar em arquivo
+     * @throws Exception 
+     */
     public void SalvaLocacao(Locacao locacao) throws Exception {
         File arquivo = new File("C:/Distrib2/Locacao.dst");
         if (arquivo.exists()) {
@@ -146,6 +162,12 @@ public class ControleLocacao {
         objGravar.writeObject(locacoes);
     }
 
+    /**
+     * Lê o arquivo de Locações para ser processado
+     * 
+     * @return ArrayList com todas as Locações
+     * @throws Exception 
+     */
     public ArrayList<Locacao> RecuperarLocacoes() throws Exception {
         File arquivo = new File("C:/Distrib2/Locacao.dst");
         if (arquivo.exists()) {
@@ -158,22 +180,32 @@ public class ControleLocacao {
         return locacoes;
     }
 
+    /**
+     * Método retorna uma instância Estática de ControleLocacao, no caso de primeira execução, declara uma nova
+     * 
+     * @return Instância Estática de ControleLocacao
+     */
     public static ControleLocacao getInstancia() {
         if (instancia == null) {
             instancia = new ControleLocacao();
         }
-
         return instancia;
     }
 
-    public void setInstancia(ControleLocacao instancia) {
-        this.instancia = instancia;
-    }
-
+    /**
+     * Método que verifica de o Sistema está marca como disponível ou não
+     * 
+     * @return disponivel Retorna se o sistema está disponível para mais acessos ou não
+     */
     public boolean isSistemaDisponivel() {
         return sistemaDisponivel;
     }
 
+    /**
+     * Método que muda a disponibilidade do sistema de acordo com o parâmetro recebido
+     * 
+     * @param sistemaDisponivel Parâmetro que vai tornar o sistema disponível ou indisponível
+     */
     public void setSistemaDisponivel(boolean sistemaDisponivel) {
         this.sistemaDisponivel = sistemaDisponivel;
     }

@@ -14,8 +14,6 @@ import java.util.logging.Logger;
  */
 public class InicialClient extends javax.swing.JFrame {
 
-    JanelaConsole console;
-
     /**
      * Creates new form InicialClient
      */

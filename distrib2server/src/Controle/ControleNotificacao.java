@@ -12,19 +12,31 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
- * @author Bruno
+ * Classe que controla as Noticacoes que serão enviadas aos Clientes
+ * 
+ * @author Bruno Tokarski e Rafael Vidal
  */
 public class ControleNotificacao extends Thread {
 
     Veiculo veiculo;
     String precoAntigo;
 
+    /**
+     * O construtor dessa recebe os parâmetros que serão necessários às notificações
+     * 
+     * @param veiculo Veiculo que teve preço reduzido
+     * @param precoAntigo Preço antigo do veículo com preço reduzido
+     */
     public ControleNotificacao(Veiculo veiculo, String precoAntigo) {
         this.veiculo = veiculo;
         this.precoAntigo = precoAntigo;
     }
 
+    /**
+     * Método de Thread separada para enviar as notificações aos clientes
+     * O método define a mensagem e depois percorre o vetor de clientes que desejam notificação daquele veículo disparando as mensagens
+     * 
+     */
     @Override
     public void run() {
         try {
