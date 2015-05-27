@@ -41,18 +41,33 @@ public class ControleLocacao {
     public boolean verificaDisponibilidade(Locacao minhaLocacao) {
         ArrayList<Locacao> locacoesVeiculo = getLocacoesPorVeiculo(minhaLocacao.getVeiculo().getIdVeiculo());
         for (Locacao outraLocacao : locacoesVeiculo) {
-            //Se a data de retirada da outra for antes da minha, a data de devolução da outra deve ser antes da minha retirada 
-            if (!(outraLocacao.getDataRetirada().before(minhaLocacao.getDataRetirada())
-                    && outraLocacao.getDataDevolucao().before(minhaLocacao.getDataRetirada()))) {
-                return false;
+            
+            //Quando a data de retirada da outra é antes da minha
+            if (outraLocacao.getDataRetirada().before(minhaLocacao.getDataRetirada()))
+            {
+                //a data de devolução da outra deve ser antes da minha retirada
+                if(outraLocacao.getDataDevolucao().before(minhaLocacao.getDataRetirada()))
+                {
+                    return true;
+                }
             }
-            //Se a data de retirada da outra for depois da minha, a minha data de devolução deve ser antes da de retirada da outra
-            if (!(outraLocacao.getDataRetirada().after(minhaLocacao.getDataRetirada())
-                    && outraLocacao.getDataRetirada().after(minhaLocacao.getDataDevolucao()))) {
-                return false;
+            
+            //Quando a data de retirada da outra é depois da minha
+            if (outraLocacao.getDataRetirada().after(minhaLocacao.getDataRetirada()))
+            {
+                //a minha data de devolução deve ser antes da de retirada da outra
+                if(outraLocacao.getDataRetirada().after(minhaLocacao.getDataDevolucao()))
+                {
+                    return true;
+                }                        
             }
         }
-        return true;
+        if(locacoesVeiculo.isEmpty())
+        {
+            return true;
+        }
+        
+        return false;
     }
 
     public boolean addLocacao(Locacao locacao) {
