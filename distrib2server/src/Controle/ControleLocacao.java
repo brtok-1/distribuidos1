@@ -7,7 +7,6 @@ package Controle;
 
 import Modelo.Locacao;
 import java.util.ArrayList;
-import java.util.Date;
 
 /**
  *
@@ -28,6 +27,9 @@ public class ControleLocacao {
 
     public ArrayList<Locacao> getLocacoesPorVeiculo(int idVeiculo) {
         ArrayList<Locacao> resultado = new ArrayList<>();
+        ControleLocacao controle = ControleLocacao.getInstancia();
+        locacoes = controle.getLocacoes();
+        
         for (Locacao l : locacoes) {
             if (l.getVeiculo().getIdVeiculo() == idVeiculo) {
                 resultado.add(l);

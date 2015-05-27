@@ -5,6 +5,7 @@
  */
 package Modelo;
 
+import java.io.Serializable;
 import java.sql.Time;
 import java.util.Date;
 
@@ -12,7 +13,7 @@ import java.util.Date;
  * Modelo da entidade locação
  * @author Bruno Tokarski e Rafael Vidal
  */
-public class Locacao {
+public class Locacao implements Serializable {
     
     private String localRetirada;
     private String localDevolucao;

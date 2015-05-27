@@ -67,11 +67,11 @@ public class JanelaRelatorioLocacao extends javax.swing.JDialog {
         tabelaLocacoes.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         if (tabelaLocacoes.getColumnModel().getColumnCount() > 0) {
             tabelaLocacoes.getColumnModel().getColumn(0).setResizable(false);
-            tabelaLocacoes.getColumnModel().getColumn(0).setPreferredWidth(30);
-            tabelaLocacoes.getColumnModel().getColumn(1).setPreferredWidth(30);
-            tabelaLocacoes.getColumnModel().getColumn(2).setPreferredWidth(50);
+            tabelaLocacoes.getColumnModel().getColumn(0).setPreferredWidth(80);
+            tabelaLocacoes.getColumnModel().getColumn(1).setPreferredWidth(80);
+            tabelaLocacoes.getColumnModel().getColumn(2).setPreferredWidth(100);
             tabelaLocacoes.getColumnModel().getColumn(3).setPreferredWidth(20);
-            tabelaLocacoes.getColumnModel().getColumn(4).setPreferredWidth(50);
+            tabelaLocacoes.getColumnModel().getColumn(4).setPreferredWidth(100);
         }
     }
 

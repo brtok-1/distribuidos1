@@ -26,12 +26,10 @@ public class RMICliente extends UnicastRemoteObject implements ComunicacaoClient
 
     private Registry reg;
     private ComunicacaoServer obj;
-    private JanelaConsole janelaConsole;
     private RMICliente rmic;
 
     public RMICliente() throws Exception {
         super();
-        janelaConsole = JanelaConsole.getInstancia();
         reg = LocateRegistry.getRegistry("localhost", 1099);
         obj = (ComunicacaoServer) reg.lookup("servidor");
   
@@ -60,9 +58,7 @@ public class RMICliente extends UnicastRemoteObject implements ComunicacaoClient
      */
     public ArrayList<Veiculo> RecuperarVeiculos() throws Exception {
         IniciaRMI();
-        janelaConsole.EscreveNaJanela("Recuperando veículos...");
         ArrayList<Veiculo> veiculos = obj.ConsultarVeiculos();
-        janelaConsole.EscreveNaJanela("Veículos recuperados. Total: " + veiculos.size());
         return veiculos;
     }
 

@@ -13,7 +13,6 @@ import java.io.Serializable;
  */
 public class Veiculo implements Serializable{
     
-    private static final long serialVersionUID = 6529685098267757690L;
     private int idVeiculo;    
     private int ano;
     private double valorDiaria;
