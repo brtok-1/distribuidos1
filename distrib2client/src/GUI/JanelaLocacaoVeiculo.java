@@ -407,8 +407,6 @@ public class JanelaLocacaoVeiculo extends javax.swing.JDialog {
             loc.setHoraRetirada(Time.valueOf(horarioInicio));
             Date dataTermino = (Date) formatter.parse(dataFim);
             loc.setDataDevolucao(dataTermino);
-            System.out.println("Retirada: " + dataRetirada);
-            System.out.println("Devolução: " + dataTermino);
             loc.setHoraDevolucao(Time.valueOf(horarioTermino));
             loc.setIdadeCondutor(Integer.parseInt(spinnerIdade.getValue().toString()));
             loc.setLocalDevolucao(labelLocalDevolucao.getText());
@@ -424,7 +422,6 @@ public class JanelaLocacaoVeiculo extends javax.swing.JDialog {
                     JOptionPane.showMessageDialog(null, "<html><center>Incorreto!<br>Hora de devolução anterior a hora de retirada.");
                 } else {
                     Date hoje = new Date();
-                    System.out.println("Hoje: " + hoje);
                     Calendar gregoriano = new GregorianCalendar();
                     String agoraString = gregoriano.get(Calendar.HOUR_OF_DAY) + ":" + gregoriano.get(Calendar.MINUTE) + ":00";
                     Time agora = Time.valueOf(agoraString);

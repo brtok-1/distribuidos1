@@ -8,7 +8,10 @@ package GUI;
 import Comunicacao.RMICliente;
 import Modelo.Locacao;
 import Modelo.Veiculo;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -316,10 +319,17 @@ public class JanelaRelatorioLocacoes extends javax.swing.JDialog {
                 ArrayList<Locacao> locacoes = rmic.RecuperarLocacoesPorVeiculo(selecionado.getIdVeiculo());
                 Object[][] tabelaLocacao = new Object[locacoes.size()][4];
                 for (int i = 0; i < locacoes.size(); i++) {
-                    String dataHoraRetirada = locacoes.get(i).getDataRetirada().toString();
-                    String dataHoraDevolucao = locacoes.get(i).getDataDevolucao().toString();
-                    tabelaLocacao[i][0] = dataHoraRetirada;
-                    tabelaLocacao[i][1] = dataHoraDevolucao;
+                    
+                    SimpleDateFormat out = new SimpleDateFormat("dd/MM/yyyy");  
+                    
+                    String dataRetirada = out.format(locacoes.get(i).getDataRetirada());
+                    String horaRetirada = locacoes.get(i).getHoraRetirada().toString();
+
+                    String dataDevolucao = out.format(locacoes.get(i).getDataDevolucao());
+                    String horaDevolucao = locacoes.get(i).getHoraRetirada().toString();
+                    
+                    tabelaLocacao[i][0] = dataRetirada + " " + horaRetirada;
+                    tabelaLocacao[i][1] = dataDevolucao + " " + horaDevolucao;
                     tabelaLocacao[i][2] = locacoes.get(i).getLocalRetirada();
                     tabelaLocacao[i][3] = locacoes.get(i).getLocalDevolucao();
                 }

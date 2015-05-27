@@ -11,6 +11,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import static java.lang.Thread.sleep;
 import java.util.ArrayList;
 
 /**
@@ -19,7 +20,10 @@ import java.util.ArrayList;
  */
 public class ControleLocacao {
 
+    private static ControleLocacao instancia;
+
     private ArrayList<Locacao> locacoes = new ArrayList<>();
+    private boolean sistemaDisponivel = true;
 
     public ArrayList<Locacao> getLocacoesPorVeiculo(int idVeiculo) throws Exception {
         ArrayList<Locacao> resultado = new ArrayList<>();
@@ -91,44 +95,29 @@ public class ControleLocacao {
         }
 
         return disponivel;
-
-//        return disponivel;
-//        for (Locacao outraLocacao : locacoesVeiculo) {
-//            
-//            //Quando a data de retirada da outra é antes da minha
-//            if (outraLocacao.getDataRetirada().before(minhaLocacao.getDataRetirada()))
-//            {
-//                //a data de devolução da outra deve ser antes da minha retirada
-//                if(outraLocacao.getDataDevolucao().before(minhaLocacao.getDataRetirada()))
-//                {
-//                    return true;
-//                }
-//            }
-//            
-//            //Quando a data de retirada da outra é depois da minha
-//            if (outraLocacao.getDataRetirada().after(minhaLocacao.getDataRetirada()))
-//            {
-//                //a minha data de devolução deve ser antes da de retirada da outra
-//                if(outraLocacao.getDataRetirada().after(minhaLocacao.getDataDevolucao()))
-//                {
-//                    return true;
-//                }                        
-//            }
-//        }
-//        if(locacoesVeiculo.isEmpty())
-//        {
-//            return true;
-//        }
-//        
-//        return false;
     }
 
     public boolean addLocacao(Locacao locacao) throws Exception {
-        boolean disponivel = verificaDisponibilidade(locacao);
-        if (disponivel) {
-            SalvaLocacao(locacao);
-        }
-        return disponivel;
+
+        ControleLocacao controle = ControleLocacao.getInstancia();
+
+        while (true) {
+            if (controle.sistemaDisponivel) {
+                System.out.println("Sistema disponível");
+                //Locka o sistema
+                controle.setSistemaDisponivel(false);
+                boolean disponivel = verificaDisponibilidade(locacao);
+                if (disponivel) {
+                    SalvaLocacao(locacao);
+                }
+                //Deslocka o sistema
+                controle.setSistemaDisponivel(true);
+                
+                return disponivel;
+            }
+            System.out.println("Sistema indisponível. Agurandando.");
+            sleep(500);
+        }        
     }
 
     public ArrayList<Locacao> getLocacoes() {
@@ -167,5 +156,25 @@ public class ControleLocacao {
             }
         }
         return locacoes;
+    }
+
+    public static ControleLocacao getInstancia() {
+        if (instancia == null) {
+            instancia = new ControleLocacao();
+        }
+
+        return instancia;
+    }
+
+    public void setInstancia(ControleLocacao instancia) {
+        this.instancia = instancia;
+    }
+
+    public boolean isSistemaDisponivel() {
+        return sistemaDisponivel;
+    }
+
+    public void setSistemaDisponivel(boolean sistemaDisponivel) {
+        this.sistemaDisponivel = sistemaDisponivel;
     }
 }

@@ -49,7 +49,6 @@ public class RMIServer extends UnicastRemoteObject implements ComunicacaoServer 
         ListaClientes lc = ListaClientes.getInstancia();
         lc.getListaClientesNotificar().add(n);
         
-        System.out.println("Registrado interesse de um cliente no veiculo " + idVeiculo);
     }
     
     @Override
