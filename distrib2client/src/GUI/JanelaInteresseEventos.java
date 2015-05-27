@@ -14,8 +14,8 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
- * @author Rafael
+ * Janela para o cliente registrar interesse em eventos de um determinado veículo
+ * @author Bruno Tokarski e Rafael Vidal
  */
 public class JanelaInteresseEventos extends javax.swing.JDialog {
 
@@ -170,6 +170,10 @@ public class JanelaInteresseEventos extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Após selecionado o veículo, confirmar o interesse
+     * @param evt 
+     */
     private void botaoAvancarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoAvancarActionPerformed
         DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
         int linha = jTable1.getSelectedRow();

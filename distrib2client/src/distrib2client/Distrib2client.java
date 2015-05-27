@@ -12,8 +12,8 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
 /**
- *
- * @author Bruno
+ * Classe inicial do cliente
+ * @author Bruno Tokarski e Rafael Vidal
  */
 public class Distrib2client {
 

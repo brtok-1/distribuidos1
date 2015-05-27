@@ -53,8 +53,8 @@ public class JanelaLocacaoVeiculo extends javax.swing.JDialog {
     }
 
     /**
-     * Popula a tabela de veículos
-     * @param tabela 
+     * Imprime a tabela
+     * @param tabela tabela montada
      */
     public final void fazTabela(Object[][] tabela) {
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -371,7 +371,7 @@ public class JanelaLocacaoVeiculo extends javax.swing.JDialog {
 
     /**
      * Após selecionar um veículo, efetuar a locação
-     * @param evt 
+     * @param evt acionamento do botão "Avançar"
      */
     private void botaoAvancarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoAvancarActionPerformed
         DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();

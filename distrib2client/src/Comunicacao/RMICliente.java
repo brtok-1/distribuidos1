@@ -49,7 +49,7 @@ public class RMICliente extends UnicastRemoteObject implements ComunicacaoClient
     }
     
     /**
-     * Teste inicial da comunicação RMI
+     * Início da comunicação RMI
      *
      * @throws InterruptedException
      */
@@ -97,7 +97,7 @@ public class RMICliente extends UnicastRemoteObject implements ComunicacaoClient
     /**
      * Faz a locação do veículo no servidor
      * 
-     * @param locacao
+     * @param locacao 
      * @return Resultado da Operação = sucesso
      * @throws Exception 
      */

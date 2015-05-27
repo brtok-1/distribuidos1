@@ -8,8 +8,8 @@ package Interface;
 import java.rmi.Remote;
 
 /**
- *
- * @author Rafael
+ * Interface de comunicação do cliente
+ * @author Bruno Tokarski e Rafael Vidal
  */
 public interface ComunicacaoClient extends Remote {
     

@@ -89,7 +89,7 @@ public class JanelaNotificacao extends javax.swing.JDialog {
 
     /**
      * Avançar para a tela de locação
-     * @param evt 
+     * @param evt acionamento do botão avançar
      */
     private void btnIrLocacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIrLocacaoActionPerformed
         try {
@@ -103,7 +103,7 @@ public class JanelaNotificacao extends javax.swing.JDialog {
 
     /**
      * Fechar a janela de notificação
-     * @param evt 
+     * @param evt acionamento do botão "Fechar"
      */
     private void btnFecharAvisoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFecharAvisoActionPerformed
         dispose();

@@ -91,7 +91,7 @@ public class InicialClient extends javax.swing.JFrame {
 
     /**
      * Efetuar a locação de um carro
-     * @param evt 
+     * @param evt acionamento do botão "Locar Carro"
      */
     private void btnLocarCarroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLocarCarroActionPerformed
         try {
@@ -104,7 +104,7 @@ public class InicialClient extends javax.swing.JFrame {
 
     /**
      * Registrar interesse nos eventos de um determinado veículo
-     * @param evt 
+     * @param evt acionamento do botão "Registrar Interesse"
      */
     private void btnRegistrarInteresseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarInteresseActionPerformed
         try {
@@ -117,7 +117,7 @@ public class InicialClient extends javax.swing.JFrame {
 
     /**
      * Visualizar locações para um determinado veículo
-     * @param evt 
+     * @param evt acionamento do botão "Ver Locações"
      */
     private void btnLocacoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLocacoesActionPerformed
         try {

@@ -48,6 +48,10 @@ public class JanelaRelatorioLocacoes extends javax.swing.JDialog {
         fazTabela1(tabelaVeiculos);
     }
 
+    /**
+     * Imprime a tabela
+     * @param tabela tabela montada
+     */
     public final void fazTabela1(Object[][] tabela) {
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
                 tabela,

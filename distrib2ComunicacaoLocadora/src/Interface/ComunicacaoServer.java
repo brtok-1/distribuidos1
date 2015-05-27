@@ -11,20 +11,32 @@ import java.rmi.Remote;
 import java.util.ArrayList;
 
 /**
- *
- * @author Rafael
+ * Interface de comunicação do usuário
+ * @author Bruno Tokarski e Rafael Vidal
  */
 public interface ComunicacaoServer extends Remote {
     
     /**
-     * 
-     * @return
+     * Consulta de veículos
+     * @return lista de veículos
      * @throws Exception 
      */
     ArrayList<Veiculo> ConsultarVeiculos() throws Exception;
     
+    /**
+     * Efetuar locaçãp de veículo
+     * @param locacao objeto locacao preenchido
+     * @return locação efetuada ou não
+     * @throws Exception 
+     */
     boolean EfetuarLocacao(Locacao locacao) throws Exception;
     
+    /**
+     * Registrar para notificação conforme interesse em determinado veículo
+     * @param cliente interface do cliente
+     * @param idVeiculo código do veículo
+     * @throws Exception 
+     */
     void RegistrarParaNotificacao(ComunicacaoClient cliente, int idVeiculo) throws Exception;
 
     ArrayList<Locacao> RecuperarLocacoesPorVeiculo(int idVeiculo) throws Exception;
