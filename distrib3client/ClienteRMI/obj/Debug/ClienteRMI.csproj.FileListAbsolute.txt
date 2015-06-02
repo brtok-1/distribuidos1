@@ -1,0 +1,12 @@
+D:\GitHub\distribuidos1\distrib3client\ClienteRMI\ClienteRMI\bin\Debug\ClienteRMI.exe.config
+D:\GitHub\distribuidos1\distrib3client\ClienteRMI\bin\Debug\ClienteRMI.exe.config
+D:\GitHub\distribuidos1\distrib3client\ClienteRMI\bin\Debug\ClienteRMI.exe
+D:\GitHub\distribuidos1\distrib3client\ClienteRMI\bin\Debug\ClienteRMI.pdb
+D:\GitHub\distribuidos1\distrib3client\ClienteRMI\obj\Debug\ClienteRMI.csprojResolveAssemblyReference.cache
+D:\GitHub\distribuidos1\distrib3client\ClienteRMI\obj\Debug\ClienteRMI.InicialCliente.resources
+D:\GitHub\distribuidos1\distrib3client\ClienteRMI\obj\Debug\ClienteRMI.JanelaLocarVeiculo.resources
+D:\GitHub\distribuidos1\distrib3client\ClienteRMI\obj\Debug\ClienteRMI.Properties.Resources.resources
+D:\GitHub\distribuidos1\distrib3client\ClienteRMI\obj\Debug\ClienteRMI.csproj.GenerateResource.Cache
+D:\GitHub\distribuidos1\distrib3client\ClienteRMI\obj\Debug\ClienteRMI.exe
+D:\GitHub\distribuidos1\distrib3client\ClienteRMI\obj\Debug\ClienteRMI.pdb
+D:\GitHub\distribuidos1\distrib3client\ClienteRMI\obj\Debug\ClienteRMI.JanelaRelatorioLocacoes.resources
