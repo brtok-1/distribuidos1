@@ -1,4 +1,4 @@
-﻿namespace ClienteRMI
+﻿namespace ClienteWebService
 {
     partial class InicialCliente
     {

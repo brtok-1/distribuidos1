@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ClienteRMI
+namespace ClienteWebService
 {
     public partial class InicialCliente : Form
     {

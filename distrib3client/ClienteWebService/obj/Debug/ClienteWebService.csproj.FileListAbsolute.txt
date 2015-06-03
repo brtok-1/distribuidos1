@@ -1,0 +1,9 @@
+D:\GitHub\distribuidos1\distrib3client\ClienteWebService\bin\Debug\ClienteRMI.exe.config
+D:\GitHub\distribuidos1\distrib3client\ClienteWebService\obj\Debug\ClienteRMI.exe
+D:\GitHub\distribuidos1\distrib3client\ClienteWebService\obj\Debug\ClienteRMI.pdb
+D:\GitHub\distribuidos1\distrib3client\ClienteWebService\obj\Debug\ClienteWebService.csprojResolveAssemblyReference.cache
+D:\GitHub\distribuidos1\distrib3client\ClienteWebService\obj\Debug\ClienteWebService.InicialCliente.resources
+D:\GitHub\distribuidos1\distrib3client\ClienteWebService\obj\Debug\ClienteWebService.JanelaLocarVeiculo.resources
+D:\GitHub\distribuidos1\distrib3client\ClienteWebService\obj\Debug\ClienteWebService.JanelaRelatorioLocacoes.resources
+D:\GitHub\distribuidos1\distrib3client\ClienteWebService\obj\Debug\ClienteRMI.Properties.Resources.resources
+D:\GitHub\distribuidos1\distrib3client\ClienteWebService\obj\Debug\ClienteWebService.csproj.GenerateResource.Cache

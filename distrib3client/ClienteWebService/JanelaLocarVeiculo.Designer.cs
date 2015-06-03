@@ -1,4 +1,4 @@
-﻿namespace ClienteRMI
+﻿namespace ClienteWebService
 {
     partial class JanelaLocarVeiculo
     {
@@ -32,21 +32,20 @@
             this.listaVeiculos = new System.Windows.Forms.CheckedListBox();
             this.botaoAvancar = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.panelDados = new System.Windows.Forms.Panel();
-            this.label3 = new System.Windows.Forms.Label();
-            this.spinnerNumeroParcelas = new System.Windows.Forms.DomainUpDown();
-            this.dateHoraDevolucao = new System.Windows.Forms.DateTimePicker();
-            this.dateDataDevolucao = new System.Windows.Forms.DateTimePicker();
-            this.dateHoraRetirada = new System.Windows.Forms.DateTimePicker();
-            this.dateDataRetirada = new System.Windows.Forms.DateTimePicker();
-            this.textBox9 = new System.Windows.Forms.TextBox();
-            this.nomeMotorista = new System.Windows.Forms.TextBox();
-            this.boxLocalDevolucao = new System.Windows.Forms.TextBox();
-            this.boxLocalRetirada = new System.Windows.Forms.TextBox();
-            this.botaoConfirmar = new System.Windows.Forms.Button();
-            this.botaoVoltar = new System.Windows.Forms.Button();
-            this.dadosCarro = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.dadosCarro = new System.Windows.Forms.Label();
+            this.botaoVoltar = new System.Windows.Forms.Button();
+            this.botaoConfirmar = new System.Windows.Forms.Button();
+            this.boxLocalRetirada = new System.Windows.Forms.TextBox();
+            this.boxLocalDevolucao = new System.Windows.Forms.TextBox();
+            this.boxNomeMotorista = new System.Windows.Forms.TextBox();
+            this.boxNumeroCartao = new System.Windows.Forms.TextBox();
+            this.dateDataRetirada = new System.Windows.Forms.DateTimePicker();
+            this.dateHoraRetirada = new System.Windows.Forms.DateTimePicker();
+            this.dateDataDevolucao = new System.Windows.Forms.DateTimePicker();
+            this.dateHoraDevolucao = new System.Windows.Forms.DateTimePicker();
+            this.spinnerNumeroParcelas = new System.Windows.Forms.DomainUpDown();
+            this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -55,8 +54,9 @@
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
             this.spinnerIdadeCondutor = new System.Windows.Forms.DomainUpDown();
+            this.label12 = new System.Windows.Forms.Label();
+            this.panelDados = new System.Windows.Forms.Panel();
             this.panelCarro.SuspendLayout();
             this.panelDados.SuspendLayout();
             this.SuspendLayout();
@@ -106,46 +106,108 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Selecione um Veículo Cadastrado";
             // 
-            // panelDados
+            // label2
             // 
-            this.panelDados.Controls.Add(this.label12);
-            this.panelDados.Controls.Add(this.spinnerIdadeCondutor);
-            this.panelDados.Controls.Add(this.label11);
-            this.panelDados.Controls.Add(this.label10);
-            this.panelDados.Controls.Add(this.label9);
-            this.panelDados.Controls.Add(this.label8);
-            this.panelDados.Controls.Add(this.label7);
-            this.panelDados.Controls.Add(this.label6);
-            this.panelDados.Controls.Add(this.label5);
-            this.panelDados.Controls.Add(this.label4);
-            this.panelDados.Controls.Add(this.label3);
-            this.panelDados.Controls.Add(this.spinnerNumeroParcelas);
-            this.panelDados.Controls.Add(this.dateHoraDevolucao);
-            this.panelDados.Controls.Add(this.dateDataDevolucao);
-            this.panelDados.Controls.Add(this.dateHoraRetirada);
-            this.panelDados.Controls.Add(this.dateDataRetirada);
-            this.panelDados.Controls.Add(this.textBox9);
-            this.panelDados.Controls.Add(this.nomeMotorista);
-            this.panelDados.Controls.Add(this.boxLocalDevolucao);
-            this.panelDados.Controls.Add(this.boxLocalRetirada);
-            this.panelDados.Controls.Add(this.botaoConfirmar);
-            this.panelDados.Controls.Add(this.botaoVoltar);
-            this.panelDados.Controls.Add(this.dadosCarro);
-            this.panelDados.Controls.Add(this.label2);
-            this.panelDados.Location = new System.Drawing.Point(3, 3);
-            this.panelDados.Name = "panelDados";
-            this.panelDados.Size = new System.Drawing.Size(548, 360);
-            this.panelDados.TabIndex = 1;
-            this.panelDados.Visible = false;
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(11, 8);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(166, 20);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "Locação de Veículo";
             // 
-            // label3
+            // dadosCarro
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(28, 66);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(149, 13);
-            this.label3.TabIndex = 18;
-            this.label3.Text = "Local de Retirada do Veículo:";
+            this.dadosCarro.AutoSize = true;
+            this.dadosCarro.Location = new System.Drawing.Point(12, 30);
+            this.dadosCarro.Name = "dadosCarro";
+            this.dadosCarro.Size = new System.Drawing.Size(61, 13);
+            this.dadosCarro.TabIndex = 1;
+            this.dadosCarro.Text = "dadosCarro";
+            // 
+            // botaoVoltar
+            // 
+            this.botaoVoltar.Location = new System.Drawing.Point(9, 331);
+            this.botaoVoltar.Name = "botaoVoltar";
+            this.botaoVoltar.Size = new System.Drawing.Size(168, 23);
+            this.botaoVoltar.TabIndex = 2;
+            this.botaoVoltar.Text = "<< Voltar e escolher outro carro";
+            this.botaoVoltar.UseVisualStyleBackColor = true;
+            this.botaoVoltar.Click += new System.EventHandler(this.botaoVoltar_Click);
+            // 
+            // botaoConfirmar
+            // 
+            this.botaoConfirmar.Location = new System.Drawing.Point(415, 331);
+            this.botaoConfirmar.Name = "botaoConfirmar";
+            this.botaoConfirmar.Size = new System.Drawing.Size(113, 23);
+            this.botaoConfirmar.TabIndex = 3;
+            this.botaoConfirmar.Text = "Confirmar Locação";
+            this.botaoConfirmar.UseVisualStyleBackColor = true;
+            this.botaoConfirmar.Click += new System.EventHandler(this.botaoConfirmar_Click);
+            // 
+            // boxLocalRetirada
+            // 
+            this.boxLocalRetirada.Location = new System.Drawing.Point(179, 63);
+            this.boxLocalRetirada.Name = "boxLocalRetirada";
+            this.boxLocalRetirada.Size = new System.Drawing.Size(349, 20);
+            this.boxLocalRetirada.TabIndex = 4;
+            // 
+            // boxLocalDevolucao
+            // 
+            this.boxLocalDevolucao.Location = new System.Drawing.Point(179, 144);
+            this.boxLocalDevolucao.Name = "boxLocalDevolucao";
+            this.boxLocalDevolucao.Size = new System.Drawing.Size(349, 20);
+            this.boxLocalDevolucao.TabIndex = 5;
+            // 
+            // boxNomeMotorista
+            // 
+            this.boxNomeMotorista.Location = new System.Drawing.Point(179, 219);
+            this.boxNomeMotorista.Name = "boxNomeMotorista";
+            this.boxNomeMotorista.Size = new System.Drawing.Size(349, 20);
+            this.boxNomeMotorista.TabIndex = 8;
+            // 
+            // boxNumeroCartao
+            // 
+            this.boxNumeroCartao.Location = new System.Drawing.Point(179, 272);
+            this.boxNumeroCartao.Name = "boxNumeroCartao";
+            this.boxNumeroCartao.Size = new System.Drawing.Size(349, 20);
+            this.boxNumeroCartao.TabIndex = 12;
+            // 
+            // dateDataRetirada
+            // 
+            this.dateDataRetirada.Checked = false;
+            this.dateDataRetirada.Location = new System.Drawing.Point(179, 92);
+            this.dateDataRetirada.Name = "dateDataRetirada";
+            this.dateDataRetirada.Size = new System.Drawing.Size(349, 20);
+            this.dateDataRetirada.TabIndex = 13;
+            // 
+            // dateHoraRetirada
+            // 
+            this.dateHoraRetirada.Checked = false;
+            this.dateHoraRetirada.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.dateHoraRetirada.Location = new System.Drawing.Point(179, 118);
+            this.dateHoraRetirada.Name = "dateHoraRetirada";
+            this.dateHoraRetirada.ShowUpDown = true;
+            this.dateHoraRetirada.Size = new System.Drawing.Size(349, 20);
+            this.dateHoraRetirada.TabIndex = 14;
+            // 
+            // dateDataDevolucao
+            // 
+            this.dateDataDevolucao.Checked = false;
+            this.dateDataDevolucao.Location = new System.Drawing.Point(179, 167);
+            this.dateDataDevolucao.Name = "dateDataDevolucao";
+            this.dateDataDevolucao.Size = new System.Drawing.Size(349, 20);
+            this.dateDataDevolucao.TabIndex = 15;
+            // 
+            // dateHoraDevolucao
+            // 
+            this.dateHoraDevolucao.Checked = false;
+            this.dateHoraDevolucao.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.dateHoraDevolucao.Location = new System.Drawing.Point(179, 193);
+            this.dateHoraDevolucao.Name = "dateHoraDevolucao";
+            this.dateHoraDevolucao.ShowUpDown = true;
+            this.dateHoraDevolucao.Size = new System.Drawing.Size(349, 20);
+            this.dateHoraDevolucao.TabIndex = 16;
             // 
             // spinnerNumeroParcelas
             // 
@@ -167,107 +229,14 @@
             this.spinnerNumeroParcelas.TabIndex = 17;
             this.spinnerNumeroParcelas.Text = "1";
             // 
-            // dateHoraDevolucao
+            // label3
             // 
-            this.dateHoraDevolucao.Checked = false;
-            this.dateHoraDevolucao.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.dateHoraDevolucao.Location = new System.Drawing.Point(179, 193);
-            this.dateHoraDevolucao.Name = "dateHoraDevolucao";
-            this.dateHoraDevolucao.ShowUpDown = true;
-            this.dateHoraDevolucao.Size = new System.Drawing.Size(349, 20);
-            this.dateHoraDevolucao.TabIndex = 16;
-            // 
-            // dateDataDevolucao
-            // 
-            this.dateDataDevolucao.Checked = false;
-            this.dateDataDevolucao.Location = new System.Drawing.Point(179, 167);
-            this.dateDataDevolucao.Name = "dateDataDevolucao";
-            this.dateDataDevolucao.Size = new System.Drawing.Size(349, 20);
-            this.dateDataDevolucao.TabIndex = 15;
-            // 
-            // dateHoraRetirada
-            // 
-            this.dateHoraRetirada.Checked = false;
-            this.dateHoraRetirada.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.dateHoraRetirada.Location = new System.Drawing.Point(179, 118);
-            this.dateHoraRetirada.Name = "dateHoraRetirada";
-            this.dateHoraRetirada.ShowUpDown = true;
-            this.dateHoraRetirada.Size = new System.Drawing.Size(349, 20);
-            this.dateHoraRetirada.TabIndex = 14;
-            // 
-            // dateDataRetirada
-            // 
-            this.dateDataRetirada.Checked = false;
-            this.dateDataRetirada.Location = new System.Drawing.Point(179, 92);
-            this.dateDataRetirada.Name = "dateDataRetirada";
-            this.dateDataRetirada.Size = new System.Drawing.Size(349, 20);
-            this.dateDataRetirada.TabIndex = 13;
-            // 
-            // textBox9
-            // 
-            this.textBox9.Location = new System.Drawing.Point(179, 272);
-            this.textBox9.Name = "textBox9";
-            this.textBox9.Size = new System.Drawing.Size(349, 20);
-            this.textBox9.TabIndex = 12;
-            // 
-            // nomeMotorista
-            // 
-            this.nomeMotorista.Location = new System.Drawing.Point(179, 219);
-            this.nomeMotorista.Name = "nomeMotorista";
-            this.nomeMotorista.Size = new System.Drawing.Size(349, 20);
-            this.nomeMotorista.TabIndex = 8;
-            // 
-            // boxLocalDevolucao
-            // 
-            this.boxLocalDevolucao.Location = new System.Drawing.Point(179, 144);
-            this.boxLocalDevolucao.Name = "boxLocalDevolucao";
-            this.boxLocalDevolucao.Size = new System.Drawing.Size(349, 20);
-            this.boxLocalDevolucao.TabIndex = 5;
-            // 
-            // boxLocalRetirada
-            // 
-            this.boxLocalRetirada.Location = new System.Drawing.Point(179, 63);
-            this.boxLocalRetirada.Name = "boxLocalRetirada";
-            this.boxLocalRetirada.Size = new System.Drawing.Size(349, 20);
-            this.boxLocalRetirada.TabIndex = 4;
-            // 
-            // botaoConfirmar
-            // 
-            this.botaoConfirmar.Location = new System.Drawing.Point(415, 331);
-            this.botaoConfirmar.Name = "botaoConfirmar";
-            this.botaoConfirmar.Size = new System.Drawing.Size(113, 23);
-            this.botaoConfirmar.TabIndex = 3;
-            this.botaoConfirmar.Text = "Confirmar Locação";
-            this.botaoConfirmar.UseVisualStyleBackColor = true;
-            // 
-            // botaoVoltar
-            // 
-            this.botaoVoltar.Location = new System.Drawing.Point(9, 331);
-            this.botaoVoltar.Name = "botaoVoltar";
-            this.botaoVoltar.Size = new System.Drawing.Size(168, 23);
-            this.botaoVoltar.TabIndex = 2;
-            this.botaoVoltar.Text = "<< Voltar e escolher outro carro";
-            this.botaoVoltar.UseVisualStyleBackColor = true;
-            this.botaoVoltar.Click += new System.EventHandler(this.botaoVoltar_Click);
-            // 
-            // dadosCarro
-            // 
-            this.dadosCarro.AutoSize = true;
-            this.dadosCarro.Location = new System.Drawing.Point(12, 30);
-            this.dadosCarro.Name = "dadosCarro";
-            this.dadosCarro.Size = new System.Drawing.Size(61, 13);
-            this.dadosCarro.TabIndex = 1;
-            this.dadosCarro.Text = "dadosCarro";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(11, 8);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(166, 20);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "Locação de Veículo";
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(28, 66);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(149, 13);
+            this.label3.TabIndex = 18;
+            this.label3.Text = "Local de Retirada do Veículo:";
             // 
             // label4
             // 
@@ -340,15 +309,6 @@
             this.label11.Size = new System.Drawing.Size(106, 13);
             this.label11.TabIndex = 26;
             this.label11.Text = "Número de Parcelas:";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(81, 247);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(98, 13);
-            this.label12.TabIndex = 28;
-            this.label12.Text = "Idade do Condutor:";
             // 
             // spinnerIdadeCondutor
             // 
@@ -431,6 +391,47 @@
             this.spinnerIdadeCondutor.TabIndex = 27;
             this.spinnerIdadeCondutor.Text = "18";
             // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(81, 247);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(98, 13);
+            this.label12.TabIndex = 28;
+            this.label12.Text = "Idade do Condutor:";
+            // 
+            // panelDados
+            // 
+            this.panelDados.Controls.Add(this.label12);
+            this.panelDados.Controls.Add(this.spinnerIdadeCondutor);
+            this.panelDados.Controls.Add(this.label11);
+            this.panelDados.Controls.Add(this.label10);
+            this.panelDados.Controls.Add(this.label9);
+            this.panelDados.Controls.Add(this.label8);
+            this.panelDados.Controls.Add(this.label7);
+            this.panelDados.Controls.Add(this.label6);
+            this.panelDados.Controls.Add(this.label5);
+            this.panelDados.Controls.Add(this.label4);
+            this.panelDados.Controls.Add(this.label3);
+            this.panelDados.Controls.Add(this.spinnerNumeroParcelas);
+            this.panelDados.Controls.Add(this.dateHoraDevolucao);
+            this.panelDados.Controls.Add(this.dateDataDevolucao);
+            this.panelDados.Controls.Add(this.dateHoraRetirada);
+            this.panelDados.Controls.Add(this.dateDataRetirada);
+            this.panelDados.Controls.Add(this.boxNumeroCartao);
+            this.panelDados.Controls.Add(this.boxNomeMotorista);
+            this.panelDados.Controls.Add(this.boxLocalDevolucao);
+            this.panelDados.Controls.Add(this.boxLocalRetirada);
+            this.panelDados.Controls.Add(this.botaoConfirmar);
+            this.panelDados.Controls.Add(this.botaoVoltar);
+            this.panelDados.Controls.Add(this.dadosCarro);
+            this.panelDados.Controls.Add(this.label2);
+            this.panelDados.Location = new System.Drawing.Point(3, 3);
+            this.panelDados.Name = "panelDados";
+            this.panelDados.Size = new System.Drawing.Size(548, 360);
+            this.panelDados.TabIndex = 1;
+            this.panelDados.Visible = false;
+            // 
             // JanelaLocarVeiculo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -455,31 +456,31 @@
         private System.Windows.Forms.Panel panelCarro;
         private System.Windows.Forms.Button botaoAvancar;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Panel panelDados;
-        private System.Windows.Forms.Label dadosCarro;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox9;
-        private System.Windows.Forms.TextBox nomeMotorista;
-        private System.Windows.Forms.TextBox boxLocalDevolucao;
-        private System.Windows.Forms.TextBox boxLocalRetirada;
-        private System.Windows.Forms.Button botaoConfirmar;
-        private System.Windows.Forms.Button botaoVoltar;
-        private System.Windows.Forms.DateTimePicker dateDataRetirada;
         private System.Windows.Forms.CheckedListBox listaVeiculos;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label dadosCarro;
+        private System.Windows.Forms.Button botaoVoltar;
+        private System.Windows.Forms.Button botaoConfirmar;
+        private System.Windows.Forms.TextBox boxLocalRetirada;
+        private System.Windows.Forms.TextBox boxLocalDevolucao;
+        private System.Windows.Forms.TextBox boxNomeMotorista;
+        private System.Windows.Forms.TextBox boxNumeroCartao;
+        private System.Windows.Forms.DateTimePicker dateDataRetirada;
         private System.Windows.Forms.DateTimePicker dateHoraRetirada;
-        private System.Windows.Forms.DateTimePicker dateHoraDevolucao;
         private System.Windows.Forms.DateTimePicker dateDataDevolucao;
+        private System.Windows.Forms.DateTimePicker dateHoraDevolucao;
         private System.Windows.Forms.DomainUpDown spinnerNumeroParcelas;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.DomainUpDown spinnerIdadeCondutor;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.DomainUpDown spinnerIdadeCondutor;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Panel panelDados;
     }
 }

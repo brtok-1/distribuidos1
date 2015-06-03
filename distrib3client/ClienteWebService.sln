@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.22823.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClienteRMI", "ClienteRMI\ClienteRMI.csproj", "{2618E27B-4791-4FC9-87A1-79572DA1288F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClienteWebService", "ClienteWebService\ClienteWebService.csproj", "{2618E27B-4791-4FC9-87A1-79572DA1288F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
