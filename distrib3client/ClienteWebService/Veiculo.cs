@@ -16,7 +16,7 @@ namespace ClienteWebService
         private String modelo;
         private String placa;
 
-
+        
         public int getIdVeiculo()
         {
             return idVeiculo;
@@ -79,14 +79,25 @@ namespace ClienteWebService
 
         public String getValorDiariaString()
         {
-            String valor = valorDiaria.ToString().Replace(".", ",");
+            String valor = valorDiaria.ToString();
             return valor;
         }
 
         public void setValorDiariaString(String valor)
         {
-            valor = valor.Trim().Replace(",", ".");
             this.valorDiaria = Double.Parse(valor);
         }
+
+        public String descricaoParaCombo
+        {
+            get
+            {
+                String desc = Convert.ToString(idVeiculo) + "   -   " + modelo + " - " + fabricante + " - " 
+                    + Convert.ToString(idVeiculo) + "   -   " + placa + "   -   Valor da Diária: R$ " 
+                    + Convert.ToString(valorDiaria);
+                return desc;
+            }
+        }
+
     }
 }

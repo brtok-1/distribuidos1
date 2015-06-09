@@ -22,6 +22,7 @@ namespace ClienteWebService
             if (veiculos.Count != 0)
             {
                 comboVeiculos.DataSource = veiculos;
+                comboVeiculos.DisplayMember = "descricaoParaCombo";
             }
         }
 
@@ -33,6 +34,7 @@ namespace ClienteWebService
             }
             else
             {
+                listaLocacoes.Clear();
                 Veiculo selecionado = (Veiculo) comboVeiculos.SelectedItem;
                 labelLocVeic.Text = "Relatório de Locações para o Veículo " + selecionado.getIdVeiculo()
                     + "-" + selecionado.getModelo();

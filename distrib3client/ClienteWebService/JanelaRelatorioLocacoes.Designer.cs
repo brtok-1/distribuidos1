@@ -29,13 +29,13 @@
         private void InitializeComponent()
         {
             this.panelCarro = new System.Windows.Forms.Panel();
-            this.comboVeiculos = new System.Windows.Forms.ComboBox();
             this.botaoAvancar = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.panelLocacoes = new System.Windows.Forms.Panel();
             this.listaLocacoes = new System.Windows.Forms.ListView();
             this.botaoVoltar = new System.Windows.Forms.Button();
             this.labelLocVeic = new System.Windows.Forms.Label();
+            this.comboVeiculos = new System.Windows.Forms.ComboBox();
             this.panelCarro.SuspendLayout();
             this.panelLocacoes.SuspendLayout();
             this.SuspendLayout();
@@ -50,17 +50,9 @@
             this.panelCarro.Size = new System.Drawing.Size(643, 363);
             this.panelCarro.TabIndex = 1;
             // 
-            // comboVeiculos
-            // 
-            this.comboVeiculos.FormattingEnabled = true;
-            this.comboVeiculos.Location = new System.Drawing.Point(12, 46);
-            this.comboVeiculos.Name = "comboVeiculos";
-            this.comboVeiculos.Size = new System.Drawing.Size(626, 21);
-            this.comboVeiculos.TabIndex = 2;
-            // 
             // botaoAvancar
             // 
-            this.botaoAvancar.Location = new System.Drawing.Point(563, 8);
+            this.botaoAvancar.Location = new System.Drawing.Point(558, 8);
             this.botaoAvancar.Name = "botaoAvancar";
             this.botaoAvancar.Size = new System.Drawing.Size(75, 23);
             this.botaoAvancar.TabIndex = 1;
@@ -117,6 +109,14 @@
             this.labelLocVeic.Size = new System.Drawing.Size(216, 20);
             this.labelLocVeic.TabIndex = 0;
             this.labelLocVeic.Text = "Locações para o Veículo: ";
+            // 
+            // comboVeiculos
+            // 
+            this.comboVeiculos.FormattingEnabled = true;
+            this.comboVeiculos.Location = new System.Drawing.Point(12, 46);
+            this.comboVeiculos.Name = "comboVeiculos";
+            this.comboVeiculos.Size = new System.Drawing.Size(621, 21);
+            this.comboVeiculos.TabIndex = 2;
             // 
             // JanelaRelatorioLocacoes
             // 

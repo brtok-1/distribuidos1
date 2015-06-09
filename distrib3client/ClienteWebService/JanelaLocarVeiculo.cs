@@ -23,6 +23,7 @@ namespace ClienteWebService
             if (veiculos.Count != 0)
             {
                 comboVeiculos.DataSource = veiculos;
+                comboVeiculos.DisplayMember = "descricaoParaCombo";
             }
         }
 
