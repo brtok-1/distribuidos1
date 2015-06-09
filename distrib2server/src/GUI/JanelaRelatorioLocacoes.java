@@ -336,7 +336,7 @@ public class JanelaRelatorioLocacoes extends javax.swing.JDialog {
                     String horaRetirada = locacoes.get(i).getHoraRetirada().toString();
 
                     String dataDevolucao = out.format(locacoes.get(i).getDataDevolucao());
-                    String horaDevolucao = locacoes.get(i).getHoraRetirada().toString();
+                    String horaDevolucao = locacoes.get(i).getHoraDevolucao().toString();
                     
                     tabelaLocacao[i][0] = dataRetirada + " " + horaRetirada;
                     tabelaLocacao[i][1] = dataDevolucao + " " + horaDevolucao;

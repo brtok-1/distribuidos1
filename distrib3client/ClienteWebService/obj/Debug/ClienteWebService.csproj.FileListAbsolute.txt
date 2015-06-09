@@ -7,3 +7,5 @@ D:\GitHub\distribuidos1\distrib3client\ClienteWebService\obj\Debug\ClienteWebSer
 D:\GitHub\distribuidos1\distrib3client\ClienteWebService\obj\Debug\ClienteWebService.JanelaRelatorioLocacoes.resources
 D:\GitHub\distribuidos1\distrib3client\ClienteWebService\obj\Debug\ClienteRMI.Properties.Resources.resources
 D:\GitHub\distribuidos1\distrib3client\ClienteWebService\obj\Debug\ClienteWebService.csproj.GenerateResource.Cache
+D:\GitHub\distribuidos1\distrib3client\ClienteWebService\bin\Debug\ClienteRMI.exe
+D:\GitHub\distribuidos1\distrib3client\ClienteWebService\bin\Debug\ClienteRMI.pdb

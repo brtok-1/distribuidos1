@@ -6,11 +6,14 @@
 package WebService;
 
 import Comunicacao.RMIServer;
+import Controle.ControleVeiculo;
 import Modelo.Locacao;
 import Modelo.Veiculo;
+import java.sql.Time;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
+import java.util.Date;
 import javax.jws.WebService;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
@@ -95,4 +98,60 @@ public class wsLocadora {
         }
         return locacoesVeiculo;
     }
+
+    /**
+     * Operação de Web service
+     */
+    @WebMethod(operationName = "EfetuarLocacao")
+    public boolean EfetuarLocacao(@WebParam(name = "locacao") String locacao) {
+        try {
+            //desmonta a String para fazer a locação
+            String[] locacaoDesmontada = locacao.split("#");
+            int idVeiculo = Integer.parseInt(locacaoDesmontada[0]);
+            int parcelasCartao = Integer.parseInt(locacaoDesmontada[1]);
+            String numeroCartao = locacaoDesmontada[2];
+            String nomeCondutor = locacaoDesmontada[3];
+            int idadeCondutor = Integer.parseInt(locacaoDesmontada[4]);
+            String localRetirada = locacaoDesmontada[5];
+            String localDevolucao = locacaoDesmontada[6];
+            String[] dataHoraRetirada = locacaoDesmontada[7].split(" ");
+            String[] dataHoraDevolucao = locacaoDesmontada[8].split(" ");
+            DateFormat formatterData = new SimpleDateFormat("dd/MM/yyyy");
+            Date dataRetirada = (Date) formatterData.parse(dataHoraRetirada[0]);
+            dataRetirada.setHours(23);
+            dataRetirada.setMinutes(59);
+            Date dataDevolucao = (Date) formatterData.parse(dataHoraDevolucao[0]);
+            Time horaRetirada = Time.valueOf(dataHoraRetirada[1]);
+            Time horaDevolucao = Time.valueOf(dataHoraDevolucao[1]);
+            
+            //recupera o veiculo da vocacao para salvar
+            //(pois o parametro recebido do C# é somente o id e não um objeto)
+            ControleVeiculo cv = new ControleVeiculo();
+            Veiculo v = cv.RecuperarVeiculoPorID(idVeiculo);
+            
+            //Constrói um nova locacao
+            Locacao loc = new Locacao();
+            loc.setVeiculo(v);
+            loc.setDataDevolucao(dataDevolucao);
+            loc.setDataRetirada(dataRetirada);
+            loc.setHoraDevolucao(horaDevolucao);
+            loc.setHoraRetirada(horaRetirada);
+            loc.setIdadeCondutor(idadeCondutor);
+            loc.setLocalDevolucao(localDevolucao);
+            loc.setLocalRetirada(localRetirada);
+            loc.setNomeCondutor(nomeCondutor);
+            loc.setNumeroCartao(numeroCartao);
+            loc.setParcelasCartao(parcelasCartao);
+            
+            System.out.println(loc.getDataDevolucao());
+            //tenta fazer a locacao através do mecanismo padrão e devolve a resposta
+            RMIServer rmis = new RMIServer();
+            boolean sucesso = rmis.EfetuarLocacao(loc);
+            return sucesso;
+        } catch (Exception e) {
+            System.out.println("Falhou: " + e.getMessage());
+            return false;
+        }
+    }
+
 }

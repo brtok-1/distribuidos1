@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ClienteWebService.WebServiceReferencia;
 
 namespace ClienteWebService
 {
@@ -12,8 +13,8 @@ namespace ClienteWebService
         
         public List<Veiculo> RecuperarVeiculos()
         {
-            
-            String resultado = "";
+            WebServiceReferencia.wsLocadoraClient proxy = new WebServiceReferencia.wsLocadoraClient();
+            String resultado = proxy.ListarVeiculos().ToString();
             String[] mensagem = resultado.Split('~');
             int tamanhoArray = Convert.ToInt32(mensagem[0]);
             List<Veiculo> veiculos = new List<Veiculo>();
@@ -30,6 +31,7 @@ namespace ClienteWebService
                     v.setFabricante(dadosVeiculo[3]);
                     v.setAno(Convert.ToInt32(dadosVeiculo[4]));
                     v.setValorDiariaString(dadosVeiculo[5]);
+                    veiculos.Add(v);
                 }
             }
             return veiculos;
@@ -37,8 +39,8 @@ namespace ClienteWebService
 
         public List<Locacao> RecuperarLocacoesPorVeiculo(int idVeiculo)
         {
-            
-            String resultado = "";
+            WebServiceReferencia.wsLocadoraClient proxy = new WebServiceReferencia.wsLocadoraClient();
+            String resultado = proxy.ConsultarLocacoesVeiculo(idVeiculo).ToString();
             String[] mensagem = resultado.Split('~');
             int tamanhoArray = Convert.ToInt32(mensagem[0]);
             List<Locacao> locacoes = new List<Locacao>();
@@ -63,15 +65,26 @@ namespace ClienteWebService
                     dtRetirada = dtRetirada.Date + tsRetirada;
                     l.setDataHoraDevolucao(dtDevolucao);
                     l.setDataHoraRetirada(dtRetirada);
+                    locacoes.Add(l);
                 }
             }
             return locacoes;
         }
 
-        public int EfetuarLocacao(Locacao loc)
+        public bool EfetuarLocacao(Locacao loc)
         {
-
-            return 1;
+            String locacao = loc.getIdVeiculoReferencia() + "#"
+                + loc.getParcelasCartao() + "#"
+                + loc.getNumeroCartao() + "#"
+                + loc.getNomeCondutor() + "#"
+                + loc.getIdadeCondutor() + "#"
+                + loc.getLocalRetirada() + "#"
+                + loc.getLocalDevolucao() + "#"
+                + loc.getDataHoraRetirada() + "#"
+                + loc.getDataHoraDevolucao();
+            WebServiceReferencia.wsLocadoraClient proxy = new WebServiceReferencia.wsLocadoraClient();
+            bool sucesso = Convert.ToBoolean(proxy.EfetuarLocacao(locacao));
+            return sucesso;
         }
     }
 }

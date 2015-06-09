@@ -5,11 +5,11 @@
       <xsd:import schemaLocation="http://localhost:8080/distrib3WebService/wsLocadora?xsd=1" namespace="http://WebService/" />
     </xsd:schema>
   </types>
-  <message name="ConsultarLocacoesVeiculo">
-    <part name="parameters" element="tns:ConsultarLocacoesVeiculo" />
+  <message name="hello">
+    <part name="parameters" element="tns:hello" />
   </message>
-  <message name="ConsultarLocacoesVeiculoResponse">
-    <part name="parameters" element="tns:ConsultarLocacoesVeiculoResponse" />
+  <message name="helloResponse">
+    <part name="parameters" element="tns:helloResponse" />
   </message>
   <message name="ListarVeiculos">
     <part name="parameters" element="tns:ListarVeiculos" />
@@ -17,29 +17,39 @@
   <message name="ListarVeiculosResponse">
     <part name="parameters" element="tns:ListarVeiculosResponse" />
   </message>
-  <message name="hello">
-    <part name="parameters" element="tns:hello" />
+  <message name="ConsultarLocacoesVeiculo">
+    <part name="parameters" element="tns:ConsultarLocacoesVeiculo" />
   </message>
-  <message name="helloResponse">
-    <part name="parameters" element="tns:helloResponse" />
+  <message name="ConsultarLocacoesVeiculoResponse">
+    <part name="parameters" element="tns:ConsultarLocacoesVeiculoResponse" />
+  </message>
+  <message name="EfetuarLocacao">
+    <part name="parameters" element="tns:EfetuarLocacao" />
+  </message>
+  <message name="EfetuarLocacaoResponse">
+    <part name="parameters" element="tns:EfetuarLocacaoResponse" />
   </message>
   <portType name="wsLocadora">
-    <operation name="ConsultarLocacoesVeiculo">
-      <input wsam:Action="http://WebService/wsLocadora/ConsultarLocacoesVeiculoRequest" message="tns:ConsultarLocacoesVeiculo" />
-      <output wsam:Action="http://WebService/wsLocadora/ConsultarLocacoesVeiculoResponse" message="tns:ConsultarLocacoesVeiculoResponse" />
+    <operation name="hello">
+      <input wsam:Action="http://WebService/wsLocadora/helloRequest" message="tns:hello" />
+      <output wsam:Action="http://WebService/wsLocadora/helloResponse" message="tns:helloResponse" />
     </operation>
     <operation name="ListarVeiculos">
       <input wsam:Action="http://WebService/wsLocadora/ListarVeiculosRequest" message="tns:ListarVeiculos" />
       <output wsam:Action="http://WebService/wsLocadora/ListarVeiculosResponse" message="tns:ListarVeiculosResponse" />
     </operation>
-    <operation name="hello">
-      <input wsam:Action="http://WebService/wsLocadora/helloRequest" message="tns:hello" />
-      <output wsam:Action="http://WebService/wsLocadora/helloResponse" message="tns:helloResponse" />
+    <operation name="ConsultarLocacoesVeiculo">
+      <input wsam:Action="http://WebService/wsLocadora/ConsultarLocacoesVeiculoRequest" message="tns:ConsultarLocacoesVeiculo" />
+      <output wsam:Action="http://WebService/wsLocadora/ConsultarLocacoesVeiculoResponse" message="tns:ConsultarLocacoesVeiculoResponse" />
+    </operation>
+    <operation name="EfetuarLocacao">
+      <input wsam:Action="http://WebService/wsLocadora/EfetuarLocacaoRequest" message="tns:EfetuarLocacao" />
+      <output wsam:Action="http://WebService/wsLocadora/EfetuarLocacaoResponse" message="tns:EfetuarLocacaoResponse" />
     </operation>
   </portType>
   <binding name="wsLocadoraPortBinding" type="tns:wsLocadora">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <operation name="ConsultarLocacoesVeiculo">
+    <operation name="hello">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
@@ -57,7 +67,16 @@
         <soap:body use="literal" />
       </output>
     </operation>
-    <operation name="hello">
+    <operation name="ConsultarLocacoesVeiculo">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="EfetuarLocacao">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />

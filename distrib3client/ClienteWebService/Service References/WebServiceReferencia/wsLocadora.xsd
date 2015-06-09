@@ -2,6 +2,8 @@
 <xs:schema xmlns:tns="http://WebService/" targetNamespace="http://WebService/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:element name="ConsultarLocacoesVeiculo" type="tns:ConsultarLocacoesVeiculo" />
   <xs:element name="ConsultarLocacoesVeiculoResponse" type="tns:ConsultarLocacoesVeiculoResponse" />
+  <xs:element name="EfetuarLocacao" type="tns:EfetuarLocacao" />
+  <xs:element name="EfetuarLocacaoResponse" type="tns:EfetuarLocacaoResponse" />
   <xs:element name="ListarVeiculos" type="tns:ListarVeiculos" />
   <xs:element name="ListarVeiculosResponse" type="tns:ListarVeiculosResponse" />
   <xs:element name="hello" type="tns:hello" />
@@ -32,6 +34,16 @@
   <xs:complexType name="ListarVeiculosResponse">
     <xs:sequence>
       <xs:element minOccurs="0" name="return" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="EfetuarLocacao">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="locacao" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="EfetuarLocacaoResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:boolean" />
     </xs:sequence>
   </xs:complexType>
 </xs:schema>

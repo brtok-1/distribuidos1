@@ -22,10 +22,7 @@ namespace ClienteWebService
             veiculos = wsc.RecuperarVeiculos();
             if (veiculos.Count != 0)
             {
-                foreach (Veiculo v in veiculos)
-                {
-                    comboVeiculos.Items.Add(v);
-                }
+                comboVeiculos.DataSource = veiculos;
             }
         }
 
@@ -89,8 +86,8 @@ namespace ClienteWebService
                 else
                 {
                     WebServiceCliente wsc = new WebServiceCliente();
-                    int sucesso = wsc.EfetuarLocacao(loc);
-                    if (sucesso == 1)
+                    bool sucesso = wsc.EfetuarLocacao(loc);
+                    if (sucesso)
                     {
                         MessageBox.Show("Locação efetuada com sucesso.", "Finalizado!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         this.Dispose();

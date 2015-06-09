@@ -15,12 +15,12 @@ namespace ClienteWebService.WebServiceReferencia {
     [System.ServiceModel.ServiceContractAttribute(Namespace="http://WebService/", ConfigurationName="WebServiceReferencia.wsLocadora")]
     public interface wsLocadora {
         
-        // CODEGEN: Gerando contrato de mensagem porque o nome do elemento return no namespace  não está marcado como nulo
-        [System.ServiceModel.OperationContractAttribute(Action="http://WebService/wsLocadora/ConsultarLocacoesVeiculoRequest", ReplyAction="http://WebService/wsLocadora/ConsultarLocacoesVeiculoResponse")]
-        ClienteWebService.WebServiceReferencia.ConsultarLocacoesVeiculoResponse ConsultarLocacoesVeiculo(ClienteWebService.WebServiceReferencia.ConsultarLocacoesVeiculoRequest request);
+        // CODEGEN: Gerando contrato de mensagem porque o nome do elemento name no namespace  não está marcado como nulo
+        [System.ServiceModel.OperationContractAttribute(Action="http://WebService/wsLocadora/helloRequest", ReplyAction="http://WebService/wsLocadora/helloResponse")]
+        ClienteWebService.WebServiceReferencia.helloResponse hello(ClienteWebService.WebServiceReferencia.helloRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://WebService/wsLocadora/ConsultarLocacoesVeiculoRequest", ReplyAction="http://WebService/wsLocadora/ConsultarLocacoesVeiculoResponse")]
-        System.Threading.Tasks.Task<ClienteWebService.WebServiceReferencia.ConsultarLocacoesVeiculoResponse> ConsultarLocacoesVeiculoAsync(ClienteWebService.WebServiceReferencia.ConsultarLocacoesVeiculoRequest request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://WebService/wsLocadora/helloRequest", ReplyAction="http://WebService/wsLocadora/helloResponse")]
+        System.Threading.Tasks.Task<ClienteWebService.WebServiceReferencia.helloResponse> helloAsync(ClienteWebService.WebServiceReferencia.helloRequest request);
         
         // CODEGEN: Gerando contrato de mensagem porque o nome do elemento return no namespace  não está marcado como nulo
         [System.ServiceModel.OperationContractAttribute(Action="http://WebService/wsLocadora/ListarVeiculosRequest", ReplyAction="http://WebService/wsLocadora/ListarVeiculosResponse")]
@@ -29,12 +29,148 @@ namespace ClienteWebService.WebServiceReferencia {
         [System.ServiceModel.OperationContractAttribute(Action="http://WebService/wsLocadora/ListarVeiculosRequest", ReplyAction="http://WebService/wsLocadora/ListarVeiculosResponse")]
         System.Threading.Tasks.Task<ClienteWebService.WebServiceReferencia.ListarVeiculosResponse> ListarVeiculosAsync(ClienteWebService.WebServiceReferencia.ListarVeiculosRequest request);
         
-        // CODEGEN: Gerando contrato de mensagem porque o nome do elemento name no namespace  não está marcado como nulo
-        [System.ServiceModel.OperationContractAttribute(Action="http://WebService/wsLocadora/helloRequest", ReplyAction="http://WebService/wsLocadora/helloResponse")]
-        ClienteWebService.WebServiceReferencia.helloResponse hello(ClienteWebService.WebServiceReferencia.helloRequest request);
+        // CODEGEN: Gerando contrato de mensagem porque o nome do elemento return no namespace  não está marcado como nulo
+        [System.ServiceModel.OperationContractAttribute(Action="http://WebService/wsLocadora/ConsultarLocacoesVeiculoRequest", ReplyAction="http://WebService/wsLocadora/ConsultarLocacoesVeiculoResponse")]
+        ClienteWebService.WebServiceReferencia.ConsultarLocacoesVeiculoResponse ConsultarLocacoesVeiculo(ClienteWebService.WebServiceReferencia.ConsultarLocacoesVeiculoRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://WebService/wsLocadora/helloRequest", ReplyAction="http://WebService/wsLocadora/helloResponse")]
-        System.Threading.Tasks.Task<ClienteWebService.WebServiceReferencia.helloResponse> helloAsync(ClienteWebService.WebServiceReferencia.helloRequest request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://WebService/wsLocadora/ConsultarLocacoesVeiculoRequest", ReplyAction="http://WebService/wsLocadora/ConsultarLocacoesVeiculoResponse")]
+        System.Threading.Tasks.Task<ClienteWebService.WebServiceReferencia.ConsultarLocacoesVeiculoResponse> ConsultarLocacoesVeiculoAsync(ClienteWebService.WebServiceReferencia.ConsultarLocacoesVeiculoRequest request);
+        
+        // CODEGEN: Gerando contrato de mensagem porque o nome do elemento locacao no namespace  não está marcado como nulo
+        [System.ServiceModel.OperationContractAttribute(Action="http://WebService/wsLocadora/EfetuarLocacaoRequest", ReplyAction="http://WebService/wsLocadora/EfetuarLocacaoResponse")]
+        ClienteWebService.WebServiceReferencia.EfetuarLocacaoResponse EfetuarLocacao(ClienteWebService.WebServiceReferencia.EfetuarLocacaoRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://WebService/wsLocadora/EfetuarLocacaoRequest", ReplyAction="http://WebService/wsLocadora/EfetuarLocacaoResponse")]
+        System.Threading.Tasks.Task<ClienteWebService.WebServiceReferencia.EfetuarLocacaoResponse> EfetuarLocacaoAsync(ClienteWebService.WebServiceReferencia.EfetuarLocacaoRequest request);
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class helloRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="hello", Namespace="http://WebService/", Order=0)]
+        public ClienteWebService.WebServiceReferencia.helloRequestBody Body;
+        
+        public helloRequest() {
+        }
+        
+        public helloRequest(ClienteWebService.WebServiceReferencia.helloRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class helloRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string name;
+        
+        public helloRequestBody() {
+        }
+        
+        public helloRequestBody(string name) {
+            this.name = name;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class helloResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="helloResponse", Namespace="http://WebService/", Order=0)]
+        public ClienteWebService.WebServiceReferencia.helloResponseBody Body;
+        
+        public helloResponse() {
+        }
+        
+        public helloResponse(ClienteWebService.WebServiceReferencia.helloResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class helloResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string @return;
+        
+        public helloResponseBody() {
+        }
+        
+        public helloResponseBody(string @return) {
+            this.@return = @return;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class ListarVeiculosRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="ListarVeiculos", Namespace="http://WebService/", Order=0)]
+        public ClienteWebService.WebServiceReferencia.ListarVeiculosRequestBody Body;
+        
+        public ListarVeiculosRequest() {
+        }
+        
+        public ListarVeiculosRequest(ClienteWebService.WebServiceReferencia.ListarVeiculosRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute()]
+    public partial class ListarVeiculosRequestBody {
+        
+        public ListarVeiculosRequestBody() {
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class ListarVeiculosResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="ListarVeiculosResponse", Namespace="http://WebService/", Order=0)]
+        public ClienteWebService.WebServiceReferencia.ListarVeiculosResponseBody Body;
+        
+        public ListarVeiculosResponse() {
+        }
+        
+        public ListarVeiculosResponse(ClienteWebService.WebServiceReferencia.ListarVeiculosResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class ListarVeiculosResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string @return;
+        
+        public ListarVeiculosResponseBody() {
+        }
+        
+        public ListarVeiculosResponseBody(string @return) {
+            this.@return = @return;
+        }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -109,42 +245,15 @@ namespace ClienteWebService.WebServiceReferencia {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
-    public partial class ListarVeiculosRequest {
+    public partial class EfetuarLocacaoRequest {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="ListarVeiculos", Namespace="http://WebService/", Order=0)]
-        public ClienteWebService.WebServiceReferencia.ListarVeiculosRequestBody Body;
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="EfetuarLocacao", Namespace="http://WebService/", Order=0)]
+        public ClienteWebService.WebServiceReferencia.EfetuarLocacaoRequestBody Body;
         
-        public ListarVeiculosRequest() {
+        public EfetuarLocacaoRequest() {
         }
         
-        public ListarVeiculosRequest(ClienteWebService.WebServiceReferencia.ListarVeiculosRequestBody Body) {
-            this.Body = Body;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.Runtime.Serialization.DataContractAttribute()]
-    public partial class ListarVeiculosRequestBody {
-        
-        public ListarVeiculosRequestBody() {
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
-    public partial class ListarVeiculosResponse {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="ListarVeiculosResponse", Namespace="http://WebService/", Order=0)]
-        public ClienteWebService.WebServiceReferencia.ListarVeiculosResponseBody Body;
-        
-        public ListarVeiculosResponse() {
-        }
-        
-        public ListarVeiculosResponse(ClienteWebService.WebServiceReferencia.ListarVeiculosResponseBody Body) {
+        public EfetuarLocacaoRequest(ClienteWebService.WebServiceReferencia.EfetuarLocacaoRequestBody Body) {
             this.Body = Body;
         }
     }
@@ -153,16 +262,16 @@ namespace ClienteWebService.WebServiceReferencia {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
-    public partial class ListarVeiculosResponseBody {
+    public partial class EfetuarLocacaoRequestBody {
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
-        public string @return;
+        public string locacao;
         
-        public ListarVeiculosResponseBody() {
+        public EfetuarLocacaoRequestBody() {
         }
         
-        public ListarVeiculosResponseBody(string @return) {
-            this.@return = @return;
+        public EfetuarLocacaoRequestBody(string locacao) {
+            this.locacao = locacao;
         }
     }
     
@@ -170,15 +279,15 @@ namespace ClienteWebService.WebServiceReferencia {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
-    public partial class helloRequest {
+    public partial class EfetuarLocacaoResponse {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="hello", Namespace="http://WebService/", Order=0)]
-        public ClienteWebService.WebServiceReferencia.helloRequestBody Body;
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="EfetuarLocacaoResponse", Namespace="http://WebService/", Order=0)]
+        public ClienteWebService.WebServiceReferencia.EfetuarLocacaoResponseBody Body;
         
-        public helloRequest() {
+        public EfetuarLocacaoResponse() {
         }
         
-        public helloRequest(ClienteWebService.WebServiceReferencia.helloRequestBody Body) {
+        public EfetuarLocacaoResponse(ClienteWebService.WebServiceReferencia.EfetuarLocacaoResponseBody Body) {
             this.Body = Body;
         }
     }
@@ -187,49 +296,15 @@ namespace ClienteWebService.WebServiceReferencia {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
-    public partial class helloRequestBody {
+    public partial class EfetuarLocacaoResponseBody {
         
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
-        public string name;
+        [System.Runtime.Serialization.DataMemberAttribute(Order=0)]
+        public bool @return;
         
-        public helloRequestBody() {
+        public EfetuarLocacaoResponseBody() {
         }
         
-        public helloRequestBody(string name) {
-            this.name = name;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
-    public partial class helloResponse {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="helloResponse", Namespace="http://WebService/", Order=0)]
-        public ClienteWebService.WebServiceReferencia.helloResponseBody Body;
-        
-        public helloResponse() {
-        }
-        
-        public helloResponse(ClienteWebService.WebServiceReferencia.helloResponseBody Body) {
-            this.Body = Body;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
-    public partial class helloResponseBody {
-        
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
-        public string @return;
-        
-        public helloResponseBody() {
-        }
-        
-        public helloResponseBody(string @return) {
+        public EfetuarLocacaoResponseBody(bool @return) {
             this.@return = @return;
         }
     }
@@ -262,28 +337,28 @@ namespace ClienteWebService.WebServiceReferencia {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        ClienteWebService.WebServiceReferencia.ConsultarLocacoesVeiculoResponse ClienteWebService.WebServiceReferencia.wsLocadora.ConsultarLocacoesVeiculo(ClienteWebService.WebServiceReferencia.ConsultarLocacoesVeiculoRequest request) {
-            return base.Channel.ConsultarLocacoesVeiculo(request);
+        ClienteWebService.WebServiceReferencia.helloResponse ClienteWebService.WebServiceReferencia.wsLocadora.hello(ClienteWebService.WebServiceReferencia.helloRequest request) {
+            return base.Channel.hello(request);
         }
         
-        public string ConsultarLocacoesVeiculo(int idVeiculo) {
-            ClienteWebService.WebServiceReferencia.ConsultarLocacoesVeiculoRequest inValue = new ClienteWebService.WebServiceReferencia.ConsultarLocacoesVeiculoRequest();
-            inValue.Body = new ClienteWebService.WebServiceReferencia.ConsultarLocacoesVeiculoRequestBody();
-            inValue.Body.idVeiculo = idVeiculo;
-            ClienteWebService.WebServiceReferencia.ConsultarLocacoesVeiculoResponse retVal = ((ClienteWebService.WebServiceReferencia.wsLocadora)(this)).ConsultarLocacoesVeiculo(inValue);
+        public string hello(string name) {
+            ClienteWebService.WebServiceReferencia.helloRequest inValue = new ClienteWebService.WebServiceReferencia.helloRequest();
+            inValue.Body = new ClienteWebService.WebServiceReferencia.helloRequestBody();
+            inValue.Body.name = name;
+            ClienteWebService.WebServiceReferencia.helloResponse retVal = ((ClienteWebService.WebServiceReferencia.wsLocadora)(this)).hello(inValue);
             return retVal.Body.@return;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<ClienteWebService.WebServiceReferencia.ConsultarLocacoesVeiculoResponse> ClienteWebService.WebServiceReferencia.wsLocadora.ConsultarLocacoesVeiculoAsync(ClienteWebService.WebServiceReferencia.ConsultarLocacoesVeiculoRequest request) {
-            return base.Channel.ConsultarLocacoesVeiculoAsync(request);
+        System.Threading.Tasks.Task<ClienteWebService.WebServiceReferencia.helloResponse> ClienteWebService.WebServiceReferencia.wsLocadora.helloAsync(ClienteWebService.WebServiceReferencia.helloRequest request) {
+            return base.Channel.helloAsync(request);
         }
         
-        public System.Threading.Tasks.Task<ClienteWebService.WebServiceReferencia.ConsultarLocacoesVeiculoResponse> ConsultarLocacoesVeiculoAsync(int idVeiculo) {
-            ClienteWebService.WebServiceReferencia.ConsultarLocacoesVeiculoRequest inValue = new ClienteWebService.WebServiceReferencia.ConsultarLocacoesVeiculoRequest();
-            inValue.Body = new ClienteWebService.WebServiceReferencia.ConsultarLocacoesVeiculoRequestBody();
-            inValue.Body.idVeiculo = idVeiculo;
-            return ((ClienteWebService.WebServiceReferencia.wsLocadora)(this)).ConsultarLocacoesVeiculoAsync(inValue);
+        public System.Threading.Tasks.Task<ClienteWebService.WebServiceReferencia.helloResponse> helloAsync(string name) {
+            ClienteWebService.WebServiceReferencia.helloRequest inValue = new ClienteWebService.WebServiceReferencia.helloRequest();
+            inValue.Body = new ClienteWebService.WebServiceReferencia.helloRequestBody();
+            inValue.Body.name = name;
+            return ((ClienteWebService.WebServiceReferencia.wsLocadora)(this)).helloAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -310,28 +385,53 @@ namespace ClienteWebService.WebServiceReferencia {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        ClienteWebService.WebServiceReferencia.helloResponse ClienteWebService.WebServiceReferencia.wsLocadora.hello(ClienteWebService.WebServiceReferencia.helloRequest request) {
-            return base.Channel.hello(request);
+        ClienteWebService.WebServiceReferencia.ConsultarLocacoesVeiculoResponse ClienteWebService.WebServiceReferencia.wsLocadora.ConsultarLocacoesVeiculo(ClienteWebService.WebServiceReferencia.ConsultarLocacoesVeiculoRequest request) {
+            return base.Channel.ConsultarLocacoesVeiculo(request);
         }
         
-        public string hello(string name) {
-            ClienteWebService.WebServiceReferencia.helloRequest inValue = new ClienteWebService.WebServiceReferencia.helloRequest();
-            inValue.Body = new ClienteWebService.WebServiceReferencia.helloRequestBody();
-            inValue.Body.name = name;
-            ClienteWebService.WebServiceReferencia.helloResponse retVal = ((ClienteWebService.WebServiceReferencia.wsLocadora)(this)).hello(inValue);
+        public string ConsultarLocacoesVeiculo(int idVeiculo) {
+            ClienteWebService.WebServiceReferencia.ConsultarLocacoesVeiculoRequest inValue = new ClienteWebService.WebServiceReferencia.ConsultarLocacoesVeiculoRequest();
+            inValue.Body = new ClienteWebService.WebServiceReferencia.ConsultarLocacoesVeiculoRequestBody();
+            inValue.Body.idVeiculo = idVeiculo;
+            ClienteWebService.WebServiceReferencia.ConsultarLocacoesVeiculoResponse retVal = ((ClienteWebService.WebServiceReferencia.wsLocadora)(this)).ConsultarLocacoesVeiculo(inValue);
             return retVal.Body.@return;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<ClienteWebService.WebServiceReferencia.helloResponse> ClienteWebService.WebServiceReferencia.wsLocadora.helloAsync(ClienteWebService.WebServiceReferencia.helloRequest request) {
-            return base.Channel.helloAsync(request);
+        System.Threading.Tasks.Task<ClienteWebService.WebServiceReferencia.ConsultarLocacoesVeiculoResponse> ClienteWebService.WebServiceReferencia.wsLocadora.ConsultarLocacoesVeiculoAsync(ClienteWebService.WebServiceReferencia.ConsultarLocacoesVeiculoRequest request) {
+            return base.Channel.ConsultarLocacoesVeiculoAsync(request);
         }
         
-        public System.Threading.Tasks.Task<ClienteWebService.WebServiceReferencia.helloResponse> helloAsync(string name) {
-            ClienteWebService.WebServiceReferencia.helloRequest inValue = new ClienteWebService.WebServiceReferencia.helloRequest();
-            inValue.Body = new ClienteWebService.WebServiceReferencia.helloRequestBody();
-            inValue.Body.name = name;
-            return ((ClienteWebService.WebServiceReferencia.wsLocadora)(this)).helloAsync(inValue);
+        public System.Threading.Tasks.Task<ClienteWebService.WebServiceReferencia.ConsultarLocacoesVeiculoResponse> ConsultarLocacoesVeiculoAsync(int idVeiculo) {
+            ClienteWebService.WebServiceReferencia.ConsultarLocacoesVeiculoRequest inValue = new ClienteWebService.WebServiceReferencia.ConsultarLocacoesVeiculoRequest();
+            inValue.Body = new ClienteWebService.WebServiceReferencia.ConsultarLocacoesVeiculoRequestBody();
+            inValue.Body.idVeiculo = idVeiculo;
+            return ((ClienteWebService.WebServiceReferencia.wsLocadora)(this)).ConsultarLocacoesVeiculoAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        ClienteWebService.WebServiceReferencia.EfetuarLocacaoResponse ClienteWebService.WebServiceReferencia.wsLocadora.EfetuarLocacao(ClienteWebService.WebServiceReferencia.EfetuarLocacaoRequest request) {
+            return base.Channel.EfetuarLocacao(request);
+        }
+        
+        public bool EfetuarLocacao(string locacao) {
+            ClienteWebService.WebServiceReferencia.EfetuarLocacaoRequest inValue = new ClienteWebService.WebServiceReferencia.EfetuarLocacaoRequest();
+            inValue.Body = new ClienteWebService.WebServiceReferencia.EfetuarLocacaoRequestBody();
+            inValue.Body.locacao = locacao;
+            ClienteWebService.WebServiceReferencia.EfetuarLocacaoResponse retVal = ((ClienteWebService.WebServiceReferencia.wsLocadora)(this)).EfetuarLocacao(inValue);
+            return retVal.Body.@return;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<ClienteWebService.WebServiceReferencia.EfetuarLocacaoResponse> ClienteWebService.WebServiceReferencia.wsLocadora.EfetuarLocacaoAsync(ClienteWebService.WebServiceReferencia.EfetuarLocacaoRequest request) {
+            return base.Channel.EfetuarLocacaoAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<ClienteWebService.WebServiceReferencia.EfetuarLocacaoResponse> EfetuarLocacaoAsync(string locacao) {
+            ClienteWebService.WebServiceReferencia.EfetuarLocacaoRequest inValue = new ClienteWebService.WebServiceReferencia.EfetuarLocacaoRequest();
+            inValue.Body = new ClienteWebService.WebServiceReferencia.EfetuarLocacaoRequestBody();
+            inValue.Body.locacao = locacao;
+            return ((ClienteWebService.WebServiceReferencia.wsLocadora)(this)).EfetuarLocacaoAsync(inValue);
         }
     }
 }

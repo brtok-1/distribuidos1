@@ -47,7 +47,7 @@
             this.panelCarro.Controls.Add(this.label1);
             this.panelCarro.Location = new System.Drawing.Point(0, 0);
             this.panelCarro.Name = "panelCarro";
-            this.panelCarro.Size = new System.Drawing.Size(746, 363);
+            this.panelCarro.Size = new System.Drawing.Size(643, 363);
             this.panelCarro.TabIndex = 1;
             // 
             // comboVeiculos
@@ -55,12 +55,12 @@
             this.comboVeiculos.FormattingEnabled = true;
             this.comboVeiculos.Location = new System.Drawing.Point(12, 46);
             this.comboVeiculos.Name = "comboVeiculos";
-            this.comboVeiculos.Size = new System.Drawing.Size(725, 21);
+            this.comboVeiculos.Size = new System.Drawing.Size(626, 21);
             this.comboVeiculos.TabIndex = 2;
             // 
             // botaoAvancar
             // 
-            this.botaoAvancar.Location = new System.Drawing.Point(662, 8);
+            this.botaoAvancar.Location = new System.Drawing.Point(563, 8);
             this.botaoAvancar.Name = "botaoAvancar";
             this.botaoAvancar.Size = new System.Drawing.Size(75, 23);
             this.botaoAvancar.TabIndex = 1;
@@ -85,20 +85,22 @@
             this.panelLocacoes.Controls.Add(this.labelLocVeic);
             this.panelLocacoes.Location = new System.Drawing.Point(0, 0);
             this.panelLocacoes.Name = "panelLocacoes";
-            this.panelLocacoes.Size = new System.Drawing.Size(749, 363);
+            this.panelLocacoes.Size = new System.Drawing.Size(646, 363);
             this.panelLocacoes.TabIndex = 3;
             // 
             // listaLocacoes
             // 
+            this.listaLocacoes.GridLines = true;
             this.listaLocacoes.Location = new System.Drawing.Point(12, 46);
             this.listaLocacoes.Name = "listaLocacoes";
-            this.listaLocacoes.Size = new System.Drawing.Size(725, 305);
+            this.listaLocacoes.Size = new System.Drawing.Size(626, 305);
             this.listaLocacoes.TabIndex = 2;
             this.listaLocacoes.UseCompatibleStateImageBehavior = false;
+            this.listaLocacoes.View = System.Windows.Forms.View.List;
             // 
             // botaoVoltar
             // 
-            this.botaoVoltar.Location = new System.Drawing.Point(662, 8);
+            this.botaoVoltar.Location = new System.Drawing.Point(563, 8);
             this.botaoVoltar.Name = "botaoVoltar";
             this.botaoVoltar.Size = new System.Drawing.Size(75, 23);
             this.botaoVoltar.TabIndex = 1;
@@ -120,9 +122,9 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(749, 363);
-            this.Controls.Add(this.panelLocacoes);
+            this.ClientSize = new System.Drawing.Size(645, 363);
             this.Controls.Add(this.panelCarro);
+            this.Controls.Add(this.panelLocacoes);
             this.MaximizeBox = false;
             this.Name = "JanelaRelatorioLocacoes";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;

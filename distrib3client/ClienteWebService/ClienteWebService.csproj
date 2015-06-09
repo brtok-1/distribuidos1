@@ -107,6 +107,9 @@
     <None Include="Service References\WebServiceReferencia\ClienteRMI.WebServiceReferencia.ConsultarLocacoesVeiculoResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\WebServiceReferencia\ClienteRMI.WebServiceReferencia.EfetuarLocacaoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\WebServiceReferencia\ClienteRMI.WebServiceReferencia.helloResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
