@@ -9,6 +9,7 @@ import Comunicacao.RMIServer;
 import Modelo.Locacao;
 import Modelo.Veiculo;
 import java.util.ArrayList;
+import java.util.Calendar;
 import javax.jws.WebService;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
@@ -58,7 +59,6 @@ public class wsLocadora {
             return "0~Ocorreu um erro e não foi possível obter a lista de veículos: "
                     + e.getMessage();
         }
-
         return veiculosString;
     }
 
@@ -67,9 +67,7 @@ public class wsLocadora {
      */
     @WebMethod(operationName = "ConsultarLocacoesVeiculo")
     public String ConsultarLocacoesVeiculo(@WebParam(name = "idVeiculo") int idVeiculo) {
-
         String locacoesVeiculo;
-
         try {
             RMIServer rmis = new RMIServer();
             ArrayList<Locacao> locacoes = rmis.RecuperarLocacoesPorVeiculo(idVeiculo);
@@ -79,15 +77,10 @@ public class wsLocadora {
                     locacoesVeiculo = locacoesVeiculo
                             + locacoes.get(i).getLocalDevolucao() + "#"
                             + locacoes.get(i).getLocalRetirada() + "#"
-                            + locacoes.get(i).getNomeCondutor() + "#"
-                            + locacoes.get(i).getNumeroCartao() + "#"
                             + locacoes.get(i).getDataDevolucao() + "#"
                             + locacoes.get(i).getDataRetirada() + "#"
                             + locacoes.get(i).getHoraDevolucao() + "#"
-                            + locacoes.get(i).getHoraRetirada() + "#"
-                            + locacoes.get(i).getIdadeCondutor() + "#"
-                            + locacoes.get(i).getParcelasCartao() + "#"
-                            + locacoes.get(i).getVeiculo().getIdVeiculo();
+                            + locacoes.get(i).getHoraRetirada() + "#";
                     if (i != (locacoes.size() - 1)) {
                         locacoesVeiculo = locacoesVeiculo + "@";
                     }
@@ -96,8 +89,6 @@ public class wsLocadora {
         } catch (Exception e) {
             return "0~Não foi possível consultar as locações: " + e.getMessage();
         }
-
         return locacoesVeiculo;
-
     }
 }
