@@ -30,36 +30,35 @@ public class wsLocadora {
 
     /**
      * Operação de Web service
-     * @return 
+     *
+     * @return
      */
     @WebMethod(operationName = "ListarVeiculos")
     public String ListarVeiculos() {
-        
-        String veiculosString = "";
-        try
-        {
+        String veiculosString;
+        try {
             RMIServer rmis = new RMIServer();
-            
             ArrayList<Veiculo> veiculos = rmis.ConsultarVeiculos();
-            
-            for (Veiculo v : veiculos)
-            {
-                veiculosString = veiculosString + 
-                        v.getIdVeiculo() + "#" +
-                        v.getPlaca() + "#" +
-                        v.getModelo() + "#" +
-                        v.getFabricante() + "#" +
-                        v.getAno() + "#" +
-                        v.getValorDiariaString() + "@";
-                        
+            veiculosString = veiculos.size() + "~";
+            if (!(veiculos.isEmpty())) {
+                for (int i = 0; i < veiculos.size(); i++) {
+                    veiculosString = veiculosString
+                            + veiculos.get(i).getIdVeiculo() + "#"
+                            + veiculos.get(i).getPlaca() + "#"
+                            + veiculos.get(i).getModelo() + "#"
+                            + veiculos.get(i).getFabricante() + "#"
+                            + veiculos.get(i).getAno() + "#"
+                            + veiculos.get(i).getValorDiariaString() + "@";
+                    if (i != (veiculos.size() - 1)) {
+                        veiculosString = veiculosString + "@";
+                    }
+                }
             }
-            
-        } catch (Exception e)
-        {
-            return "Ocorreu um erro e não foi possível obter a lista de veículos: " 
+        } catch (Exception e) {
+            return "0~Ocorreu um erro e não foi possível obter a lista de veículos: "
                     + e.getMessage();
-        }       
-        
+        }
+
         return veiculosString;
     }
 
@@ -68,37 +67,37 @@ public class wsLocadora {
      */
     @WebMethod(operationName = "ConsultarLocacoesVeiculo")
     public String ConsultarLocacoesVeiculo(@WebParam(name = "idVeiculo") int idVeiculo) {
-        
-        String locacoesVeiculo = "";
-        
-        try
-        {
+
+        String locacoesVeiculo;
+
+        try {
             RMIServer rmis = new RMIServer();
-            
             ArrayList<Locacao> locacoes = rmis.RecuperarLocacoesPorVeiculo(idVeiculo);
-            
-            for(Locacao l : locacoes)
-            {
-                locacoesVeiculo = locacoesVeiculo +
-                        l.getLocalDevolucao() + "#" +
-                        l.getLocalRetirada() + "#" +
-                        l.getNomeCondutor() + "#" +
-                        l.getNumeroCartao() + "#" +
-                        l.getDataDevolucao() + "#" +
-                        l.getDataRetirada() + "#" +
-                        l.getHoraDevolucao() + "#" +
-                        l.getHoraRetirada() + "#" +
-                        l.getIdadeCondutor() + "#" +
-                        l.getParcelasCartao() + "#" +
-                        l.getVeiculo().getIdVeiculo() + "@";
+            locacoesVeiculo = locacoes.size() + "~";
+            if (!(locacoes.isEmpty())) {
+                for (int i = 0; i < locacoes.size(); i++) {
+                    locacoesVeiculo = locacoesVeiculo
+                            + locacoes.get(i).getLocalDevolucao() + "#"
+                            + locacoes.get(i).getLocalRetirada() + "#"
+                            + locacoes.get(i).getNomeCondutor() + "#"
+                            + locacoes.get(i).getNumeroCartao() + "#"
+                            + locacoes.get(i).getDataDevolucao() + "#"
+                            + locacoes.get(i).getDataRetirada() + "#"
+                            + locacoes.get(i).getHoraDevolucao() + "#"
+                            + locacoes.get(i).getHoraRetirada() + "#"
+                            + locacoes.get(i).getIdadeCondutor() + "#"
+                            + locacoes.get(i).getParcelasCartao() + "#"
+                            + locacoes.get(i).getVeiculo().getIdVeiculo();
+                    if (i != (locacoes.size() - 1)) {
+                        locacoesVeiculo = locacoesVeiculo + "@";
+                    }
+                }
             }
-            
-        }catch(Exception e)
-        {
-            return "Não foi possível consultar as locações: " + e.getMessage();
+        } catch (Exception e) {
+            return "0~Não foi possível consultar as locações: " + e.getMessage();
         }
-        
+
         return locacoesVeiculo;
-        
+
     }
 }
