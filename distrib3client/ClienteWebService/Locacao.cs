@@ -16,7 +16,7 @@ namespace ClienteWebService
         private int idadeCondutor;
         private String numeroCartao;
         private int parcelasCartao;
-        private Veiculo veiculo;
+        private int idVeiculoReferencia;
 
         public String getLocalRetirada()
         {
@@ -78,14 +78,14 @@ namespace ClienteWebService
             this.parcelasCartao = parcelasCartao;
         }
 
-        public Veiculo getVeiculo()
+        public int getIdVeiculoReferencia()
         {
-            return veiculo;
+            return idVeiculoReferencia;
         }
 
-        public void setVeiculo(Veiculo veiculo)
+        public void setIdVeiculoReferencia(int idVeiculoReferencia)
         {
-            this.veiculo = veiculo;
+            this.idVeiculoReferencia = idVeiculoReferencia;
         }
 
         public DateTime getDataHoraRetirada()

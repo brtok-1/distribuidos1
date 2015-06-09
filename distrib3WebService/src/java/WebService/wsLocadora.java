@@ -8,6 +8,7 @@ package WebService;
 import Comunicacao.RMIServer;
 import Modelo.Locacao;
 import Modelo.Veiculo;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import javax.jws.WebService;
@@ -49,7 +50,7 @@ public class wsLocadora {
                             + veiculos.get(i).getModelo() + "#"
                             + veiculos.get(i).getFabricante() + "#"
                             + veiculos.get(i).getAno() + "#"
-                            + veiculos.get(i).getValorDiariaString() + "@";
+                            + veiculos.get(i).getValorDiariaString();
                     if (i != (veiculos.size() - 1)) {
                         veiculosString = veiculosString + "@";
                     }
@@ -74,13 +75,16 @@ public class wsLocadora {
             locacoesVeiculo = locacoes.size() + "~";
             if (!(locacoes.isEmpty())) {
                 for (int i = 0; i < locacoes.size(); i++) {
+                    SimpleDateFormat out = new SimpleDateFormat("dd/MM/yyyy");
+                    String dataRetirada = out.format(locacoes.get(i).getDataRetirada());
+                    String dataDevolucao = out.format(locacoes.get(i).getDataDevolucao());
                     locacoesVeiculo = locacoesVeiculo
                             + locacoes.get(i).getLocalDevolucao() + "#"
                             + locacoes.get(i).getLocalRetirada() + "#"
-                            + locacoes.get(i).getDataDevolucao() + "#"
-                            + locacoes.get(i).getDataRetirada() + "#"
+                            + dataDevolucao + "#"
+                            + dataRetirada + "#"
                             + locacoes.get(i).getHoraDevolucao() + "#"
-                            + locacoes.get(i).getHoraRetirada() + "#";
+                            + locacoes.get(i).getHoraRetirada();
                     if (i != (locacoes.size() - 1)) {
                         locacoesVeiculo = locacoesVeiculo + "@";
                     }

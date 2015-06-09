@@ -39,7 +39,7 @@ namespace ClienteWebService
             {
                 selecionado = (Veiculo) comboVeiculos.SelectedItem;
                 dadosCarro.Text = selecionado.getIdVeiculo() + " - " + selecionado.getFabricante() + " - "
-                        + selecionado.getModelo() + " - " + selecionado.getAno() + " - " + selecionado.getPlaca());
+                        + selecionado.getModelo() + " - " + selecionado.getAno() + " - " + selecionado.getPlaca();
                 panelCarro.Visible = false;
                 panelDados.Visible = true;
             }
@@ -72,7 +72,7 @@ namespace ClienteWebService
             loc.setNomeCondutor(boxNomeMotorista.Text);
             loc.setNumeroCartao(boxNumeroCartao.Text);
             loc.setParcelasCartao(Convert.ToInt32(spinnerNumeroParcelas.Text));
-            loc.setVeiculo(selecionado);
+            loc.setIdVeiculoReferencia(selecionado.getIdVeiculo());
             int comparacao = devolucao.CompareTo(retirada);
             if (comparacao <= 0)
             {

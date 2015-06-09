@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.panelCarro = new System.Windows.Forms.Panel();
+            this.comboVeiculos = new System.Windows.Forms.ComboBox();
             this.botaoAvancar = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -56,7 +57,6 @@
             this.spinnerIdadeCondutor = new System.Windows.Forms.DomainUpDown();
             this.label12 = new System.Windows.Forms.Label();
             this.panelDados = new System.Windows.Forms.Panel();
-            this.comboVeiculos = new System.Windows.Forms.ComboBox();
             this.panelCarro.SuspendLayout();
             this.panelDados.SuspendLayout();
             this.SuspendLayout();
@@ -70,6 +70,14 @@
             this.panelCarro.Name = "panelCarro";
             this.panelCarro.Size = new System.Drawing.Size(551, 340);
             this.panelCarro.TabIndex = 0;
+            // 
+            // comboVeiculos
+            // 
+            this.comboVeiculos.FormattingEnabled = true;
+            this.comboVeiculos.Location = new System.Drawing.Point(12, 63);
+            this.comboVeiculos.Name = "comboVeiculos";
+            this.comboVeiculos.Size = new System.Drawing.Size(526, 21);
+            this.comboVeiculos.TabIndex = 2;
             // 
             // botaoAvancar
             // 
@@ -417,21 +425,13 @@
             this.panelDados.TabIndex = 1;
             this.panelDados.Visible = false;
             // 
-            // comboVeiculos
-            // 
-            this.comboVeiculos.FormattingEnabled = true;
-            this.comboVeiculos.Location = new System.Drawing.Point(12, 63);
-            this.comboVeiculos.Name = "comboVeiculos";
-            this.comboVeiculos.Size = new System.Drawing.Size(526, 21);
-            this.comboVeiculos.TabIndex = 2;
-            // 
             // JanelaLocarVeiculo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(554, 345);
-            this.Controls.Add(this.panelCarro);
             this.Controls.Add(this.panelDados);
+            this.Controls.Add(this.panelCarro);
             this.MaximizeBox = false;
             this.Name = "JanelaLocarVeiculo";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
