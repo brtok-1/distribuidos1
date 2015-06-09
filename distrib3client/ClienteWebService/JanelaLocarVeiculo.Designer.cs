@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.panelCarro = new System.Windows.Forms.Panel();
-            this.listaVeiculos = new System.Windows.Forms.CheckedListBox();
             this.botaoAvancar = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -57,34 +56,20 @@
             this.spinnerIdadeCondutor = new System.Windows.Forms.DomainUpDown();
             this.label12 = new System.Windows.Forms.Label();
             this.panelDados = new System.Windows.Forms.Panel();
+            this.comboVeiculos = new System.Windows.Forms.ComboBox();
             this.panelCarro.SuspendLayout();
             this.panelDados.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelCarro
             // 
-            this.panelCarro.Controls.Add(this.listaVeiculos);
+            this.panelCarro.Controls.Add(this.comboVeiculos);
             this.panelCarro.Controls.Add(this.botaoAvancar);
             this.panelCarro.Controls.Add(this.label1);
             this.panelCarro.Location = new System.Drawing.Point(3, 3);
             this.panelCarro.Name = "panelCarro";
-            this.panelCarro.Size = new System.Drawing.Size(551, 363);
+            this.panelCarro.Size = new System.Drawing.Size(551, 340);
             this.panelCarro.TabIndex = 0;
-            // 
-            // listaVeiculos
-            // 
-            this.listaVeiculos.CheckOnClick = true;
-            this.listaVeiculos.FormattingEnabled = true;
-            this.listaVeiculos.HorizontalScrollbar = true;
-            this.listaVeiculos.Items.AddRange(new object[] {
-            "Chua",
-            "Locura",
-            "Oi",
-            "Tchau"});
-            this.listaVeiculos.Location = new System.Drawing.Point(12, 46);
-            this.listaVeiculos.Name = "listaVeiculos";
-            this.listaVeiculos.Size = new System.Drawing.Size(527, 304);
-            this.listaVeiculos.TabIndex = 2;
             // 
             // botaoAvancar
             // 
@@ -127,7 +112,7 @@
             // 
             // botaoVoltar
             // 
-            this.botaoVoltar.Location = new System.Drawing.Point(9, 331);
+            this.botaoVoltar.Location = new System.Drawing.Point(9, 310);
             this.botaoVoltar.Name = "botaoVoltar";
             this.botaoVoltar.Size = new System.Drawing.Size(168, 23);
             this.botaoVoltar.TabIndex = 2;
@@ -137,7 +122,7 @@
             // 
             // botaoConfirmar
             // 
-            this.botaoConfirmar.Location = new System.Drawing.Point(415, 331);
+            this.botaoConfirmar.Location = new System.Drawing.Point(415, 310);
             this.botaoConfirmar.Name = "botaoConfirmar";
             this.botaoConfirmar.Size = new System.Drawing.Size(113, 23);
             this.botaoConfirmar.TabIndex = 3;
@@ -428,17 +413,25 @@
             this.panelDados.Controls.Add(this.label2);
             this.panelDados.Location = new System.Drawing.Point(3, 3);
             this.panelDados.Name = "panelDados";
-            this.panelDados.Size = new System.Drawing.Size(548, 360);
+            this.panelDados.Size = new System.Drawing.Size(548, 340);
             this.panelDados.TabIndex = 1;
             this.panelDados.Visible = false;
+            // 
+            // comboVeiculos
+            // 
+            this.comboVeiculos.FormattingEnabled = true;
+            this.comboVeiculos.Location = new System.Drawing.Point(12, 63);
+            this.comboVeiculos.Name = "comboVeiculos";
+            this.comboVeiculos.Size = new System.Drawing.Size(526, 21);
+            this.comboVeiculos.TabIndex = 2;
             // 
             // JanelaLocarVeiculo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(554, 369);
-            this.Controls.Add(this.panelDados);
+            this.ClientSize = new System.Drawing.Size(554, 345);
             this.Controls.Add(this.panelCarro);
+            this.Controls.Add(this.panelDados);
             this.MaximizeBox = false;
             this.Name = "JanelaLocarVeiculo";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
@@ -456,7 +449,6 @@
         private System.Windows.Forms.Panel panelCarro;
         private System.Windows.Forms.Button botaoAvancar;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.CheckedListBox listaVeiculos;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label dadosCarro;
         private System.Windows.Forms.Button botaoVoltar;
@@ -482,5 +474,6 @@
         private System.Windows.Forms.DomainUpDown spinnerIdadeCondutor;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Panel panelDados;
+        private System.Windows.Forms.ComboBox comboVeiculos;
     }
 }

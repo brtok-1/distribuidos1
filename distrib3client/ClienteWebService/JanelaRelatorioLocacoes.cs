@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
@@ -16,65 +17,55 @@ namespace ClienteWebService
         {
             InitializeComponent();
             panelLocacoes.Visible = false;
-            /*
-            RMICliente rmic = new RMICliente();
-            veiculos = rmic.RecuperarVeiculos();
-            tabelaVeiculos = new Object[veiculos.size()][6];
-            for (int i = 0; i < veiculos.size(); i++)
+            WebServiceCliente wsc = new WebServiceCliente();
+            List<Veiculo> veiculos = wsc.RecuperarVeiculos();
+            if (veiculos.Count != 0)
             {
-                tabelaVeiculos[i][0] = veiculos.get(i).getIdVeiculo();
-                tabelaVeiculos[i][1] = veiculos.get(i).getPlaca();
-                tabelaVeiculos[i][2] = veiculos.get(i).getFabricante();
-                tabelaVeiculos[i][3] = veiculos.get(i).getModelo();
-                tabelaVeiculos[i][4] = veiculos.get(i).getAno();
-                tabelaVeiculos[i][5] = veiculos.get(i).getValorDiariaString();
+                foreach (Veiculo v in veiculos)
+                {
+                    comboVeiculos.Items.Add(v);
+                }
             }
-            fazTabela1(tabelaVeiculos);
-            */
         }
 
         private void botaoAvancar_Click(object sender, EventArgs e)
         {
-            /*
-                        DefaultTableModel dtm = (DefaultTableModel)jTable1.getModel();
-                        int linha = jTable1.getSelectedRow();
-                        if (linha < 0)
-                        {
-                            JOptionPane.showMessageDialog(null, "É necessário selecionar um veículo, clicando na sua linha");
-                        }
-                        else
-                        {
-                            int codigo = (int)dtm.getValueAt(linha, 0);
-                            for (Veiculo v : veiculos)
-                            {
-                                if (v.getIdVeiculo() == codigo)
-                                {
-                                    selecionado = v;
-                                }
-                            }
-                            jLabel13.setText("Relatório de Locações para o Veículo" + selecionado.getIdVeiculo() + "-" + selecionado.getModelo());
-                            RMICliente rmic = new RMICliente();
-                            ArrayList<Locacao> locacoes = rmic.RecuperarLocacoesPorVeiculo(selecionado.getIdVeiculo());
-                            Object[][] tabelaLocacao = new Object[locacoes.size()][4];
-                            for (int i = 0; i < locacoes.size(); i++)
-                            {
+            if (comboVeiculos.SelectedItem == null)
+            {
+                MessageBox.Show("Selecione um carro", "Cliente", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+            else
+            {
+                Veiculo selecionado = (Veiculo) comboVeiculos.SelectedItem;
+                labelLocVeic.Text = "Relatório de Locações para o Veículo" + selecionado.getIdVeiculo()
+                    + "-" + selecionado.getModelo();
 
-                                SimpleDateFormat out = new SimpleDateFormat("dd/MM/yyyy");
+                WebServiceCliente wsc = new WebServiceCliente();
+                List<Locacao> locacoes = wsc.RecuperarLocacoesPorVeiculo(selecionado.getIdVeiculo());
 
-                                String dataRetirada = out.format(locacoes.get(i).getDataRetirada());
-                                String horaRetirada = locacoes.get(i).getHoraRetirada().toString();
+                foreach (Locacao l in locacoes)
+                {
+                    String linha = "De " + l.getDataHoraRetirada().Day.ToString();
+                    linha = linha + "/" + l.getDataHoraRetirada().Month.ToString();
+                    linha = linha + "/" + l.getDataHoraRetirada().Year.ToString();
+                    linha = linha + " as " + l.getDataHoraRetirada().Year.ToString();
+                    linha = linha + l.getDataHoraRetirada().Hour.ToString();
+                    linha = linha + ":" + l.getDataHoraRetirada().Minute.ToString();
 
-                                String dataDevolucao = out.format(locacoes.get(i).getDataDevolucao());
-                                String horaDevolucao = locacoes.get(i).getHoraRetirada().toString();
+                    linha = linha + " com retirada no " + l.getLocalRetirada();
 
-                                tabelaLocacao[i][0] = dataRetirada + " " + horaRetirada;
-                                tabelaLocacao[i][1] = dataDevolucao + " " + horaDevolucao;
-                                tabelaLocacao[i][2] = locacoes.get(i).getLocalRetirada();
-                                tabelaLocacao[i][3] = locacoes.get(i).getLocalDevolucao();
-                            }
-                            fazTabela2(tabelaLocacao);
-                        }
-            */
+                    linha = linha + " e devolução " + l.getDataHoraDevolucao().Day.ToString();
+                    linha = linha + "/" + l.getDataHoraDevolucao().Month.ToString();
+                    linha = linha + "/" + l.getDataHoraDevolucao().Year.ToString();
+                    linha = linha + " as " + l.getDataHoraDevolucao().Year.ToString();
+                    linha = linha + l.getDataHoraDevolucao().Hour.ToString();
+                    linha = linha + ":" + l.getDataHoraDevolucao().Minute.ToString();
+
+                    linha = linha + " no " + l.getLocalDevolucao();
+
+                    listaLocacoes.Items.Add(linha);
+                }
+            }
             panelCarro.Visible = false;
             panelLocacoes.Visible = true;
         }

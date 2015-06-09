@@ -18,41 +18,26 @@ namespace ClienteWebService
         public JanelaLocarVeiculo()
         {
             InitializeComponent();
-/*            RMICliente crmic = new RMICliente();
-            veiculos = crmic.RecuperarVeiculos();
-            Object[][] tabela = new Object[veiculos.size()][6];
-            for (int i = 0; i < veiculos.size(); i++)
+            WebServiceCliente wsc = new WebServiceCliente();
+            veiculos = wsc.RecuperarVeiculos();
+            if (veiculos.Count != 0)
             {
-                tabela[i][0] = veiculos.get(i).getIdVeiculo();
-                tabela[i][1] = veiculos.get(i).getPlaca();
-                tabela[i][2] = veiculos.get(i).getFabricante();
-                tabela[i][3] = veiculos.get(i).getModelo();
-                tabela[i][4] = veiculos.get(i).getAno();
-                tabela[i][5] = veiculos.get(i).getValorDiariaString();
+                foreach (Veiculo v in veiculos)
+                {
+                    comboVeiculos.Items.Add(v);
+                }
             }
-            fazTabela(tabela); */
         }
 
         private void botaoAvancar_Click(object sender, EventArgs e)
         {
-            
-            //DefaultTableModel dtm = (DefaultTableModel)jTable1.getModel();
-            //int linha = jTable1.getSelectedRow();
-            
-            if (linha < 0)
+            if (comboVeiculos.SelectedItem == null)
             {
                 MessageBox.Show("Selecione um carro", "Cliente", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
             else
             {
-                //int codigo = (int)dtm.getValueAt(linha, 0);
-                foreach (Veiculo v in veiculos)
-                {
-                    if (v.getIdVeiculo() == codigo)
-                    {
-                        selecionado = v;
-                    }
-                }
+                selecionado = (Veiculo) comboVeiculos.SelectedItem;
                 dadosCarro.Text = selecionado.getIdVeiculo() + " - " + selecionado.getFabricante() + " - "
                         + selecionado.getModelo() + " - " + selecionado.getAno() + " - " + selecionado.getPlaca());
                 panelCarro.Visible = false;
@@ -103,9 +88,9 @@ namespace ClienteWebService
                 }
                 else
                 {
-                    RMICliente rmi = new RMICliente();
-                    bool sucesso = rmi.EfetuarLocacao(loc);
-                    if (sucesso)
+                    WebServiceCliente wsc = new WebServiceCliente();
+                    int sucesso = wsc.EfetuarLocacao(loc);
+                    if (sucesso == 1)
                     {
                         MessageBox.Show("Locação efetuada com sucesso.", "Finalizado!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         this.Dispose();
