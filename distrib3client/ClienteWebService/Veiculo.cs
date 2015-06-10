@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace ClienteWebService
 {
+    /// <summary>
+    /// Classe com atributos e métodos do Veículo
+    /// </summary>
     class Veiculo
     {
 

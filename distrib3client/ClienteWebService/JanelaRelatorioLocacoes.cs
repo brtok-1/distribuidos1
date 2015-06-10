@@ -11,8 +11,15 @@ using System.Windows.Forms;
 
 namespace ClienteWebService
 {
+    /// <summary>
+    /// Código com as operações da Janela para Relatório de Locações
+    /// </summary>
     public partial class JanelaRelatorioLocacoes : Form
     {
+        /// <summary>
+        /// Método de inicialização da janela.
+        /// Também consulta os veículos no Servidor e lista-os para seleção
+        /// </summary>
         public JanelaRelatorioLocacoes()
         {
             InitializeComponent();
@@ -26,6 +33,9 @@ namespace ClienteWebService
             }
         }
 
+        /// <summary>
+        /// Método que recupera as locações para o veículo selecionado, exibindo-os após trocar o Panel
+        /// </summary>
         private void botaoAvancar_Click(object sender, EventArgs e)
         {
             if (comboVeiculos.SelectedItem == null)
@@ -75,6 +85,9 @@ namespace ClienteWebService
             }
         }
 
+        /// <summary>
+        /// Método que retorna ao panel inicial para consulta a um novo carro
+        /// </summary>
         private void botaoVoltar_Click(object sender, EventArgs e)
         {
             panelLocacoes.Visible = false;

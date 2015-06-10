@@ -1,0 +1,93 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ClienteRMI</name>
+    </assembly>
+    <members>
+        <member name="F:ClienteWebService.InicialCliente.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:ClienteWebService.InicialCliente.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:ClienteWebService.InicialCliente.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="F:ClienteWebService.JanelaLocarVeiculo.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:ClienteWebService.JanelaLocarVeiculo.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:ClienteWebService.JanelaLocarVeiculo.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="F:ClienteWebService.JanelaRelatorioLocacoes.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:ClienteWebService.JanelaRelatorioLocacoes.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:ClienteWebService.JanelaRelatorioLocacoes.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="M:ClienteWebService.Program.Main">
+            <summary>
+            The main entry point for the application.
+            </summary>
+        </member>
+        <member name="M:ClienteWebService.WebServiceCliente.RecuperarVeiculos">
+            <summary>
+            Método que solicita a lista de veiculos na referência do Web Service, recebe a String de resposta e transforma em uma estrutura de dados de melhor trabalho durante o programa
+            </summary>
+            <returns>List com objetos da classe Veiculos</returns>
+        </member>
+        <member name="M:ClienteWebService.WebServiceCliente.RecuperarLocacoesPorVeiculo(System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="idVeiculo">Código do veiculos do qual se deseja consultar as locações</param>
+            <returns>List com Locacões </returns>
+        </member>
+        <member name="T:ClienteWebService.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:ClienteWebService.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:ClienteWebService.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -8,8 +8,15 @@ using ClienteWebService.WebServiceReferencia;
 
 namespace ClienteWebService
 {
+    /// <summary>
+    /// Classe de apoio ao acesso de referência do Web Service acessando os métodos do servidor
+    /// </summary>
     class WebServiceCliente
     {
+        /// <summary>
+        /// Método que solicita a lista de veiculos na referência do Web Service, recebe a String de resposta e transforma em uma estrutura de dados de melhor compreensão para o resto do programa
+        /// </summary>
+        /// <returns>List com objetos da classe Veiculos</returns>
         public List<Veiculo> RecuperarVeiculos()
         {
             WebServiceReferencia.wsLocadoraClient proxy = new WebServiceReferencia.wsLocadoraClient();
@@ -36,6 +43,11 @@ namespace ClienteWebService
             return veiculos;
         }
 
+        /// <summary>
+        /// Método que solicita a lista de locações do veiculo com código passado como parâmetro na referência do Web Service, recebe a String de resposta e transforma em uma estrutura de dados de melhor compreensão para o resto do programa
+        /// </summary>
+        /// <param name="idVeiculo">Código do veiculos do qual se deseja consultar as locações</param>
+        /// <returns>List com objetos da classe Locação do Veiculo de Parâmetro</returns>
         public List<Locacao> RecuperarLocacoesPorVeiculo(int idVeiculo)
         {
             WebServiceReferencia.wsLocadoraClient proxy = new WebServiceReferencia.wsLocadoraClient();
@@ -70,6 +82,11 @@ namespace ClienteWebService
             return locacoes;
         }
 
+        /// <summary>
+        /// Método solicita a locacao de um veiculo na referência do Web Service, enviando a String com todos os parâmetros da locação e indicando o sucesso da operação.
+        /// </summary>
+        /// <param name="loc">Objeto da classe locação com todos os atributos da locação solicitada.</param>
+        /// <returns>Boolean indicando o sucesso e o insucesso da operação.</returns>
         public bool EfetuarLocacao(Locacao loc)
         {
             String locacao = loc.getIdVeiculoReferencia() + "#"

@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace ClienteWebService
 {
+    /// <summary>
+    /// Classe com atributos e métodos da Locação
+    /// </summary>
     class Locacao
     {
         private String localRetirada;

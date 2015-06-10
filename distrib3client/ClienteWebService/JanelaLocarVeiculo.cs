@@ -10,11 +10,18 @@ using System.Windows.Forms;
 
 namespace ClienteWebService
 {
+    /// <summary>
+    /// Código com as operações da Janela para Locação de Veículos
+    /// </summary>
     public partial class JanelaLocarVeiculo : Form
     {
         private List<Veiculo> veiculos;
         private Veiculo selecionado;
 
+        /// <summary>
+        /// Método de inicialização da janela.
+        /// Também consulta os veículos no Servidor e lista-os para seleção
+        /// </summary>
         public JanelaLocarVeiculo()
         {
             InitializeComponent();
@@ -27,6 +34,9 @@ namespace ClienteWebService
             }
         }
 
+        /// <summary>
+        /// Método que, após selecionado o veículo, muda o panel exibido para que o usuário preencha os dados
+        /// </summary>
         private void botaoAvancar_Click(object sender, EventArgs e)
         {
             if (comboVeiculos.SelectedItem == null)
@@ -43,12 +53,18 @@ namespace ClienteWebService
             }
         }
 
+        /// <summary>
+        /// Método que retorna ao panel inicial para permitir a seleção de outro carro
+        /// </summary>
         private void botaoVoltar_Click(object sender, EventArgs e)
         {
             panelDados.Visible = false;
             panelCarro.Visible = true;
         }
 
+        /// <summary>
+        /// Método que recolhe os dados preenchidos pelo usuário, valida as datas para não estarem inválidas e após isso, envia a requisição de locação para o servidor através da interface de Web Service
+        /// </summary>
         private void botaoConfirmar_Click(object sender, EventArgs e)
         {
             Locacao loc = new Locacao();

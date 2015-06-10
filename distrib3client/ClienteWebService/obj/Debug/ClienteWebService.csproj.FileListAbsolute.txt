@@ -9,3 +9,4 @@ D:\GitHub\distribuidos1\distrib3client\ClienteWebService\obj\Debug\ClienteRMI.Pr
 D:\GitHub\distribuidos1\distrib3client\ClienteWebService\obj\Debug\ClienteWebService.csproj.GenerateResource.Cache
 D:\GitHub\distribuidos1\distrib3client\ClienteWebService\bin\Debug\ClienteRMI.exe
 D:\GitHub\distribuidos1\distrib3client\ClienteWebService\bin\Debug\ClienteRMI.pdb
+D:\GitHub\distribuidos1\distrib3client\ClienteWebService\bin\Debug\ClienteWebService.XML
