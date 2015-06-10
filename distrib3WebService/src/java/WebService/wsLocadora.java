@@ -124,7 +124,7 @@ public class wsLocadora {
             Time horaRetirada = Time.valueOf(dataHoraRetirada[1]);
             Time horaDevolucao = Time.valueOf(dataHoraDevolucao[1]);
             
-            //recupera o veiculo da vocacao para salvar
+            //recupera o veiculo da locacao para salvar
             //(pois o parametro recebido do C# é somente o id e não um objeto)
             ControleVeiculo cv = new ControleVeiculo();
             Veiculo v = cv.RecuperarVeiculoPorID(idVeiculo);
@@ -143,7 +143,6 @@ public class wsLocadora {
             loc.setNumeroCartao(numeroCartao);
             loc.setParcelasCartao(parcelasCartao);
             
-            System.out.println(loc.getDataDevolucao());
             //tenta fazer a locacao através do mecanismo padrão e devolve a resposta
             RMIServer rmis = new RMIServer();
             boolean sucesso = rmis.EfetuarLocacao(loc);

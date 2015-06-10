@@ -10,7 +10,6 @@ namespace ClienteWebService
 {
     class WebServiceCliente
     {
-        
         public List<Veiculo> RecuperarVeiculos()
         {
             WebServiceReferencia.wsLocadoraClient proxy = new WebServiceReferencia.wsLocadoraClient();
