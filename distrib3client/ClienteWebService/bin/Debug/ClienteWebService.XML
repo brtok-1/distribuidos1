@@ -4,6 +4,36 @@
         <name>ClienteRMI</name>
     </assembly>
     <members>
+        <member name="T:ClienteWebService.Locacao">
+            <summary>
+            Classe com atributos e métodos da Locação
+            </summary>
+        </member>
+        <member name="T:ClienteWebService.Veiculo">
+            <summary>
+            Classe com atributos e métodos do Veículo
+            </summary>
+        </member>
+        <member name="T:ClienteWebService.InicialCliente">
+            <summary>
+            Código com as operações da Janela exibida inicialmente e permanentemente para o usuário
+            </summary>
+        </member>
+        <member name="M:ClienteWebService.InicialCliente.#ctor">
+            <summary>
+            Método de inicialização da janela.
+            </summary>
+        </member>
+        <member name="M:ClienteWebService.InicialCliente.button1_Click(System.Object,System.EventArgs)">
+            <summary>
+            Método de inicialização e exibição da janela de Locação de Veículos
+            </summary>
+        </member>
+        <member name="M:ClienteWebService.InicialCliente.button2_Click(System.Object,System.EventArgs)">
+            <summary>
+            Método de inicialização e exibição da janela de Consulta de Locações
+            </summary>
+        </member>
         <member name="F:ClienteWebService.InicialCliente.components">
             <summary>
             Required designer variable.
@@ -21,6 +51,32 @@
             the contents of this method with the code editor.
             </summary>
         </member>
+        <member name="T:ClienteWebService.JanelaLocarVeiculo">
+            <summary>
+            Código com as operações da Janela para Locação de Veículos
+            </summary>
+        </member>
+        <member name="M:ClienteWebService.JanelaLocarVeiculo.#ctor">
+            <summary>
+            Método de inicialização da janela.
+            Também consulta os veículos no Servidor e lista-os para seleção
+            </summary>
+        </member>
+        <member name="M:ClienteWebService.JanelaLocarVeiculo.botaoAvancar_Click(System.Object,System.EventArgs)">
+            <summary>
+            Método que, após selecionado o veículo, muda o panel exibido para que o usuário preencha os dados
+            </summary>
+        </member>
+        <member name="M:ClienteWebService.JanelaLocarVeiculo.botaoVoltar_Click(System.Object,System.EventArgs)">
+            <summary>
+            Método que retorna ao panel inicial para permitir a seleção de outro carro
+            </summary>
+        </member>
+        <member name="M:ClienteWebService.JanelaLocarVeiculo.botaoConfirmar_Click(System.Object,System.EventArgs)">
+            <summary>
+            Método que recolhe os dados preenchidos pelo usuário, valida as datas para não estarem inválidas e após isso, envia a requisição de locação para o servidor através da interface de Web Service
+            </summary>
+        </member>
         <member name="F:ClienteWebService.JanelaLocarVeiculo.components">
             <summary>
             Required designer variable.
@@ -36,6 +92,27 @@
             <summary>
             Required method for Designer support - do not modify
             the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:ClienteWebService.JanelaRelatorioLocacoes">
+            <summary>
+            Código com as operações da Janela para Relatório de Locações
+            </summary>
+        </member>
+        <member name="M:ClienteWebService.JanelaRelatorioLocacoes.#ctor">
+            <summary>
+            Método de inicialização da janela.
+            Também consulta os veículos no Servidor e lista-os para seleção
+            </summary>
+        </member>
+        <member name="M:ClienteWebService.JanelaRelatorioLocacoes.botaoAvancar_Click(System.Object,System.EventArgs)">
+            <summary>
+            Método que recupera as locações para o veículo selecionado, exibindo-os após trocar o Panel
+            </summary>
+        </member>
+        <member name="M:ClienteWebService.JanelaRelatorioLocacoes.botaoVoltar_Click(System.Object,System.EventArgs)">
+            <summary>
+            Método que retorna ao panel inicial para consulta a um novo carro
             </summary>
         </member>
         <member name="F:ClienteWebService.JanelaRelatorioLocacoes.components">
@@ -60,18 +137,30 @@
             The main entry point for the application.
             </summary>
         </member>
+        <member name="T:ClienteWebService.WebServiceCliente">
+            <summary>
+            Classe de apoio ao acesso de referência do Web Service acessando os métodos do servidor
+            </summary>
+        </member>
         <member name="M:ClienteWebService.WebServiceCliente.RecuperarVeiculos">
             <summary>
-            Método que solicita a lista de veiculos na referência do Web Service, recebe a String de resposta e transforma em uma estrutura de dados de melhor trabalho durante o programa
+            Método que solicita a lista de veiculos na referência do Web Service, recebe a String de resposta e transforma em uma estrutura de dados de melhor compreensão para o resto do programa
             </summary>
             <returns>List com objetos da classe Veiculos</returns>
         </member>
         <member name="M:ClienteWebService.WebServiceCliente.RecuperarLocacoesPorVeiculo(System.Int32)">
             <summary>
-            
+            Método que solicita a lista de locações do veiculo com código passado como parâmetro na referência do Web Service, recebe a String de resposta e transforma em uma estrutura de dados de melhor compreensão para o resto do programa
             </summary>
             <param name="idVeiculo">Código do veiculos do qual se deseja consultar as locações</param>
-            <returns>List com Locacões </returns>
+            <returns>List com objetos da classe Locação do Veiculo de Parâmetro</returns>
+        </member>
+        <member name="M:ClienteWebService.WebServiceCliente.EfetuarLocacao(ClienteWebService.Locacao)">
+            <summary>
+            Método solicita a locacao de um veiculo na referência do Web Service, enviando a String com todos os parâmetros da locação e indicando o sucesso da operação.
+            </summary>
+            <param name="loc">Objeto da classe locação com todos os atributos da locação solicitada.</param>
+            <returns>Boolean indicando o sucesso e o insucesso da operação.</returns>
         </member>
         <member name="T:ClienteWebService.Properties.Resources">
             <summary>
