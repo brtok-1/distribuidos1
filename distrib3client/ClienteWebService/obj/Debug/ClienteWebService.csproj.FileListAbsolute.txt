@@ -10,3 +10,8 @@ D:\GitHub\distribuidos1\distrib3client\ClienteWebService\obj\Debug\ClienteWebSer
 D:\GitHub\distribuidos1\distrib3client\ClienteWebService\bin\Debug\ClienteRMI.exe
 D:\GitHub\distribuidos1\distrib3client\ClienteWebService\bin\Debug\ClienteRMI.pdb
 D:\GitHub\distribuidos1\distrib3client\ClienteWebService\bin\Debug\ClienteWebService.XML
+C:\Users\Rafael\Documents\GitHub\distribuidos1\distrib3client\ClienteWebService\bin\Debug\ClienteRMI.exe.config
+C:\Users\Rafael\Documents\GitHub\distribuidos1\distrib3client\ClienteWebService\bin\Debug\ClienteWebService.XML
+C:\Users\Rafael\Documents\GitHub\distribuidos1\distrib3client\ClienteWebService\obj\Debug\ClienteRMI.exe
+C:\Users\Rafael\Documents\GitHub\distribuidos1\distrib3client\ClienteWebService\obj\Debug\ClienteRMI.pdb
+C:\Users\Rafael\Documents\GitHub\distribuidos1\distrib3client\ClienteWebService\bin\Debug\ClienteWebService.exe.config
