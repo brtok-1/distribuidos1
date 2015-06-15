@@ -19,14 +19,17 @@ import javax.jws.WebMethod;
 import javax.jws.WebParam;
 
 /**
- *
- * @author Rafael
+ * Classe de Web Service
+ * 
+ * @author Bruno e Rafael
  */
 @WebService(serviceName = "wsLocadora")
 public class wsLocadora {
 
     /**
-     * This is a sample web service operation
+     * Método de teste Hello
+     * @param txt String recebida como parâmetro
+     * @return Mensagem dizendo Hello com String recebida como parâmetro
      */
     @WebMethod(operationName = "hello")
     public String hello(@WebParam(name = "name") String txt) {
@@ -34,9 +37,10 @@ public class wsLocadora {
     }
 
     /**
-     * Operação de Web service
-     *
-     * @return
+     * Método para Listar todos os veículos cadastrados no servidor.
+     * Este método implementa uma interface Web Service para o método já existente no servidor.
+     * 
+     * @return String formatada para envio da lista de clientes
      */
     @WebMethod(operationName = "ListarVeiculos")
     public String ListarVeiculos() {
@@ -67,7 +71,11 @@ public class wsLocadora {
     }
 
     /**
-     * Operação de Web service
+     * Método que retorna as locações para um determinado veículo.
+     * Este método implementa uma interface Web Service para o método já existente no servidor.
+     * 
+     * @param idVeiculo número inteiro que representa o código do veículo que pretende-se consultar.
+     * @return String formatada para envio da lista de locações
      */
     @WebMethod(operationName = "ConsultarLocacoesVeiculo")
     public String ConsultarLocacoesVeiculo(@WebParam(name = "idVeiculo") int idVeiculo) {
@@ -100,7 +108,11 @@ public class wsLocadora {
     }
 
     /**
-     * Operação de Web service
+     * Método que realiza uma locação conforme os parâmetro recebidos do cliente.
+     * Este método implementa uma interface Web Service para o método já existente no servidor.
+     * 
+     * @param locacao String contendo os dados da locação a ser realizada.
+     * @return sucesso Boolean que informa o sucesso ou insucesso da operação de locação solicitada.
      */
     @WebMethod(operationName = "EfetuarLocacao")
     public boolean EfetuarLocacao(@WebParam(name = "locacao") String locacao) {
