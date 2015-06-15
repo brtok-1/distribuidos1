@@ -7,11 +7,12 @@
     <ProjectGuid>{2618E27B-4791-4FC9-87A1-79572DA1288F}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ClienteRMI</RootNamespace>
-    <AssemblyName>ClienteRMI</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <RootNamespace>ClienteWebService</RootNamespace>
+    <AssemblyName>ClienteWebService</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -95,6 +96,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -105,16 +107,16 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="Service References\WebServiceReferencia\ClienteRMI.WebServiceReferencia.ConsultarLocacoesVeiculoResponse.datasource">
+    <None Include="Service References\WebServiceReferencia\ClienteWebService.WebServiceReferencia.ConsultarLocacoesVeiculoResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\WebServiceReferencia\ClienteRMI.WebServiceReferencia.EfetuarLocacaoResponse.datasource">
+    <None Include="Service References\WebServiceReferencia\ClienteWebService.WebServiceReferencia.EfetuarLocacaoResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\WebServiceReferencia\ClienteRMI.WebServiceReferencia.helloResponse.datasource">
+    <None Include="Service References\WebServiceReferencia\ClienteWebService.WebServiceReferencia.helloResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\WebServiceReferencia\ClienteRMI.WebServiceReferencia.ListarVeiculosResponse.datasource">
+    <None Include="Service References\WebServiceReferencia\ClienteWebService.WebServiceReferencia.ListarVeiculosResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\WebServiceReferencia\wsLocadora.wsdl" />
