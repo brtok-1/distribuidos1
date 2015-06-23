@@ -17,3 +17,4 @@
 /distrib3webServer/nbproject/private/
 /distrib3WebService/nbproject/private/
 /distrib3WebService/build/
+*.config
