@@ -11,13 +11,11 @@ package Modelo;
  */
 public class Troca {
     
-    private int idSolicitante;
-    
+    private int idSolicitante;    
     private int idSolicitado;
-    
     private int idCartaoManda;
-    
     private int idCartaoRecebe;
+    
     
     //1: Aguardando, 2: Efetuada, 3: Recusada
     private int situacaoTroca;

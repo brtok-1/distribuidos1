@@ -12,11 +12,10 @@ package Modelo;
 public class Cartao {
     
     private int idCartao;
-    
     private String local;
-    
     private int idProprietario;
 
+    
     public int getIdCartao() {
         return idCartao;
     }
