@@ -11,47 +11,47 @@ package Modelo;
  */
 public class Troca {
     
-    private int idSolicitante;
+    private Colecionador solicitante;
     
-    private int idSolicitado;
+    private Colecionador solicitado;
     
-    private int idCartaoManda;
+    private Cartao cartaoManda;
     
-    private int idCartaoRecebe;
+    private Cartao cartaoRecebe;
     
     //1: Aguardando, 2: Efetuada, 3: Recusada
     private int situacaoTroca;
 
-    public int getIdSolicitante() {
-        return idSolicitante;
+    public Colecionador getSolicitante() {
+        return solicitante;
     }
 
-    public void setIdSolicitante(int idSolicitante) {
-        this.idSolicitante = idSolicitante;
+    public void setSolicitante(Colecionador solicitante) {
+        this.solicitante = solicitante;
     }
 
-    public int getIdSolicitado() {
-        return idSolicitado;
+    public Colecionador getSolicitado() {
+        return solicitado;
     }
 
-    public void setIdSolicitado(int idSolicitado) {
-        this.idSolicitado = idSolicitado;
+    public void setSolicitado(Colecionador solicitado) {
+        this.solicitado = solicitado;
     }
 
-    public int getIdCartaoManda() {
-        return idCartaoManda;
+    public Cartao getCartaoManda() {
+        return cartaoManda;
     }
 
-    public void setIdCartaoManda(int idCartaoManda) {
-        this.idCartaoManda = idCartaoManda;
+    public void setCartaoManda(Cartao cartaoManda) {
+        this.cartaoManda = cartaoManda;
     }
 
-    public int getIdCartaoRecebe() {
-        return idCartaoRecebe;
+    public Cartao getCartaoRecebe() {
+        return cartaoRecebe;
     }
 
-    public void setIdCartaoRecebe(int idCartaoRecebe) {
-        this.idCartaoRecebe = idCartaoRecebe;
+    public void setCartaoRecebe(Cartao cartaoRecebe) {
+        this.cartaoRecebe = cartaoRecebe;
     }
 
     public int getSituacaoTroca() {
@@ -61,6 +61,5 @@ public class Troca {
     public void setSituacaoTroca(int situacaoTroca) {
         this.situacaoTroca = situacaoTroca;
     }
-    
     
 }

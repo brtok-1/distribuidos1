@@ -15,7 +15,7 @@ public class Cartao {
     
     private String local;
     
-    private int idProprietario;
+    private Colecionador proprietario;
 
     public int getIdCartao() {
         return idCartao;
@@ -33,12 +33,12 @@ public class Cartao {
         this.local = local;
     }
 
-    public int getIdProprietario() {
-        return idProprietario;
+    public Colecionador getProprietario() {
+        return proprietario;
     }
 
-    public void setIdProprietario(int idProprietario) {
-        this.idProprietario = idProprietario;
+    public void setProprietario(Colecionador proprietario) {
+        this.proprietario = proprietario;
     }
     
 }

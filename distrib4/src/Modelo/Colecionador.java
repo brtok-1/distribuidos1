@@ -5,40 +5,51 @@
  */
 package Modelo;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Rafael
  */
 public class Colecionador {
     
-    private int idProprietario;
+    private int idColecionador;
     
-    private String nomeProprietario;
+    private String nomeColecionador;
     
-    private boolean isCoordenador;
+    private boolean coordenador;
 
-    public int getIdProprietario() {
-        return idProprietario;
+    private ArrayList<Cartao> cartoes;
+
+    public int getIdColecionador() {
+        return idColecionador;
     }
 
-    public void setIdProprietario(int idProprietario) {
-        this.idProprietario = idProprietario;
+    public void setIdColecionador(int idColecionador) {
+        this.idColecionador = idColecionador;
     }
 
-    public String getNomeProprietario() {
-        return nomeProprietario;
+    public String getNomeColecionador() {
+        return nomeColecionador;
     }
 
-    public void setNomeProprietario(String nomeProprietario) {
-        this.nomeProprietario = nomeProprietario;
+    public void setNomeColecionador(String nomeColecionador) {
+        this.nomeColecionador = nomeColecionador;
     }
 
-    public boolean isIsCoordenador() {
-        return isCoordenador;
+    public boolean isCoordenador() {
+        return coordenador;
     }
 
-    public void setIsCoordenador(boolean isCoordenador) {
-        this.isCoordenador = isCoordenador;
+    public void setCoordenador(boolean coordenador) {
+        this.coordenador = coordenador;
     }
-    
+
+    public ArrayList<Cartao> getCartoes() {
+        return cartoes;
+    }
+
+    public void setCartoes(ArrayList<Cartao> cartoes) {
+        this.cartoes = cartoes;
+    }
 }
