@@ -6,8 +6,11 @@
 package IOarquivo;
 
 import Modelo.Cartao;
+import Modelo.Colecionador;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -21,7 +24,8 @@ public class IOCartao {
     public boolean SalvaCartao(Cartao cartao) throws Exception {
         ArrayList<Cartao> cartoes;
         boolean duplicado = false;
-        File arquivo = new File("C:/Distrib2/Cartao.dst");
+        Colecionador logado = Colecionador.getInstancia();
+        File arquivo = new File("C:/Distrib3/Cartao-" + logado.getIdColecionador() + ".dst");
         if (arquivo.exists()) {
             cartoes = RecuperarCartoes();
             for (Cartao c : cartoes) {
@@ -46,14 +50,15 @@ public class IOCartao {
             FileOutputStream arquivoGrav = new FileOutputStream(arquivo);
             ObjectOutputStream objGravar = new ObjectOutputStream(arquivoGrav);
             objGravar.writeObject(cartoes);
-            JOptionPane.showMessageDialog(null, "Veículo ID " + cartao.getIdCartao() + " cadastrado com sucesso.");
+            JOptionPane.showMessageDialog(null, "Cartão ID " + cartao.getIdCartao() + " cadastrado com sucesso.");
             return true;
         }
     }
     
     public void EditaCartao(Cartao cartao) throws Exception {
         ArrayList<Cartao> cartoes;
-        File arquivo = new File("C:/Distrib2/Cartao.dst");
+        Colecionador logado = Colecionador.getInstancia();
+        File arquivo = new File("C:/Distrib3/Cartao-" + logado.getIdColecionador() + ".dst");
         Cartao cartaoAntes;
         if (arquivo.exists()) {
             cartoes = RecuperarCartoes();
@@ -75,11 +80,40 @@ public class IOCartao {
         //Cria um arquivo novo para salvar o array atualizado
         FileOutputStream arquivoGrav = new FileOutputStream(arquivo);
         ObjectOutputStream objGravar = new ObjectOutputStream(arquivoGrav);
-        objGravar.writeObject(veiculos);
-        JOptionPane.showMessageDialog(null, "Veículo ID " + veiculo.getIdVeiculo() + " modificado com sucesso.");
-        if (veiculo.getValorDiaria() < veiculoAntes.getValorDiaria()) {
-            ControleNotificacao cn = new ControleNotificacao(veiculo, veiculoAntes.getValorDiariaString());
-            cn.start();
+        objGravar.writeObject(cartoes);
+        JOptionPane.showMessageDialog(null, "Cartão ID " + cartao.getIdCartao() + " modificado com sucesso.");
+    }
+    
+    public ArrayList<Cartao> RecuperarCartoes() throws Exception {
+        ArrayList<Cartao> cartoes = new ArrayList<>();
+        Colecionador logado = Colecionador.getInstancia();
+        File arquivo = new File("C:/Distrib3/Cartao-" + logado.getIdColecionador() + ".dst");
+        if (arquivo.exists()) {
+            FileInputStream arquivoLeitura = new FileInputStream("C:/Distrib3/Cartao-" + logado.getIdColecionador() + ".dst");
+            if (arquivoLeitura.available() != 0) {
+                ObjectInputStream objLeitura = new ObjectInputStream(arquivoLeitura);
+                cartoes = (ArrayList<Cartao>) objLeitura.readObject();
+            }
+        }
+        return cartoes;
+    }
+
+    public Cartao RecuperarCartaoPorID(int id) throws Exception {
+        ArrayList<Cartao> cartoes = new ArrayList<>();
+        Colecionador logado = Colecionador.getInstancia();
+        File arquivo = new File("C:/Distrib3/Cartao-" + logado.getIdColecionador() + ".dst");
+        if (arquivo.exists()) {
+            cartoes = RecuperarCartoes();
+            Cartao c = null;
+            for (Cartao cartao : cartoes) {
+                if (cartao.getIdCartao() == id) {
+                    c = cartao;
+                }
+            }
+            return c;
+        } else {
+            JOptionPane.showMessageDialog(null, "Ainda não existe nenhum cartão cadastrado");
+            return null;
         }
     }
     
