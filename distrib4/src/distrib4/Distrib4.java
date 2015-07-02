@@ -5,6 +5,8 @@
  */
 package distrib4;
 
+import GUI.JanelaInicial;
+
 /**
  *
  * @author Rafael
@@ -15,7 +17,8 @@ public class Distrib4 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        JanelaInicial ji = new JanelaInicial();
+        ji.setVisible(true);
     }
     
 }

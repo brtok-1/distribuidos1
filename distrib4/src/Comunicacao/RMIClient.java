@@ -6,8 +6,10 @@
 package Comunicacao;
 
 import Interface.ComunicacaoServer;
+import Modelo.Cartao;
 import Modelo.Troca;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
 
 /**
  *
@@ -22,6 +24,11 @@ public class RMIClient extends UnicastRemoteObject implements ComunicacaoServer
 
     @Override
     public void ReceberProposta(Troca troca) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public ArrayList<Cartao> ListarCartoes() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

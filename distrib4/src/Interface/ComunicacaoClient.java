@@ -19,4 +19,6 @@ public interface ComunicacaoClient {
     void EnviaProposta(Troca troca, ComunicacaoClient cliente);
     
     Troca RespondeProposta(Troca troca, ComunicacaoClient cliente);
+    
+    void SolicitaListaCartoes(Colecionador colecionador);
 }

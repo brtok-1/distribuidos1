@@ -5,7 +5,9 @@
  */
 package Interface;
 
+import Modelo.Cartao;
 import Modelo.Troca;
+import java.util.ArrayList;
 
 /**
  * Interface de recebimento de ações de outros colecionadores
@@ -14,5 +16,7 @@ import Modelo.Troca;
 public interface ComunicacaoServer {
     
     void ReceberProposta(Troca troca);
+    
+    ArrayList<Cartao> ListarCartoes();
     
 }
