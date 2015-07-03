@@ -6,6 +6,7 @@
 package distrib4;
 
 import GUI.JanelaInicial;
+import javax.swing.UIManager;
 
 /**
  *
@@ -17,8 +18,15 @@ public class Distrib4 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        JanelaInicial ji = new JanelaInicial();
-        ji.setVisible(true);
+
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+            JanelaInicial ji = new JanelaInicial();
+            ji.setVisible(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
-    
+
 }

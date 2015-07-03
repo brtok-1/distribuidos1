@@ -5,13 +5,14 @@
  */
 package Modelo;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  *
  * @author Rafael
  */
-public class Colecionador {
+public class Colecionador implements Serializable{
     
     private int idColecionador;
     private String nomeColecionador;

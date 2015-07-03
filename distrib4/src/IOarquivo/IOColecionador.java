@@ -20,10 +20,13 @@ import javax.swing.JOptionPane;
  */
 public class IOColecionador {
     
+    ArrayList<Colecionador> colecionadores;
+    
     public boolean SalvaColecionador(Colecionador colecionador) throws Exception {
-        ArrayList<Colecionador> colecionadores;
+        
         boolean duplicado = false;
-        File arquivo = new File("C:/Distrib3/Colecionadores.dst");
+        File arquivo = new File("C:/Distrib4/Colecionadores.dst");
+        
         if (arquivo.exists()) {
             colecionadores = RecuperarColecionadores();
             for (Colecionador c : colecionadores) {
@@ -31,7 +34,10 @@ public class IOColecionador {
                     duplicado = true;
                 }
             }
+            //Deleta o arquivo
+            arquivo.delete();
         } else {
+            arquivo.createNewFile();
             colecionadores = new ArrayList<>();
         }
         
@@ -40,10 +46,6 @@ public class IOColecionador {
             return false;
         } else {
             colecionadores.add(colecionador);
-
-            //Deleta o arquivo
-            arquivo.delete();
-
             //Cria um arquivo novo para salvar o array atualizado
             FileOutputStream arquivoGrav = new FileOutputStream(arquivo);
             ObjectOutputStream objGravar = new ObjectOutputStream(arquivoGrav);
@@ -54,9 +56,8 @@ public class IOColecionador {
     }
     
     public Colecionador RecuperaColecionadorPorID(int id) throws Exception {
-        ArrayList<Colecionador> colecionadores = new ArrayList<>();
         Colecionador logado = Colecionador.getInstancia();
-        File arquivo = new File("C:/Distrib3/Colecionadores.dst");
+        File arquivo = new File("C:/Distrib4/Colecionadores.dst");
         if (arquivo.exists()) {
             colecionadores = RecuperarColecionadores();
             Colecionador colecionador = null;
@@ -73,10 +74,9 @@ public class IOColecionador {
     }
     
     public ArrayList<Colecionador> RecuperarColecionadores() throws Exception {
-        ArrayList<Colecionador> colecionadores = new ArrayList<>();
-        File arquivo = new File("C:/Distrib3/Colecionadores.dst");
+        File arquivo = new File("C:/Distrib4/Colecionadores.dst");
         if (arquivo.exists()) {
-            FileInputStream arquivoLeitura = new FileInputStream("C:/Distrib3/Colecionadores.dst");
+            FileInputStream arquivoLeitura = new FileInputStream("C:/Distrib4/Colecionadores.dst");
             if (arquivoLeitura.available() != 0) {
                 ObjectInputStream objLeitura = new ObjectInputStream(arquivoLeitura);
                 colecionadores = (ArrayList<Colecionador>) objLeitura.readObject();
