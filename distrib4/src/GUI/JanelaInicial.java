@@ -5,7 +5,8 @@
  */
 package GUI;
 
-import IOarquivo.IOCartao;
+import Comunicacao.RMIClient;
+import Comunicacao.RMIServer;
 import IOarquivo.IOColecionador;
 import Modelo.Colecionador;
 import javax.swing.JOptionPane;
@@ -118,6 +119,13 @@ public class JanelaInicial extends javax.swing.JFrame {
                 JanelaPrincipal jp = new JanelaPrincipal();
                 jp.setVisible(true);
                 this.dispose();
+                
+                RMIServer rmis = new RMIServer();
+                rmis.IniciaRMI();
+                
+                RMIClient rmic = new RMIClient();
+                rmic.EnviaPresenca(colecionadorLogado);
+                
             } else
             {
                 JOptionPane.showMessageDialog(null, "Usuário não cadastrado.");

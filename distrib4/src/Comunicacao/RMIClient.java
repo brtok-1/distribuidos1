@@ -5,30 +5,65 @@
  */
 package Comunicacao;
 
+import Interface.ComunicacaoClient;
 import Interface.ComunicacaoServer;
-import Modelo.Cartao;
+import Modelo.Colecionador;
 import Modelo.Troca;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
-import java.util.ArrayList;
 
 /**
  *
  * @author Rafael
  */
-public class RMIClient extends UnicastRemoteObject implements ComunicacaoServer
+public class RMIClient extends UnicastRemoteObject implements ComunicacaoClient
 {
+    
+    private Registry reg;
+    private ComunicacaoServer obj;
+    private RMIClient rmic;
     
     public RMIClient() throws Exception {
         super();
+        reg = LocateRegistry.getRegistry("localhost", 1099);
+        obj = (ComunicacaoServer) reg.lookup("comunicacaoCartoes");
     }
 
     @Override
-    public void ReceberProposta(Troca troca) {
+    public void EnviaPresenca(Colecionador colecionador) {
+        try
+        {
+            IniciaRMI();
+            obj.ReceberParticipante(colecionador);
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        
+    }
+
+    @Override
+    public void EnviaProposta(Troca troca, ComunicacaoClient cliente) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public ArrayList<Cartao> ListarCartoes() {
+    public Troca RespondeProposta(Troca troca, ComunicacaoClient cliente) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public void SolicitaListaCartoes(Colecionador colecionador) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    /**
+     * Início da comunicação RMI
+     * @throws InterruptedException
+     */
+    public void IniciaRMI() throws Exception {
+        rmic = new RMIClient();
+    }
+
 }

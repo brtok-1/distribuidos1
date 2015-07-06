@@ -14,7 +14,7 @@ import Modelo.Troca;
  */
 public interface ComunicacaoClient {
     
-    void EnviaId(Colecionador colecionador);
+    void EnviaPresenca(Colecionador colecionador);
     
     void EnviaProposta(Troca troca, ComunicacaoClient cliente);
     
