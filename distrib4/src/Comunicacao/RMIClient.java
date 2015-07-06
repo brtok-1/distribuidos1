@@ -26,8 +26,23 @@ public class RMIClient extends UnicastRemoteObject implements ComunicacaoClient
     
     public RMIClient() throws Exception {
         super();
+        
+        Colecionador logado = Colecionador.getInstancia();
+        
         reg = LocateRegistry.getRegistry("localhost", 1099);
-        obj = (ComunicacaoServer) reg.lookup("comunicacaoCartoes");
+        obj = (ComunicacaoServer) reg.lookup("servidor" + logado.getIdColecionador());
+    }
+    
+    /**
+     * Conecata-se no servidor RMI do participante
+     * @param idColecionador
+     * @throws Exception 
+     */
+    public void ConectaRMI(int idColecionador) throws Exception {
+        
+        reg = LocateRegistry.getRegistry("localhost", 1099);
+        obj = (ComunicacaoServer) reg.lookup("servidor" + idColecionador);
+        
     }
 
     @Override

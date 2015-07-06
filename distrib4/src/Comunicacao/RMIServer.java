@@ -48,8 +48,11 @@ public class RMIServer extends UnicastRemoteObject implements ComunicacaoServer 
      * @throws Exception 
      */
     public void IniciaRMI() throws Exception {
+        
+        Colecionador logado = Colecionador.getInstancia();
+        
         Registry reg = LocateRegistry.createRegistry(1099);
-        reg.bind("comunicacaoCartoes", new RMIServer());
+        reg.bind("servidor" + logado.getIdColecionador(), new RMIServer());
         System.out.println("RMIServer criado e registrado");
     }    
 }
