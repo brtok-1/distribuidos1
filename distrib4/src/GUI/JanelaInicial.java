@@ -22,7 +22,6 @@ public class JanelaInicial extends javax.swing.JFrame {
      */
     public JanelaInicial() {
         initComponents();
-        setLocationRelativeTo(null);
     }
 
     /**
@@ -42,6 +41,7 @@ public class JanelaInicial extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jLabel1.setText("ID:");
 
@@ -105,6 +105,7 @@ public class JanelaInicial extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed

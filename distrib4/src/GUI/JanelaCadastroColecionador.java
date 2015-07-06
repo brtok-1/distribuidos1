@@ -12,14 +12,14 @@ import Modelo.Colecionador;
  *
  * @author Rafael
  */
-public class JanelaCadastroColecionador extends javax.swing.JFrame {
+public class JanelaCadastroColecionador extends javax.swing.JDialog {
 
     /**
      * Creates new form JanelaCadastroUsuario
      */
     public JanelaCadastroColecionador() {
         initComponents();
-        setLocationRelativeTo(null);
+        setModal(true);
     }
 
     /**
@@ -38,7 +38,8 @@ public class JanelaCadastroColecionador extends javax.swing.JFrame {
         txtNomeColecionador = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
         jLabel1.setText("ID:");
 
@@ -98,6 +99,7 @@ public class JanelaCadastroColecionador extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
