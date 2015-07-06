@@ -22,9 +22,15 @@ import javax.swing.JOptionPane;
 public class IOCartao {
     
     public boolean SalvaCartao(Cartao cartao) throws Exception {
+        
+        
         ArrayList<Cartao> cartoes;
         boolean duplicado = false;
         Colecionador logado = Colecionador.getInstancia();
+        
+        //Adiciona informação do proprietário do cartão
+        cartao.setProprietario(logado);
+        
         File arquivo = new File("C:/Distrib4/Cartao-" + logado.getIdColecionador() + ".dst");
         if (arquivo.exists()) {
             cartoes = RecuperarCartoes();

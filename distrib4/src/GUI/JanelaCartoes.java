@@ -5,6 +5,10 @@
  */
 package GUI;
 
+import IOarquivo.IOCartao;
+import Modelo.Cartao;
+import java.util.ArrayList;
+
 /**
  *
  * @author Rafael
@@ -14,9 +18,64 @@ public class JanelaCartoes extends javax.swing.JFrame {
     /**
      * Creates new form JanelaCartoes
      */
-    public JanelaCartoes() {
+    public JanelaCartoes() throws Exception {
         initComponents();
         setLocationRelativeTo(null);
+        
+        CarregaCartoes();
+    }
+    
+    /**
+     * Carrega os cartões e popula a tabela
+     */
+    public void CarregaCartoes() throws Exception
+    {
+        IOCartao iocar = new IOCartao();
+        
+        ArrayList<Cartao> cartoes = iocar.RecuperarCartoes();
+        
+        Object[][] tabela = new Object[cartoes.size()][3];
+        for (int i = 0; i < cartoes.size(); i++) {
+            tabela[i][0] = cartoes.get(i).getIdCartao();
+            tabela[i][1] = cartoes.get(i).getLocal();
+            tabela[i][2] = cartoes.get(i).getProprietario().getNomeColecionador();
+        }
+        
+        PopulaTabela(tabela);
+    }
+    
+    public void PopulaTabela(Object[][] tabela) throws Exception
+    {
+        tbCartoes.setModel(new javax.swing.table.DefaultTableModel(
+                tabela,
+                new String[]{
+                    "ID", "Local", "Proprietário"
+                }
+        ) {
+            Class[] types = new Class[]{
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class,
+            };
+            boolean[] canEdit = new boolean[]{
+                false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types[columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit[columnIndex];
+            }
+        });
+        tbCartoes.setColumnSelectionAllowed(true);
+        jScrollPane2.setViewportView(tbCartoes);
+        tbCartoes.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        if (tbCartoes.getColumnModel().getColumnCount() > 0) {
+            tbCartoes.getColumnModel().getColumn(0).setResizable(false);
+            tbCartoes.getColumnModel().getColumn(0).setPreferredWidth(28);
+            tbCartoes.getColumnModel().getColumn(1).setPreferredWidth(95);
+            tbCartoes.getColumnModel().getColumn(2).setPreferredWidth(95);
+        }
     }
 
     /**
@@ -32,7 +91,7 @@ public class JanelaCartoes extends javax.swing.JFrame {
         tbCartoes = new javax.swing.JTable();
         btnNovoCartao = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         tbCartoes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -92,6 +151,7 @@ public class JanelaCartoes extends javax.swing.JFrame {
     private void btnNovoCartaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoCartaoActionPerformed
         JanelaCadastroCartao jcc = new JanelaCadastroCartao();
         jcc.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnNovoCartaoActionPerformed
 
 
