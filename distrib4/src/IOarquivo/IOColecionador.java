@@ -56,11 +56,12 @@ public class IOColecionador {
     }
     
     public Colecionador RecuperaColecionadorPorID(int id) throws Exception {
-        Colecionador logado = Colecionador.getInstancia();
+        //Colecionador logado = Colecionador.getInstancia();
         File arquivo = new File("C:/Distrib4/Colecionadores.dst");
         if (arquivo.exists()) {
             colecionadores = RecuperarColecionadores();
             Colecionador colecionador = null;
+            //colecionador.setIdColecionador(0);
             for (Colecionador c : colecionadores) {
                 if (c.getIdColecionador() == id) {
                     colecionador = c;
@@ -68,7 +69,7 @@ public class IOColecionador {
             }
             return colecionador;
         } else {
-            JOptionPane.showMessageDialog(null, "Ainda não existe nenhum cartão cadastrado");
+            JOptionPane.showMessageDialog(null, "Usuário não cadastrado.");
             return null;
         }
     }

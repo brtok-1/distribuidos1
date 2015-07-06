@@ -8,6 +8,7 @@ package GUI;
 import IOarquivo.IOCartao;
 import IOarquivo.IOColecionador;
 import Modelo.Colecionador;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -20,7 +21,7 @@ public class JanelaInicial extends javax.swing.JFrame {
      */
     public JanelaInicial() {
         initComponents();
-        setLocationRelativeTo(null); 
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -111,17 +112,21 @@ public class JanelaInicial extends javax.swing.JFrame {
             Colecionador colecionadorLogado = new Colecionador();
             IOColecionador ioc = new IOColecionador();
             colecionadorLogado = ioc.RecuperaColecionadorPorID(Integer.parseInt(txtID.getText()));
-            
-            Colecionador.setInstancia(colecionadorLogado);
-            
+
+            if (colecionadorLogado != null) {
+                Colecionador.setInstancia(colecionadorLogado);
+                JanelaPrincipal jp = new JanelaPrincipal();
+                jp.setVisible(true);
+                this.dispose();
+            } else
+            {
+                JOptionPane.showMessageDialog(null, "Usuário não cadastrado.");
+            }
             //Recupera a lista de cartões do colecionador
-            IOCartao iocartao = new IOCartao();
-            colecionadorLogado.setCartoes(iocartao.RecuperarCartoes());
-            
-            JanelaPrincipal jp = new JanelaPrincipal();
-            jp.setVisible(true);
+//            IOCartao iocartao = new IOCartao();
+//            colecionadorLogado.setCartoes(iocartao.RecuperarCartoes());
         } catch (Exception e) {
-                        
+            e.printStackTrace();
         }
     }//GEN-LAST:event_btnEntrarActionPerformed
 
