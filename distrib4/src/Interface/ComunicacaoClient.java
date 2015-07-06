@@ -5,8 +5,10 @@
  */
 package Interface;
 
+import Modelo.Cartao;
 import Modelo.Colecionador;
 import Modelo.Troca;
+import java.util.ArrayList;
 
 /**
  * Interface de envio de ações para outros participantes
@@ -20,5 +22,5 @@ public interface ComunicacaoClient {
     
     Troca RespondeProposta(Troca troca, ComunicacaoClient cliente);
     
-    void SolicitaListaCartoes(Colecionador colecionador);
+    ArrayList<Cartao> SolicitaListaCartoes(int idColecionador);
 }

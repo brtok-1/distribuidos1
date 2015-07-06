@@ -7,11 +7,13 @@ package Comunicacao;
 
 import Interface.ComunicacaoClient;
 import Interface.ComunicacaoServer;
+import Modelo.Cartao;
 import Modelo.Colecionador;
 import Modelo.Troca;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
 
 /**
  *
@@ -69,7 +71,7 @@ public class RMIClient extends UnicastRemoteObject implements ComunicacaoClient
     }
 
     @Override
-    public void SolicitaListaCartoes(Colecionador colecionador) {
+    public ArrayList<Cartao> SolicitaListaCartoes(int idColecionador) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
