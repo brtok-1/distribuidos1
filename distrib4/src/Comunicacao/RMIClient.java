@@ -72,7 +72,20 @@ public class RMIClient extends UnicastRemoteObject implements ComunicacaoClient
 
     @Override
     public ArrayList<Cartao> SolicitaListaCartoes(int idColecionador) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ArrayList<Cartao> cartoes = new ArrayList<>();
+        try
+        {
+            ConectaRMI(idColecionador);
+            
+            cartoes = obj.ListarCartoes();
+            
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        
+        return cartoes;
+        
     }
     
     /**
