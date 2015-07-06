@@ -36,10 +36,6 @@ public class RMIServer extends UnicastRemoteObject implements ComunicacaoServer 
     @Override
     public void ReceberParticipante(Colecionador participante) {
         
-        Colecionador logado = Colecionador.getInstancia();
-        logado.getListaParticipantes().add(participante);
-        System.out.println("Adicionado participante " + participante.getNomeColecionador());
-        
     }
     
     /**

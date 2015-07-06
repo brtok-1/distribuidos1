@@ -5,6 +5,7 @@
  */
 package Comunicacao;
 
+import Modelo.Colecionador;
 import java.net.DatagramPacket;
 import java.net.InetAddress;
 import java.net.MulticastSocket;
@@ -29,6 +30,8 @@ public class MulticastRecebimento extends Thread {
                 clientSocket.receive(msgPacket);
                 String mensagem = new String(buf);
                 int recebido = Integer.parseInt(mensagem.trim());
+                Colecionador instancia = Colecionador.getInstancia();
+                instancia.getListaParticipantes().add(recebido);
             }
         } catch (Exception ex) {
             Logger.getLogger(MulticastRecebimento.class.getName()).log(Level.SEVERE, null, ex);

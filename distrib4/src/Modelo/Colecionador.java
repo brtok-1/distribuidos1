@@ -18,7 +18,7 @@ public class Colecionador implements Serializable{
     private String nomeColecionador;
     private boolean coordenador;
     private ArrayList<Cartao> cartoes;
-    private ArrayList<Colecionador> listaParticipantes;
+    private ArrayList<Integer> listaParticipantes;
     
     private static Colecionador instancia;
     
@@ -30,11 +30,11 @@ public class Colecionador implements Serializable{
         Colecionador.instancia = instancia;
     }
 
-    public ArrayList<Colecionador> getListaParticipantes() {
+    public ArrayList<Integer> getListaParticipantes() {
         return listaParticipantes;
     }
 
-    public void setListaParticipantes(ArrayList<Colecionador> listaParticipantes) {
+    public void setListaParticipantes(ArrayList<Integer> listaParticipantes) {
         this.listaParticipantes = listaParticipantes;
     }
 
