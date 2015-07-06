@@ -112,13 +112,12 @@ public class JanelaCadastroCartao extends javax.swing.JFrame {
             Cartao c = new Cartao();
 
             
-            c.setIdColecionador(Integer.parseInt(txtIdCartao.getText()));
-            c.setNomeColecionador(txtLocalCartao.getText());
-            c.setCoordenador(false);
+            c.setIdCartao(Integer.parseInt(txtIdCartao.getText()));
+            c.setLocal(txtLocalCartao.getText());
 
             //Salva o colecionador
             IOCartao iocar = new IOCartao();
-            boolean salvou = iocar.SalvaColecionador(c);
+            boolean salvou = iocar.SalvaCartao(c);
 
             if (salvou)
             {

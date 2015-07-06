@@ -25,7 +25,7 @@ public class IOCartao {
         ArrayList<Cartao> cartoes;
         boolean duplicado = false;
         Colecionador logado = Colecionador.getInstancia();
-        File arquivo = new File("C:/Distrib3/Cartao-" + logado.getIdColecionador() + ".dst");
+        File arquivo = new File("C:/Distrib4/Cartao-" + logado.getIdColecionador() + ".dst");
         if (arquivo.exists()) {
             cartoes = RecuperarCartoes();
             for (Cartao c : cartoes) {
@@ -58,7 +58,7 @@ public class IOCartao {
     public void EditaCartao(Cartao cartao) throws Exception {
         ArrayList<Cartao> cartoes;
         Colecionador logado = Colecionador.getInstancia();
-        File arquivo = new File("C:/Distrib3/Cartao-" + logado.getIdColecionador() + ".dst");
+        File arquivo = new File("C:/Distrib4/Cartao-" + logado.getIdColecionador() + ".dst");
         Cartao cartaoAntes;
         if (arquivo.exists()) {
             cartoes = RecuperarCartoes();
@@ -87,9 +87,9 @@ public class IOCartao {
     public ArrayList<Cartao> RecuperarCartoes() throws Exception {
         ArrayList<Cartao> cartoes = new ArrayList<>();
         Colecionador logado = Colecionador.getInstancia();
-        File arquivo = new File("C:/Distrib3/Cartao-" + logado.getIdColecionador() + ".dst");
+        File arquivo = new File("C:/Distrib4/Cartao-" + logado.getIdColecionador() + ".dst");
         if (arquivo.exists()) {
-            FileInputStream arquivoLeitura = new FileInputStream("C:/Distrib3/Cartao-" + logado.getIdColecionador() + ".dst");
+            FileInputStream arquivoLeitura = new FileInputStream("C:/Distrib4/Cartao-" + logado.getIdColecionador() + ".dst");
             if (arquivoLeitura.available() != 0) {
                 ObjectInputStream objLeitura = new ObjectInputStream(arquivoLeitura);
                 cartoes = (ArrayList<Cartao>) objLeitura.readObject();
@@ -101,7 +101,7 @@ public class IOCartao {
     public Cartao RecuperarCartaoPorID(int id) throws Exception {
         ArrayList<Cartao> cartoes = new ArrayList<>();
         Colecionador logado = Colecionador.getInstancia();
-        File arquivo = new File("C:/Distrib3/Cartao-" + logado.getIdColecionador() + ".dst");
+        File arquivo = new File("C:/Distrib4/Cartao-" + logado.getIdColecionador() + ".dst");
         if (arquivo.exists()) {
             cartoes = RecuperarCartoes();
             Cartao c = null;
