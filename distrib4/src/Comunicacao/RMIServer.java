@@ -44,11 +44,10 @@ public class RMIServer extends UnicastRemoteObject implements ComunicacaoServer 
      * @throws Exception 
      */
     public void IniciaRMI() throws Exception {
-        
         Colecionador logado = Colecionador.getInstancia();
-        
+        String nomeServer = "servidor" + logado.getIdColecionador();
         Registry reg = LocateRegistry.createRegistry(1099);
-        reg.bind("servidor" + logado.getIdColecionador(), new RMIServer());
+        reg.bind(nomeServer, new RMIServer());
         System.out.println("RMIServer criado e registrado");
     }    
 }

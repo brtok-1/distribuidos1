@@ -5,10 +5,13 @@
  */
 package Comunicacao;
 
+import GUI.JanelaPrincipal;
 import Modelo.Colecionador;
+import Modelo.ColecionadorEncontrado;
 import java.net.DatagramPacket;
 import java.net.InetAddress;
 import java.net.MulticastSocket;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -29,9 +32,28 @@ public class MulticastRecebimento extends Thread {
                 DatagramPacket msgPacket = new DatagramPacket(buf, buf.length);
                 clientSocket.receive(msgPacket);
                 String mensagem = new String(buf);
-                int recebido = Integer.parseInt(mensagem.trim());
+                String mensagemQuebrada[] = mensagem.trim().split("#");
+                int idColecionador = Integer.parseInt(mensagemQuebrada[0]);
+                String nome = mensagemQuebrada[1];
+                int numeroCartoes = Integer.parseInt(mensagemQuebrada[2]);
                 Colecionador instancia = Colecionador.getInstancia();
-                instancia.getListaParticipantes().add(recebido);
+                ArrayList<ColecionadorEncontrado> participantes = instancia.getListaParticipantes();
+                int indice = -1;
+                for (int i = 0; i < participantes.size(); i++) {
+                    if (participantes.get(i).getIdColecionador() == idColecionador) {
+                        indice = i;
+                    }
+                }
+                if (indice == -1) {
+                    long tempo = System.currentTimeMillis() + 20000;
+                    ColecionadorEncontrado ce = new ColecionadorEncontrado(idColecionador,tempo, nome, numeroCartoes);
+                    participantes.add(ce);
+                } else {
+                    long tempo = System.currentTimeMillis() + 20000;
+                    participantes.get(indice).setConsiderarQueda(tempo);
+                    participantes.get(indice).setNumeroCartoes(numeroCartoes);
+                }
+                JanelaPrincipal.atualizarTabela();
             }
         } catch (Exception ex) {
             Logger.getLogger(MulticastRecebimento.class.getName()).log(Level.SEVERE, null, ex);

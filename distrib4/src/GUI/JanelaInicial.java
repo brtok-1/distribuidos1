@@ -5,6 +5,9 @@
  */
 package GUI;
 
+import Comunicacao.MulticastEnvio;
+import Comunicacao.MulticastRecebimento;
+import Comunicacao.MulticastTeste;
 import Comunicacao.RMIClient;
 import Comunicacao.RMIServer;
 import IOarquivo.IOColecionador;
@@ -109,38 +112,34 @@ public class JanelaInicial extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
-
         try {
             Colecionador colecionadorLogado = new Colecionador();
             IOColecionador ioc = new IOColecionador();
             colecionadorLogado = ioc.RecuperaColecionadorPorID(Integer.parseInt(txtID.getText()));
-
             if (colecionadorLogado != null) {
                 Colecionador.setInstancia(colecionadorLogado);
                 JanelaPrincipal jp = new JanelaPrincipal();
                 jp.setVisible(true);
-                this.dispose();
-                
-                RMIServer rmis = new RMIServer();
-                rmis.IniciaRMI();
-                
-                RMIClient rmic = new RMIClient();
-                rmic.EnviaPresenca(colecionadorLogado);
-                
-            } else
-            {
+                this.dispose();              
+                //RMIServer rmis = new RMIServer();
+                //rmis.IniciaRMI();
+                MulticastEnvio me = new MulticastEnvio();
+                me.start();
+                MulticastRecebimento mr = new MulticastRecebimento();
+                mr.start();
+                MulticastTeste mt = new MulticastTeste();
+                mt.start();
+            } else {
                 JOptionPane.showMessageDialog(null, "Usuário não cadastrado.");
             }
-            //Recupera a lista de cartões do colecionador
-//            IOCartao iocartao = new IOCartao();
-//            colecionadorLogado.setCartoes(iocartao.RecuperarCartoes());
         } catch (Exception e) {
             e.printStackTrace();
         }
     }//GEN-LAST:event_btnEntrarActionPerformed
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
-        JanelaCadastroColecionador jcc = new JanelaCadastroColecionador();
+        int id = Integer.parseInt(txtID.getText());
+        JanelaCadastroColecionador jcc = new JanelaCadastroColecionador(id);
         jcc.setVisible(true);
     }//GEN-LAST:event_btnCadastrarActionPerformed
 

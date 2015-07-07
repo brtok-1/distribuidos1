@@ -6,9 +6,12 @@
 package GUI;
 
 import Modelo.Colecionador;
+import Modelo.ColecionadorEncontrado;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -21,6 +24,46 @@ public class JanelaPrincipal extends javax.swing.JFrame {
      */
     public JanelaPrincipal() {
         initComponents();
+        Colecionador instancia = Colecionador.getInstancia();
+        setTitle("Principal - " + instancia.getIdColecionador() + " - " + instancia.getNomeColecionador());
+    }
+
+    public static void atualizarTabela() {
+        Colecionador instancia = Colecionador.getInstancia();
+        ArrayList<ColecionadorEncontrado> usuarios = instancia.getListaParticipantes();
+        Object[][] tabela = new Object[usuarios.size()][3];
+        for (int i = 0; i < usuarios.size(); i++) {
+            tabela[i][0] = usuarios.get(i).getIdColecionador();
+            tabela[i][1] = usuarios.get(i).getNome();
+            tabela[i][2] = usuarios.get(i).getNumeroCartoes();
+        }
+
+        //popularTabela
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+                tabela,
+                new String[]{
+                    "ID Colecionador", "Nome", "Qtd. Cartões"
+                }
+        ) {
+            Class[] types = new Class[]{
+                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class
+            };
+            boolean[] canEdit = new boolean[]{
+                false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types[columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit[columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(jTable2);
+        if (jTable2.getColumnModel().getColumnCount() > 0) {
+            jTable2.getColumnModel().getColumn(0).setResizable(false);
+        }
     }
 
     /**
@@ -33,25 +76,17 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     private void initComponents() {
 
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
         btnMeusCartoes = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
-        jButton1.setText("Visualizar Cartões");
+        jButton1.setText("Visualizar Cartões do Usuário Selecionado");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
-            }
-        });
-
-        jButton2.setText("Sair");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
             }
         });
 
@@ -63,9 +98,16 @@ public class JanelaPrincipal extends javax.swing.JFrame {
                 "ID Colecionador", "Nome", "Qtd. Cartões"
             }
         ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class
+            };
             boolean[] canEdit = new boolean [] {
                 false, false, false
             };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
@@ -74,7 +116,6 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         jScrollPane2.setViewportView(jTable2);
         if (jTable2.getColumnModel().getColumnCount() > 0) {
             jTable2.getColumnModel().getColumn(0).setResizable(false);
-            jTable2.getColumnModel().getColumn(2).setResizable(false);
         }
 
         btnMeusCartoes.setText("Meus Cartões");
@@ -92,11 +133,10 @@ public class JanelaPrincipal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 376, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnMeusCartoes)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2)))
+                        .addComponent(jButton1)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -105,11 +145,9 @@ public class JanelaPrincipal extends javax.swing.JFrame {
                 .addGap(9, 9, 9)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnMeusCartoes)
-                    .addComponent(jButton2))
+                    .addComponent(jButton1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -118,17 +156,25 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        int selecao = jTable2.getSelectedRow();
-        if (selecao < 0) {
-            JOptionPane.showMessageDialog(null, "É preciso selecionar um usuário na tabela");
-        } else {
-            
+        try {
+            int selecao = jTable2.getSelectedRow();
+            if (selecao < 0) {
+                JOptionPane.showMessageDialog(null, "É preciso selecionar um usuário na tabela.");
+            } else {
+                DefaultTableModel dtm = (DefaultTableModel) jTable2.getModel();
+                int quantidadeCartoes = (Integer) dtm.getValueAt(selecao, 2);
+                if (quantidadeCartoes > 0) {
+                    int idSelecionado = (Integer) dtm.getValueAt(selecao, 0);
+                    JanelaCartoes jc = new JanelaCartoes(idSelecionado);
+                    jc.setVisible(true);
+                } else {
+                    JOptionPane.showMessageDialog(null, "O usuário selecionado não possui cartões.");
+                }
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(JanelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
 
     private void btnMeusCartoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMeusCartoesActionPerformed
         try {
@@ -143,8 +189,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnMeusCartoes;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable2;
+    private static javax.swing.JScrollPane jScrollPane2;
+    private static javax.swing.JTable jTable2;
     // End of variables declaration//GEN-END:variables
 }

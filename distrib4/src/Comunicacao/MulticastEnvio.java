@@ -35,12 +35,13 @@ public class MulticastEnvio extends Thread {
             InetAddress address = InetAddress.getByName("228.5.6.7");
             Colecionador instancia = Colecionador.getInstancia();
             while (true) {
-                String mensagem = String.valueOf(instancia.getIdColecionador());
+                String mensagem = instancia.getIdColecionador() + "#" + instancia.getNomeColecionador() + "#" + instancia.getCartoes().size();
                 DatagramPacket msgPacket = new DatagramPacket(mensagem.getBytes(), mensagem.getBytes().length, address, 8885);
                 serverSocket.send(msgPacket);
-                sleep(8000);
+                System.out.println("Mandou: " + mensagem);
+                sleep(10000);
             }
-        } catch (IOException | InterruptedException ex) {
+        } catch (Exception ex) {
             Logger.getLogger(MulticastEnvio.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
