@@ -6,15 +6,9 @@
 package Comunicacao;
 
 import Modelo.Colecionador;
-import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
-import java.net.SocketException;
-import java.net.UnknownHostException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -35,7 +29,7 @@ public class MulticastEnvio extends Thread {
             InetAddress address = InetAddress.getByName("228.5.6.7");
             Colecionador instancia = Colecionador.getInstancia();
             while (true) {
-                String mensagem = instancia.getIdColecionador() + "#" + instancia.getNomeColecionador() + "#" + instancia.getCartoes().size();
+                String mensagem = instancia.getIdColecionador() + "#" + instancia.getPorta() + "#" + instancia.getNomeColecionador() + "#" + instancia.getCartoes().size();
                 DatagramPacket msgPacket = new DatagramPacket(mensagem.getBytes(), mensagem.getBytes().length, address, 8885);
                 serverSocket.send(msgPacket);
                 System.out.println("Mandou: " + mensagem);

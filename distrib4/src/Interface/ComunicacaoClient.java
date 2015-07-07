@@ -6,7 +6,6 @@
 package Interface;
 
 import Modelo.Cartao;
-import Modelo.Colecionador;
 import Modelo.Troca;
 import java.util.ArrayList;
 
@@ -15,9 +14,7 @@ import java.util.ArrayList;
  * @author Rafael
  */
 public interface ComunicacaoClient {
-    
-    void EnviaPresenca(Colecionador colecionador);
-    
+   
     void EnviaProposta(Troca troca, ComunicacaoClient cliente);
     
     Troca RespondeProposta(Troca troca, ComunicacaoClient cliente);

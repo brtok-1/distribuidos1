@@ -6,7 +6,6 @@
 package Interface;
 
 import Modelo.Cartao;
-import Modelo.Colecionador;
 import Modelo.Troca;
 import java.util.ArrayList;
 
@@ -15,9 +14,7 @@ import java.util.ArrayList;
  * @author Bruno Tokarski e Rafael Vidal
  */
 public interface ComunicacaoServer {
-    
-    void ReceberParticipante(Colecionador participante);
-    
+        
     void ReceberProposta(Troca troca);
     
     ArrayList<Cartao> ListarCartoes();

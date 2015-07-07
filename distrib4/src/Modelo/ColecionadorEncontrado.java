@@ -5,21 +5,25 @@
  */
 package Modelo;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Bruno
  */
-public class ColecionadorEncontrado {
+public class ColecionadorEncontrado implements Serializable {
     
     private int idColecionador;
     private long considerarQueda;
     private String nome;
     private int numeroCartoes;
+    private int porta;
 
-    public ColecionadorEncontrado(int idColecionador, long considerarQueda, String nome, int numeroCartoes) {
+    public ColecionadorEncontrado(int idColecionador, int porta, long considerarQueda, String nome, int numeroCartoes) {
         this.idColecionador = idColecionador;
         this.considerarQueda = considerarQueda;
         this.nome = nome;
+        this.porta = porta;
         this.numeroCartoes = numeroCartoes;
     }
 
@@ -53,6 +57,14 @@ public class ColecionadorEncontrado {
 
     public void setNumeroCartoes(int numeroCartoes) {
         this.numeroCartoes = numeroCartoes;
+    }
+
+    public int getPorta() {
+        return porta;
+    }
+
+    public void setPorta(int porta) {
+        this.porta = porta;
     }
     
 }

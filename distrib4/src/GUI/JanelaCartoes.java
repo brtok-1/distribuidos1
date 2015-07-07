@@ -9,6 +9,7 @@ import Comunicacao.RMIClient;
 import IOarquivo.IOCartao;
 import Modelo.Cartao;
 import Modelo.Colecionador;
+import Modelo.ColecionadorEncontrado;
 import java.util.ArrayList;
 
 /**
@@ -38,6 +39,7 @@ public class JanelaCartoes extends javax.swing.JDialog {
 
     /**
      * Carrega os cartões e popula a tabela
+     * @throws java.lang.Exception
      */
     public void CarregaCartoes() throws Exception {
         ArrayList<Cartao> cartoes = new ArrayList<>();
@@ -45,14 +47,15 @@ public class JanelaCartoes extends javax.swing.JDialog {
             IOCartao iocar = new IOCartao();
             cartoes = iocar.RecuperarCartoes();
         } else {
-            RMIClient rmic = new RMIClient();
+            RMIClient rmic = new RMIClient(logado.getUsuarioParticipantePorId(idUsuario));
             cartoes = rmic.SolicitaListaCartoes(idUsuario);
         }
         Object[][] tabela = new Object[cartoes.size()][3];
         for (int i = 0; i < cartoes.size(); i++) {
             tabela[i][0] = cartoes.get(i).getIdCartao();
             tabela[i][1] = cartoes.get(i).getLocal();
-            tabela[i][2] = cartoes.get(i).getProprietario().getNomeColecionador();
+            ColecionadorEncontrado ce = logado.getUsuarioParticipantePorId(cartoes.get(i).getIdProprietario());
+            tabela[i][2] = ce.getNome();
         }
         PopulaTabela(tabela);
     }

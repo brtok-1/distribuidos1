@@ -16,6 +16,7 @@ public class JanelaCadastroColecionador extends javax.swing.JDialog {
 
     /**
      * Creates new form JanelaCadastroUsuario
+     * @param id
      */
     public JanelaCadastroColecionador(int id) {
         initComponents();

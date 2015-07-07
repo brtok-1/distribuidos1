@@ -32,11 +32,6 @@ public class RMIServer extends UnicastRemoteObject implements ComunicacaoServer 
     public ArrayList<Cartao> ListarCartoes() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
-    @Override
-    public void ReceberParticipante(Colecionador participante) {
-        
-    }
     
     /**
      * Método para Registro e declaração Inicial do Serviço de RMI
@@ -46,7 +41,7 @@ public class RMIServer extends UnicastRemoteObject implements ComunicacaoServer 
     public void IniciaRMI() throws Exception {
         Colecionador logado = Colecionador.getInstancia();
         String nomeServer = "servidor" + logado.getIdColecionador();
-        Registry reg = LocateRegistry.createRegistry(1099);
+        Registry reg = LocateRegistry.createRegistry(logado.getPorta());
         reg.bind(nomeServer, new RMIServer());
         System.out.println("RMIServer criado e registrado");
     }    

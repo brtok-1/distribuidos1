@@ -5,59 +5,34 @@
  */
 package Comunicacao;
 
+import IOarquivo.IOCartao;
 import Interface.ComunicacaoClient;
 import Interface.ComunicacaoServer;
 import Modelo.Cartao;
-import Modelo.Colecionador;
+import Modelo.ColecionadorEncontrado;
 import Modelo.Troca;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author Rafael
  */
-public class RMIClient extends UnicastRemoteObject implements ComunicacaoClient
-{
-    
+public class RMIClient extends UnicastRemoteObject implements ComunicacaoClient {
+
     private Registry reg;
     private ComunicacaoServer obj;
-    private RMIClient rmic;
-    
-    public RMIClient() throws Exception {
-        super();
-        
-        Colecionador logado = Colecionador.getInstancia();
-        
-        reg = LocateRegistry.getRegistry("localhost", 1099);
-        obj = (ComunicacaoServer) reg.lookup("servidor" + logado.getIdColecionador());
-    }
-    
-    /**
-     * Conecata-se no servidor RMI do participante
-     * @param idColecionador
-     * @throws Exception 
-     */
-    public void ConectaRMI(int idColecionador) throws Exception {
-        
-        reg = LocateRegistry.getRegistry("localhost", 1099);
-        obj = (ComunicacaoServer) reg.lookup("servidor" + idColecionador);
-        
-    }
 
-    @Override
-    public void EnviaPresenca(Colecionador colecionador) {
-        try
-        {
-            IniciaRMI();
-            obj.ReceberParticipante(colecionador);
-        }catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-        
+    public RMIClient(ColecionadorEncontrado conexao) throws Exception {
+        super();
+        reg = LocateRegistry.getRegistry("localhost", conexao.getPorta());
+        String nomeServer = "servidor" + conexao.getIdColecionador();
+        nomeServer = nomeServer.trim();
+        obj = (ComunicacaoServer) reg.lookup(nomeServer);
     }
 
     @Override
@@ -72,15 +47,13 @@ public class RMIClient extends UnicastRemoteObject implements ComunicacaoClient
 
     @Override
     public ArrayList<Cartao> SolicitaListaCartoes(int idColecionador) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    /**
-     * Início da comunicação RMI
-     * @throws InterruptedException
-     */
-    public void IniciaRMI() throws Exception {
-        rmic = new RMIClient();
+        try {
+            IOCartao ioc = new IOCartao();
+            return ioc.RecuperarCartoes();
+        } catch (Exception ex) {
+            Logger.getLogger(RMIClient.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 
 }

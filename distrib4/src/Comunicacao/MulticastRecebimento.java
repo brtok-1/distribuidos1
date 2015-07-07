@@ -34,8 +34,9 @@ public class MulticastRecebimento extends Thread {
                 String mensagem = new String(buf);
                 String mensagemQuebrada[] = mensagem.trim().split("#");
                 int idColecionador = Integer.parseInt(mensagemQuebrada[0]);
-                String nome = mensagemQuebrada[1];
-                int numeroCartoes = Integer.parseInt(mensagemQuebrada[2]);
+                int portaColecionador = Integer.parseInt(mensagemQuebrada[1]);
+                String nome = mensagemQuebrada[2];
+                int numeroCartoes = Integer.parseInt(mensagemQuebrada[3]);
                 Colecionador instancia = Colecionador.getInstancia();
                 ArrayList<ColecionadorEncontrado> participantes = instancia.getListaParticipantes();
                 int indice = -1;
@@ -46,12 +47,13 @@ public class MulticastRecebimento extends Thread {
                 }
                 if (indice == -1) {
                     long tempo = System.currentTimeMillis() + 20000;
-                    ColecionadorEncontrado ce = new ColecionadorEncontrado(idColecionador,tempo, nome, numeroCartoes);
+                    ColecionadorEncontrado ce = new ColecionadorEncontrado(idColecionador, portaColecionador, tempo, nome, numeroCartoes);
                     participantes.add(ce);
                 } else {
                     long tempo = System.currentTimeMillis() + 20000;
                     participantes.get(indice).setConsiderarQueda(tempo);
                     participantes.get(indice).setNumeroCartoes(numeroCartoes);
+                    participantes.get(indice).setPorta(portaColecionador);
                 }
                 JanelaPrincipal.atualizarTabela();
             }

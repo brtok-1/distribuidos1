@@ -19,14 +19,13 @@ import javax.swing.JOptionPane;
  * @author Bruno
  */
 public class IOColecionador {
-    
+
     ArrayList<Colecionador> colecionadores;
-    
+
     public boolean SalvaColecionador(Colecionador colecionador) throws Exception {
-        
         boolean duplicado = false;
         File arquivo = new File("C:/Distrib4/Colecionadores.dst");
-        
+
         if (arquivo.exists()) {
             colecionadores = RecuperarColecionadores();
             for (Colecionador c : colecionadores) {
@@ -40,7 +39,7 @@ public class IOColecionador {
             arquivo.createNewFile();
             colecionadores = new ArrayList<>();
         }
-        
+
         if (duplicado) {
             JOptionPane.showMessageDialog(null, "Já existe um colecionador com ID " + colecionador.getIdColecionador() + ".");
             return false;
@@ -54,26 +53,25 @@ public class IOColecionador {
             return true;
         }
     }
-    
+
     public Colecionador RecuperaColecionadorPorID(int id) throws Exception {
-        //Colecionador logado = Colecionador.getInstancia();
         File arquivo = new File("C:/Distrib4/Colecionadores.dst");
+        Colecionador colecionador = null;
         if (arquivo.exists()) {
             colecionadores = RecuperarColecionadores();
-            Colecionador colecionador = null;
-            //colecionador.setIdColecionador(0);
             for (Colecionador c : colecionadores) {
                 if (c.getIdColecionador() == id) {
                     colecionador = c;
+                    break;
                 }
             }
-            return colecionador;
-        } else {
-            JOptionPane.showMessageDialog(null, "Usuário não cadastrado.");
-            return null;
         }
+        if (colecionador == null) {
+            JOptionPane.showMessageDialog(null, "Usuário não cadastrado.");
+        }
+        return colecionador;
     }
-    
+
     public ArrayList<Colecionador> RecuperarColecionadores() throws Exception {
         File arquivo = new File("C:/Distrib4/Colecionadores.dst");
         if (arquivo.exists()) {
@@ -85,5 +83,28 @@ public class IOColecionador {
         }
         return colecionadores;
     }
-    
+
+    public void RemoverColecionador(int idColecionador) throws Exception {
+        File arquivo = new File("C:/Distrib4/Colecionadores.dst");
+        if (arquivo.exists()) {
+            colecionadores = RecuperarColecionadores();
+            Colecionador colecionador = null;
+            for (Colecionador c : colecionadores) {
+                if (c.getIdColecionador() == idColecionador) {
+                    colecionador = c;
+                }
+            }
+            if (colecionador != null) {
+                colecionadores.remove(colecionador);
+            }
+            arquivo.delete();
+            FileOutputStream arquivoGrav = new FileOutputStream(arquivo);
+            ObjectOutputStream objGravar = new ObjectOutputStream(arquivoGrav);
+            objGravar.writeObject(colecionadores);
+            JOptionPane.showMessageDialog(null, "Colecionador ID " + idColecionador + " removido com sucesso.");
+        } else {
+            JOptionPane.showMessageDialog(null, "Usuário não cadastrado.");
+        }
+    }
+
 }

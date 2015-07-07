@@ -8,11 +8,10 @@ package GUI;
 import Comunicacao.MulticastEnvio;
 import Comunicacao.MulticastRecebimento;
 import Comunicacao.MulticastTeste;
-import Comunicacao.RMIClient;
 import Comunicacao.RMIServer;
+import IOarquivo.IOCartao;
 import IOarquivo.IOColecionador;
 import Modelo.Colecionador;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -117,20 +116,23 @@ public class JanelaInicial extends javax.swing.JFrame {
             IOColecionador ioc = new IOColecionador();
             colecionadorLogado = ioc.RecuperaColecionadorPorID(Integer.parseInt(txtID.getText()));
             if (colecionadorLogado != null) {
+                int gerado = 2000 + (int) (Math.random()*1000);
+                System.out.println(gerado);
+                colecionadorLogado.setPorta(gerado);
                 Colecionador.setInstancia(colecionadorLogado);
+                IOCartao iocartao = new IOCartao();
+                iocartao.RecuperarCartoes();
                 JanelaPrincipal jp = new JanelaPrincipal();
                 jp.setVisible(true);
                 this.dispose();              
-                //RMIServer rmis = new RMIServer();
-                //rmis.IniciaRMI();
+                RMIServer rmis = new RMIServer();
+                rmis.IniciaRMI();
                 MulticastEnvio me = new MulticastEnvio();
                 me.start();
                 MulticastRecebimento mr = new MulticastRecebimento();
                 mr.start();
                 MulticastTeste mt = new MulticastTeste();
                 mt.start();
-            } else {
-                JOptionPane.showMessageDialog(null, "Usuário não cadastrado.");
             }
         } catch (Exception e) {
             e.printStackTrace();

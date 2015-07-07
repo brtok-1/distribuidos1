@@ -15,7 +15,7 @@ public class Cartao implements Serializable{
     
     private int idCartao;
     private String local;
-    private Colecionador proprietario;
+    private int idProprietario;
     
     
     public int getIdCartao() {
@@ -34,11 +34,11 @@ public class Cartao implements Serializable{
         this.local = local;
     }
 
-    public Colecionador getProprietario() {
-        return proprietario;
+    public int getIdProprietario() {
+        return idProprietario;
     }
 
-    public void setProprietario(Colecionador proprietario) {
-        this.proprietario = proprietario;
+    public void setIdProprietario(int idProprietario) {
+        this.idProprietario = idProprietario;
     }
 }
