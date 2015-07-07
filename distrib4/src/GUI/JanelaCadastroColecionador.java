@@ -16,11 +16,14 @@ public class JanelaCadastroColecionador extends javax.swing.JDialog {
 
     /**
      * Creates new form JanelaCadastroUsuario
+     *
      * @param id
      */
     public JanelaCadastroColecionador(int id) {
         initComponents();
+
         txtIdColecionador.setText(String.valueOf(id));
+
         txtNomeColecionador.grabFocus();
         setModal(true);
     }
@@ -118,9 +121,8 @@ public class JanelaCadastroColecionador extends javax.swing.JDialog {
             //Salva o colecionador
             IOColecionador iocol = new IOColecionador();
             boolean salvou = iocol.SalvaColecionador(c);
-            
-            if (salvou)
-            {
+
+            if (salvou) {
                 this.dispose();
             }
         } catch (Exception e) {

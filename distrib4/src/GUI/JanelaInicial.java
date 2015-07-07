@@ -12,6 +12,8 @@ import Comunicacao.RMIServer;
 import IOarquivo.IOCartao;
 import IOarquivo.IOColecionador;
 import Modelo.Colecionador;
+import static java.lang.Thread.sleep;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -129,6 +131,7 @@ public class JanelaInicial extends javax.swing.JFrame {
                 rmis.IniciaRMI();
                 MulticastEnvio me = new MulticastEnvio();
                 me.start();
+                sleep(1000);
                 MulticastRecebimento mr = new MulticastRecebimento();
                 mr.start();
                 MulticastTeste mt = new MulticastTeste();
@@ -140,9 +143,19 @@ public class JanelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEntrarActionPerformed
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
-        int id = Integer.parseInt(txtID.getText());
-        JanelaCadastroColecionador jcc = new JanelaCadastroColecionador(id);
-        jcc.setVisible(true);
+        
+        int id = 0;
+        if (!txtID.getText().equalsIgnoreCase(""))
+        {
+            id = Integer.parseInt(txtID.getText());
+            JanelaCadastroColecionador jcc = new JanelaCadastroColecionador(id);
+            jcc.setVisible(true);
+        } else
+        {
+            JOptionPane.showMessageDialog(null, "Preencha o ID!");
+        }
+        
+        
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
