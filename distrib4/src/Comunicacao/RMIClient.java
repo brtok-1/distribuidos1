@@ -5,18 +5,17 @@
  */
 package Comunicacao;
 
-import IOarquivo.IOCartao;
 import Interface.ComunicacaoClient;
 import Interface.ComunicacaoServer;
 import Modelo.Cartao;
 import Modelo.ColecionadorEncontrado;
 import Modelo.Troca;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -27,33 +26,29 @@ public class RMIClient extends UnicastRemoteObject implements ComunicacaoClient 
     private Registry reg;
     private ComunicacaoServer obj;
 
-    public RMIClient(ColecionadorEncontrado conexao) throws Exception {
+    public RMIClient() throws RemoteException {
         super();
+    }
+
+    @Override
+    public void EnviaProposta(Troca troca, ComunicacaoClient cliente) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Troca RespondeProposta(Troca troca, ComunicacaoClient cliente) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public ArrayList<Cartao> SolicitaListaCartoes(int idColecionador) throws Exception {
+        ArrayList<Cartao> cartoes = obj.ListarCartoes();
+        return cartoes;
+    }
+
+    public void IniciaRMI(ColecionadorEncontrado conexao) throws RemoteException, NotBoundException {
         reg = LocateRegistry.getRegistry("localhost", conexao.getPorta());
         String nomeServer = "servidor" + conexao.getIdColecionador();
         nomeServer = nomeServer.trim();
         obj = (ComunicacaoServer) reg.lookup(nomeServer);
     }
-
-    @Override
-    public void EnviaProposta(Troca troca, ComunicacaoClient cliente) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public Troca RespondeProposta(Troca troca, ComunicacaoClient cliente) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public ArrayList<Cartao> SolicitaListaCartoes(int idColecionador) {
-        try {
-            IOCartao ioc = new IOCartao();
-            return ioc.RecuperarCartoes();
-        } catch (Exception ex) {
-            Logger.getLogger(RMIClient.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return null;
-    }
-
 }

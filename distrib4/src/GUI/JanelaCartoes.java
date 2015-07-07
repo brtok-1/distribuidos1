@@ -47,7 +47,9 @@ public class JanelaCartoes extends javax.swing.JDialog {
             IOCartao iocar = new IOCartao();
             cartoes = iocar.RecuperarCartoes();
         } else {
-            RMIClient rmic = new RMIClient(logado.getUsuarioParticipantePorId(idUsuario));
+            RMIClient rmic = new RMIClient();
+            ColecionadorEncontrado conexao = logado.getUsuarioParticipantePorId(idUsuario);
+            rmic.IniciaRMI(conexao);
             cartoes = rmic.SolicitaListaCartoes(idUsuario);
         }
         Object[][] tabela = new Object[cartoes.size()][3];

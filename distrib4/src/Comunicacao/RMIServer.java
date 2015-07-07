@@ -5,14 +5,18 @@
  */
 package Comunicacao;
 
+import IOarquivo.IOCartao;
 import Interface.ComunicacaoServer;
 import Modelo.Cartao;
 import Modelo.Colecionador;
 import Modelo.Troca;
+import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Métodos acessíveis aos outros colecionadores via RMI
@@ -20,17 +24,24 @@ import java.util.ArrayList;
  */
 public class RMIServer extends UnicastRemoteObject implements ComunicacaoServer {
     
-    public RMIServer() throws Exception {
+    public RMIServer() throws RemoteException {
         super();
     }
 
     @Override
     public void ReceberProposta(Troca troca) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
     @Override
     public ArrayList<Cartao> ListarCartoes() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            IOCartao ioc = new IOCartao();
+            return ioc.RecuperarCartoes();
+        } catch (Exception ex) {
+            Logger.getLogger(RMIClient.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
     
     /**
@@ -45,4 +56,5 @@ public class RMIServer extends UnicastRemoteObject implements ComunicacaoServer 
         reg.bind(nomeServer, new RMIServer());
         System.out.println("RMIServer criado e registrado");
     }    
+
 }
