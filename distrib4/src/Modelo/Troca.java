@@ -5,11 +5,13 @@
  */
 package Modelo;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Rafael
  */
-public class Troca {
+public class Troca implements Serializable{
     
     private Colecionador solicitante;    
     private Colecionador solicitado;

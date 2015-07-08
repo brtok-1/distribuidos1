@@ -11,6 +11,10 @@ import Modelo.Cartao;
 import Modelo.Colecionador;
 import Modelo.ColecionadorEncontrado;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -142,6 +146,11 @@ public class JanelaCartoes extends javax.swing.JDialog {
         });
 
         btnPedirTroca.setText("Pedir Troca");
+        btnPedirTroca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPedirTrocaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -178,6 +187,33 @@ public class JanelaCartoes extends javax.swing.JDialog {
         jcc.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnNovoCartaoActionPerformed
+
+    private void btnPedirTrocaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPedirTrocaActionPerformed
+        try {
+            int selecao = tbCartoes.getSelectedRow();
+            if (selecao < 0) {
+                JOptionPane.showMessageDialog(null, "É preciso selecionar um cartão.");
+            } else {
+                DefaultTableModel dtm = (DefaultTableModel) tbCartoes.getModel();
+                
+                int idSelecionado = (Integer) dtm.getValueAt(selecao, 0);
+                String localSelecionado = (String) dtm.getValueAt(selecao, 1);
+                
+                //IOCartao iocar = new IOCartao();
+                Cartao cartaoSelecionado  = new Cartao();
+                cartaoSelecionado.setIdCartao(idSelecionado);
+                cartaoSelecionado.setLocal(localSelecionado);
+                
+                this.dispose();
+                JanelaSolicitacaoTroca jst = new JanelaSolicitacaoTroca(cartaoSelecionado, idUsuario);
+                jst.setVisible(true);
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(JanelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+
+    }//GEN-LAST:event_btnPedirTrocaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

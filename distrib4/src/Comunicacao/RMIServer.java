@@ -5,6 +5,7 @@
  */
 package Comunicacao;
 
+import GUI.JanelaAvisoTroca;
 import IOarquivo.IOCartao;
 import Interface.ComunicacaoServer;
 import Modelo.Cartao;
@@ -30,7 +31,10 @@ public class RMIServer extends UnicastRemoteObject implements ComunicacaoServer 
 
     @Override
     public void ReceberProposta(Troca troca) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        JanelaAvisoTroca jat = new JanelaAvisoTroca(troca);
+        jat.setVisible(true);
+        
     }
     
     @Override

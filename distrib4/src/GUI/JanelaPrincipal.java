@@ -75,7 +75,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
+        btnVisualizarCartoes = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
         btnMeusCartoes = new javax.swing.JButton();
@@ -83,10 +83,10 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
-        jButton1.setText("Visualizar Cartões do Usuário Selecionado");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnVisualizarCartoes.setText("Visualizar Cartões do Usuário Selecionado");
+        btnVisualizarCartoes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnVisualizarCartoesActionPerformed(evt);
             }
         });
 
@@ -136,7 +136,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnMeusCartoes)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1)))
+                        .addComponent(btnVisualizarCartoes)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -145,7 +145,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
                 .addGap(9, 9, 9)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnMeusCartoes)
-                    .addComponent(jButton1))
+                    .addComponent(btnVisualizarCartoes))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -155,7 +155,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnVisualizarCartoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVisualizarCartoesActionPerformed
         try {
             int selecao = jTable2.getSelectedRow();
             if (selecao < 0) {
@@ -174,7 +174,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         } catch (Exception ex) {
             Logger.getLogger(JanelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnVisualizarCartoesActionPerformed
 
     private void btnMeusCartoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMeusCartoesActionPerformed
         try {
@@ -188,7 +188,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnMeusCartoes;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnVisualizarCartoes;
     private static javax.swing.JScrollPane jScrollPane2;
     private static javax.swing.JTable jTable2;
     // End of variables declaration//GEN-END:variables
