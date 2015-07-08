@@ -30,11 +30,9 @@ public class RMIServer extends UnicastRemoteObject implements ComunicacaoServer 
     }
 
     @Override
-    public void ReceberProposta(Troca troca) {
-        
+    public void ReceberProposta(Troca troca) throws InterruptedException {
         JanelaAvisoTroca jat = new JanelaAvisoTroca(troca);
-        jat.setVisible(true);
-        
+        jat.setVisible(true);        
     }
     
     @Override
@@ -59,6 +57,6 @@ public class RMIServer extends UnicastRemoteObject implements ComunicacaoServer 
         Registry reg = LocateRegistry.createRegistry(logado.getPorta());
         reg.bind(nomeServer, new RMIServer());
         System.out.println("RMIServer criado e registrado");
-    }    
+    }
 
 }

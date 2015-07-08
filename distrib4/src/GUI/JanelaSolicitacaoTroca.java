@@ -36,17 +36,13 @@ public class JanelaSolicitacaoTroca extends javax.swing.JFrame {
         initComponents();
         this.outroCartao = outroCartao;
         this.idOutroColecionador = idOutroColecionador;
-
         lblCartaoProposto.setText(outroCartao.getIdCartao() + " - " + outroCartao.getLocal());
-
         PopulaComboBox();
-
     }
 
     public void PopulaComboBox() throws Exception {
         IOCartao iocar = new IOCartao();
         ArrayList<Cartao> cartoes = iocar.RecuperarCartoes();
-
         for (Cartao c : cartoes) {
             String item = c.getIdCartao() + " - " + c.getLocal();
             cbMeusCartoes.addItem(item);
@@ -142,11 +138,8 @@ public class JanelaSolicitacaoTroca extends javax.swing.JFrame {
     }//GEN-LAST:event_cbMeusCartoesActionPerformed
 
     private void btnConfSolicitacaoTrocaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfSolicitacaoTrocaActionPerformed
-
         try {
-            
             Colecionador logado = Colecionador.getInstancia();
-
             if (cbMeusCartoes.getSelectedItem().equals("(Selecione)")) {
                 JOptionPane.showMessageDialog(null, "Selecione um cartão.");
             } else {
@@ -154,26 +147,25 @@ public class JanelaSolicitacaoTroca extends javax.swing.JFrame {
                 String txtItemSelecionado[] = itemSelecionado.split(" ");
 
                 int idCartaoSelecionado = Integer.parseInt(txtItemSelecionado[0]);
-                
+
                 IOCartao iocar = new IOCartao();
                 meuCartao = iocar.RecuperarCartaoPorID(idCartaoSelecionado);
 
                 IOColecionador iocol = new IOColecionador();
                 Colecionador solicitado = iocol.RecuperaColecionadorPorID(idOutroColecionador);
-                
+
                 Troca troca = new Troca();
                 troca.setCartaoManda(meuCartao);
                 troca.setCartaoRecebe(outroCartao);
                 troca.setSituacaoTroca(1);
                 troca.setSolicitante(logado);
                 troca.setSolicitado(solicitado);
-                
+
                 RMIClient rmic = new RMIClient();
                 ColecionadorEncontrado conexao = logado.getUsuarioParticipantePorId(idOutroColecionador);
                 rmic.IniciaRMI(conexao);
-
+                dispose();
                 rmic.EnviaProposta(troca);
-
             }
 
             //cartoes = rmic.SolicitaListaCartoes(idUsuario);
