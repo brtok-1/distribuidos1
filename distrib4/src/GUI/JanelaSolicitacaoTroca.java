@@ -171,7 +171,11 @@ public class JanelaSolicitacaoTroca extends javax.swing.JFrame {
                 RMIClient rmic = new RMIClient();
                 ColecionadorEncontrado conexao = logado.getUsuarioParticipantePorId(idOutroColecionador);
                 rmic.IniciaRMI(conexao);
+
+<<<<<<< HEAD
+=======
 		dispose();
+>>>>>>> origin/master
                 rmic.EnviaProposta(troca);
 
             }
