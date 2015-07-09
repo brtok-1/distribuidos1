@@ -5,10 +5,14 @@
  */
 package GUI;
 
-import Comunicacao.RMIClient;
+import Comunicacao.MulticastEnvio;
+import Comunicacao.MulticastRecebimento;
+import Comunicacao.MulticastTeste;
 import Comunicacao.RMIServer;
+import IOarquivo.IOCartao;
 import IOarquivo.IOColecionador;
 import Modelo.Colecionador;
+import static java.lang.Thread.sleep;
 import javax.swing.JOptionPane;
 
 /**
@@ -109,39 +113,49 @@ public class JanelaInicial extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
-
         try {
             Colecionador colecionadorLogado = new Colecionador();
             IOColecionador ioc = new IOColecionador();
             colecionadorLogado = ioc.RecuperaColecionadorPorID(Integer.parseInt(txtID.getText()));
-
             if (colecionadorLogado != null) {
+                int gerado = 2000 + (int) (Math.random()*1000);
+                System.out.println(gerado);
+                colecionadorLogado.setPorta(gerado);
                 Colecionador.setInstancia(colecionadorLogado);
+                IOCartao iocartao = new IOCartao();
+                iocartao.RecuperarCartoes();
                 JanelaPrincipal jp = new JanelaPrincipal();
                 jp.setVisible(true);
-                this.dispose();
-                
+                this.dispose();              
                 RMIServer rmis = new RMIServer();
                 rmis.IniciaRMI();
-                
-                RMIClient rmic = new RMIClient();
-                rmic.EnviaPresenca(colecionadorLogado);
-                
-            } else
-            {
-                JOptionPane.showMessageDialog(null, "Usuário não cadastrado.");
+                MulticastEnvio me = new MulticastEnvio();
+                me.start();
+                sleep(1000);
+                MulticastRecebimento mr = new MulticastRecebimento();
+                mr.start();
+                MulticastTeste mt = new MulticastTeste();
+                mt.start();
             }
-            //Recupera a lista de cartões do colecionador
-//            IOCartao iocartao = new IOCartao();
-//            colecionadorLogado.setCartoes(iocartao.RecuperarCartoes());
         } catch (Exception e) {
             e.printStackTrace();
         }
     }//GEN-LAST:event_btnEntrarActionPerformed
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
-        JanelaCadastroColecionador jcc = new JanelaCadastroColecionador();
-        jcc.setVisible(true);
+        
+        int id = 0;
+        if (!txtID.getText().equalsIgnoreCase(""))
+        {
+            id = Integer.parseInt(txtID.getText());
+            JanelaCadastroColecionador jcc = new JanelaCadastroColecionador(id);
+            jcc.setVisible(true);
+        } else
+        {
+            JOptionPane.showMessageDialog(null, "Preencha o ID!");
+        }
+        
+        
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

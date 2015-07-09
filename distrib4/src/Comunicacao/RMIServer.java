@@ -5,14 +5,19 @@
  */
 package Comunicacao;
 
+import GUI.JanelaAvisoTroca;
+import IOarquivo.IOCartao;
 import Interface.ComunicacaoServer;
 import Modelo.Cartao;
 import Modelo.Colecionador;
 import Modelo.Troca;
+import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Métodos acessíveis aos outros colecionadores via RMI
@@ -20,26 +25,27 @@ import java.util.ArrayList;
  */
 public class RMIServer extends UnicastRemoteObject implements ComunicacaoServer {
     
-    public RMIServer() throws Exception {
+    public RMIServer() throws RemoteException {
         super();
     }
 
     @Override
-    public void ReceberProposta(Troca troca) {
+    public void ReceberProposta(Troca troca) throws InterruptedException {
+        
+        JanelaAvisoTroca jat = new JanelaAvisoTroca(troca);
+        jat.setVisible(true);
+        
     }
-
+    
     @Override
     public ArrayList<Cartao> ListarCartoes() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void ReceberParticipante(Colecionador participante) {
-        
-        Colecionador logado = Colecionador.getInstancia();
-        logado.getListaParticipantes().add(participante);
-        System.out.println("Adicionado participante " + participante.getNomeColecionador());
-        
+        try {
+            IOCartao ioc = new IOCartao();
+            return ioc.RecuperarCartoes();
+        } catch (Exception ex) {
+            Logger.getLogger(RMIClient.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
     
     /**
@@ -48,11 +54,11 @@ public class RMIServer extends UnicastRemoteObject implements ComunicacaoServer 
      * @throws Exception 
      */
     public void IniciaRMI() throws Exception {
-        
         Colecionador logado = Colecionador.getInstancia();
-        
-        Registry reg = LocateRegistry.createRegistry(1099);
-        reg.bind("servidor" + logado.getIdColecionador(), new RMIServer());
+        String nomeServer = "servidor" + logado.getIdColecionador();
+        Registry reg = LocateRegistry.createRegistry(logado.getPorta());
+        reg.bind(nomeServer, new RMIServer());
         System.out.println("RMIServer criado e registrado");
     }    
+
 }

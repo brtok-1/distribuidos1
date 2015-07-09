@@ -16,9 +16,15 @@ public class JanelaCadastroColecionador extends javax.swing.JDialog {
 
     /**
      * Creates new form JanelaCadastroUsuario
+     *
+     * @param id
      */
-    public JanelaCadastroColecionador() {
+    public JanelaCadastroColecionador(int id) {
         initComponents();
+
+        txtIdColecionador.setText(String.valueOf(id));
+
+        txtNomeColecionador.grabFocus();
         setModal(true);
     }
 
@@ -52,6 +58,7 @@ public class JanelaCadastroColecionador extends javax.swing.JDialog {
             }
         });
 
+        txtIdColecionador.setEditable(false);
         txtIdColecionador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtIdColecionadorActionPerformed(evt);
@@ -114,9 +121,8 @@ public class JanelaCadastroColecionador extends javax.swing.JDialog {
             //Salva o colecionador
             IOColecionador iocol = new IOColecionador();
             boolean salvou = iocol.SalvaColecionador(c);
-            
-            if (salvou)
-            {
+
+            if (salvou) {
                 this.dispose();
             }
         } catch (Exception e) {

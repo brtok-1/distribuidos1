@@ -12,13 +12,14 @@ import java.util.ArrayList;
  *
  * @author Rafael
  */
-public class Colecionador implements Serializable{
+public class Colecionador implements Serializable {
     
     private int idColecionador;
     private String nomeColecionador;
     private boolean coordenador;
-    private ArrayList<Cartao> cartoes;
-    private ArrayList<Colecionador> listaParticipantes;
+    private int porta;
+    private ArrayList<Cartao> cartoes = new ArrayList<>();
+    private ArrayList<ColecionadorEncontrado> listaParticipantes = new ArrayList<>();
     
     private static Colecionador instancia;
     
@@ -30,11 +31,11 @@ public class Colecionador implements Serializable{
         Colecionador.instancia = instancia;
     }
 
-    public ArrayList<Colecionador> getListaParticipantes() {
+    public ArrayList<ColecionadorEncontrado> getListaParticipantes() {
         return listaParticipantes;
     }
 
-    public void setListaParticipantes(ArrayList<Colecionador> listaParticipantes) {
+    public void setListaParticipantes(ArrayList<ColecionadorEncontrado> listaParticipantes) {
         this.listaParticipantes = listaParticipantes;
     }
 
@@ -69,5 +70,23 @@ public class Colecionador implements Serializable{
     public void setCartoes(ArrayList<Cartao> cartoes) {
         this.cartoes = cartoes;
     }
+
+    public int getPorta() {
+        return porta;
+    }
+
+    public void setPorta(int porta) {
+        this.porta = porta;
+    }
     
+    public ColecionadorEncontrado getUsuarioParticipantePorId(int idColecionadorConectado) {
+        ColecionadorEncontrado resultado = null;
+        for (ColecionadorEncontrado ce : listaParticipantes) {
+            if (ce.getIdColecionador() == idColecionadorConectado) {
+                resultado = ce;
+                break;
+            }
+        }
+        return resultado;
+    }
 }

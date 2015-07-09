@@ -20,3 +20,4 @@
 *.config
 /distrib4/nbproject/private/
 /distrib4/build/
+distrib4/dist/README.TXT
