@@ -6,20 +6,18 @@
 package Interface;
 
 import Modelo.Cartao;
-import Modelo.Colecionador;
 import Modelo.Troca;
+import java.rmi.Remote;
 import java.util.ArrayList;
 
 /**
  * Interface de recebimento de ações de outros colecionadores
  * @author Bruno Tokarski e Rafael Vidal
  */
-public interface ComunicacaoServer {
+public interface ComunicacaoServer extends Remote {
+        
+    void ReceberProposta(Troca troca) throws Exception;
     
-    void ReceberParticipante(Colecionador participante);
-    
-    void ReceberProposta(Troca troca);
-    
-    ArrayList<Cartao> ListarCartoes();
+    ArrayList<Cartao> ListarCartoes() throws Exception;
     
 }

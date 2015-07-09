@@ -8,8 +8,10 @@ package Comunicacao;
 import Interface.ComunicacaoClient;
 import Interface.ComunicacaoServer;
 import Modelo.Cartao;
-import Modelo.Colecionador;
+import Modelo.ColecionadorEncontrado;
 import Modelo.Troca;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
@@ -19,81 +21,34 @@ import java.util.ArrayList;
  *
  * @author Rafael
  */
-public class RMIClient extends UnicastRemoteObject implements ComunicacaoClient
-{
-    
+public class RMIClient extends UnicastRemoteObject implements ComunicacaoClient {
+
     private Registry reg;
     private ComunicacaoServer obj;
-    private RMIClient rmic;
-    
-    public RMIClient() throws Exception {
+
+    public RMIClient() throws RemoteException {
         super();
-        
-        Colecionador logado = Colecionador.getInstancia();
-        
-        reg = LocateRegistry.getRegistry("localhost", 1099);
-        obj = (ComunicacaoServer) reg.lookup("servidor" + logado.getIdColecionador());
-    }
-    
-    /**
-     * Conecata-se no servidor RMI do participante
-     * @param idColecionador
-     * @throws Exception 
-     */
-    public void ConectaRMI(int idColecionador) throws Exception {
-        
-        reg = LocateRegistry.getRegistry("localhost", 1099);
-        obj = (ComunicacaoServer) reg.lookup("servidor" + idColecionador);
-        
     }
 
     @Override
-    public void EnviaPresenca(Colecionador colecionador) {
-        try
-        {
-            IniciaRMI();
-            obj.ReceberParticipante(colecionador);
-        }catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-        
-    }
-
-    @Override
-    public void EnviaProposta(Troca troca, ComunicacaoClient cliente) {
+    public Troca RespondeProposta(Troca troca, ComunicacaoClient cliente) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public Troca RespondeProposta(Troca troca, ComunicacaoClient cliente) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public ArrayList<Cartao> SolicitaListaCartoes(int idColecionador) {
-        ArrayList<Cartao> cartoes = new ArrayList<>();
-        try
-        {
-            ConectaRMI(idColecionador);
-            
-            cartoes = obj.ListarCartoes();
-            
-        }catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-        
+    public ArrayList<Cartao> SolicitaListaCartoes(int idColecionador) throws Exception {
+        ArrayList<Cartao> cartoes = obj.ListarCartoes();
         return cartoes;
-        
-    }
-    
-    /**
-     * Início da comunicação RMI
-     * @throws InterruptedException
-     */
-    public void IniciaRMI() throws Exception {
-        rmic = new RMIClient();
     }
 
+    public void IniciaRMI(ColecionadorEncontrado conexao) throws RemoteException, NotBoundException {
+        reg = LocateRegistry.getRegistry("localhost", conexao.getPorta());
+        String nomeServer = "servidor" + conexao.getIdColecionador();
+        nomeServer = nomeServer.trim();
+        obj = (ComunicacaoServer) reg.lookup(nomeServer);
+    }
+
+    @Override
+    public void EnviaProposta(Troca troca) throws Exception {
+        obj.ReceberProposta(troca);
+    }
 }

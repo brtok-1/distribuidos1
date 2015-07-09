@@ -9,7 +9,12 @@ import Comunicacao.RMIClient;
 import IOarquivo.IOCartao;
 import Modelo.Cartao;
 import Modelo.Colecionador;
+import Modelo.ColecionadorEncontrado;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -18,6 +23,7 @@ import java.util.ArrayList;
 public class JanelaCartoes extends javax.swing.JDialog {
 
     private int idUsuario;
+    Colecionador logado;
 
     /**
      * Creates new form JanelaCartoes
@@ -25,30 +31,44 @@ public class JanelaCartoes extends javax.swing.JDialog {
     public JanelaCartoes(int idUsuario) throws Exception {
         initComponents();
         this.idUsuario = idUsuario;
+        logado = Colecionador.getInstancia();
+        if (logado.getIdColecionador() == idUsuario) {
+            btnPedirTroca.setVisible(false);
+        } else {
+            btnNovoCartao.setVisible(false);
+        }
         setModal(true);
         CarregaCartoes();
     }
 
     /**
      * Carrega os cartões e popula a tabela
+     *
+     * @throws java.lang.Exception
      */
     public void CarregaCartoes() throws Exception {
-        Colecionador instancia = Colecionador.getInstancia();
         ArrayList<Cartao> cartoes = new ArrayList<>();
-        if (idUsuario == instancia.getIdColecionador()) {
+        if (idUsuario == logado.getIdColecionador()) {
             IOCartao iocar = new IOCartao();
             cartoes = iocar.RecuperarCartoes();
         } else {
             RMIClient rmic = new RMIClient();
+            ColecionadorEncontrado conexao = logado.getUsuarioParticipantePorId(idUsuario);
+            rmic.IniciaRMI(conexao);
             cartoes = rmic.SolicitaListaCartoes(idUsuario);
         }
-        Object[][] tabela = new Object[cartoes.size()][3];
-        for (int i = 0; i < cartoes.size(); i++) {
-            tabela[i][0] = cartoes.get(i).getIdCartao();
-            tabela[i][1] = cartoes.get(i).getLocal();
-            tabela[i][2] = cartoes.get(i).getProprietario().getNomeColecionador();
+
+        if (cartoes != null) {
+            Object[][] tabela = new Object[cartoes.size()][3];
+            for (int i = 0; i < cartoes.size(); i++) {
+                tabela[i][0] = cartoes.get(i).getIdCartao();
+                tabela[i][1] = cartoes.get(i).getLocal();
+                ColecionadorEncontrado ce = logado.getUsuarioParticipantePorId(cartoes.get(i).getIdProprietario());
+                tabela[i][2] = ce.getNome();
+            }
+            PopulaTabela(tabela);
         }
-        PopulaTabela(tabela);
+
     }
 
     public void PopulaTabela(Object[][] tabela) throws Exception {
@@ -95,7 +115,7 @@ public class JanelaCartoes extends javax.swing.JDialog {
         jScrollPane2 = new javax.swing.JScrollPane();
         tbCartoes = new javax.swing.JTable();
         btnNovoCartao = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btnPedirTroca = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -125,7 +145,12 @@ public class JanelaCartoes extends javax.swing.JDialog {
             }
         });
 
-        jButton1.setText("Pedir Troca");
+        btnPedirTroca.setText("Pedir Troca");
+        btnPedirTroca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPedirTrocaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -134,23 +159,23 @@ public class JanelaCartoes extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 408, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnNovoCartao, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnNovoCartao)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1)))
+                        .addComponent(btnPedirTroca))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 408, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnPedirTroca)
+                    .addComponent(btnNovoCartao))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnNovoCartao)
-                    .addComponent(jButton1))
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -163,10 +188,37 @@ public class JanelaCartoes extends javax.swing.JDialog {
         this.dispose();
     }//GEN-LAST:event_btnNovoCartaoActionPerformed
 
+    private void btnPedirTrocaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPedirTrocaActionPerformed
+        try {
+            int selecao = tbCartoes.getSelectedRow();
+            if (selecao < 0) {
+                JOptionPane.showMessageDialog(null, "É preciso selecionar um cartão.");
+            } else {
+                DefaultTableModel dtm = (DefaultTableModel) tbCartoes.getModel();
+                
+                int idSelecionado = (Integer) dtm.getValueAt(selecao, 0);
+                String localSelecionado = (String) dtm.getValueAt(selecao, 1);
+                
+                //IOCartao iocar = new IOCartao();
+                Cartao cartaoSelecionado  = new Cartao();
+                cartaoSelecionado.setIdCartao(idSelecionado);
+                cartaoSelecionado.setLocal(localSelecionado);
+                
+                this.dispose();
+                JanelaSolicitacaoTroca jst = new JanelaSolicitacaoTroca(cartaoSelecionado, idUsuario);
+                jst.setVisible(true);
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(JanelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+
+    }//GEN-LAST:event_btnPedirTrocaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnNovoCartao;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnPedirTroca;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable tbCartoes;
     // End of variables declaration//GEN-END:variables

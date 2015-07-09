@@ -22,14 +22,12 @@ import javax.swing.JOptionPane;
 public class IOCartao {
     
     public boolean SalvaCartao(Cartao cartao) throws Exception {
-        
-        
         ArrayList<Cartao> cartoes;
         boolean duplicado = false;
         Colecionador logado = Colecionador.getInstancia();
         
         //Adiciona informação do proprietário do cartão
-        cartao.setProprietario(logado);
+        cartao.setIdProprietario(logado.getIdColecionador());
         
         File arquivo = new File("C:/Distrib4/Cartao-" + logado.getIdColecionador() + ".dst");
         if (arquivo.exists()) {
@@ -48,14 +46,14 @@ public class IOCartao {
             return false;
         } else {
             cartoes.add(cartao);
-
+            
             //Deleta o arquivo
             arquivo.delete();
-
             //Cria um arquivo novo para salvar o array atualizado
             FileOutputStream arquivoGrav = new FileOutputStream(arquivo);
             ObjectOutputStream objGravar = new ObjectOutputStream(arquivoGrav);
             objGravar.writeObject(cartoes);
+            logado.setCartoes(cartoes);
             JOptionPane.showMessageDialog(null, "Cartão ID " + cartao.getIdCartao() + " cadastrado com sucesso.");
             return true;
         }
@@ -87,6 +85,7 @@ public class IOCartao {
         FileOutputStream arquivoGrav = new FileOutputStream(arquivo);
         ObjectOutputStream objGravar = new ObjectOutputStream(arquivoGrav);
         objGravar.writeObject(cartoes);
+        logado.setCartoes(cartoes);
         JOptionPane.showMessageDialog(null, "Cartão ID " + cartao.getIdCartao() + " modificado com sucesso.");
     }
     
@@ -101,6 +100,7 @@ public class IOCartao {
                 cartoes = (ArrayList<Cartao>) objLeitura.readObject();
             }
         }
+        logado.setCartoes(cartoes);
         return cartoes;
     }
 
