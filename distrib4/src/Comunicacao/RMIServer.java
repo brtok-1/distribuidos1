@@ -30,7 +30,7 @@ public class RMIServer extends UnicastRemoteObject implements ComunicacaoServer 
     }
 
     @Override
-    public void ReceberProposta(Troca troca) {
+    public void ReceberProposta(Troca troca) throws InterruptedException {
         
         JanelaAvisoTroca jat = new JanelaAvisoTroca(troca);
         jat.setVisible(true);

@@ -39,30 +39,29 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         }
 
         //popularTabela
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
-                tabela,
-                new String[]{
-                    "ID Colecionador", "Nome", "Qtd. Cartões"
-                }
-        ) {
-            Class[] types = new Class[]{
-                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class
-            };
-            boolean[] canEdit = new boolean[]{
-                false, false, false
-            };
+        tabelaColecionadores.setModel(new javax.swing.table.DefaultTableModel(
+                tabela, new String[]{"ID Colecionador", "Nome", "Qtd. Cartões"}) {
+                    Class[] types = new Class[]{
+                        java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class
+                    };
+                    boolean[] canEdit = new boolean[]{
+                        false, false, false
+                    };
 
             public Class getColumnClass(int columnIndex) {
-                return types[columnIndex];
-            }
+                        return types[columnIndex];
+                    }
 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit[columnIndex];
-            }
-        });
-        jScrollPane2.setViewportView(jTable2);
-        if (jTable2.getColumnModel().getColumnCount() > 0) {
-            jTable2.getColumnModel().getColumn(0).setResizable(false);
+        public boolean isCellEditable(int rowIndex, int columnIndex) {
+                        return canEdit[columnIndex];
+                    }
+                });
+        jScrollPane2.setViewportView(tabelaColecionadores);
+        if (tabelaColecionadores.getColumnModel().getColumnCount() > 0) {
+            tabelaColecionadores.getColumnModel().getColumn(0).setResizable(false);
+            tabelaColecionadores.getColumnModel().getColumn(0).setPreferredWidth(88);
+            tabelaColecionadores.getColumnModel().getColumn(1).setPreferredWidth(101);
+            tabelaColecionadores.getColumnModel().getColumn(2).setPreferredWidth(101);
         }
     }
 
@@ -77,8 +76,13 @@ public class JanelaPrincipal extends javax.swing.JFrame {
 
         btnVisualizarCartoes = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tabelaColecionadores = new javax.swing.JTable();
         btnMeusCartoes = new javax.swing.JButton();
+		jLabel1 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tabelaTransacoes = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -90,7 +94,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tabelaColecionadores.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -113,10 +117,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(jTable2);
-        if (jTable2.getColumnModel().getColumnCount() > 0) {
-            jTable2.getColumnModel().getColumn(0).setResizable(false);
-        }
+        jScrollPane2.setViewportView(tabelaColecionadores);
 
         btnMeusCartoes.setText("Meus Cartões");
         btnMeusCartoes.addActionListener(new java.awt.event.ActionListener() {
@@ -125,29 +126,90 @@ public class JanelaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+		jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 204));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Colecionadores Ativos");
+
+        jButton1.setText("Visualizar Detalhes da Troca Selecionada");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 0, 204));
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("Transações Que Estou Participando");
+
+        tabelaTransacoes.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Trocar Meu", "Trocar Por", "Status da Troca"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane3.setViewportView(tabelaTransacoes);
+
+		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 376, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnMeusCartoes)
+					.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(btnVisualizarCartoes)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnMeusCartoes)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnVisualizarCartoes)))
-                .addContainerGap())
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(9, 9, 9)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+					.addComponent(btnVisualizarCartoes)
                     .addComponent(btnMeusCartoes)
-                    .addComponent(btnVisualizarCartoes))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -157,11 +219,11 @@ public class JanelaPrincipal extends javax.swing.JFrame {
 
     private void btnVisualizarCartoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVisualizarCartoesActionPerformed
         try {
-            int selecao = jTable2.getSelectedRow();
+            int selecao = tabelaColecionadores.getSelectedRow();
             if (selecao < 0) {
                 JOptionPane.showMessageDialog(null, "É preciso selecionar um usuário na tabela.");
             } else {
-                DefaultTableModel dtm = (DefaultTableModel) jTable2.getModel();
+                DefaultTableModel dtm = (DefaultTableModel) tabelaColecionadores.getModel();
                 int quantidadeCartoes = (Integer) dtm.getValueAt(selecao, 2);
                 if (quantidadeCartoes > 0) {
                     int idSelecionado = (Integer) dtm.getValueAt(selecao, 0);
@@ -186,10 +248,31 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnMeusCartoesActionPerformed
 
+	private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try {
+            int selecao = tabelaTransacoes.getSelectedRow();
+            if (selecao < 0) {
+                JOptionPane.showMessageDialog(null, "É preciso selecionar um transação na tabela.");
+            } else {
+                DefaultTableModel dtm = (DefaultTableModel) tabelaTransacoes.getModel();
+                int idSelecionado = (Integer) dtm.getValueAt(selecao, 0);
+                //JanelaAvisoTroca av = new JanelaAvisoTroca();
+                //av.setVisible(true);
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(JanelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnMeusCartoes;
     private javax.swing.JButton btnVisualizarCartoes;
+	private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private static javax.swing.JScrollPane jScrollPane2;
-    private static javax.swing.JTable jTable2;
+    private static javax.swing.JScrollPane jScrollPane3;
+    private static javax.swing.JTable tabelaColecionadores;
+    private static javax.swing.JTable tabelaTransacoes;
     // End of variables declaration//GEN-END:variables
 }
